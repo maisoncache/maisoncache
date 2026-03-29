@@ -43,7 +43,6 @@ This repo (`maisoncache/maisoncache`) holds the HTML prototypes for the Maison C
 |------|------|---------|
 | **Home** | `index.html` | Landing page / Foyer — hub linking all rooms |
 | **The Hearth** | `hearth.html` | Kitchen rituals, lunar-phase-based cooking, recipe cards |
-| **The Hearth (alt)** | `the-hearth.html` | Alternative version of The Hearth |
 | **Celestial Archive** | `celestial-archive.html` | Member-only story/knowledge archive with starfield canvas |
 | **The Library** | `library.html` | Curated knowledge repository with warm literary aesthetic |
 | **The Sanctum** | `sanctum.html` | Hidden room accessed via Easter egg (click dot 3x in The Hearth) |
@@ -140,8 +139,7 @@ Serif-heavy — Cormorant Garamond for headings, Crimson Pro / EB Garamond for b
 /
 ├── CLAUDE.md                  # AI assistant guidance (this file)
 ├── index.html                 # Home / Foyer — landing page linking all rooms
-├── hearth.html                # The Hearth — kitchen rituals (canonical)
-├── the-hearth.html            # The Hearth (alternative version)
+├── hearth.html                # The Hearth — kitchen rituals
 ├── celestial-archive.html     # Celestial Archive — stories
 ├── library.html               # The Library — knowledge
 └── sanctum.html               # The Sanctum — hidden room
@@ -149,8 +147,7 @@ Serif-heavy — Cormorant Garamond for headings, Crimson Pro / EB Garamond for b
 
 ## Known Issues
 
-1. **Duplicate Hearth pages** — `hearth.html` (canonical, richer) and `the-hearth.html` (alternative) both exist; may want to consolidate.
-2. **Cloudflare email obfuscation bug** — Known issue on the landing page (fix options documented in Notion Scratchpad).
+1. **Cloudflare email obfuscation bug** — Known issue on the landing page (fix options documented in Notion Scratchpad).
 
 ## Build Priority
 
