@@ -312,6 +312,15 @@
       transition: color 0.5s ease; line-height: 1.4;
       display: block; margin-bottom: 0.4rem;
     }
+    .room-cell-sub {
+      font-family: var(--font-italic); font-size: 0.72rem;
+      font-style: italic; color: rgba(240,224,200,0.18);
+      display: block; margin-bottom: 0.6rem; line-height: 1.5;
+    }
+    .room-cell:hover .room-cell-sub { color: rgba(240,224,200,0.3); }
+    .room-cell.open .room-cell-sub { color: rgba(45,107,94,0.35); }
+    .room-cell.shadow .room-cell-sub { color: rgba(240,224,200,0.08); }
+    .room-cell.shadow:hover .room-cell-sub { color: rgba(240,224,200,0.15); }
     .room-cell-status {
       font-family: var(--font-display); font-size: 0.55rem;
       letter-spacing: 0.28em; text-transform: uppercase;
@@ -594,6 +603,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🕯</span>
             <span class="room-cell-name">The Ritual Space</span>
+            <span class="room-cell-sub">Moon phase prompts. The entry room.</span>
             <span class="room-cell-status">open</span>
           </div>
 
@@ -602,6 +612,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🗝</span>
             <span class="room-cell-name">The Confessional</span>
+            <span class="room-cell-sub">Say the thing. Leave it here.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -610,6 +621,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🖋</span>
             <span class="room-cell-name">Written Filth with Teeth</span>
+            <span class="room-cell-sub">18+ fiction. Reader submissions. Curated.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -618,6 +630,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🪞</span>
             <span class="room-cell-name">The Mirror Room</span>
+            <span class="room-cell-sub">Body. Self-perception. The erotic self.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -626,6 +639,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">◎</span>
             <span class="room-cell-name">Audio Holds</span>
+            <span class="room-cell-sub">Breathwork. Spoken word. Close your eyes.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -637,6 +651,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">📜</span>
             <span class="room-cell-name">The Codex</span>
+            <span class="room-cell-sub">Scene generator. Browse by mood.</span>
             <span class="room-cell-status">open</span>
           </div>
 
@@ -645,6 +660,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">✦</span>
             <span class="room-cell-name">Story Drops</span>
+            <span class="room-cell-sub">The house's own dark fiction.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -653,6 +669,7 @@
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">☽</span>
             <span class="room-cell-name">The Aftercare Room</span>
+            <span class="room-cell-sub">Soft landing. Always open.</span>
             <span class="room-cell-status">preparing</span>
           </div>
 
@@ -790,23 +807,27 @@
         glyph: '🕯',
         name: 'The Ritual Space',
         open: true,
-        body: `This is the room where you build the practice.<br><br>
-               Not the performance of wellness — the real thing.<br>
-               Moon phases. Intentions set in smoke.<br>
-               The small sacred acts that nobody sees.`,
+        body: `<div style="font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:1.8rem">Full Moon · Illuminate</div>
+               <p style="font-family:var(--font-italic);font-style:italic;font-size:clamp(1rem,2vw,1.15rem);color:var(--cream-mute);line-height:2;margin-bottom:2.5rem">
+                 Before you begin, clear one surface. Light one candle.<br>Stand still for ten seconds.
+               </p>`,
         taster: `<div style="border:1px solid rgba(176,120,32,0.2);padding:2rem;margin:2rem 0;background:rgba(176,120,32,0.04)">
                    <p style="font-family:var(--font-italic);font-style:italic;font-size:clamp(1.1rem,2.2vw,1.3rem);color:var(--cream-dim);line-height:2.2;margin-bottom:1.5rem">
                      Under the full moon, nothing hides.<br>
                      What have you been pretending not to see?<br>
                      Name it. Don't explain it. Just let it stand in the light.
                    </p>
+                   <div class="divider divider--amber" style="width:40px;margin-bottom:1.5rem"></div>
                    <p style="font-family:var(--font-display);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:1.5rem">
                      The full guided ritual for this phase — including setup, journaling prompts, and closing — lives in The Inner House.
                    </p>
                    <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
                       class="btn btn--amber" style="text-decoration:none">Join the house</a>
-                 </div>`,
-        sub: 'Monthly ritual guides drop here. Seasonal. Lunar. Yours.',
+                 </div>
+                 <p style="font-family:var(--font-italic);font-style:italic;font-size:0.85rem;color:rgba(240,224,200,0.2);margin-top:2rem;letter-spacing:0.03em">
+                   The Ritual Space changes with the moon.<br>Come back when the light changes.
+                 </p>`,
+        sub: 'Moon phase prompts. The entry room.',
         color: 'rgba(176,120,32,0.6)',
       },
       confessional: {
@@ -816,7 +837,7 @@
         body: `The room is being prepared.<br><br>
                Come to say the thing you haven't said out loud yet.<br>
                No judgement. No record. Just the house, listening.`,
-        sub: 'Opening soon.',
+        sub: 'Say the thing. Leave it here.',
         color: 'rgba(155,52,104,0.5)',
       },
       filth: {
@@ -826,7 +847,7 @@
         body: `Dark fiction. Desire written honestly.<br><br>
                Stories that don't apologise<br>
                for what they want you to feel.`,
-        sub: 'Members only — opening soon.',
+        sub: '18+ fiction. Reader submissions. Curated.',
         color: 'rgba(107,31,58,0.7)',
       },
       mirror: {
@@ -836,7 +857,7 @@
         body: `The interactive room.<br><br>
                You come here to be seen — by yourself.<br>
                The mirror doesn't lie. Neither does the house.`,
-        sub: 'In development.',
+        sub: 'Body. Self-perception. The erotic self.',
         color: 'rgba(45,107,94,0.55)',
       },
       audio: {
@@ -846,7 +867,7 @@
         body: `Sound as sanctuary.<br><br>
                Guided breathwork. Spoken ritual.<br>
                The voice that holds you when you can't hold yourself.`,
-        sub: 'Opening soon.',
+        sub: 'Breathwork. Spoken word. Close your eyes.',
         color: 'rgba(59,15,78,0.7)',
       },
       codex: {
@@ -856,7 +877,7 @@
         body: `The archive within the archive.<br><br>
                Distilled ritual entries. Tone preservation.<br>
                Everything the house has learned, written down.`,
-        sub: 'Open — enter the codex.',
+        sub: 'Scene generator. Browse by mood.',
         color: 'rgba(155,52,104,0.4)',
       },
       story: {
@@ -866,7 +887,7 @@
         body: `Short fiction. Dark. Intimate. Unannounced.<br><br>
                A story appears in this room without warning.<br>
                Then another. The basement edition.`,
-        sub: 'First drop coming.',
+        sub: 'The house\'s own dark fiction.',
         color: 'rgba(107,31,58,0.6)',
       },
       aftercare: {
@@ -877,7 +898,7 @@
                Come here after anything hard.<br>
                Soft landing. No performance required.<br>
                The house holds you here.`,
-        sub: 'Always being prepared.',
+        sub: 'Soft landing. Always open.',
         color: 'rgba(45,107,94,0.45)',
       },
     };

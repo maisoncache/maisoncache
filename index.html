@@ -564,22 +564,37 @@
     <section class="section section--medium" id="rooms">
       <div class="reveal" style="max-width:820px;width:100%">
 
-        <div class="label" style="margin-bottom:2.5rem">The rooms of the house</div>
+        <div class="label" style="margin-bottom:1.5rem">The rooms of the house</div>
+
+        <div style="text-align:center;margin:1rem auto 2rem;padding:0.5rem 1.5rem;display:inline-block;border:1px solid rgba(176,120,32,0.15);border-radius:2px">
+          <span style="font-family:var(--font-display);font-size:clamp(0.75rem,1vw,0.8rem);letter-spacing:0.3em;text-transform:uppercase;color:var(--amber-dim)">
+            🌕 Full Moon · Pink Moon · April 2026
+          </span>
+        </div>
 
         <div class="doors-grid">
 
-          <!-- OPEN: Oracle -->
-          <a href="#oracle-section" onclick="event.preventDefault();document.getElementById('oracle-section').scrollIntoView({behavior:'smooth'})"
-             class="door"
-             onmouseenter="setStatus('the oracle — open')"
+          <!-- OPEN: Perfume Atelier -->
+          <a href="perfume-atelier.html" class="door"
+             onmouseenter="setStatus('the perfume atelier — open')"
              onmouseleave="setStatus('listening')">
             <div class="door-tag-open">open now</div>
-            <span class="door-motif">✦</span>
-            <span class="door-name">The Oracle</span>
+            <span class="door-motif">🌺</span>
+            <span class="door-name">The Perfume Atelier</span>
             <span class="door-sub">Scent reading</span>
           </a>
 
-          <!-- OPEN: Library -->
+          <!-- OPEN: The Hearth -->
+          <a href="hearth.html" class="door"
+             onmouseenter="setStatus('the hearth — open')"
+             onmouseleave="setStatus('listening')">
+            <div class="door-tag-open">open now</div>
+            <span class="door-motif">🔥</span>
+            <span class="door-name">The Hearth</span>
+            <span class="door-sub">Kitchen rituals</span>
+          </a>
+
+          <!-- OPEN: The Library -->
           <a href="library.html" class="door"
              onmouseenter="setStatus('the library — open')"
              onmouseleave="setStatus('listening')">
@@ -589,7 +604,7 @@
             <span class="door-sub">Always open</span>
           </a>
 
-          <!-- OPEN: Celestial Archive -->
+          <!-- OPEN: The Archive (members only) -->
           <a href="celestial-archive.html" class="door"
              onmouseenter="setStatus('the celestial archive — open')"
              onmouseleave="setStatus('listening')">
@@ -603,29 +618,10 @@
           <div class="door-ghost"
                onmouseenter="setStatus('the garden — not yet ready')"
                onmouseleave="setStatus('listening')">
-            <span class="ghost-motif">❀</span>
+            <span class="ghost-motif">🌿</span>
             <span class="ghost-name">The Garden</span>
             <span class="ghost-tag">forming</span>
           </div>
-
-          <!-- GHOST: The Atelier -->
-          <div class="door-ghost"
-               onmouseenter="setStatus('the atelier — forming')"
-               onmouseleave="setStatus('listening')">
-            <span class="ghost-motif">◈</span>
-            <span class="ghost-name">The Atelier</span>
-            <span class="ghost-tag">forming</span>
-          </div>
-
-          <!-- OPEN: The Hearth -->
-          <a href="hearth.html" class="door"
-             onmouseenter="setStatus('the hearth — open')"
-             onmouseleave="setStatus('listening')">
-            <div class="door-tag-open">open now</div>
-            <span class="door-motif">🕯</span>
-            <span class="door-name">The Hearth</span>
-            <span class="door-sub">Kitchen rituals</span>
-          </a>
 
         </div>
 
@@ -644,12 +640,16 @@
         <div class="label" style="margin-bottom:1.8rem">Now open</div>
         <h2 style="font-family:var(--font-italic);font-size:clamp(2rem,5vw,3rem);font-style:italic;font-weight:300;color:var(--cream);margin-bottom:1.2rem">The Oracle</h2>
         <div class="divider" style="width:44px;margin-bottom:2rem"></div>
-        <p class="body-text" style="margin-bottom:2.8rem;font-size:clamp(1.1rem,2.1vw,1.3rem)">
-          Three questions. One reading.<br>
-          Written for you alone and never spoken again.<br>
-          The house will tell you what scent lives on your skin.
+        <p class="body-text" style="margin-bottom:1rem;font-size:clamp(1.1rem,2.1vw,1.3rem)">
+          Three cards. One reading.
         </p>
-        <button class="btn" onclick="openOracle()">Receive your reading</button>
+        <p class="body-text" style="margin-bottom:1rem;font-size:clamp(1.1rem,2.1vw,1.3rem)">
+          Drawn for you alone and never repeated.
+        </p>
+        <p class="body-text" style="margin-bottom:2.8rem;font-size:clamp(1.1rem,2.1vw,1.3rem)">
+          The house will tell you what this cycle holds.
+        </p>
+        <button class="btn" onclick="openOracle()">Draw your cards</button>
       </div>
     </section>
 
@@ -657,13 +657,11 @@
     <section class="section section--short">
       <div class="reveal" style="max-width:440px" id="remember-section">
         <div id="remember-form">
-          <div class="label" style="margin-bottom:1.5rem">The house remembers</div>
+          <div class="label" style="margin-bottom:1.5rem">The house sends letters</div>
           <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(1.05rem,2vw,1.25rem)">
-            New rooms open without warning.<br>
-            Join the house so it can find you.
-          </p>
-          <p style="font-family:var(--font-display);font-size:0.62rem;color:var(--amber-mute);margin-bottom:2rem;letter-spacing:0.08em">
-            We'll only write when a new door opens. No spam. Ever.
+            Every time the moon shifts, a letter arrives.<br>
+            Recipes, rituals, playlists, and a prompt from the Sanctum.<br>
+            Free to join. The deeper rooms are $5/month for those who stay.
           </p>
           <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
             <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
@@ -737,7 +735,7 @@
         <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin-bottom:2rem">
           <p class="body-text" style="color:var(--teal-dim);margin-bottom:0.5rem;font-size:clamp(1rem,1.9vw,1.15rem)">
             The Sanctum is being prepared.<br>
-            Members enter first. Members enter deeper.
+            Join the house. When it opens, you enter first.
           </p>
           <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
              class="btn btn--rose" style="padding:0.75rem 2rem;font-size:0.7rem;letter-spacing:0.28em;text-decoration:none">Hold my place</a>
@@ -758,9 +756,10 @@
       <div style="font-family:var(--font-display);font-size:0.62rem;letter-spacing:0.45em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:1.5rem">Privacy</div>
       <h2 style="font-family:var(--font-italic);font-size:clamp(1.4rem,3vw,1.9rem);font-style:italic;font-weight:300;color:var(--cream);margin-bottom:2rem">How the house treats your information</h2>
       <div style="font-family:var(--font-body);font-size:clamp(1rem,1.9vw,1.15rem);color:var(--cream-dim);line-height:2.2;text-align:left">
-        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">What we collect.</strong> If you share your email — through Remember Me, The Sanctum, or the Archive — that's all we store. An email, a date, which part of the house you were visiting.</p>
-        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">What we do with it.</strong> We use your email only to notify you when new rooms open. No selling. No sharing. No spam. Ever.</p>
-        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">Your rights.</strong> Ask us to delete your email any time via <a href="https://www.tiktok.com/@maisoncache" target="_blank" style="color:var(--amber-dim);border-bottom:1px solid rgba(176,120,32,0.2)">@maisoncache</a>. We'll remove it, no questions asked.</p>
+        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">What we collect.</strong> If you share your email — through our newsletter — that's all we store. An email, a date, which part of the house you were visiting.</p>
+        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">What we do with it.</strong> We send you letters when the moon shifts. Recipes, rituals, playlists, prompts. No selling. No sharing. No spam. Ever.</p>
+        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">Storage &amp; payments.</strong> Your email is stored securely through Ghost, our newsletter platform. Payments are handled by Stripe.</p>
+        <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">Your rights.</strong> You can unsubscribe any time through the link in every email. Ask us to delete your data via <a href="https://www.tiktok.com/@maisoncache" target="_blank" style="color:var(--amber-dim);border-bottom:1px solid rgba(176,120,32,0.2)">@maisoncache</a>. We'll remove it, no questions asked.</p>
         <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">Content advisory.</strong> Maison Caché contains rooms that explore sensuality, emotional intensity, and ritual. The Sanctum is 18+ only.</p>
         <p style="margin-bottom:1.5rem"><strong style="color:var(--amber-dim)">Who we are.</strong> Maison Caché is an independent creative project based in Australia.</p>
       </div>
@@ -946,55 +945,52 @@
     // ══════════════════════════════════════════
     // THE ORACLE
     // ══════════════════════════════════════════
-    const PROMPTS = [
-      { instruction:"Close your eyes. Breathe. Now tell me...", question:"Where does your body want to be right now?", options:[
-        {id:"rain-garden", text:"A rain-soaked garden at dusk",           families:["fresh","floral"]},
-        {id:"dying-fire",  text:"A library with the fire dying down",      families:["woody","aromatic"]},
-        {id:"skin-2am",    text:"Someone's collarbone at 2am",             families:["oriental","gourmand"]},
-        {id:"struck-match",text:"The space between a struck match and the flame", families:["aromatic","oriental"]},
-      ]},
-      { instruction:"Good. Stay there a moment longer.", question:"What are you reaching for?", options:[
-        {id:"anchor",     text:"Something to anchor me",                   families:["woody","aromatic"]},
-        {id:"permission", text:"Permission to unravel",                    families:["floral","oriental"]},
-        {id:"armour",     text:"Armour that smells like surrender",        families:["oriental","gourmand"]},
-        {id:"morning",    text:"The memory of a morning I haven't lived yet", families:["fresh","floral"]},
-      ]},
-      { instruction:"Almost there. One last truth.", question:"When you are most yourself, what lingers on your skin?", options:[
-        {id:"petrichor",  text:"Petrichor and something green",            families:["fresh","aromatic"]},
-        {id:"smoke-honey",text:"Smoke and warm honey",                     families:["oriental","gourmand"]},
-        {id:"old-pages",  text:"Old pages and cedarwood",                  families:["woody","aromatic"]},
-        {id:"skin-salt",  text:"Clean skin and sea salt",                  families:["fresh","floral"]},
-      ]},
+    const TAROT = [
+      { name: "The Fool", meaning: "The beginning before the beginning. Something in you is ready to leap without knowing where the ground is. That\u2019s not recklessness \u2014 that\u2019s trust wearing running shoes." },
+      { name: "The Magician", meaning: "Everything you need is already on the table. Stop looking for permission and start using what\u2019s in your hands. The magic isn\u2019t in the wand \u2014 it\u2019s in the decision to pick it up." },
+      { name: "The High Priestess", meaning: "She knows and she isn\u2019t telling. Not yet. The information you need is arriving through your body, not your brain. Stop thinking. Start listening." },
+      { name: "The Empress", meaning: "Abundance that doesn\u2019t apologise. She\u2019s not asking if she deserves the garden \u2014 she\u2019s already eating from it. Feed yourself first. The harvest follows." },
+      { name: "The Emperor", meaning: "Structure isn\u2019t the enemy of freedom \u2014 it\u2019s the container that makes freedom possible. What needs a boundary this cycle? Name it. Hold it." },
+      { name: "The Hierophant", meaning: "Someone else\u2019s wisdom is useful right now, but only as a starting point. Take the lesson. Leave the dogma. Your own truth is the one that stays." },
+      { name: "The Lovers", meaning: "Not romance \u2014 alignment. The moment two things that were separate recognise they belong together. A choice is coming. Make it with your whole chest." },
+      { name: "The Chariot", meaning: "Forward motion held by opposing forces. You\u2019re not driving \u2014 you\u2019re balancing. The tension isn\u2019t a problem. The tension is the engine." },
+      { name: "Strength", meaning: "Not the roar. The hand on the lion\u2019s mouth. Strength this cycle looks like staying when everything in you wants to bolt. Gentle pressure. Infinite patience." },
+      { name: "The Hermit", meaning: "The lantern is for you, not for them. Step away. Not forever \u2014 just long enough to hear your own voice without the echo of everyone else\u2019s opinion." },
+      { name: "Wheel of Fortune", meaning: "It turns. It always turns. If you\u2019re down, this is the uptick. If you\u2019re up, hold it loosely. The only constant is the rotation. Ride it." },
+      { name: "Justice", meaning: "The scales don\u2019t lie and they don\u2019t negotiate. Something needs to be made right this cycle. You already know what it is. Stop pretending you don\u2019t." },
+      { name: "The Hanged Man", meaning: "Suspension. Not stuck \u2014 suspended. The world looks different upside down and that\u2019s the point. Stop struggling. The surrender is the lesson." },
+      { name: "Death", meaning: "Not the ending \u2014 the composting. Something is finished and the grief is real and the space it leaves is where the next thing grows. Let the dead thing be dead." },
+      { name: "Temperance", meaning: "The pour between two cups. Not moderation \u2014 alchemy. Two things that don\u2019t belong together creating something neither could alone. Patience with the process." },
+      { name: "The Devil", meaning: "The chain is loose. You could leave any time. The question isn\u2019t whether you\u2019re trapped \u2014 it\u2019s what you\u2019re getting from staying. Be honest about that." },
+      { name: "The Tower", meaning: "The structure falls because it was built on something that wasn\u2019t true. This feels like destruction. It\u2019s actually architecture. What gets rebuilt from here is real." },
+      { name: "The Star", meaning: "After the tower, the sky. Naked and unhurried and pouring yourself out because you finally can. Hope isn\u2019t naive \u2014 hope is what survives the collapse." },
+      { name: "The Moon", meaning: "Not everything is as it appears this cycle. The moon lights the path but casts shadows too. Trust your instincts over your eyes. The dog knows before you do." },
+      { name: "The Sun", meaning: "Warmth without condition. The simplest card and the hardest to receive. You are allowed to feel good without earning it first. Just \u2014 let the sun land." },
+      { name: "Judgement", meaning: "The call from inside the ground. Something buried is asking to be resurrected \u2014 a dream, a version of yourself, a truth you put away because the timing wasn\u2019t right. The timing is right." },
+      { name: "The World", meaning: "Completion. Not perfection \u2014 completion. The cycle closes. You\u2019ve been here before but you\u2019re not the same person who started. Exhale. Then begin again." }
     ];
 
-    const FRAGRANCE_DB = {
-      fresh:    [{name:"Jo Malone — Wood Sage & Sea Salt",note:"The cliff walk you take alone",price:"$$"},{name:"Byredo — Bal d'Afrique",note:"Sunlight caught in motion",price:"$$$"},{name:"Clean Reserve — Skin",note:"Your own warmth, amplified",price:"$"},{name:"Maison Margiela — Sailing Day",note:"Salt-kissed freedom",price:"$$"},{name:"Philosophy — Amazing Grace",note:"Simple. Devastating.",price:"$"},{name:"Issey Miyake — L'Eau d'Issey",note:"Water before it touches anything",price:"$$"}],
-      floral:   [{name:"Viktor & Rolf — Flowerbomb",note:"A detonation dressed in petals",price:"$$"},{name:"Diptyque — Do Son",note:"Tuberose at the edge of water",price:"$$$"},{name:"Ariana Grande — Cloud",note:"Soft rebellion on a budget",price:"$"},{name:"Gucci — Bloom",note:"A garden that grew without permission",price:"$$"},{name:"Chanel — Chance Eau Tendre",note:"Softness with a backbone",price:"$$$"},{name:"Jo Malone — Peony & Blush Suede",note:"The blush before the kiss",price:"$$"}],
-      oriental: [{name:"Maison Margiela — Jazz Club",note:"Leather booth, last drink, no regrets",price:"$$"},{name:"Tom Ford — Black Orchid",note:"The thing they smell on your pillow and never forget",price:"$$$"},{name:"YSL — Black Opium",note:"Caffeine and bad decisions, beautifully",price:"$$"},{name:"The Body Shop — Black Musk",note:"Dark velvet at a friendly price",price:"$"},{name:"Nishane — Ani",note:"Vanilla with a spine",price:"$$$"},{name:"Who Is Elijah — Muse",note:"The part of you they write poems about",price:"$$"}],
-      woody:    [{name:"Le Labo — Santal 33",note:"The room remembers you were here",price:"$$$"},{name:"Byredo — Mojave Ghost",note:"Something beautiful that shouldn't survive, but does",price:"$$$"},{name:"Aesop — Hwyl",note:"Cathedral forest, no congregation",price:"$$$"},{name:"Maison Margiela — By the Fireplace",note:"Smoke, chestnuts, the crackle of something ending",price:"$$"},{name:"Jo Malone — Myrrh & Tonka",note:"The fire after the guests have gone",price:"$$"},{name:"Commodity — Book",note:"Ink and leather and a quiet afternoon",price:"$"}],
-      aromatic: [{name:"Aesop — Marrakech Intense",note:"Spice and smoke and ceremony",price:"$$$"},{name:"Diptyque — Philosykos",note:"Fig tree in a fever dream",price:"$$$"},{name:"L'Occitane — Verbena",note:"Sharp enough to wake you, soft enough to stay",price:"$"},{name:"Jo Malone — Poppy & Barley",note:"A meadow that knows your name",price:"$$"},{name:"Lush — Karma",note:"Patchouli that went to therapy and came back whole",price:"$"},{name:"Le Labo — Thé Noir 29",note:"Tea leaves and quiet rebellion",price:"$$$"}],
-      gourmand: [{name:"Kayali — Vanilla 28",note:"Dessert as a love language",price:"$$"},{name:"Sol de Janeiro — Cheirosa '62",note:"Caramel-kissed skin in a bottle",price:"$"},{name:"Mugler — Angel",note:"Chocolate and star anise and the audacity to wear both",price:"$$"},{name:"Carolina Herrera — Good Girl",note:"Cocoa and tuberose in stilettos",price:"$$$"},{name:"Maison Margiela — Coffee Break",note:"The first sip. The one that fixes everything.",price:"$$"},{name:"Montale — Chocolate Greedy",note:"Shameless. Rich. Unapologetic.",price:"$$$"}],
-    };
+    const TAROT_POSITIONS = [
+      { label: "Past", meaning: "What shaped this moment" },
+      { label: "Present", meaning: "Where you stand now" },
+      { label: "Future", meaning: "What this cycle is asking of you" }
+    ];
 
-    const NEIGHBOURS = {fresh:["floral","aromatic"],floral:["fresh","oriental"],oriental:["floral","gourmand"],woody:["aromatic","oriental"],aromatic:["fresh","woody"],gourmand:["oriental","woody"]};
+    function drawThreeCards() {
+      const deck = [...TAROT];
+      const drawn = [];
+      for (let i = 0; i < 3; i++) {
+        const idx = Math.floor(Math.random() * deck.length);
+        drawn.push(deck.splice(idx, 1)[0]);
+      }
+      return drawn;
+    }
 
-    const FALLBACKS = {
-      fresh:    {archetype:"The Awakening",   symbol:"☽", reading:"You reach for the first breath — the one before the world remembers you exist. Your skin speaks in rain-washed stone, in dew that hasn't dried, in the sharp green honesty of something just beginning.", ritual:"Your ritual is dawn. Before you speak to anyone, before you check a single screen — press your scent to the inside of your wrists and stand in the doorway. Breathe the threshold."},
-      floral:   {archetype:"The Bloom",       symbol:"✾", reading:"There is a garden inside you that refuses to be tamed. Your scent is the heavy-headed peony at midnight, the jasmine that climbs through cracked walls, the rose that draws blood before it gives beauty.", ritual:"Your ritual is the mirror. Apply your fragrance while looking yourself in the eye. Say nothing. Let the scent settle into the silence between who you were this morning and who you're becoming tonight."},
-      oriental: {archetype:"The Ember",       symbol:"◉", reading:"You burn slow. Amber, resin, the dark sweet ache of vanilla against something sharper — your scent profile reads like a confession whispered into someone's neck at the end of a long night. You don't enter rooms. You alter them.", ritual:"Your ritual is midnight. When the house is quiet, when the mask comes off — that's when you anoint. Pulse points and the hollow of your throat. Light a candle. Let it witness you."},
-      woody:    {archetype:"The Hearth",      symbol:"⬡", reading:"You are the room everyone exhales in. Sandalwood, cedar, vetiver — your scent language is the creak of old floors, the weight of a book left open, the smoke that still clings to wool the morning after. Your presence is architectural.", ritual:"Your ritual is layering. Base first — an oil or balm pressed into warm skin straight after bathing. Then the fragrance over the top. Dress your skin the way you'd build a fire — with intention, and patience."},
-      aromatic: {archetype:"The Apothecary",  symbol:"✧", reading:"Yours is the scent of the healer, the hedge-witch, the one who keeps dried lavender in every drawer and knows which herb to burn when the air gets heavy. Your fragrance profile reads like a remedy. You wear scent as spellwork.", ritual:"Your ritual is the threshold. Every time you leave your home, pause at the door. Apply your scent like a ward. You are sealing yourself in something that says: I am protected. Then walk through the door like you mean it."},
-      gourmand: {archetype:"The Feast",       symbol:"◈", reading:"You are hunger made beautiful. Vanilla, tonka, the burnt sugar edge of something almost too sweet — your scent is the dessert no one has the restraint to refuse. You understand that pleasure is not a sin. It's a sacrament.", ritual:"Your ritual is skin. Warm, bare, just-bathed skin. Apply your scent before you dress — let it meld with your heat. Give them time. Give them warmth. Then let someone get close enough to discover you."},
-    };
-
-    let oracleStep = 0, oracleChoices = [];
-
-    function openOracle()  {
-      oracleStep = 0; oracleChoices = [];
+    function openOracle() {
       document.getElementById('oracle-overlay').style.display = 'block';
       document.body.style.overflow = 'hidden';
       setStatus('the oracle is listening');
-      renderOracleThreshold();
+      renderTarotThreshold();
     }
     function closeOracle() {
       document.getElementById('oracle-overlay').style.display = 'none';
@@ -1002,50 +998,32 @@
       setStatus('listening');
     }
 
-    function renderOracleThreshold() {
+    function renderTarotThreshold() {
       document.getElementById('oracle-content').innerHTML = `
         <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem;animation:fadeIn 1.5s ease forwards">
-          <div class="eyebrow" style="margin-bottom:2.2rem">Maison Caché</div>
+          <div class="eyebrow" style="margin-bottom:2.2rem">Maison Cach\u00e9</div>
           <h1 style="font-family:'Cormorant Infant',serif;font-size:clamp(2.4rem,7vw,5rem);font-weight:300;font-style:italic;color:var(--cream);margin:0 0 0.5rem 0">The Oracle</h1>
           <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:65px;margin:1.8rem auto"></div>
-          <p class="body-text" style="max-width:440px;margin:0 auto 3.5rem">The house knows what you need.<br>It always has.<br>You just have to be still enough to hear it.</p>
-          <button class="btn" onclick="startOracleReading()">Step inside</button>
+          <p class="body-text" style="max-width:440px;margin:0 auto 3.5rem">Three cards. One reading.<br>Drawn for you alone and never repeated.<br>The house will tell you what this cycle holds.</p>
+          <button class="btn" onclick="beginTarotDraw()">Draw your cards</button>
         </div>`;
     }
 
-    function startOracleReading() { renderOraclePrompt(); }
-
-    function renderOraclePrompt() {
-      const p = PROMPTS[oracleStep];
-      const numerals = ['I','II','III'];
-      document.getElementById('oracle-content').innerHTML = `
-        <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 1.5rem;animation:fadeIn 1s ease forwards">
-          <div class="eyebrow" style="margin-bottom:2rem">${numerals[oracleStep]}</div>
-          <p style="font-family:'Cormorant Infant',serif;font-size:clamp(0.95rem,1.9vw,1.1rem);font-style:italic;color:var(--amber-dim);margin-bottom:0.75rem;letter-spacing:0.04em">${p.instruction}</p>
-          <h2 style="font-family:'Cormorant Infant',serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:300;color:var(--cream);margin-bottom:3rem;line-height:1.45;max-width:560px;font-style:italic">${p.question}</h2>
-          <div style="display:flex;flex-direction:column;gap:0.8rem;width:100%;max-width:500px">
-            ${p.options.map((o,i) => `<button class="oracle-option" id="opt-${o.id}" onclick="selectOracleOption('${o.id}')" style="animation:fadeUp 0.7s ${0.25+i*0.12}s ease forwards;opacity:0">${o.text}</button>`).join('')}
-          </div>
-        </div>`;
-      document.getElementById('oracle-content').scrollTop = 0;
-    }
-
-    function selectOracleOption(id) {
-      const option = PROMPTS[oracleStep].options.find(o => o.id === id);
-      document.querySelectorAll('.oracle-option').forEach(btn => { btn.disabled = true; if(btn.id===`opt-${id}`) btn.classList.add('selected'); });
-      oracleChoices.push(option);
+    function beginTarotDraw() {
+      const cards = drawThreeCards();
+      renderChanneling();
       setTimeout(() => {
-        if (oracleStep < PROMPTS.length - 1) { oracleStep++; renderOraclePrompt(); }
-        else { renderChanneling(); consultTheOracle(); }
-      }, 1100);
+        if (window._channelingInterval) clearInterval(window._channelingInterval);
+        renderTarotReading(cards);
+      }, 4200);
     }
 
     function renderChanneling() {
-      const lines = ["The house is listening...","Reading the smoke...","The walls remember your scent...","Something is forming..."];
+      const lines = ["The house is listening...","Shuffling the deck...","The cards are choosing you...","Something is forming..."];
       let lineIdx = 0;
       document.getElementById('oracle-content').innerHTML = `
         <div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem">
-          <div style="font-family:'Cormorant Infant',serif;font-size:2.2rem;color:var(--amber-dim);margin-bottom:2rem;animation:pulse 2.5s infinite ease-in-out">◉</div>
+          <div style="font-family:'Cormorant Infant',serif;font-size:2.2rem;color:var(--amber-dim);margin-bottom:2rem;animation:pulse 2.5s infinite ease-in-out">\u25C9</div>
           <p id="channeling-text" class="body-text" style="min-height:2em;transition:opacity 0.5s ease">${lines[0]}</p>
           <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:44px;margin:2rem auto 0;animation:pulse 2.5s infinite ease-in-out"></div>
         </div>`;
@@ -1056,63 +1034,56 @@
       }, 2800);
     }
 
-    function calculateFamily(choices) {
-      const s = {};
-      choices.forEach(c => c.families.forEach(f => { s[f] = (s[f]||0)+1; }));
-      return Object.entries(s).sort((a,b) => b[1]-a[1])[0][0];
-    }
-
-    function pickFragrances(family) {
-      const pool = [...FRAGRANCE_DB[family]], picked = [];
-      while (picked.length < 2 && pool.length) picked.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
-      const nf = NEIGHBOURS[family], nFamily = nf[Math.floor(Math.random()*nf.length)];
-      const wp = [...FRAGRANCE_DB[nFamily]], wc = wp[Math.floor(Math.random()*wp.length)];
-      wc._wildcard = true; picked.push(wc);
-      return picked.sort((a,b) => ({"$":0,"$$":1,"$$$":2})[a.price] - ({"$":0,"$$":1,"$$$":2})[b.price]);
-    }
-
-    function consultTheOracle() {
-      const family = calculateFamily(oracleChoices), fragrances = pickFragrances(family), reading = FALLBACKS[family];
-      setTimeout(() => {
-        if (window._channelingInterval) clearInterval(window._channelingInterval);
-        renderReading(reading, fragrances);
-      }, 4200);
-    }
-
-    function renderReading(reading, fragrances) {
+    function renderTarotReading(cards) {
       const el = document.getElementById('oracle-content');
       el.innerHTML = `
         <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:3.5rem 1.5rem;animation:fadeIn 1.5s ease forwards">
-          <div style="max-width:580px;width:100%;text-align:center">
-            <div style="font-family:'Cormorant Infant',serif;font-size:2.8rem;color:var(--amber-dim);margin-bottom:1.8rem;animation:pulse 4s infinite ease-in-out">${reading.symbol}</div>
-            <div class="eyebrow" style="margin-bottom:0.75rem">Your scent archetype</div>
-            <h2 style="font-family:'Cormorant Infant',serif;font-size:clamp(2.2rem,6vw,3.5rem);font-weight:300;font-style:italic;color:var(--cream);margin:0 0 2.2rem 0">${reading.archetype}</h2>
-            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:65px;margin:0 auto 2.5rem"></div>
-            <p class="body-text" style="margin-bottom:3.2rem;text-align:left;font-size:clamp(1.15rem,2.3vw,1.38rem)">${reading.reading}</p>
-            <div style="display:flex;align-items:center;gap:1rem;margin:0 0 2.5rem 0">
-              <div style="flex:1;height:1px;background:rgba(176,120,32,0.15)"></div>
-              <span class="label">The Ritual</span>
-              <div style="flex:1;height:1px;background:rgba(176,120,32,0.15)"></div>
-            </div>
-            <p class="body-text" style="margin-bottom:3.5rem;text-align:left;font-size:clamp(1.15rem,2.3vw,1.38rem)">${reading.ritual}</p>
-            <div style="display:flex;align-items:center;gap:1rem;margin:0 0 2rem 0">
-              <div style="flex:1;height:1px;background:rgba(176,120,32,0.15)"></div>
-              <span class="label">The Oracle Suggests</span>
-              <div style="flex:1;height:1px;background:rgba(176,120,32,0.15)"></div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:0.85rem;margin-bottom:3.5rem">
-              ${fragrances.map((r,i) => `
-                <div class="frag-card" style="animation:fadeUp 0.7s ${0.8+i*0.15}s ease forwards;opacity:0">
-                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.4rem;flex-wrap:wrap;gap:0.5rem">
-                    <span style="font-family:var(--font-body);font-size:clamp(1rem,1.9vw,1.15rem);color:rgba(176,120,32,0.9);font-weight:400">${r.name}</span>
-                    <span style="font-family:var(--font-display);font-size:0.62rem;color:var(--amber-dim);letter-spacing:0.15em">${r._wildcard ? '✧ wildcard' : r.price}</span>
+          <div style="max-width:680px;width:100%;text-align:center">
+            <div class="eyebrow" style="margin-bottom:1.5rem">Your reading</div>
+            <h2 style="font-family:'Cormorant Infant',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;font-style:italic;color:var(--cream);margin:0 0 2.5rem 0">Past \u00b7 Present \u00b7 Future</h2>
+            <div style="display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem">
+              ${cards.map((card, i) => `
+                <div style="flex:1;min-width:180px;max-width:220px;perspective:800px;animation:fadeUp 0.8s ${0.5 + i * 0.4}s ease forwards;opacity:0">
+                  <div class="tarot-card-inner" id="tarot-card-${i}" style="position:relative;width:100%;min-height:280px;transition:transform 0.8s ease;transform-style:preserve-3d;cursor:crosshair" onclick="this.style.transform=this.style.transform==='rotateY(180deg)'?'rotateY(0deg)':'rotateY(180deg)'">
+                    <div style="position:absolute;inset:0;backface-visibility:hidden;border:1px solid rgba(176,120,32,0.3);background:rgba(59,15,78,0.25);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem">
+                      <div style="font-family:var(--font-display);font-size:0.52rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:1rem">${TAROT_POSITIONS[i].label}</div>
+                      <div style="font-size:2rem;margin-bottom:1rem;opacity:0.6">\u2726</div>
+                      <div style="font-family:var(--font-italic);font-size:1.1rem;font-style:italic;color:var(--cream-dim)">${card.name}</div>
+                      <div style="font-family:var(--font-display);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber-mute);margin-top:0.8rem">${TAROT_POSITIONS[i].meaning}</div>
+                    </div>
+                    <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);border:1px solid rgba(45,107,94,0.3);background:rgba(42,15,53,0.35);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;overflow-y:auto">
+                      <div style="font-family:var(--font-display);font-size:0.52rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:0.8rem">${card.name}</div>
+                      <p style="font-family:var(--font-body);font-size:0.95rem;font-style:italic;color:var(--cream-dim);line-height:1.8;text-align:center">${card.meaning}</p>
+                    </div>
                   </div>
-                  <div style="font-family:var(--font-body);font-size:clamp(1rem,1.9vw,1.15rem);font-style:italic;color:var(--cream-dim)">${r.note}${r._wildcard ? ' <span style="color:rgba(45,107,94,0.45);font-size:0.85em">— unexpected</span>' : ''}</div>
                 </div>
               `).join('')}
             </div>
+            <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:65px;margin:0 auto 2.5rem"></div>
+            ${cards.map((card, i) => `
+              <div style="text-align:left;margin-bottom:2.5rem;animation:fadeUp 0.8s ${1.8 + i * 0.3}s ease forwards;opacity:0">
+                <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+                  <span style="font-family:var(--font-display);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--teal-dim)">${TAROT_POSITIONS[i].label}</span>
+                  <div style="flex:1;height:1px;background:rgba(176,120,32,0.1)"></div>
+                </div>
+                <h3 style="font-family:var(--font-italic);font-size:clamp(1.3rem,3vw,1.8rem);font-style:italic;font-weight:300;color:var(--cream);margin-bottom:0.5rem">${card.name}</h3>
+                <p style="font-family:var(--font-display);font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber-mute);margin-bottom:1rem">${TAROT_POSITIONS[i].meaning}</p>
+                <p class="body-text" style="font-size:clamp(1.05rem,2vw,1.25rem)">${card.meaning}</p>
+              </div>
+            `).join('')}
             <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:44px;margin:0 auto 3rem"></div>
-            <button onclick="closeOracle()" class="btn" style="margin-bottom:2.5rem">Return to the house</button>
+            <div style="animation:fadeUp 1s 3s ease forwards;opacity:0">
+              <p class="body-text" style="margin-bottom:0.8rem;font-size:clamp(1.1rem,2.1vw,1.3rem);color:var(--amber-dim)">The Oracle has spoken.</p>
+              <p class="body-text" style="margin-bottom:2rem;font-size:clamp(1rem,1.9vw,1.15rem)">This cycle\u2019s cards live deeper in the Archive.</p>
+              <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin-bottom:2rem">
+                <a href="celestial-archive.html" class="btn" style="text-decoration:none">Explore the Archive</a>
+              </div>
+              <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(0.95rem,1.8vw,1.1rem);color:var(--cream-mute)">Join the house to receive the full monthly reading.</p>
+              <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin-bottom:2.5rem">
+                <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn btn--rose" style="text-decoration:none;padding:0.75rem 2rem;font-size:0.7rem;letter-spacing:0.28em">Join the house</a>
+              </div>
+              <button onclick="closeOracle()" class="btn" style="margin-bottom:2.5rem">Return to the house</button>
+            </div>
           </div>
         </div>`;
       el.scrollTop = 0;

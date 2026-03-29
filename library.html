@@ -560,6 +560,19 @@
       </a>
     </div>
 
+    <div style="text-align:center;margin:3rem auto 2rem;max-width:500px;opacity:0.85">
+      <p class="body-text" style="font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:0.5rem">
+        The Library has a staircase.
+      </p>
+      <p class="body-text" style="font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:1.5rem">
+        It winds upward, past the top shelf, into the Observatory Tower.<br>
+        The Celestial Archive lives above the books.
+      </p>
+      <a href="celestial-archive.html" style="display:inline-block;text-decoration:none;padding:0.65rem 1.8rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:#b07010;border:1px solid rgba(176,112,16,0.3);border-radius:2px;transition:all 0.3s ease">
+        Ascend →
+      </a>
+    </div>
+
     <footer style="padding:3rem 2rem;text-align:center;border-top:1px solid rgba(176,112,16,0.06)">
       <div style="font-family:var(--font-fraktur);font-size:1.3rem;color:rgba(242,232,213,0.15);margin-bottom:0.5rem">The Library</div>
       <p style="font-family:var(--font-italic);font-style:italic;font-size:0.85rem;color:rgba(242,232,213,0.12)">
@@ -648,6 +661,14 @@
         note: `Mira. Vale. A house that responds to truth. Sacred fiction. The first part lives here. The rest is waiting.`,
         category: "from-the-old-house",
         spine: "#2a1a0e", color: "#4a2e18"
+      },
+      {
+        id: 8,
+        title: "Selected Poetry — Xander",
+        author: "From the old house",
+        note: `Poetry and writings that arrived from somewhere else. The words carry weight. Handle them accordingly.`,
+        category: "from-the-old-house",
+        spine: "#1a1018", color: "#2e1a28"
       }
     ];
 
@@ -753,6 +774,19 @@
         <div class="divider" style="width:44px;margin-bottom:1.8rem"></div>
 
         <p style="font-family:var(--font-italic);font-size:clamp(1.05rem,2vw,1.2rem);font-style:italic;color:var(--cream-dim);line-height:1.9;margin-bottom:1.5rem">"${book.note}"</p>
+
+        ${book.id === 7 ? `
+        <div style="margin:1.5rem 0;padding:1.5rem 1.8rem;border-left:2px solid rgba(139,58,18,0.35);background:rgba(26,16,8,0.4)">
+          <p style="font-family:var(--font-italic);font-size:clamp(1rem,1.8vw,1.15rem);font-style:italic;color:var(--cream-dim);line-height:2;margin-bottom:0">
+            "The house knew before she touched the door. It had been waiting the way old things wait — not with hope, but with the patience of stone that has felt warmth before and learned to hold it."
+          </p>
+        </div>
+        <p style="font-family:var(--font-italic);font-size:0.95rem;font-style:italic;color:var(--gold-dim);margin-top:1.2rem;margin-bottom:0.8rem">Four more parts wait behind the door.</p>
+        <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;text-decoration:none;padding:0.6rem 1.5rem;font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);border:1px solid var(--gold-mute);border-radius:2px;transition:all 0.3s ease;margin-top:0.5rem">
+          Join the house →
+        </a>
+        ` : ''}
       `;
 
       document.getElementById('book-overlay').classList.add('open');
