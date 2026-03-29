@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Hearth — Maison Caché</title>
   <meta name="description" content="Kitchen rituals. Home magic. The practical sacred.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta property="og:title" content="The Hearth — Maison Caché">
-  <meta property="og:description" content="Kitchen rituals. Home magic. The practical sacred.">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Almendra:ital@0;1&display=swap" rel="stylesheet">
@@ -27,7 +22,7 @@
       --flame:    #D4882A;
       --beeswax:  #C8A040;
       --linen:    #EDD8B8;
-      --linen-dim:rgba(237,216,184,0.7);
+      --linen-dim:rgba(237,216,184,0.55);
       --linen-ghost:rgba(237,216,184,0.2);
       --ember-glow:rgba(196,98,45,0.08);
       --font-cinzel: 'Cinzel', serif;
@@ -221,6 +216,40 @@
       text-transform: uppercase; color: var(--loam);
     }
 
+    /* ── RECIPE ARCHIVE ── */
+    .archive-grid {
+      max-width: 520px; width: 100%; display: flex; flex-direction: column; gap: 1px;
+    }
+    .archive-item {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.2rem 1.5rem; background: rgba(30,18,8,0.25);
+      border: 1px solid rgba(200,160,64,0.04);
+      transition: all 0.5s ease; cursor: default;
+    }
+    .archive-item:hover { background: rgba(46,28,14,0.35); border-color: rgba(200,160,64,0.08); }
+    .archive-moon { font-size: 1rem; flex-shrink: 0; }
+    .archive-info { flex: 1; }
+    .archive-recipe-name {
+      font-family: var(--font-fell); font-style: italic; font-size: 0.95rem;
+      color: var(--linen-dim);
+    }
+    .archive-phase-name {
+      font-family: var(--font-fellsc); font-size: 0.48rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--loam); margin-top: 0.15rem;
+    }
+    .archive-season {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.78rem;
+      color: rgba(200,160,64,0.3); flex-shrink: 0;
+    }
+    .archive-locked {
+      font-family: var(--font-fellsc); font-size: 0.45rem; letter-spacing: 0.2em;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+    .archive-locked a {
+      color: rgba(200,160,64,0.2); text-decoration: none; transition: color 0.4s;
+    }
+    .archive-locked a:hover { color: rgba(200,160,64,0.5); }
+
     /* ── CANDLE CLUSTER ── */
     .candle-cluster {
       position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -231,7 +260,7 @@
     .house-status {
       position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
       font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
-      text-transform: lowercase; color: rgba(200,160,64,0.45); pointer-events: none;
+      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
     }
 
     /* ── SANCTUM TRIGGER ── */
@@ -261,20 +290,6 @@
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── ACCESSIBILITY ── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal { opacity: 1; transform: none; }
-    }
-    a:focus-visible, button:focus-visible, input:focus-visible {
-      outline: 2px solid var(--beeswax);
-      outline-offset: 2px;
     }
   </style>
 </head>
@@ -395,6 +410,19 @@
             The full moon kitchen practice is <em>the abundance audit.</em> Open every cupboard. What do you have? What has been sitting there waiting to be used? The thing pushed to the back of the shelf — that's tonight's ingredient. Nothing is wasted here. The Hearth sees everything in the light.
           </p>
         </div>
+
+        <!-- HOUSEKEEPING RITUAL -->
+        <div class="practice-card" style="border-left-color:rgba(200,160,64,0.2)">
+          <p class="intention-line">The house is a body. Tend it the way you'd tend your own.</p>
+
+          <div class="practice-step">Housekeeping · Full Moon</div>
+          <p class="practice-text">
+            Full moon housekeeping is <em>the full light clean.</em> Not the deep scrub — the intentional one. Clear one surface completely. Wipe it down until it's bare. Then put back only what earns its place. Fresh flowers — whatever's seasonal, whatever's cheap, whatever you walked past and felt something about. A clean glass. A candle that hasn't been lit yet. The full moon shows you everything. Let your space match.
+          </p>
+          <p class="practice-text" style="margin-top:1rem">
+            <em>This week's small act:</em> One vase. One bunch. One clean surface. The table you eat at — make it beautiful before you sit down.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -464,26 +492,114 @@
       </div>
     </section>
 
-    <!-- ═══ SUB-ROOMS ═══ -->
+    <!-- ═══ RECIPE ARCHIVE ═══ -->
+    <section class="section--medium" id="archive">
+      <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
+
+        <div class="room-label">From the shelves</div>
+        <h2 class="room-heading" style="font-size:clamp(1.2rem,3vw,1.6rem)">Recipe Archive</h2>
+        <p class="room-sub" style="margin-bottom:0.5rem; max-width:400px; text-align:center">
+          The Hearth remembers every meal it's made.<br>
+          Past recipes live here. Take what you need.
+        </p>
+
+        <div class="archive-grid">
+          <div class="archive-item">
+            <div class="archive-moon">🌕</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Autumn Feast — Slow-Roasted Lamb Shoulder</div>
+              <div class="archive-phase-name">Full Moon · April 2026</div>
+            </div>
+            <div class="archive-season">🍂</div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌖</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Autumn Minestrone — Batch & Share</div>
+              <div class="archive-phase-name">Waning Gibbous · April 2026</div>
+            </div>
+            <div class="archive-locked"><a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer">members</a></div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌗</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Turmeric-Ginger Broth — Cleanse & Clear</div>
+              <div class="archive-phase-name">Last Quarter · April 2026</div>
+            </div>
+            <div class="archive-locked"><a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer">members</a></div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌘</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Pumpkin Soup with Sage Brown Butter</div>
+              <div class="archive-phase-name">Waning Crescent · April 2026</div>
+            </div>
+            <div class="archive-season">🍂</div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌑</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Simple Dhal with Rice — One-Pot Reset</div>
+              <div class="archive-phase-name">New Moon · April 2026</div>
+            </div>
+            <div class="archive-season">🍂</div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌒</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Herb & Ricotta Stuffed Mushrooms</div>
+              <div class="archive-phase-name">Waxing Crescent · April 2026</div>
+            </div>
+            <div class="archive-locked"><a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer">members</a></div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌓</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Harissa-Roasted Cauliflower with Tahini</div>
+              <div class="archive-phase-name">First Quarter · April 2026</div>
+            </div>
+            <div class="archive-locked"><a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer">members</a></div>
+          </div>
+          <div class="archive-item">
+            <div class="archive-moon">🌔</div>
+            <div class="archive-info">
+              <div class="archive-recipe-name">Beef Cheek Ragu — Slow & Layered</div>
+              <div class="archive-phase-name">Waxing Gibbous · April 2026</div>
+            </div>
+            <div class="archive-locked"><a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer">members</a></div>
+          </div>
+        </div>
+
+        <p class="body-text" style="text-align:center; margin-top:0.5rem; font-style:italic; color:rgba(200,160,64,0.3); font-size:0.85rem">
+          The archive grows with every cycle.<br>
+          Older seasons hold different flavours.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ CONNECTED ROOMS ═══ -->
     <section class="section--medium">
       <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
 
-        <div class="room-label">Other doors from the Hearth</div>
+        <div class="room-label">Connected to the Hearth</div>
 
-        <div class="subroom-grid">
-          <div class="subroom-teaser">
-            <div class="subroom-icon">◈</div>
-            <div class="subroom-name">The Atelier</div>
-            <p style="font-family:var(--font-cg); font-style:italic; font-size:0.82rem; color:rgba(237,216,184,0.3); line-height:1.6; margin-top:0.3rem">Scent rituals.<br>Perfume as practice.</p>
-            <div class="subroom-status" style="margin-top:0.6rem">forming</div>
-          </div>
-          <div class="subroom-teaser">
-            <div class="subroom-icon">🍷</div>
-            <div class="subroom-name">The Sommelier</div>
-            <p style="font-family:var(--font-cg); font-style:italic; font-size:0.82rem; color:rgba(237,216,184,0.3); line-height:1.6; margin-top:0.3rem">What to drink<br>with what you feel.</p>
+        <div style="max-width:280px; width:100%">
+          <div class="subroom-teaser" style="max-width:100%">
+            <div class="subroom-icon">🌿</div>
+            <div class="subroom-name">The Garden</div>
+            <p style="font-family:var(--font-cg); font-style:italic; font-size:0.82rem; color:rgba(237,216,184,0.3); line-height:1.6; margin-top:0.3rem">Grow what you cook.<br>Seasonal planting & outside rituals.</p>
             <div class="subroom-status" style="margin-top:0.6rem">forming</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══ JOIN THE HOUSE ═══ -->
+    <section class="section--short">
+      <div class="reveal" style="max-width:440px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.2rem">
+        <p class="intention-line" style="max-width:360px">The full Hearth cycle — all eight recipes with ingredients and method, hearthcraft practices, and expanded rituals — lives in The Inner House.</p>
+        <a href="https://maisoncache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-cinzel); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--beeswax); text-decoration:none; border:1px solid rgba(200,160,64,0.25); padding:0.7rem 2rem; transition:all 0.4s">Join the house</a>
+        <p style="font-family:var(--font-fellsc); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(200,160,64,0.2)">$5/month · The Inner House</p>
       </div>
     </section>
 
@@ -537,6 +653,10 @@
     });
     document.querySelectorAll('.subroom-teaser').forEach(el => {
       el.addEventListener('mouseenter', () => setStatus('another door'));
+      el.addEventListener('mouseleave', () => setStatus('lit'));
+    });
+    document.querySelectorAll('.archive-item').forEach(el => {
+      el.addEventListener('mouseenter', () => setStatus('the shelves remember'));
       el.addEventListener('mouseleave', () => setStatus('lit'));
     });
     document.querySelector('.recipe-card').addEventListener('mouseenter', () => setStatus('something is cooking'));

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Codex — Maison Caché</title>
+  <meta name="description" content="The Codex doesn't judge what you want. It helps you ask for it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Almendra:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{
+      --ground:#0a0510;--mid:#140e1a;--deep:#1a1025;
+      --plum:rgba(61,26,79,0.4);--rose:#9b3a6e;--rose-dim:rgba(155,58,110,0.5);
+      --gold:#c9a84c;--gold-dim:rgba(201,168,76,0.4);--gold-ghost:rgba(201,168,76,0.12);
+      --cream:#f2e8d5;--cream-dim:rgba(242,232,213,0.55);--cream-ghost:rgba(242,232,213,0.2);
+      --ember:rgba(196,98,45,0.6);
+      --font-cinzel:'Cinzel',serif;--font-fell:'IM Fell English',serif;
+      --font-fellsc:'IM Fell English SC',serif;--font-cg:'Cormorant Garamond',serif;
+      --font-alm:'Almendra',serif;
+    }
+    body{background:var(--ground);color:var(--cream);font-family:var(--font-fell);line-height:1.75;overflow-x:hidden;min-height:100vh}
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.03;pointer-events:none;z-index:9999}
+    .layer-vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(10,5,16,0.8) 100%)}
+
+    /* NAV */
+    .nav-back{position:fixed;top:1.2rem;left:1.5rem;z-index:100;font-family:var(--font-fellsc);font-size:0.7rem;letter-spacing:0.12em;color:var(--cream-dim);text-decoration:none;transition:color 0.4s}
+    .nav-back:hover{color:var(--gold)}
+    .house-status{position:fixed;bottom:0.45rem;right:0.7rem;z-index:60;font-family:var(--font-fellsc);font-size:0.56rem;letter-spacing:0.16em;text-transform:lowercase;color:rgba(201,168,76,0.3);pointer-events:none}
+
+    /* CONTENT */
+    .content{position:relative;z-index:10;max-width:600px;margin:0 auto;padding:0 1.5rem}
+
+    /* HEADER */
+    .codex-header{text-align:center;padding:8rem 0 4rem}
+    .codex-icon{font-size:2rem;opacity:0.5;margin-bottom:1.5rem}
+    .codex-label{font-family:var(--font-fellsc);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--rose-dim);margin-bottom:1.2rem}
+    .codex-title{font-family:var(--font-cinzel);font-weight:400;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:0.08em;margin-bottom:0.6rem}
+    .codex-sub{font-family:var(--font-cg);font-weight:300;font-style:italic;font-size:clamp(0.95rem,2vw,1.1rem);color:var(--cream-dim);line-height:1.8;max-width:380px;margin:0 auto}
+
+    /* CONTROLS */
+    .controls{text-align:center;padding:2rem 0 3rem;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+    .mood-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem}
+    .mood-btn{font-family:var(--font-fellsc);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream-dim);background:none;border:1px solid rgba(201,168,76,0.1);padding:0.5rem 1rem;cursor:pointer;transition:all 0.4s;border-radius:1px}
+    .mood-btn:hover{border-color:var(--gold-dim);color:var(--gold)}
+    .mood-btn.active{border-color:var(--rose-dim);color:var(--rose);background:rgba(155,58,110,0.08)}
+    .shuffle-btn{font-family:var(--font-cinzel);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream);background:none;border:1px solid var(--gold-dim);padding:0.7rem 2.2rem;cursor:pointer;transition:all 0.5s;position:relative;overflow:hidden}
+    .shuffle-btn:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);color:var(--gold)}
+    .shuffle-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.06),transparent);transform:translateX(-100%);transition:transform 0.6s}
+    .shuffle-btn:hover::after{transform:translateX(100%)}
+    .for-tag{font-family:var(--font-fellsc);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream-ghost)}
+    .for-filters{display:flex;gap:0.5rem}
+    .for-btn{font-family:var(--font-fellsc);font-size:0.5rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream-ghost);background:none;border:1px solid rgba(201,168,76,0.06);padding:0.35rem 0.8rem;cursor:pointer;transition:all 0.4s}
+    .for-btn:hover{color:var(--cream-dim);border-color:rgba(201,168,76,0.15)}
+    .for-btn.active{color:var(--gold-dim);border-color:var(--gold-ghost)}
+
+    /* CARD */
+    .ritual-card{display:none;border:1px solid rgba(201,168,76,0.08);background:rgba(20,14,26,0.6);padding:2.5rem 2.2rem;margin-bottom:2rem;position:relative;animation:cardFade 0.8s ease forwards}
+    .ritual-card.visible{display:block}
+    .ritual-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rose-dim),transparent);opacity:0.4}
+    .card-mood{font-family:var(--font-fellsc);font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem}
+    .card-intention{font-family:var(--font-alm);font-style:italic;font-size:1rem;color:var(--gold);opacity:0.7;line-height:1.8;margin-bottom:1.5rem}
+    .card-section-label{font-family:var(--font-cinzel);font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:0.6rem;margin-top:1.5rem}
+    .card-setup{font-family:var(--font-fell);font-size:0.9rem;color:var(--cream-dim);line-height:1.8;margin-bottom:0.5rem}
+    .card-setup em{color:var(--gold);opacity:0.7;font-style:italic}
+    .card-prompt{font-family:var(--font-fell);font-size:0.95rem;color:var(--cream-dim);line-height:1.9;margin-bottom:0.5rem}
+    .card-aftercare{border-top:1px solid rgba(201,168,76,0.06);padding-top:1.2rem;margin-top:1.5rem}
+    .card-aftercare-label{font-family:var(--font-cinzel);font-size:0.45rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,168,76,0.3);margin-bottom:0.5rem}
+    .card-aftercare-text{font-family:var(--font-cg);font-style:italic;font-size:0.9rem;color:rgba(242,232,213,0.35);line-height:1.8}
+    .card-tags{display:flex;gap:0.6rem;margin-top:1.2rem}
+    .card-tag{font-family:var(--font-fellsc);font-size:0.42rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream-ghost);border:1px solid rgba(201,168,76,0.06);padding:0.2rem 0.6rem}
+
+    /* COMPANION PIECE */
+    .card-companion{margin:0 0 1.8rem;padding:1.5rem 0;border-top:1px solid rgba(155,58,110,0.1);border-bottom:1px solid rgba(155,58,110,0.1)}
+    .companion-label{font-family:var(--font-cinzel);font-size:0.42rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--rose-dim);margin-bottom:0.4rem}
+    .companion-title{font-family:var(--font-alm);font-style:italic;font-size:1.05rem;color:var(--rose);opacity:0.75;margin-bottom:1rem}
+    .companion-text{font-family:var(--font-fell);font-size:0.92rem;color:var(--cream-dim);line-height:2;opacity:0.85}
+    .companion-text em{color:var(--gold);opacity:0.65;font-style:italic}
+    .companion-book{font-family:var(--font-cg);font-style:italic;font-size:0.85rem;color:var(--gold-dim);margin-top:1rem;padding-top:0.8rem;border-top:1px solid rgba(201,168,76,0.06)}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:4rem 2rem;display:none}
+    .empty-state.visible{display:block}
+    .empty-text{font-family:var(--font-cg);font-style:italic;font-size:1rem;color:rgba(242,232,213,0.25)}
+
+    /* FOOTER */
+    .codex-footer{text-align:center;padding:4rem 0 6rem}
+    .footer-line{font-family:var(--font-cg);font-style:italic;font-size:0.85rem;color:rgba(242,232,213,0.2);letter-spacing:0.04em}
+    .footer-brand{font-family:var(--font-fellsc);font-size:0.5rem;letter-spacing:0.25em;color:rgba(201,168,76,0.15);text-transform:uppercase;margin-top:1rem}
+
+    @keyframes cardFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:500px){.mood-filters{gap:0.35rem}.ritual-card{padding:2rem 1.5rem}}
+  </style>
+</head>
+<body>
+  <div class="layer-vignette"></div>
+  <a class="nav-back" href="sanctum.html">← The Sanctum</a>
+  <div class="house-status" id="house-status">[ codex : waiting ]</div>
+
+  <div class="content">
+    <div class="codex-header">
+      <div class="codex-icon">📜</div>
+      <div class="codex-label">the sanctum</div>
+      <h1 class="codex-title">The Codex</h1>
+      <p class="codex-sub">The Codex doesn't judge what you want.<br>It helps you ask for it.</p>
+    </div>
+
+    <div class="controls">
+      <div class="mood-filters">
+        <button class="mood-btn active" data-mood="all">All</button>
+        <button class="mood-btn" data-mood="tender">Tender</button>
+        <button class="mood-btn" data-mood="fierce">Fierce</button>
+        <button class="mood-btn" data-mood="playful">Playful</button>
+        <button class="mood-btn" data-mood="dark">Dark</button>
+        <button class="mood-btn" data-mood="slow">Slow</button>
+        <button class="mood-btn" data-mood="surrendering">Surrendering</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.8rem">
+        <span class="for-tag">for:</span>
+        <div class="for-filters">
+          <button class="for-btn active" data-for="all">All</button>
+          <button class="for-btn" data-for="solo">Solo</button>
+          <button class="for-btn" data-for="partner">Partner</button>
+          <button class="for-btn" data-for="both">Either</button>
+        </div>
+      </div>
+      <button class="shuffle-btn" id="shuffle">Draw from the Codex</button>
+    </div>
+
+    <div id="card-container"></div>
+    <div class="empty-state" id="empty-state"><p class="empty-text">The Codex has nothing for that combination.<br>Adjust the filters and draw again.</p></div>
+
+    <div class="codex-footer">
+      <p class="footer-line">The Codex grows with the house.<br>New entries appear without announcement.</p>
+      <p class="footer-brand">Maison Caché</p>
+    </div>
+  </div>
+
+<script>
+const CODEX = [
+  // ── TENDER ──
+  {mood:"tender",forWho:"partner",intention:"Tonight is not about arriving anywhere. It's about being in the same room on purpose.",
+   setup:"Light two candles — one for each of you. Put on something without words. <em>Ólafur Arnalds or Nils Frahm.</em> Scent: vanilla or sandalwood — something that says <em>home.</em>",
+   prompt:"Sit facing each other. Knees touching if you can. Close your eyes. One of you places a hand on the other's chest — over the heartbeat. Hold it there for sixty seconds without speaking. When the minute is up, the other person does the same. Then — eyes still closed — one of you says one true thing. Not a compliment. A truth. Something you've been holding. The other receives it without responding. Switch. Open your eyes when you're both done. You don't have to talk about what was said. You can just stay.",
+   aftercare:"Warm drinks. Something sweet. Forehead to forehead for as long as you need. This one lands slowly — let it.",
+   companion:{type:"fiction",title:"The Sixty Seconds",text:"She put her hand on his chest the way you put your hand on a door you're not sure is locked — tentative, testing, expecting resistance. There was none.<br><br>Underneath her palm: the thud. Steady and unremarkable. The kind of heartbeat that doesn't know it's being listened to. She counted to ten and lost track because somewhere around seven his breathing changed — deeper, slower, like his body recognised hers before his brain caught up.<br><br>When he placed his hand on her chest she almost laughed. Not because it was funny but because nobody had ever done that without wanting something next. His hand just stayed. Warm. Still. Patient with the kind of patience that doesn't perform itself.<br><br>Sixty seconds. She'd thought it would feel like forever. It felt like exactly enough.<br><br>He said: <em>I'm terrified of how well you know me.</em><br><br>She received it the way the practice asked her to — without responding. But her heartbeat answered. He felt it under his palm. That was enough."}},
+
+  {mood:"tender",forWho:"solo",intention:"You are allowed to be gentle with yourself tonight. Not as a reward. As a practice.",
+   setup:"Run a bath or set up your most comfortable space. One candle. Scent: something you associate with comfort — not seduction, <em>comfort.</em> Warm milk or chamomile within reach.",
+   prompt:"Put your hand over your own heart. Feel it. Say — out loud or silently — 'I am here. I am not going anywhere.' Hold the pressure of your own palm for two minutes. Let your breathing slow to match the weight. Then: with your fingertips, trace the outline of your own face. Slowly. Forehead, temples, jaw, chin. Map yourself the way a lover would if they had all the time in the world and nowhere else to be.",
+   aftercare:"Stay warm. Don't pick up your phone for at least twenty minutes. The tenderness needs time to settle before the world gets back in."},
+
+  {mood:"tender",forWho:"partner",intention:"Read to each other. That's the whole practice.",
+   setup:"Choose a book — poetry, fiction, anything with weight. Sit close enough to feel heat but not quite touching. Low light. <em>Candlelight only if you can.</em> Scent: old paper and warm amber.",
+   prompt:"Take turns reading aloud. One page each. Don't perform it — just let the words arrive in your own voice. When the other person is reading, close your eyes and listen to the texture of their voice, not the content. After four pages — two each — stop reading. Sit in the silence for a moment. Then tell each other which sentence landed hardest and why. Not the most beautiful. The one that found something.",
+   aftercare:"Stay in the quiet. Don't pivot to screens or tasks. The words need a moment to settle between you."},
+
+  {mood:"tender",forWho:"solo",intention:"Write yourself a letter you'll read in six months.",
+   setup:"Paper — not a screen. A pen that feels good in your hand. One candle. Scent: whatever you're wearing today. <em>The letter should smell like now.</em>",
+   prompt:"Write to your future self. Not about goals or plans — about how your body feels right now. What your hands look like in this light. What sound is in the room. What you're afraid of that you haven't told anyone. What you want that you keep calling unreasonable. Write until the page is full or your hand gets tired, whichever comes first. Seal it. Write a date six months from now on the outside. Put it somewhere you'll find it.",
+   aftercare:"Gentle stretch. Something warm to drink. You just gave yourself something kind."},
+
+  // ── FIERCE ──
+  {mood:"fierce",forWho:"partner",intention:"Tonight, one of you leads. Completely. The other follows. Decide now.",
+   setup:"Clear the room of distractions. Phones off — not silent, <em>off.</em> One source of light only. Scent: something with bite — <em>black pepper, clove, or oud.</em> Music with a pulse. <em>Massive Attack. Portishead. FKA Twigs.</em>",
+   prompt:"The one who leads sets three rules for the next thirty minutes. They can be anything — where to sit, how to breathe, when to speak, what to wear, when to move. The rules must be spoken aloud and clearly. The one who follows agrees to each one before it begins. Within those rules, the leader directs. After thirty minutes, it ends. Not negotiable. The container holds. Discuss what it felt like after — not during.",
+   aftercare:"Water. Physical grounding — feet on the floor. The follower speaks first about how it felt. The leader listens without defending. Then reverse. Then hold each other."},
+
+  {mood:"fierce",forWho:"solo",intention:"Rage has a place in your body. Find it. Let it speak.",
+   setup:"Somewhere private. Music loud enough to feel it — <em>drums, bass, something primal.</em> No candles for this one. Overhead light on. Scent: smoke or nothing. Wear something you can move in.",
+   prompt:"Stand up. Feet planted. Clench your fists. Hold them at your sides. Breathe — hard, through your nose, out through your mouth. On the fifth exhale, make a sound. Not words — a sound. Low and guttural or high and sharp, whatever arrives. Then move. Shake your hands. Stamp your feet. Let the sound become louder. Write — immediately after — the thing you are angry about. Don't edit. Don't explain. Just let the anger have a page.",
+   aftercare:"Slow down deliberately. Hands under cold water. Three slow breaths. Something warm to eat. You didn't break anything. You gave the rage somewhere to live that wasn't your stomach."},
+
+  {mood:"fierce",forWho:"partner",intention:"Eye contact. Sustained. Unbroken. See what surfaces.",
+   setup:"Face each other. Close enough that you can see the colour shifts in each other's eyes. Low light — <em>one candle between you.</em> No music. Scent: something sharp and warm — <em>cinnamon, ginger, or black amber.</em>",
+   prompt:"Set a timer for five minutes. Look into each other's eyes. Don't speak. Don't smile to break the tension. Don't look away. Let whatever comes — laughter, tears, discomfort, desire, fear — come. The practice is staying. When the timer ends, each of you says one sentence about what you saw in the other person's face. Not 'you looked beautiful.' What you actually saw.",
+   aftercare:"Physical contact immediately. Hands, arms, foreheads together. Five minutes of eye contact strips layers. Be gentle with what's underneath.",
+   companion:{type:"essay",title:"Why Five Minutes Changes Everything",text:"There's a reason we break eye contact after three seconds. It's not shyness — it's self-preservation. Sustained mutual gaze activates the same neural pathways as physical touch. After ninety seconds, your nervous systems begin to sync. Heart rates align. Breathing patterns mirror. The body stops distinguishing between <em>mine</em> and <em>yours.</em><br><br>Most couples haven't looked at each other — really looked, without agenda — since the first year. Not because the desire left. Because somewhere along the way, being seen became more frightening than being wanted. Desire has a costume. Being seen doesn't.<br><br>Five minutes of eye contact won't fix anything. But it will show you what's there. That's almost always braver than fixing."}},
+
+  {mood:"fierce",forWho:"solo",intention:"Dress for the version of yourself that scares you a little.",
+   setup:"Your wardrobe. The full thing, including the pieces you never wear. <em>That one.</em> Music that makes you feel dangerous. Scent: the perfume you save for nobody. Full-length mirror.",
+   prompt:"Get dressed as the version of yourself that you keep in the back of the closet. Not for anyone. Not for an occasion. The version that scares you slightly because of how powerful they look. Stand in front of the mirror. Look at yourself the way a stranger across a room would. Hold the gaze. Say — out loud — 'this is also me.' Wear it for at least an hour. Do something mundane in it. Make tea. Read. The fierce version doesn't only exist at parties.",
+   aftercare:"Take a photo if you want. Keep it for yourself. Change when you're ready — not because you should."},
+
+  // ── PLAYFUL ──
+  {mood:"playful",forWho:"partner",intention:"The game: one of you hides three notes around the house. The other has fifteen minutes to find them.",
+   setup:"Small paper. Pen. Fifteen minutes apart to write and hide. Scent: something citrus or sweet — <em>bergamot, lemon verbena.</em> Music: something cheeky. <em>Arctic Monkeys. The Neighbourhood.</em>",
+   prompt:"Each note contains one sentence — either a dare, a memory, or a question. Examples: 'The first time you made me laugh — what were we doing?' or 'Kiss me somewhere you haven't in a while' or 'Tell me something you've never said out loud.' The seeker reads each note aloud when found. The hider watches. After all three are found, switch. Three new notes. The game ends when you run out of paper or end up in the same room not wanting to leave.",
+   aftercare:"Keep the notes. Put them in a jar. Draw from the jar on a night when you need a shortcut back to each other.",
+   companion:{type:"fiction",title:"The Jar on the Shelf",text:"They found the jar two years later during a move. Behind the cookbooks, dusty, the lid slightly loose. Inside: forty-seven folded notes in two different handwritings.<br><br><em>Kiss me somewhere you haven't in a while.</em><br><em>The night you burned the risotto and we ate cereal on the kitchen floor.</em><br><em>When was the last time you surprised yourself?</em><br><br>She read three before her throat closed. Not from sadness — from the shock of how much tenderness two people can generate in fifteen-minute bursts on Tuesday evenings when neither of them felt particularly brave.<br><br>They unpacked the jar first. Before the kettle. Before the bed frame. The jar went on the kitchen shelf where they could both reach it without stretching.<br><br>They still draw from it. Not every week. But enough."}},
+
+  {mood:"playful",forWho:"solo",intention:"Flirt with your own life tonight. Make your space absurdly beautiful for no reason.",
+   setup:"Candles — more than necessary. Flowers — even if they're from the petrol station. Your best glass, not the everyday one. Scent: <em>whatever makes you feel expensive.</em> Music: the playlist you'd make for a first date.",
+   prompt:"Set the table for one. Properly. Cloth napkin if you have one. The good plates. A single flower in a glass. Cook something — anything — and plate it like you're impressing someone. Sit down. Pour whatever you're drinking slowly. Eat without your phone. Taste everything. This is not sad. This is the opposite of sad. This is you, treating yourself like the most interesting dinner guest you could have invited.",
+   aftercare:"Leave the candles burning while you clean up. Dance to one song in the kitchen. The playful doesn't need a reason to end."},
+
+  {mood:"playful",forWho:"partner",intention:"Teach each other something useless. You have ten minutes each.",
+   setup:"Nothing. No preparation. That's the point. Whatever you're wearing. Whatever room you're in. Maybe a drink. Scent: <em>whatever's already in the air.</em>",
+   prompt:"One of you has ten minutes to teach the other something completely useless — a card trick, a dance move, how to fold a napkin into a swan, a phrase in a language you barely speak, the rules of a sport neither of you watches. The teacher must be sincere. The student must be a terrible student. Then switch. The worse you both are at this, the better it works. The point is not competence. The point is watching someone you love try to explain something that doesn't matter while their whole face lights up.",
+   aftercare:"No aftercare needed. You're already laughing. That is the aftercare."},
+
+  {mood:"playful",forWho:"both",intention:"Send a voice note to yourself — or your person — describing them in the third person as a character in a novel.",
+   setup:"Your phone. Voice recorder. Alone — or together, taking turns. Scent: <em>something ridiculous. The body spray from your teenage years if you still have it.</em>",
+   prompt:"Describe yourself — or each other — as though you're a character appearing for the first time in a novel. Include: what you're wearing, how you move, what your hands are doing, the first impression you give, and the thing someone would notice on the second look. Be generous. Be specific. Be absurd if you want. The description must be at least one minute long. Listen to it back. Keep it or delete it. Either way, you just saw yourself — or each other — as a story worth telling.",
+   aftercare:"Smile about it later when you least expect to."},
+
+  // ── DARK ──
+  {mood:"dark",forWho:"partner",intention:"One of you is blindfolded. The other has ten minutes and only their hands.",
+   setup:"A scarf or sleep mask. The room should be warm — <em>nobody is brave when they're cold.</em> One candle behind the sighted person so they can see but the blindfolded person only feels warmth. Scent: <em>myrrh, patchouli, or something resinous.</em> No music. The sounds of the room are enough.",
+   prompt:"The blindfolded person sits or lies still. The sighted person uses only their fingertips — no words — to communicate something. A question, a map, a message, a memory traced onto skin. The blindfolded person's only job is to receive it without interpreting. Don't try to guess what's being said. Just feel the pressure and the direction and the temperature of the touch. After ten minutes, remove the blindfold. Don't explain what you wrote. Let it live as sensation, not translation.",
+   aftercare:"Eyes need a moment to adjust. Stay close. Water. The blindfolded person speaks first about what they felt — not what they thought it meant. Just what they felt.",
+   companion:{type:"essay",title:"The Language Before Language",text:"Before we had words, we had skin. Forty-five miles of nerve endings wrapped around a body that learned to read pressure, temperature, and intention long before it learned to read a sentence.<br><br>The blindfold doesn't take something away. It gives something back. When vision goes dark, the somatosensory cortex doesn't shut down — it <em>expands.</em> Touch receptors become more sensitive. The fingertip that felt like a fingertip ten seconds ago now carries information: direction, hesitation, confidence, question.<br><br>Every couple develops a spoken language. Efficient, functional, full of shortcuts and assumptions. The blindfold forces you back to the first language — the one that can't lie, can't shortcut, can't assume. The one that has to mean exactly what it touches.<br><br>That's why it feels so intimate. You're not playing a game. You're remembering how to speak."}},
+
+  {mood:"dark",forWho:"solo",intention:"Sit in the dark. Deliberately. Without reaching for light.",
+   setup:"Every light off. Every screen dark. Sit somewhere comfortable. A blanket if you need it. Scent: <em>something that burns — a candle just extinguished, incense still smoking.</em> The smell of aftermath.",
+   prompt:"Set a timer for fifteen minutes. Sit in the complete dark. Don't meditate — that implies a goal. Just sit. Let your eyes adjust. Let the shapes come. Notice what your brain does when there's nothing to look at — the stories it tells, the faces it surfaces, the fears that arrive and the ones that don't. You are not solving anything. You are practising being in the dark without needing it to end. When the timer goes, light one candle. Only one. See how different the room looks now.",
+   aftercare:"Journal immediately — even a few lines. What arrived in the dark that wouldn't have come in the light?"},
+
+  {mood:"dark",forWho:"partner",intention:"Tell each other the thing you find most attractive about yourselves. Not each other — yourselves.",
+   setup:"Low light. Face to face. Close enough to whisper. Scent: <em>something heavy — oud, black amber, leather.</em> Music: slow, bass-heavy, almost too quiet to hear. <em>Cigarettes After Sex. Mazzy Star.</em>",
+   prompt:"This is harder than it sounds. Not what you like about each other — what you find attractive about yourselves. Your own mouth. Your own shoulders. The way you look when you're concentrating. The sound of your own voice when you're certain about something. Vanity is not the enemy here. The enemy is the reflex that makes you deflect. Say it directly. Say it slowly. Watch your partner's face while you claim yourself. That's the scene.",
+   aftercare:"Don't rush out of this one. What just happened is vulnerability wearing confidence as a costume. Hold what was said."},
+
+  {mood:"dark",forWho:"solo",intention:"Write about desire without naming what you want.",
+   setup:"Paper or screen — your choice. Low light. Scent: <em>the thing you'd wear if nobody could ask you about it.</em> Music or silence — whatever keeps you honest.",
+   prompt:"Write about desire. But you cannot name the object — not the person, not the act, not the thing. Describe only the feeling. The heat. The direction of the pull. The weight of it in your body. Where it sits — throat, chest, stomach, lower. What it does to your breathing. Whether it moves or stays still. You have one page. Make it visceral. Make it true. Don't edit. When it's done, read it back to yourself slowly. That's your desire without a costume.",
+   aftercare:"Burn the page or keep it. Both are valid. Drink water. The body sometimes forgets to after that kind of honesty."},
+
+  // ── SLOW ──
+  {mood:"slow",forWho:"partner",intention:"One touch. Held for five minutes. That's the entire practice.",
+   setup:"Somewhere you can be still. Lying down is fine. Sitting is fine. Scent: <em>something warm and patient — amber, sandalwood, warm skin.</em> No music. Let the silence be the container.",
+   prompt:"Decide where the touch will be. Palm to palm. Hand on chest. Fingertips on the inside of a wrist. Foreheads together. It doesn't matter where — it matters that it stays. Set a timer for five minutes. Hold the contact without moving, without adjusting, without breaking it to scratch an itch or shift your weight. Breathe. Let the five minutes feel like they last forever. That's the point. The slow is not the obstacle. The slow is the practice.",
+   aftercare:"Don't immediately pull apart. Let the separation happen naturally. A slow withdrawal is part of the ritual.",
+   companion:{type:"fiction",title:"Palm to Palm",text:"They set the timer for five minutes and she laughed because five minutes is nothing. Five minutes is a traffic light. Five minutes is the gap between snooze alarms.<br><br>His palm against hers. That's all.<br><br>By minute one she noticed the heat. Not warm — <em>specific.</em> The exact temperature of his blood moving under his skin. By minute two she noticed the micro-movements — his pulse in his thumb, the tiny involuntary adjustments as his hand settled into hers like water finding its level.<br><br>By minute three she was crying and she couldn't explain why. Not sadness. Something older than sadness. Something that recognised this — two bodies choosing stillness in a world that only rewards speed — as the most radical thing she'd done in years.<br><br>By minute four she understood that she had never in her adult life held something without also holding the thought of when to let it go.<br><br>The timer went off. Neither of them moved."}},
+
+  {mood:"slow",forWho:"solo",intention:"Eat one piece of fruit as slowly as you possibly can.",
+   setup:"One piece of fruit. Something with texture — a peach, a fig, an orange you have to peel. A plate. A napkin. Sit somewhere with nothing else in front of you. Scent: <em>the fruit itself is the scent.</em>",
+   prompt:"Look at it first. The colour, the weight in your hand, the skin. Bring it to your nose. Take one bite and hold it in your mouth for five seconds before chewing. Taste it — actually taste it. The sweetness, the acid, the texture against your tongue. Take the next bite only when the first is completely gone. This is not mindful eating as a wellness trend. This is you, relearning that pleasure doesn't have to be fast to be real.",
+   aftercare:"Wash your hands slowly. Notice the water temperature. You just spent ten minutes in your own body without trying to leave it. That's enough."},
+
+  {mood:"slow",forWho:"partner",intention:"Undress each other. But only one layer every five minutes.",
+   setup:"Both fully dressed. Timer visible to both. Warm room — <em>essential.</em> Scent: <em>whatever you both wore today. The everyday version of each other.</em> Music: slow, building. <em>Hozier. Tamino. Rosalía.</em> Candles.",
+   prompt:"Set the timer for five minutes. When it goes off, one person removes one item from the other. A watch. A sock. A belt. A shirt. Only one. Then five more minutes of doing nothing — talking, sitting, breathing, being looked at. Then the other person removes one item. One layer at a time. The practice is the waiting. The wanting that builds in the gap between the timer and the touch. By the time you're both undressed, you've spent an hour not rushing. The slow was the point.",
+   aftercare:"Whatever happens next happens at the same pace. The Codex set the tempo. Don't abandon it."},
+
+  {mood:"slow",forWho:"solo",intention:"Take the longest shower or bath of your life. Not to get clean.",
+   setup:"Bathroom. Every product you own that you never use — the fancy one, the sample, the one that's been sitting there for months. Candle on the edge. Scent: <em>all of them, layered. This is an experiment.</em> Music: <em>something ambient that's longer than you think you'll be in there.</em>",
+   prompt:"Get in the water and don't get out until the playlist ends — or until your body says it's done, whichever comes later. Wash slowly. Use the products in a different order than usual. Pay attention to the parts of your body you usually rush past — elbows, the backs of your knees, the nape of your neck. This is not self-care as performance. This is you, taking an unreasonable amount of time to be in your own skin.",
+   aftercare:"Softest thing you own to dry off with. Moisturise slowly. Don't get dressed immediately. The air on your skin is part of it."},
+
+  // ── SURRENDERING ──
+  {mood:"surrendering",forWho:"partner",intention:"Say 'I trust you' and mean it. Then prove it.",
+   setup:"Decide who surrenders first. The other person prepares the space — the surrendering person doesn't see the setup. Scent: <em>chosen by the holder, not the surrenderer.</em> Music: <em>chosen by the holder.</em> The surrender begins at the door.",
+   prompt:"The surrendering person enters the space the other has prepared and gives over control for twenty minutes. Not of their body — of their attention. The holder decides what happens: read to me, sit here, close your eyes, listen to this, hold this, breathe like this. The practice is releasing the need to know what's next. The holder's practice is being trusted with someone's attention and not wasting it. After twenty minutes, the surrenderer says what it felt like to not be in charge of their own evening.",
+   aftercare:"The surrenderer chooses what happens next. The power returns gently. Warm drinks. Proximity."},
+
+  {mood:"surrendering",forWho:"solo",intention:"Let your body choose where it goes. Don't override it.",
+   setup:"Stand in the middle of your space. Eyes closed. Bare feet on the floor. Scent: <em>whatever's already here.</em> No music. Just the sounds of where you are.",
+   prompt:"Stand still for two minutes. Feel where your weight is. Then let your body move — not dance, not stretch, just follow whatever direction it pulls. If it wants to sit, sit. If it wants to lie face down on the floor, lie there. If it wants to walk to the window, walk. Don't narrate it. Don't make it meaningful. The body knows what it needs and it rarely gets to drive. Let it drive. Follow for fifteen minutes. When you stop, notice where you ended up. That's the information.",
+   aftercare:"Stay where your body put you for a few extra minutes. Journal if something surfaced. Don't if it didn't."},
+
+  {mood:"surrendering",forWho:"partner",intention:"One of you rests. The other holds. That's the entire scene.",
+   setup:"The most comfortable surface in the house. Pillows. A blanket warm enough. Scent: <em>the safe one — lavender, chamomile, clean cotton.</em> Music: <em>the softest thing you have. Instrumental only. Brian Eno. Ludovico Einaudi.</em>",
+   prompt:"The person resting lies down and closes their eyes. The person holding sits beside them — hand on their back, or in their hair, or on their chest. Don't speak. Don't ask if they're okay. Don't move to make yourself more comfortable. Your job is to be the thing that doesn't move while they let go. Twenty minutes minimum. If they fall asleep, that's not a failure. That's the deepest surrender there is. Stay until they wake.",
+   aftercare:"The person who held may need holding after. This isn't one-directional. Check in. Water. Gentleness."},
+
+  {mood:"surrendering",forWho:"solo",intention:"Cry if you need to. Don't if you don't. But make space for it.",
+   setup:"Bed. The heaviest blanket you have. Lights off or one candle. Scent: <em>something that makes your chest ache slightly — the perfume someone you loved used to wear, or the smell of your childhood bedroom if you can find it.</em> Music: <em>the song. You know which one.</em>",
+   prompt:"Lie down. Put the song on. Close your eyes. Let whatever comes, come. If tears arrive, don't wipe them. Let them fall sideways into the pillow. If nothing comes, that's also fine — the practice is making space, not forcing a performance of vulnerability. Your body has been holding something. This is the room where it doesn't have to. Stay as long as you need. There is no timer. The Codex has no opinion about when you're done.",
+   aftercare:"Fresh water. Wash your face with warm water. Clean pillowcase. You did something brave by lying still.",
+   companion:{type:"essay",title:"The Weight of Unshed Things",text:"The average person cries between thirty and sixty times a year. Women more than men — not because they feel more, but because testosterone actively inhibits the lacrimal gland. Biology literally makes it harder for some people to release through tears. That's not weakness on one side or strength on the other. It's plumbing.<br><br>What most people don't know: emotional tears contain stress hormones that basal tears (the ones that keep your eyes wet) don't. When you cry from feeling, your body is literally excreting cortisol and leucine-enkephalin. You are not <em>breaking down.</em> You are <em>processing out.</em><br><br>The practice of making space for tears without forcing them is not about catharsis. It's about removing the obstacle. The obstacle is almost always the same: the belief that crying requires a good enough reason. It doesn't. The body doesn't audit its own grief. It just needs the door left open.<br><br>Sometimes the door opens and nothing comes through. That's information too. It means the body isn't ready, or it doesn't need to. Both are fine. The practice was the opening, not the tears.",book:"<em>The Body Keeps the Score</em> — Bessel van der Kolk. The chapter on how trauma lives in the body, not the mind."}}
+];
+
+// ── APP STATE ──
+let currentMood = 'all';
+let currentFor = 'all';
+let currentCard = null;
+
+// ── DOM ──
+const container = document.getElementById('card-container');
+const emptyState = document.getElementById('empty-state');
+const statusEl = document.getElementById('house-status');
+
+function setStatus(t){if(statusEl)statusEl.textContent=`[ codex : ${t} ]`}
+
+// ── FILTER ──
+function getFiltered(){
+  return CODEX.filter(e=>{
+    const moodOk = currentMood==='all'||e.mood===currentMood;
+    const forOk = currentFor==='all'||e.forWho===currentFor||e.forWho==='both';
+    return moodOk&&forOk;
+  });
+}
+
+// ── RENDER ──
+function renderCard(entry){
+  const forLabel = entry.forWho==='both'?'solo · partner':entry.forWho;
+  let companionHTML = '';
+  if(entry.companion){
+    const typeLabel = entry.companion.type==='fiction'?'Fiction':entry.companion.type==='essay'?'Essay':'Reading';
+    const bookHTML = entry.companion.book?`<p class="companion-book">${entry.companion.book}</p>`:'';
+    companionHTML = `
+      <div class="card-companion">
+        <div class="companion-label">Read before you begin · ${typeLabel}</div>
+        <div class="companion-title">${entry.companion.title}</div>
+        <p class="companion-text">${entry.companion.text}</p>
+        ${bookHTML}
+      </div>`;
+  }
+  container.innerHTML = `
+    <div class="ritual-card visible" style="animation:cardFade 0.8s ease forwards">
+      <div class="card-mood">${entry.mood}</div>
+      <p class="card-intention">${entry.intention}</p>
+      ${companionHTML}
+      <div class="card-section-label">Setup</div>
+      <p class="card-setup">${entry.setup}</p>
+      <div class="card-section-label">The Practice</div>
+      <p class="card-prompt">${entry.prompt}</p>
+      <div class="card-aftercare">
+        <div class="card-aftercare-label">Aftercare</div>
+        <p class="card-aftercare-text">${entry.aftercare}</p>
+      </div>
+      <div class="card-tags">
+        <span class="card-tag">${entry.mood}</span>
+        <span class="card-tag">${forLabel}</span>
+      </div>
+    </div>`;
+  emptyState.classList.remove('visible');
+  setStatus('drawn');
+  setTimeout(()=>setStatus('waiting'),3000);
+}
+
+function showEmpty(){
+  container.innerHTML='';
+  emptyState.classList.add('visible');
+}
+
+// ── SHUFFLE ──
+document.getElementById('shuffle').addEventListener('click',()=>{
+  const pool = getFiltered();
+  if(!pool.length){showEmpty();return;}
+  // avoid same card twice in a row
+  let pick;
+  if(pool.length===1){pick=pool[0]}
+  else{do{pick=pool[Math.floor(Math.random()*pool.length)]}while(pick===currentCard)}
+  currentCard=pick;
+  renderCard(pick);
+});
+
+// ── MOOD BUTTONS ──
+document.querySelectorAll('.mood-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentMood=btn.dataset.mood;
+    setStatus(currentMood==='all'?'waiting':currentMood);
+  });
+});
+
+// ── FOR BUTTONS ──
+document.querySelectorAll('.for-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.for-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFor=btn.dataset.for;
+  });
+});
+
+// ── HOVER STATUS ──
+document.querySelector('.shuffle-btn').addEventListener('mouseenter',()=>setStatus('the pages turn'));
+document.querySelector('.shuffle-btn').addEventListener('mouseleave',()=>setStatus('waiting'));
+</script>
+</body>
+</html>
