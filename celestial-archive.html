@@ -522,44 +522,6 @@
       margin-bottom: 3rem;
     }
 
-    .gate-input {
-      width: 100%;
-      max-width: 280px;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(196,136,42,0.18);
-      color: var(--cream);
-      font-family: var(--font-body);
-      font-size: 1.1rem;
-      font-style: italic;
-      padding: 0.7rem 0.3rem;
-      outline: none;
-      text-align: center;
-      transition: border-color 0.5s ease;
-      margin-bottom: 1.2rem;
-    }
-    .gate-input:focus { border-color: rgba(61,139,122,0.55); }
-    .gate-input::placeholder { color: rgba(196,136,42,0.25); font-style: italic; }
-
-    .gate-btn {
-      display: inline-block;
-      background: none;
-      border: 1px solid rgba(196,136,42,0.25);
-      color: var(--amber-dim);
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      padding: 1rem 2.5rem;
-      cursor: crosshair;
-      transition: all 0.6s ease;
-      position: relative;
-    }
-    .gate-btn:hover {
-      border-color: rgba(61,139,122,0.55);
-      color: var(--teal-bright);
-    }
-
     /* ── FOOTER ── */
     .archive-footer {
       padding: 3rem 2rem;
@@ -857,15 +819,23 @@
         New writing drops without announcement.<br>
         Members enter first. Members enter deeper.
       </p>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:1rem">
-        <input type="email" class="gate-input" placeholder="your@email.com" id="archive-email"
-               onkeydown="if(event.key==='Enter')submitArchive()" />
-        <button class="gate-btn" onclick="submitArchive()">Request entry</button>
-      </div>
-      <p id="archive-confirm" style="display:none;font-family:var(--font-italic);font-style:italic;font-size:1rem;color:var(--teal-dim);margin-top:1.5rem;animation:fadeIn 1s ease forwards">
-        The archive has your name now.<br>We'll find you when a new star is named.
-      </p>
+      <a href="https://maison-cache.ghost.io/#/portal/signup"
+         target="_blank" rel="noopener noreferrer"
+         class="btn" style="display:inline-block;text-decoration:none;padding:0.75rem 2rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.28em;text-transform:uppercase;color:#3d8b7a;border:1px solid rgba(61,139,122,0.4);border-radius:2px;transition:all 0.3s ease">
+         Request entry
+      </a>
     </section>
+
+    <!-- ══ FULL MOON NOTE ══ -->
+    <div style="text-align:center;margin:2rem auto;max-width:480px;opacity:0.85">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:#3d8b7a;line-height:1.7;margin-bottom:1rem">
+        New stars appear at the full moon.<br>Members enter first. Members enter deeper.
+      </p>
+      <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+         style="display:inline-block;text-decoration:none;padding:0.6rem 1.5rem;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#3d8b7a;border:1px solid rgba(61,139,122,0.3);border-radius:2px">
+        Join the house →
+      </a>
+    </div>
 
     <footer class="archive-footer">
       <div class="archive-footer-title">Maison Caché</div>
@@ -933,8 +903,6 @@
   </div>
 
   <script>
-    const WEBHOOK_URL = 'https://hook.eu1.make.com/rmhgt652uwfgo2x8h8as0ychue97cfb7';
-
     // ── STATUS BAR ──
     function setStatus(text) {
       const el = document.getElementById('archive-status');
@@ -1080,29 +1048,6 @@
       document.getElementById('locked-card').classList.remove('open');
       document.body.style.overflow = '';
       setStatus('the archive breathes');
-    }
-
-    // ── EMAIL GATE ──
-    function submitArchive() {
-      const input = document.getElementById('archive-email');
-      const email = input.value.trim();
-      const btn = document.querySelector('.gate-btn');
-      if (email && email.includes('@') && email.includes('.')) {
-        if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
-        fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source: 'Celestial Archive', room: 'Archive' })
-        }).then(() => {
-          input.style.display = 'none';
-          if (btn) btn.style.display = 'none';
-          document.getElementById('archive-confirm').style.display = 'block';
-          setStatus('the archive has your name');
-        }).catch(() => {
-          if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-          setStatus('something went wrong — try again');
-        });
-      }
     }
 
     // ── STATUS ON LOAD ──

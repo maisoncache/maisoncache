@@ -13,7 +13,7 @@ Read this first. Every time.
 
 ## Repository Overview
 
-This repo (`maisoncache/maisoncache`) holds the HTML prototypes for the Maison Caché room system. These are recovered prototype files — the canonical platform lives on **Ghost Pro** at `maisoncache.ghost.io`.
+This repo (`maisoncache/maisoncache`) holds the HTML prototypes for the Maison Caché room system. These are recovered prototype files — the canonical platform lives on **Ghost Pro** at `maison-cache.ghost.io`.
 
 ### Wider Ecosystem
 
@@ -27,7 +27,7 @@ This repo (`maisoncache/maisoncache`) holds the HTML prototypes for the Maison C
 
 ### Platform (Ghost Pro)
 
-- **Ghost Pro** at `maisoncache.ghost.io`
+- **Ghost Pro** at `maison-cache.ghost.io`
 - Two membership tiers:
   - **The Tearoom** (free) — The Parlour newsletter
   - **The Inner House** ($5 AUD/month) — paid tier, Inner House newsletter
@@ -46,6 +46,7 @@ This repo (`maisoncache/maisoncache`) holds the HTML prototypes for the Maison C
 | **Celestial Archive** | `celestial-archive.html` | Member-only story/knowledge archive with starfield canvas |
 | **The Library** | `library.html` | Curated knowledge repository with warm literary aesthetic |
 | **The Sanctum** | `sanctum.html` | Hidden room accessed via Easter egg (click dot 3x in The Hearth) |
+| **The Codex** | `codex.html` | Interactive ritual cards with mood filter and shuffle (accessed from Sanctum) |
 
 ### Navigation Flow
 
@@ -54,7 +55,8 @@ index.html  (Home — hub for all rooms)
 ├── hearth.html              "The Hearth"
 ├── celestial-archive.html   "Celestial Archive"
 ├── library.html             "The Library"
-└── sanctum.html             "The Sanctum" (hidden, Easter egg access)
+├── sanctum.html             "The Sanctum" (hidden, Easter egg access)
+│   └── codex.html           "The Codex" (ritual cards, linked from Sanctum)
 ```
 
 All inner pages link back to `index.html` via a "← The House" back link.
@@ -78,7 +80,7 @@ All inner pages link back to `index.html` via a "← The House" back link.
 - **Languages:** HTML, CSS, JavaScript (vanilla — no frameworks in this repo)
 - **Target stack:** React (single page app, single index.html where possible)
 - **Fonts:** Google Fonts (Cormorant Garamond, Crimson Pro, Cinzel, EB Garamond, Cormorant Infant, UnifrakturMaguntia, IM Fell English, Almendra)
-- **Data persistence:** fetch() to external webhook (Archive, Library, Sanctum)
+- **Membership:** Ghost Pro signup via `maison-cache.ghost.io/#/portal/signup`
 - **Graphics:** All inline SVG — no image files
 - **Deployment:** GitHub Pages (free tier, public repos)
 - **No build step** — static files served directly (for now)
@@ -138,21 +140,19 @@ Serif-heavy — Cormorant Garamond for headings, Crimson Pro / EB Garamond for b
 ```
 /
 ├── CLAUDE.md                  # AI assistant guidance (this file)
+├── SITE-UPDATE-GUIDE.md       # Change log for March 2026 updates
+├── favicon.svg                # Gold key icon favicon
 ├── index.html                 # Home / Foyer — landing page linking all rooms
 ├── hearth.html                # The Hearth — kitchen rituals
 ├── celestial-archive.html     # Celestial Archive — stories
 ├── library.html               # The Library — knowledge
-└── sanctum.html               # The Sanctum — hidden room
+├── sanctum.html               # The Sanctum — hidden room
+└── codex.html                 # The Codex — ritual cards (from Sanctum)
 ```
-
-## Known Issues
-
-1. **Cloudflare email obfuscation bug** — Known issue on the landing page (fix options documented in Notion Scratchpad).
 
 ## Build Priority
 
 1. **Push recovered prototypes to GitHub** — Grimoire, Maykhay, Letterbox etc.
-2. **Fix Cloudflare email obfuscation bug** on landing page
 
 ## Git Workflow
 

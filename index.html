@@ -10,6 +10,10 @@
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#07040c" />
   <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Maison Caché — The Hidden House" />
+  <meta name="twitter:description" content="Enter, if you were always going to." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -467,6 +471,19 @@
       transition: opacity 2s ease;
       max-width: 380px; width: 90%;
     }
+
+    /* ── ACCESSIBILITY ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--teal-bright, #5ab89a);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -600,14 +617,15 @@
             <span class="ghost-tag">forming</span>
           </div>
 
-          <!-- GHOST: The Hearth -->
-          <div class="door-ghost"
-               onmouseenter="setStatus('another room stirs')"
-               onmouseleave="setStatus('listening')">
-            <span class="ghost-motif">🕯</span>
-            <span class="ghost-name">The Hearth</span>
-            <span class="ghost-tag">forming</span>
-          </div>
+          <!-- OPEN: The Hearth -->
+          <a href="hearth.html" class="door"
+             onmouseenter="setStatus('the hearth — open')"
+             onmouseleave="setStatus('listening')">
+            <div class="door-tag-open">open now</div>
+            <span class="door-motif">🕯</span>
+            <span class="door-name">The Hearth</span>
+            <span class="door-sub">Kitchen rituals</span>
+          </a>
 
         </div>
 
@@ -642,16 +660,16 @@
           <div class="label" style="margin-bottom:1.5rem">The house remembers</div>
           <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(1.05rem,2vw,1.25rem)">
             New rooms open without warning.<br>
-            Leave your email so the house can find you.
+            Join the house so it can find you.
           </p>
           <p style="font-family:var(--font-display);font-size:0.62rem;color:var(--amber-mute);margin-bottom:2rem;letter-spacing:0.08em">
             We'll only write when a new door opens. No spam. Ever.
           </p>
           <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
-            <input type="email" id="email-input" placeholder="your@email.com"
-                   class="email-input"
-                   onkeydown="if(event.key==='Enter')submitEmail()" />
-            <button onclick="submitEmail()" class="btn">Remember me</button>
+            <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+               class="btn" style="text-decoration:none;padding:0.75rem 2rem">
+              Join the house
+            </a>
           </div>
         </div>
         <div id="remember-confirm" style="display:none;animation:fadeUp 1.5s ease forwards">
@@ -716,21 +734,14 @@
           <p id="sanctum-wolf-note" class="body-text" style="text-align:center;font-size:clamp(1.05rem,2vw,1.2rem)"></p>
         </div>
 
-        <div id="sanctum-form">
-          <p class="body-text" style="color:var(--teal-dim);margin-bottom:1.8rem;font-size:clamp(1rem,1.9vw,1.15rem)">
+        <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin-bottom:2rem">
+          <p class="body-text" style="color:var(--teal-dim);margin-bottom:0.5rem;font-size:clamp(1rem,1.9vw,1.15rem)">
             The Sanctum is being prepared.<br>
-            Leave your email. When it opens, you enter first.
+            Members enter first. Members enter deeper.
           </p>
-          <div style="display:flex;flex-direction:column;gap:1rem;align-items:center;margin-bottom:2rem">
-            <input type="email" id="sanctum-email" placeholder="your@email.com"
-                   class="email-input"
-                   onkeydown="if(event.key==='Enter')submitSanctumEmail()" />
-            <button onclick="submitSanctumEmail()" class="btn btn--rose" style="padding:0.75rem 2rem;font-size:0.7rem;letter-spacing:0.28em">Hold my place</button>
-          </div>
+          <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+             class="btn btn--rose" style="padding:0.75rem 2rem;font-size:0.7rem;letter-spacing:0.28em;text-decoration:none">Hold my place</a>
           <p style="font-family:var(--font-body);font-size:0.72rem;color:rgba(155,52,104,0.28);font-style:italic">The Sanctum explores themes of sensuality, surrender, and ritual. 18+ only.</p>
-        </div>
-        <div id="sanctum-confirm" style="display:none;margin-bottom:2rem">
-          <p class="body-text" style="color:var(--teal-dim)">The Sanctum knows your name.<br>You'll be the first to know.</p>
         </div>
 
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
@@ -758,8 +769,6 @@
   </div>
 
   <script>
-    const WEBHOOK_URL = 'https://hook.eu1.make.com/rmhgt652uwfgo2x8h8as0ychue97cfb7';
-
     // ── STATUS ──
     function setStatus(text) {
       const el = document.getElementById('house-status');
@@ -803,18 +812,6 @@
       el.addEventListener('mouseleave', () => setStatus('listening'));
     });
 
-    // ── EMAIL ──
-    function submitEmail() {
-      const input = document.getElementById('email-input');
-      const email = input.value.trim();
-      if (email && email.includes('@') && email.includes('.')) {
-        fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, source:'Landing Page', room:'Foyer' }) });
-        document.getElementById('remember-form').style.display = 'none';
-        document.getElementById('remember-confirm').style.display = 'block';
-        setStatus('the house remembers you');
-      }
-    }
-
     // ── SANCTUM ──
     let sanctumClicks = 0, sanctumTimer = null;
     function sanctumClick() {
@@ -857,16 +854,6 @@
     function loadSanctumWolfNote() {
       const el = document.getElementById('sanctum-wolf-note');
       if (el) el.textContent = WOLF_NOTES[Math.floor(Math.random() * WOLF_NOTES.length)];
-    }
-
-    function submitSanctumEmail() {
-      const input = document.getElementById('sanctum-email');
-      const email = input.value.trim();
-      if (email && email.includes('@') && email.includes('.')) {
-        fetch(WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email, source:'Foyer Sanctum Trigger', room:'Sanctum' }) });
-        document.getElementById('sanctum-form').style.display = 'none';
-        document.getElementById('sanctum-confirm').style.display = 'block';
-      }
     }
 
     // ══════════════════════════════════════════

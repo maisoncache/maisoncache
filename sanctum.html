@@ -268,8 +268,10 @@
     .btn--teal:hover { border-color: rgba(61,139,122,0.65); color: var(--teal-bright); }
     .btn--amber { border-color: var(--amber-mute); color: var(--amber-dim); }
     .btn--amber:hover { border-color: var(--amber-dim); color: var(--amber-bright); }
+    .btn--rose { border-color: rgba(155,52,104,0.35); color: rgba(155,52,104,0.7); }
+    .btn--rose:hover { border-color: rgba(155,52,104,0.7); color: rgba(155,52,104,0.95); }
 
-    /* ── NINE ROOMS GRID ── */
+    /* ── EIGHT ROOMS GRID ── */
     .rooms-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -554,7 +556,7 @@
 
         <p class="body-text" style="max-width:420px">
           The basement is being lit.<br>
-          Nine rooms. One for each of the things<br>
+          Eight rooms. One for each of the things<br>
           you were told not to want.
         </p>
 
@@ -577,10 +579,10 @@
       </div>
     </section>
 
-    <!-- ══ NINE ROOMS ══ -->
+    <!-- ══ EIGHT ROOMS ══ -->
     <section class="section" id="rooms-section">
       <div class="reveal" style="max-width:760px;width:100%">
-        <div class="label" style="margin-bottom:2rem">The nine rooms</div>
+        <div class="label" style="margin-bottom:2rem">The eight rooms</div>
 
         <div class="rooms-grid">
 
@@ -603,59 +605,53 @@
           </div>
 
           <div class="room-cell shadow"
-               onmouseenter="setStatus('written filth with teeth — forming')"
+               onmouseenter="setStatus('written filth with teeth — preparing')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🖋</span>
             <span class="room-cell-name">Written Filth with Teeth</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">preparing</span>
           </div>
 
           <div class="room-cell shadow"
-               onmouseenter="setStatus('the mirror room — forming')"
+               onmouseenter="setStatus('the mirror room — preparing')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🪞</span>
             <span class="room-cell-name">The Mirror Room</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">preparing</span>
           </div>
 
           <div class="room-cell shadow"
-               onmouseenter="setStatus('scent rituals — forming')"
-               onmouseleave="setStatus('the basement breathes')">
-            <span class="room-cell-glyph">◈</span>
-            <span class="room-cell-name">Scent Rituals</span>
-            <span class="room-cell-status">forming</span>
-          </div>
-
-          <div class="room-cell shadow"
-               onmouseenter="setStatus('audio holds — forming')"
+               onmouseenter="setStatus('audio holds — preparing')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">◎</span>
             <span class="room-cell-name">Audio Holds</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">preparing</span>
           </div>
 
-          <div class="room-cell shadow"
-               onmouseenter="setStatus('the codex — forming')"
+          <div class="room-cell open" role="button" tabindex="0"
+               onclick="window.location.href='codex.html'"
+               onkeydown="if(event.key==='Enter')window.location.href='codex.html'"
+               onmouseenter="setStatus('the codex — open')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">📜</span>
             <span class="room-cell-name">The Codex</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">open</span>
           </div>
 
           <div class="room-cell shadow"
-               onmouseenter="setStatus('story drops — forming')"
+               onmouseenter="setStatus('story drops — preparing')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">✦</span>
             <span class="room-cell-name">Story Drops</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">preparing</span>
           </div>
 
           <div class="room-cell shadow"
-               onmouseenter="setStatus('the aftercare room — forming')"
+               onmouseenter="setStatus('the aftercare room — preparing')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">☽</span>
             <span class="room-cell-name">The Aftercare Room</span>
-            <span class="room-cell-status">forming</span>
+            <span class="room-cell-status">preparing</span>
           </div>
 
         </div>
@@ -670,29 +666,21 @@
     <!-- ══ HOLD MY PLACE ══ -->
     <section class="section section--short">
       <div class="reveal" style="max-width:440px">
-        <div id="sanctum-form">
-          <div class="label" style="margin-bottom:1.5rem">Hold my place</div>
+        <div class="label" style="margin-bottom:1.5rem">Hold my place</div>
           <p class="body-text" style="margin-bottom:1.8rem;font-size:clamp(1.05rem,2vw,1.25rem)">
             The rooms open when they're ready.<br>
-            Leave your email and you enter first.
+            Join the house and you enter first.
           </p>
           <p style="font-family:var(--font-display);font-size:0.62rem;color:rgba(155,52,104,0.3);margin-bottom:2rem;letter-spacing:0.08em">
             No announcements. No spam. Just a knock when the door opens.
           </p>
           <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
-            <input type="email" id="sanctum-email" placeholder="your@email.com"
-                   class="email-input"
-                   onkeydown="if(event.key==='Enter')submitSanctum()" />
-            <button onclick="submitSanctum()" class="btn">Hold my place</button>
+            <a href="https://maison-cache.ghost.io/#/portal/signup"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--rose" style="text-decoration:none;padding:0.75rem 2rem;font-size:0.7rem;letter-spacing:0.28em">
+               Hold my place
+            </a>
           </div>
-        </div>
-        <div id="sanctum-confirm" style="display:none;animation:fadeUp 1.5s ease forwards">
-          <div style="font-size:1.4rem;color:rgba(155,52,104,0.5);margin-bottom:1.5rem;animation:pulse 3s ease-in-out infinite">◉</div>
-          <p class="body-text" style="color:rgba(155,52,104,0.6)">
-            The Sanctum knows your name.<br>
-            You'll be the first through the door.
-          </p>
-        </div>
       </div>
     </section>
 
@@ -714,8 +702,6 @@
   <div id="sanctum-status">[ sanctum : waiting ]</div>
 
   <script>
-    const WEBHOOK_URL = 'https://hook.eu1.make.com/rmhgt652uwfgo2x8h8as0ychue97cfb7';
-
     // ── STATUS ──
     function setStatus(text) {
       const el = document.getElementById('sanctum-status');
@@ -806,8 +792,19 @@
                Not the performance of wellness — the real thing.<br>
                Moon phases. Intentions set in smoke.<br>
                The small sacred acts that nobody sees.`,
+        taster: `<div style="border:1px solid rgba(176,120,32,0.2);padding:2rem;margin:2rem 0;background:rgba(176,120,32,0.04)">
+                   <p style="font-family:var(--font-italic);font-style:italic;font-size:clamp(1.1rem,2.2vw,1.3rem);color:var(--cream-dim);line-height:2.2;margin-bottom:1.5rem">
+                     Under the full moon, nothing hides.<br>
+                     What have you been pretending not to see?<br>
+                     Name it. Don't explain it. Just let it stand in the light.
+                   </p>
+                   <p style="font-family:var(--font-display);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber-dim);margin-bottom:1.5rem">
+                     The full guided ritual for this phase — including setup, journaling prompts, and closing — lives in The Inner House.
+                   </p>
+                   <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+                      class="btn btn--amber" style="text-decoration:none">Join the house</a>
+                 </div>`,
         sub: 'Monthly ritual guides drop here. Seasonal. Lunar. Yours.',
-        btn: 'Enter the ritual',
         color: 'rgba(176,120,32,0.6)',
       },
       confessional: {
@@ -840,16 +837,6 @@
         sub: 'In development.',
         color: 'rgba(45,107,94,0.55)',
       },
-      scent: {
-        glyph: '◈',
-        name: 'Scent Rituals',
-        open: false,
-        body: `Fragrance as practice.<br><br>
-               How to anoint. When to layer.<br>
-               The oils and incenses that hold the work.`,
-        sub: 'Opening soon.',
-        color: 'rgba(176,120,32,0.5)',
-      },
       audio: {
         glyph: '◎',
         name: 'Audio Holds',
@@ -863,11 +850,11 @@
       codex: {
         glyph: '📜',
         name: 'The Codex',
-        open: false,
+        open: true,
         body: `The archive within the archive.<br><br>
                Distilled ritual entries. Tone preservation.<br>
                Everything the house has learned, written down.`,
-        sub: 'Members only — in preparation.',
+        sub: 'Open — enter the codex.',
         color: 'rgba(155,52,104,0.4)',
       },
       story: {
@@ -908,7 +895,7 @@
           <div class="divider" style="width:50px;margin-bottom:2rem"></div>
           <p class="body-text" style="margin-bottom:2rem">${room.body}</p>
           <p style="font-family:var(--font-display);font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:${room.color};margin-bottom:2.5rem">${room.sub}</p>
-          ${room.open && room.btn ? `<button class="btn btn--amber" style="margin-bottom:1rem">${room.btn}</button>` : ''}
+          ${room.taster ? room.taster : ''}
         </div>
       `;
 
@@ -921,28 +908,6 @@
       document.getElementById('room-overlay').classList.remove('open');
       document.body.style.overflow = '';
       setStatus('the basement breathes');
-    }
-
-    // ── EMAIL ──
-    function submitSanctum() {
-      const input = document.getElementById('sanctum-email');
-      const email = input.value.trim();
-      const btn = document.querySelector('[onclick="submitSanctum()"]');
-      if (email && email.includes('@') && email.includes('.')) {
-        if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
-        fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, source: 'Sanctum', room: 'Sanctum' })
-        }).then(() => {
-          document.getElementById('sanctum-form').style.display = 'none';
-          document.getElementById('sanctum-confirm').style.display = 'block';
-          setStatus('the sanctum has your name');
-        }).catch(() => {
-          if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-          setStatus('something went wrong — try again');
-        });
-      }
     }
 
   </script>
