@@ -73,14 +73,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:url("d
 .cyc-btn.on{background:rgba(196,98,26,.14);border-color:var(--ember)}.cyc-btn.on small{color:var(--ember)}
 .cyc-insight{margin-top:10px;font-size:13px;font-style:italic;color:var(--dim);min-height:16px}
 
-/* SCENT */
-.scent-name{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--cream);margin-bottom:2px}
-.scent-brand{font-size:11px;color:var(--gold2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.scent-notes{font-size:13px;color:var(--text);margin-bottom:6px}
-.scent-why{font-size:13px;font-style:italic;color:var(--dim);line-height:1.4}
-.scent-divider{height:1px;background:rgba(212,168,75,.1);margin:12px 0}
-.scent-alt{opacity:.7}
-
 /* BUCKET */
 .bucket-card{background:var(--bg2);border:1px solid rgba(212,168,75,.1);border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .b-icon{font-size:26px;margin-bottom:6px}
@@ -238,6 +230,7 @@ button{-webkit-appearance:none;appearance:none}
 <!-- HOME -->
 <div class="tab on" id="tab-home">
   <div class="hdr">
+    <a href="index.html" style="display:inline-block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);text-decoration:none;margin-bottom:8px;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--dim)'">← The House</a>
     <div class="hdr-date" id="hDate"></div>
     <div class="hdr-greet" id="hGreet">Good morning, wolf.</div>
     <div class="hdr-sub"><span id="mEmoji">🌙</span><span id="mName">—</span></div>
@@ -290,13 +283,6 @@ button{-webkit-appearance:none;appearance:none}
         <button class="cyc-btn" onclick="setCycle(this,'luteal')" data-i="Inward pull. Sensitivity up. Honour it. Reduce the list."><span>🌗</span><small>Luteal</small></button>
       </div>
       <div class="cyc-insight" id="cycInsight"></div>
-    </div>
-  </div>
-
-  <div class="sec" id="scentSec" style="display:none">
-    <div class="lbl">Scent for today</div>
-    <div class="card" id="scentCard">
-      <div id="scentContent"></div>
     </div>
   </div>
 
@@ -390,27 +376,27 @@ button{-webkit-appearance:none;appearance:none}
 
       <div class="boy-panel" id="bp-ezra">
         <div class="tr-row"><div class="tr-lbl">Mood</div><div class="dots" id="em">
-          <button class="dot" onclick="setDot('em','sm',this)">😰</button>
-          <button class="dot" onclick="setDot('em','sm',this)">😔</button>
-          <button class="dot" onclick="setDot('em','sm',this)">😐</button>
-          <button class="dot" onclick="setDot('em','sm',this)">🙂</button>
-          <button class="dot" onclick="setDot('em','sm',this)">😄</button>
+          <button class="dot" onclick="setDot('em','em',this)">😰</button>
+          <button class="dot" onclick="setDot('em','em',this)">😔</button>
+          <button class="dot" onclick="setDot('em','em',this)">😐</button>
+          <button class="dot" onclick="setDot('em','em',this)">🙂</button>
+          <button class="dot" onclick="setDot('em','em',this)">😄</button>
         </div></div>
         <div class="tr-row"><div class="tr-lbl">Eating</div><div class="dots" id="ee">
-          <button class="dot" onclick="setDot('ee','se',this)" style="font-size:11px">poor</button>
-          <button class="dot" onclick="setDot('ee','se',this)" style="font-size:11px">ok</button>
-          <button class="dot" onclick="setDot('ee','se',this)" style="font-size:11px">good</button>
+          <button class="dot" onclick="setDot('ee','ee',this)" style="font-size:11px">poor</button>
+          <button class="dot" onclick="setDot('ee','ee',this)" style="font-size:11px">ok</button>
+          <button class="dot" onclick="setDot('ee','ee',this)" style="font-size:11px">good</button>
         </div></div>
         <div class="tr-row"><div class="tr-lbl">Bath</div><div class="dots" id="eb">
-          <button class="dot" onclick="setDot('eb','sb',this)">✓</button>
-          <button class="dot" onclick="setDot('eb','sb',this)" style="font-size:11px">no</button>
+          <button class="dot" onclick="setDot('eb','eb',this)">✓</button>
+          <button class="dot" onclick="setDot('eb','eb',this)" style="font-size:11px">no</button>
         </div></div>
         <div class="tr-row"><div class="tr-lbl">Sleep</div><div class="dots" id="esl">
-          <button class="dot" onclick="setDot('esl','ss',this)">💤</button>
-          <button class="dot" onclick="setDot('esl','ss',this)">🌙</button>
-          <button class="dot" onclick="setDot('esl','ss',this)">⭐</button>
-          <button class="dot" onclick="setDot('esl','ss',this)">✨</button>
-          <button class="dot" onclick="setDot('esl','ss',this)">🌟</button>
+          <button class="dot" onclick="setDot('esl','esl',this)">💤</button>
+          <button class="dot" onclick="setDot('esl','esl',this)">🌙</button>
+          <button class="dot" onclick="setDot('esl','esl',this)">⭐</button>
+          <button class="dot" onclick="setDot('esl','esl',this)">✨</button>
+          <button class="dot" onclick="setDot('esl','esl',this)">🌟</button>
         </div></div>
         <textarea class="tr-note" id="en" rows="2" placeholder="anything to note..."></textarea>
         <button class="tr-save" onclick="saveBoy('ezra')">Save Ezra log →</button>
@@ -599,61 +585,6 @@ const STAPLES = [
   "Powerade powder","Magnesium","Eggs","Chicken"
 ];
 
-// Perfume collection — owned, with energy tags mapped from Notion
-const PERFUMES = [
-  {name:"Not a Perfume",brand:"Juliette Has a Gun",notes:"Cetalox — minimal, skin",tags:["Gentle Reset","Intimate","Soft"],why:"Barely-there. Just you, amplified."},
-  {name:"Scent of a Dream",brand:"Charlotte Tilbury",notes:"Tuberose, amber — sensual, dreamy",tags:["Sensual","Intimate","Soft"],why:"For when you want to feel held from the outside in."},
-  {name:"Black Lotus",brand:"Floral Street",notes:"Lotus, incense — mystical",tags:["Grounded","Intimate","Calming"],why:"Ritual-grade. Quiet power."},
-  {name:"Wild Vanilla Orchid",brand:"Floral Street",notes:"Vanilla, orchid — soft sweet",tags:["Soft","Calming","Playful"],why:"Cozy and uncomplicated. Good for soft days."},
-  {name:"Sandalwood & Vanilla",brand:"Apothecary 18",notes:"Sandalwood, vanilla — grounded",tags:["Grounded","Calming","Restorative"],why:"Settle the nervous system from the outside."},
-  {name:"Peony & Blush Suede",brand:"Jo Malone",notes:"Peony, red apple — romantic",tags:["Soft","Intimate","Sensual"],why:"Tender and feminine. Soft date energy."},
-  {name:"Flowerbomb",brand:"Viktor & Rolf",notes:"Jasmine, patchouli — iconic",tags:["Bold","Expressive","Sensual"],why:"When you want to arrive before you speak."},
-  {name:"Ombre Leather",brand:"Tom Ford",notes:"Leather, jasmine — dark power",tags:["Bold","Feral","Grounded"],why:"Statement. Unapologetic. Yours."},
-  {name:"Neon Rose",brand:"Floral Street",notes:"Rose, amber — bold rose",tags:["Bold","Expressive","Feral"],why:"Drama. Full stop."},
-  {name:"Lovefest",brand:"Kayali",notes:"Cherry, praline — sultry",tags:["Sensual","Bold","Playful"],why:"Power in a bottle. Not subtle. Shouldn't be."},
-  {name:"Midnight Dahlia",brand:"Korres",notes:"Dahlia, caramel — dark floral",tags:["Grounded","Sensual","Intimate"],why:"Evening ritual. Slow and warm."},
-  {name:"Chypre Sublime",brand:"Floral Street",notes:"Moss, patchouli — classic",tags:["Grounded","Bold","Intimate"],why:"Structured and confident. Office-worthy power."},
-  {name:"Bal d'Afrique",brand:"Byredo",notes:"Vetiver, amber — golden, radiant",tags:["Uplifting","Bold","Expressive"],why:"Joy ritual. Wear it when you want to feel lit."},
-  {name:"Aqua Vitae",brand:"Maison Francis Kurkdjian",notes:"Lemon, musk — radiant",tags:["Uplifting","Focused","Expressive"],why:"Light days. Clear head. Clean energy."},
-  {name:"Gypsy Water",brand:"Byredo",notes:"Juniper, incense — free, bohemian",tags:["Grounded","Feral","Restorative"],why:"Wanderer energy. Good for movement days."},
-];
-
-// Map cycle + checkin score to desired energy tags
-const SCENT_MAP = {
-  menstrual: { 1:["Gentle Reset","Soft","Calming"], 2:["Gentle Reset","Soft","Calming"], 3:["Grounded","Restorative","Soft"], 4:["Grounded","Restorative","Intimate"], 5:["Uplifting","Expressive","Bold"] },
-  follicular: { 1:["Restorative","Uplifting","Soft"], 2:["Uplifting","Playful","Restorative"], 3:["Focused","Uplifting","Expressive"], 4:["Expressive","Bold","Uplifting"], 5:["Bold","Feral","Expressive"] },
-  ovulatory:  { 1:["Calming","Intimate","Soft"], 2:["Intimate","Sensual","Soft"], 3:["Sensual","Expressive","Bold"], 4:["Bold","Sensual","Expressive"], 5:["Feral","Bold","Sensual"] },
-  luteal:     { 1:["Gentle Reset","Calming","Soft"], 2:["Gentle Reset","Soft","Intimate"], 3:["Grounded","Intimate","Soft"], 4:["Grounded","Intimate","Calming"], 5:["Grounded","Bold","Feral"] },
-};
-
-function getScentSuggestion(cycle, ckVal) {
-  if (!cycle || !ckVal) return null;
-  const desired = SCENT_MAP[cycle]?.[ckVal] || [];
-  // Score each perfume by tag overlap
-  const scored = PERFUMES.map(p => ({
-    ...p,
-    score: p.tags.filter(t => desired.includes(t)).length
-  })).filter(p => p.score > 0).sort((a,b) => b.score - a.score);
-  return scored.slice(0, 2);
-}
-
-function updateScent() {
-  const sec = document.getElementById('scentSec');
-  const content = document.getElementById('scentContent');
-  const suggestions = getScentSuggestion(currentCycle, currentCkVal);
-  if (!suggestions || !suggestions.length) { sec.style.display = 'none'; return; }
-  sec.style.display = 'block';
-  content.innerHTML = suggestions.map((s, i) => `
-    <div class="${i > 0 ? 'scent-alt' : ''}">
-      ${i > 0 ? '<div class="scent-divider"></div>' : ''}
-      <div class="scent-name">🌸 ${s.name}</div>
-      <div class="scent-brand">${s.brand}</div>
-      <div class="scent-notes">${s.notes}</div>
-      <div class="scent-why">${s.why}</div>
-    </div>
-  `).join('');
-}
-
 const STATUS_CYCLE = ['open','done','moved','cancelled','waiting'];
 const STATUS_EMOJI = {open:'○',done:'✓',moved:'→',cancelled:'✕',waiting:'◎'};
 
@@ -728,7 +659,6 @@ function ck(btn, val, note, num) {
   currentCkVal = num;
   save('ck', val);
   updateAdaptive();
-  updateScent();
 }
 
 function updateAdaptive() {
@@ -768,7 +698,6 @@ function setCycle(btn, phase) {
   currentCycle = phase;
   save('cycle', phase);
   updateAdaptive();
-  updateScent();
 }
 
 // ═══ BUCKET ══════════════════════════════════════════════════
