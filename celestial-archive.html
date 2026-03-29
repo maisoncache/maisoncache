@@ -6,6 +6,11 @@
   <title>Celestial Archive — Maison Caché</title>
   <meta name="description" content="The archive lives in the sky. Each star is a story. Some doors are for members only." />
   <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="Celestial Archive — Maison Caché" />
+  <meta property="og:description" content="The archive lives in the sky. Each star is a story." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,7 +31,7 @@
       --crimson-dim: rgba(107,31,58,0.6);
       --amber:       #c4882a;
       --amber-bright:#d4a040;
-      --amber-dim:   rgba(196,136,42,0.65);
+      --amber-dim:   rgba(196,136,42,0.75);
       --amber-mute:  rgba(196,136,42,0.25);
       --rose:        #9b3468;
       --rose-dim:    rgba(155,52,104,0.5);
@@ -662,6 +667,20 @@
       .archive-title { font-size: clamp(2.4rem, 12vw, 4rem); }
       .card-border { padding: 2rem 1.5rem; }
     }
+
+    /* ── ACCESSIBILITY ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--teal-bright, #5ab89a);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -725,7 +744,9 @@
 
         <!-- THE LEMON GROVE — featured, clickable -->
         <div class="star-node featured" style="left:50%;top:40%"
+             role="button" tabindex="0"
              onclick="openLemonGrove()"
+             onkeydown="if(event.key==='Enter')openLemonGrove()"
              onmouseenter="setStatus('the lemon grove — mira & vale')"
              onmouseleave="setStatus('the archive breathes')">
           <div class="star-node-inner">
@@ -736,7 +757,9 @@
 
         <!-- Supporting stars of the main constellation -->
         <div class="star-node" style="left:41.4%;top:56%"
+             role="button" tabindex="0"
              onclick="openLocked('Archive Rose')"
+             onkeydown="if(event.key==='Enter')openLocked('Archive Rose')"
              onmouseenter="setStatus('archive rose — a relic')"
              onmouseleave="setStatus('the archive breathes')">
           <div class="star-node-inner">
@@ -746,7 +769,9 @@
         </div>
 
         <div class="star-node" style="left:60%;top:52%"
+             role="button" tabindex="0"
              onclick="openLocked('The Vow-Grove')"
+             onkeydown="if(event.key==='Enter')openLocked('The Vow-Grove')"
              onmouseenter="setStatus('the vow-grove — members only')"
              onmouseleave="setStatus('the archive breathes')">
           <div class="star-node-inner">
@@ -756,7 +781,9 @@
         </div>
 
         <div class="star-node" style="left:51.4%;top:66%"
+             role="button" tabindex="0"
              onclick="openLocked('The Golden Thread')"
+             onkeydown="if(event.key==='Enter')openLocked('The Golden Thread')"
              onmouseenter="setStatus('the golden thread')"
              onmouseleave="setStatus('the archive breathes')">
           <div class="star-node-inner">
@@ -1059,16 +1086,22 @@
     function submitArchive() {
       const input = document.getElementById('archive-email');
       const email = input.value.trim();
+      const btn = document.querySelector('.gate-btn');
       if (email && email.includes('@') && email.includes('.')) {
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
         fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, source: 'Celestial Archive', room: 'Archive' })
+        }).then(() => {
+          input.style.display = 'none';
+          if (btn) btn.style.display = 'none';
+          document.getElementById('archive-confirm').style.display = 'block';
+          setStatus('the archive has your name');
+        }).catch(() => {
+          if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+          setStatus('something went wrong — try again');
         });
-        input.style.display = 'none';
-        document.querySelector('.gate-btn').style.display = 'none';
-        document.getElementById('archive-confirm').style.display = 'block';
-        setStatus('the archive has your name');
       }
     }
 

@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maison Caché</title>
   <meta name="description" content="What is hidden is not lost. It is waiting — and so are you.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:title" content="Maison Caché — The Hidden House">
+  <meta property="og:description" content="What is hidden is not lost. It is waiting — and so are you.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maisoncache.github.io/maisoncache/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Maison Caché — The Hidden House">
+  <meta name="twitter:description" content="What is hidden is not lost. It is waiting — and so are you.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Almendra:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
@@ -23,7 +31,7 @@
       --beeswax:  #C8A040;
       --gold:     #C9A84C;
       --linen:    #EDD8B8;
-      --linen-dim:rgba(237,216,184,0.55);
+      --linen-dim:rgba(237,216,184,0.7);
       --linen-ghost:rgba(237,216,184,0.2);
       --ember-glow:rgba(196,98,45,0.08);
       --font-cinzel: 'Cinzel', serif;
@@ -146,11 +154,11 @@
 
     .room-door-desc {
       font-family: var(--font-cg); font-style: italic;
-      font-size: 0.82rem; color: rgba(237,216,184,0.3);
+      font-size: 0.82rem; color: rgba(237,216,184,0.45);
       line-height: 1.6;
     }
     .room-door-status {
-      font-family: var(--font-fellsc); font-size: 0.45rem; letter-spacing: 0.25em;
+      font-family: var(--font-fellsc); font-size: 0.55rem; letter-spacing: 0.25em;
       text-transform: uppercase; color: var(--loam); margin-top: 0.6rem;
       opacity: 0.6;
     }
@@ -210,7 +218,7 @@
     .house-status {
       position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
       font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
-      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
+      text-transform: lowercase; color: rgba(200,160,64,0.45); pointer-events: none;
     }
 
     /* ── CANDLE ── */
@@ -246,6 +254,20 @@
     }
 
     .key-icon { animation: breathe 6s ease-in-out infinite; }
+
+    /* ── ACCESSIBILITY ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--beeswax);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>

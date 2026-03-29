@@ -6,6 +6,11 @@
   <title>The Library — Maison Caché</title>
   <meta name="description" content="The library never closes its book. Every shelf holds something." />
   <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="The Library — Maison Caché" />
+  <meta property="og:description" content="The library never closes its book. Every shelf holds something." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +25,7 @@
       --ember:       #8b3a12;
       --amber:       #b07010;
       --amber-bright:#c8841a;
-      --amber-dim:   rgba(176,112,16,0.6);
+      --amber-dim:   rgba(176,112,16,0.75);
       --amber-mute:  rgba(176,112,16,0.22);
       --teal:        #2a5c52;
       --teal-bright: #3a7a6e;
@@ -450,6 +455,20 @@
       .bookshelf-container { padding: 0 0.5rem; }
       .book-card { padding: 2rem 1.5rem; }
     }
+
+    /* ── ACCESSIBILITY ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--amber, #b07010);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -687,7 +706,9 @@
               const w = SPINE_WIDTHS[(si * shelfSize + bi) % SPINE_WIDTHS.length];
               return `
                 <div class="book" style="width:${w}px;height:${h}px"
+                     role="button" tabindex="0"
                      onclick="openBook(${book.id})"
+                     onkeydown="if(event.key==='Enter')openBook(${book.id})"
                      onmouseenter="setStatus('${book.title.toLowerCase().substring(0,30)}')"
                      onmouseleave="setStatus('open')">
                   <div class="book-spine" style="background:linear-gradient(to right, ${book.color} 0%, ${book.spine} 60%, rgba(0,0,0,0.4) 100%)">
@@ -760,17 +781,23 @@
     function submitSuggestion() {
       const suggest = document.getElementById('book-suggest').value.trim();
       const email   = document.getElementById('suggest-email').value.trim();
+      const btn = document.querySelector('[onclick="submitSuggestion()"]');
       if (suggest) {
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
         fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ suggestion: suggest, email, source: 'Library', room: 'Library' })
+        }).then(() => {
+          document.getElementById('book-suggest').style.display = 'none';
+          document.getElementById('suggest-email').style.display = 'none';
+          if (btn) btn.style.display = 'none';
+          document.getElementById('suggest-confirm').style.display = 'block';
+          setStatus('suggestion received');
+        }).catch(() => {
+          if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+          setStatus('something went wrong — try again');
         });
-        document.getElementById('book-suggest').style.display = 'none';
-        document.getElementById('suggest-email').style.display = 'none';
-        document.querySelector('[onclick="submitSuggestion()"]').style.display = 'none';
-        document.getElementById('suggest-confirm').style.display = 'block';
-        setStatus('suggestion received');
       }
     }
 

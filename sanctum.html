@@ -6,6 +6,11 @@
   <title>The Sanctum — Maison Caché</title>
   <meta name="description" content="Not every room is listed. Some doors only open for those who look closely." />
   <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="The Sanctum — Maison Caché" />
+  <meta property="og:description" content="Not every room is listed. Some doors only open for those who look closely." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +32,7 @@
       --teal-dim:     rgba(45,107,94,0.55);
       --amber:        #b07820;
       --amber-bright: #c4882a;
-      --amber-dim:    rgba(176,120,32,0.6);
+      --amber-dim:    rgba(176,120,32,0.75);
       --amber-mute:   rgba(176,120,32,0.22);
       --cream:        #f0e0c8;
       --cream-dim:    rgba(240,224,200,0.82);
@@ -318,7 +323,7 @@
     .room-cell.shadow {
       border-color: rgba(155,52,104,0.04);
       background: transparent;
-      cursor: default;
+      cursor: not-allowed;
     }
     .room-cell.shadow:hover {
       background: rgba(155,52,104,0.03);
@@ -456,6 +461,19 @@
       border-radius: 1px;
     }
 
+    /* ── ACCESSIBILITY ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--rose, #c07a90);
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body>
@@ -480,7 +498,7 @@
       <p class="age-gate-note">You must be 18 or older to enter.</p>
       <div class="age-gate-btns">
         <button class="btn-enter" onclick="enterSanctum()">I am 18+ — enter</button>
-        <button class="btn-leave" onclick="window.location.href='/'">Leave quietly</button>
+        <button class="btn-leave" onclick="window.location.href='index.html'">Leave quietly</button>
       </div>
     </div>
   </div>
@@ -566,7 +584,9 @@
 
         <div class="rooms-grid">
 
-          <div class="room-cell open" onclick="openRoom('ritual')"
+          <div class="room-cell open" role="button" tabindex="0"
+               onclick="openRoom('ritual')"
+               onkeydown="if(event.key==='Enter')openRoom('ritual')"
                onmouseenter="setStatus('the ritual space — open')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🕯</span>
@@ -907,15 +927,21 @@
     function submitSanctum() {
       const input = document.getElementById('sanctum-email');
       const email = input.value.trim();
+      const btn = document.querySelector('[onclick="submitSanctum()"]');
       if (email && email.includes('@') && email.includes('.')) {
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
         fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, source: 'Sanctum', room: 'Sanctum' })
+        }).then(() => {
+          document.getElementById('sanctum-form').style.display = 'none';
+          document.getElementById('sanctum-confirm').style.display = 'block';
+          setStatus('the sanctum has your name');
+        }).catch(() => {
+          if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+          setStatus('something went wrong — try again');
         });
-        document.getElementById('sanctum-form').style.display = 'none';
-        document.getElementById('sanctum-confirm').style.display = 'block';
-        setStatus('the sanctum has your name');
       }
     }
 
