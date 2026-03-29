@@ -155,6 +155,57 @@
       opacity: 0.6;
     }
 
+    /* ── MEMBERSHIP ── */
+    .membership-card {
+      max-width: 460px; width: 100%; text-align: center;
+      border: 1px solid rgba(200,160,64,0.08);
+      background: rgba(30,18,8,0.35); padding: 2.5rem 2rem;
+      position: relative;
+    }
+    .membership-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.2;
+    }
+    .membership-tier {
+      font-family: var(--font-fellsc); font-size: 0.5rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.6;
+      margin-bottom: 1.2rem;
+    }
+    .membership-name {
+      font-family: var(--font-cinzel); font-weight: 400; font-size: 1.2rem;
+      color: var(--linen); letter-spacing: 0.08em; margin-bottom: 0.5rem;
+    }
+    .membership-desc {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.95rem;
+      color: var(--linen-dim); line-height: 1.8; margin-bottom: 1.8rem;
+    }
+    .btn-ghost {
+      display: inline-block; padding: 0.7rem 2rem;
+      font-family: var(--font-fellsc); font-size: 0.6rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--linen); text-decoration: none;
+      border: 1px solid rgba(200,160,64,0.2);
+      background: rgba(200,160,64,0.04);
+      transition: all 0.5s ease; cursor: pointer;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(200,160,64,0.4);
+      background: rgba(200,160,64,0.08);
+      color: var(--beeswax);
+    }
+    .membership-paid {
+      margin-top: 1.5rem;
+      font-family: var(--font-cg); font-style: italic; font-size: 0.82rem;
+      color: rgba(200,160,64,0.3); line-height: 1.6;
+    }
+    .membership-paid a {
+      color: rgba(200,160,64,0.4); text-decoration: none;
+      border-bottom: 1px solid rgba(200,160,64,0.15);
+      transition: all 0.4s ease;
+    }
+    .membership-paid a:hover { color: var(--beeswax); border-color: var(--beeswax); }
+
     /* ── HOUSE STATUS ── */
     .house-status {
       position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
@@ -311,6 +362,28 @@
             <div class="room-door-status">open</div>
           </a>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MEMBERSHIP ═══ -->
+    <section class="section--medium" id="enter">
+      <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
+
+        <div class="room-label">Come Inside</div>
+
+        <div class="membership-card">
+          <div class="membership-tier">Free</div>
+          <div class="membership-name">The Tearoom</div>
+          <p class="membership-desc">
+            The front door is open. Receive <em>The Parlour</em> — letters from the house, delivered when the light is right.
+          </p>
+          <a href="https://maison-cache.ghost.io/#/portal/signup/free" class="btn-ghost" target="_blank" rel="noopener">Enter the Tearoom</a>
+
+          <p class="membership-paid">
+            Looking for the rooms behind the rooms?<br>
+            <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener">The Inner House</a> — $5/month
+          </p>
         </div>
       </div>
     </section>
