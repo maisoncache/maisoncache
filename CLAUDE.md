@@ -154,9 +154,8 @@ Serif-heavy — Cormorant Garamond for headings, Crimson Pro / EB Garamond for b
 
 ## Build Priority
 
-1. **Maison Caché Foyer rebuild + Hearth page** — already in progress
-2. **Push recovered prototypes to GitHub** — Grimoire, Maykhay, Letterbox etc.
-3. **Fix Cloudflare email obfuscation bug** on landing page
+1. **Push recovered prototypes to GitHub** — Grimoire, Maykhay, Letterbox etc.
+2. **Fix Cloudflare email obfuscation bug** on landing page
 
 ## Git Workflow
 
