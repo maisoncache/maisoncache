@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hearth — Maison Caché</title>
+  <meta name="description" content="Kitchen rituals. Home magic. The practical sacred.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Almendra:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --ground:   #100A06;
+      --mid:      #1E1208;
+      --deep:     #2E1C0E;
+      --bark:     #4A2E18;
+      --loam:     #8B6850;
+      --ember:    #C4622D;
+      --flame:    #D4882A;
+      --beeswax:  #C8A040;
+      --linen:    #EDD8B8;
+      --linen-dim:rgba(237,216,184,0.55);
+      --linen-ghost:rgba(237,216,184,0.2);
+      --ember-glow:rgba(196,98,45,0.08);
+      --font-cinzel: 'Cinzel', serif;
+      --font-fell:   'IM Fell English', serif;
+      --font-fellsc: 'IM Fell English SC', serif;
+      --font-cg:     'Cormorant Garamond', serif;
+      --font-alm:    'Almendra', serif;
+    }
+
+    body {
+      background: var(--ground);
+      color: var(--linen);
+      font-family: var(--font-fell);
+      line-height: 1.75;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ── LAYERS ── */
+    .layer-grain {
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.036;
+    }
+    .layer-vignette {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(16,10,6,0.7) 100%);
+    }
+    .layer-ember-glow {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 60vh; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 100%, rgba(196,98,45,0.08) 0%, rgba(212,136,42,0.04) 30%, transparent 70%);
+    }
+    .embers-layer { position: fixed; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+
+    /* ── CONTENT WRAPPER ── */
+    .content { position: relative; z-index: 10; }
+
+    /* ── NAV ── */
+    .nav-back {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 100;
+      font-family: var(--font-fellsc); font-size: 0.7rem; letter-spacing: 0.12em;
+      color: var(--linen-dim); text-decoration: none;
+      transition: color 0.4s ease;
+    }
+    .nav-back:hover { color: var(--beeswax); }
+
+    /* ── SECTIONS ── */
+    .section {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 6rem 2rem; text-align: center;
+    }
+    .section--short { min-height: auto; padding: 4rem 2rem; }
+    .section--medium { min-height: auto; padding: 5rem 2rem; }
+
+    /* ── TYPOGRAPHY ── */
+    .room-label {
+      font-family: var(--font-fellsc); font-size: 0.6rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--ember); margin-bottom: 1.5rem;
+    }
+    .room-heading {
+      font-family: var(--font-cinzel); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--linen); letter-spacing: 0.08em; margin-bottom: 0.6rem;
+    }
+    .room-sub {
+      font-family: var(--font-cg); font-weight: 300; font-style: italic;
+      font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--linen-dim);
+      letter-spacing: 0.04em; line-height: 1.8;
+    }
+    .body-text {
+      font-family: var(--font-fell); font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      color: var(--linen-dim); line-height: 1.9; max-width: 480px;
+    }
+    .intention-line {
+      font-family: var(--font-alm); font-style: italic; font-size: 1rem;
+      color: var(--beeswax); opacity: 0.7; line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .divider {
+      height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,64,0.25), transparent);
+      margin: 2rem auto;
+    }
+
+    /* ── MOON PHASE INDICATOR ── */
+    .moon-phase {
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 0.8rem 1.6rem; border: 1px solid rgba(200,160,64,0.1);
+      border-radius: 2px; margin-bottom: 2.5rem;
+      background: rgba(30,18,8,0.5);
+    }
+    .moon-phase-icon { font-size: 1.2rem; }
+    .moon-phase-text {
+      font-family: var(--font-fellsc); font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--linen-dim);
+    }
+    .moon-phase-date {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.85rem;
+      color: rgba(200,160,64,0.45);
+    }
+
+    /* ── RECIPE CARD ── */
+    .recipe-card {
+      max-width: 520px; width: 100%; text-align: left;
+      border: 1px solid rgba(200,160,64,0.08);
+      background: rgba(30,18,8,0.4); padding: 2.5rem 2.2rem;
+      position: relative;
+    }
+    .recipe-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ember), transparent);
+      opacity: 0.3;
+    }
+    .recipe-phase-tag {
+      font-family: var(--font-fellsc); font-size: 0.55rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--ember); margin-bottom: 1.2rem;
+    }
+    .recipe-title {
+      font-family: var(--font-cinzel); font-weight: 400; font-size: 1.3rem;
+      color: var(--linen); letter-spacing: 0.06em; margin-bottom: 0.4rem;
+    }
+    .recipe-desc {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.95rem;
+      color: var(--linen-dim); line-height: 1.8; margin-bottom: 1.5rem;
+    }
+    .recipe-tier {
+      font-family: var(--font-fellsc); font-size: 0.5rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--beeswax); opacity: 0.5;
+    }
+
+    /* ── HEARTHCRAFT SECTION ── */
+    .practice-card {
+      max-width: 520px; width: 100%; text-align: left;
+      padding: 2rem 2.2rem; border-left: 1px solid rgba(196,98,45,0.2);
+      margin-top: 1.5rem;
+    }
+    .practice-step {
+      font-family: var(--font-cinzel); font-size: 0.55rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--flame); margin-bottom: 0.6rem;
+    }
+    .practice-text {
+      font-family: var(--font-fell); font-size: 0.95rem; color: var(--linen-dim);
+      line-height: 1.9;
+    }
+    .practice-text em { color: var(--beeswax); font-style: italic; }
+
+    /* ── CYCLE GRID ── */
+    .cycle-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; max-width: 520px; width: 100%;
+      border: 1px solid rgba(200,160,64,0.06);
+    }
+    @media (max-width: 500px) { .cycle-grid { grid-template-columns: 1fr; } }
+    .cycle-item {
+      padding: 1.5rem 1.2rem; text-align: center;
+      background: rgba(30,18,8,0.3);
+      border: 1px solid transparent;
+      transition: all 0.5s ease;
+    }
+    .cycle-item:hover { background: rgba(46,28,14,0.4); border-color: rgba(200,160,64,0.08); }
+    .cycle-item.active { background: rgba(46,28,14,0.5); border-color: rgba(196,98,45,0.15); }
+    .cycle-moon { font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .cycle-name {
+      font-family: var(--font-fellsc); font-size: 0.55rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--linen-dim); margin-bottom: 0.25rem;
+    }
+    .cycle-recipe {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.82rem;
+      color: rgba(200,160,64,0.45); line-height: 1.6;
+    }
+
+    /* ── SUB-ROOM TEASERS ── */
+    .subroom-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; max-width: 460px; width: 100%;
+    }
+    @media (max-width: 480px) { .subroom-grid { grid-template-columns: 1fr; } }
+    .subroom-teaser {
+      padding: 2rem 1.5rem; text-align: center;
+      background: rgba(30,18,8,0.2);
+      border: 1px solid rgba(200,160,64,0.06);
+      transition: all 0.5s ease;
+    }
+    .subroom-teaser:hover { background: rgba(46,28,14,0.3); border-color: rgba(200,160,64,0.1); }
+    .subroom-icon { font-size: 1.4rem; margin-bottom: 0.6rem; opacity: 0.6; }
+    .subroom-name {
+      font-family: var(--font-fell); font-style: italic; font-size: 1rem;
+      color: var(--linen-dim); margin-bottom: 0.2rem;
+    }
+    .subroom-status {
+      font-family: var(--font-fellsc); font-size: 0.5rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--loam);
+    }
+
+    /* ── CANDLE CLUSTER ── */
+    .candle-cluster {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      z-index: 5; pointer-events: none; opacity: 0.35;
+    }
+
+    /* ── HOUSE STATUS ── */
+    .house-status {
+      position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
+      font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
+      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
+    }
+
+    /* ── SANCTUM TRIGGER ── */
+    .sanctum-dot {
+      position: fixed; bottom: 0.6rem; left: 0.7rem; z-index: 60;
+      font-size: 0.7rem; color: rgba(200,160,64,0.05); cursor: default;
+      user-select: none; transition: color 0.6s ease;
+    }
+
+    /* ── REVEALS ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1.2s ease, transform 1.2s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── EMBER ANIMATION ── */
+    @keyframes emberRise {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0; }
+      100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      25% { opacity: 0.85; transform: scaleY(0.96); }
+      50% { opacity: 0.95; transform: scaleY(1.02); }
+      75% { opacity: 0.88; transform: scaleY(0.98); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layer-ember-glow"></div>
+  <div class="layer-vignette"></div>
+  <div class="layer-grain"></div>
+  <div class="embers-layer" id="embers"></div>
+
+  <a class="nav-back" href="index.html">← The House</a>
+  <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
+  <div class="house-status" id="house-status">[ hearth : lit ]</div>
+
+  <!-- CANDLE CLUSTER -->
+  <svg class="candle-cluster" width="120" height="80" viewBox="0 0 120 80" fill="none">
+    <rect x="30" y="35" width="6" height="40" fill="rgba(237,216,184,0.08)" rx="1"/>
+    <rect x="45" y="25" width="6" height="50" fill="rgba(237,216,184,0.08)" rx="1"/>
+    <rect x="60" y="30" width="6" height="45" fill="rgba(237,216,184,0.08)" rx="1"/>
+    <rect x="75" y="38" width="6" height="37" fill="rgba(237,216,184,0.08)" rx="1"/>
+    <rect x="88" y="42" width="5" height="33" fill="rgba(237,216,184,0.06)" rx="1"/>
+    <ellipse cx="33" cy="33" rx="3" ry="5" fill="rgba(212,136,42,0.25)" style="animation:flicker 3.5s ease-in-out infinite"/>
+    <ellipse cx="48" cy="23" rx="3" ry="6" fill="rgba(196,98,45,0.3)" style="animation:flicker 2.5s ease-in-out infinite"/>
+    <ellipse cx="63" cy="28" rx="3" ry="5" fill="rgba(212,136,42,0.25)" style="animation:flicker 2.8s ease-in-out infinite"/>
+    <ellipse cx="78" cy="36" rx="2.5" ry="4.5" fill="rgba(200,160,64,0.2)" style="animation:flicker 3.2s ease-in-out infinite"/>
+    <ellipse cx="90.5" cy="40" rx="2" ry="4" fill="rgba(196,98,45,0.2)" style="animation:flicker 3s ease-in-out infinite"/>
+  </svg>
+
+  <div class="content">
+
+    <!-- ═══ HERO ═══ -->
+    <section class="section" id="hero">
+      <div style="animation:fadeUp 2.5s ease forwards; display:flex; flex-direction:column; align-items:center; gap:1.8rem">
+
+        <!-- HEARTH ICON -->
+        <svg width="88" height="88" viewBox="0 0 88 88" fill="none" style="opacity:0.7">
+          <path d="M 10 78 L 10 40 Q 10 10 44 10 Q 78 10 78 40 L 78 78" stroke="#EDD8B8" stroke-width="1.2"/>
+          <path d="M 18 78 L 18 42 Q 18 20 44 20 Q 70 20 70 42 L 70 78" stroke="#C8A040" stroke-width="0.5" opacity="0.35"/>
+          <path d="M 44 68 Q 36 54 40 40 Q 43 32 44 24 Q 45 32 48 40 Q 52 54 44 68 Z" stroke="#C4622D" stroke-width="0.9" fill="rgba(196,98,45,0.15)" style="animation:flicker 3.5s ease-in-out infinite; transform-origin:44px 60px"/>
+          <path d="M 34 68 Q 28 54 33 42 Q 35 36 37 30 Q 37 42 35 52 Q 36 62 34 68 Z" stroke="#D4882A" stroke-width="0.6" fill="rgba(212,136,42,0.1)" style="animation:flicker 2.5s ease-in-out infinite; transform-origin:34px 58px"/>
+          <path d="M 54 68 Q 60 54 55 42 Q 53 36 51 30 Q 51 42 53 52 Q 52 62 54 68 Z" stroke="#D4882A" stroke-width="0.6" fill="rgba(212,136,42,0.1)" style="animation:flicker 2.8s ease-in-out infinite; transform-origin:54px 58px"/>
+          <circle cx="37" cy="38" r="1" fill="#C4622D" opacity="0.6"/>
+          <circle cx="50" cy="34" r="0.7" fill="#C8A040" opacity="0.5"/>
+          <line x1="10" y1="78" x2="78" y2="78" stroke="#EDD8B8" stroke-width="0.8" opacity="0.4"/>
+          <path d="M 4 62 Q 0 54 4 48 Q 6 56 4 62 Z" stroke="#C8A040" stroke-width="0.6" fill="rgba(200,160,64,0.08)" opacity="0.6"/>
+          <path d="M 84 62 Q 88 54 84 48 Q 82 56 84 62 Z" stroke="#C8A040" stroke-width="0.6" fill="rgba(200,160,64,0.08)" opacity="0.6"/>
+        </svg>
+
+        <div class="room-label">open now</div>
+        <h1 class="room-heading">The Hearth</h1>
+        <p class="room-sub">Kitchen rituals. Home magic. The practical sacred.</p>
+
+        <div class="divider" style="width:50px"></div>
+
+        <p class="body-text" style="text-align:center">
+          The small act done with intention is not a lesser magic.<br>
+          Light the candle before you begin.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="section--medium">
+      <div class="reveal" style="max-width:500px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding:0 2rem">
+        <p class="body-text" style="text-align:center">
+          This is the warmest room in the house. The one that smells like something — wood smoke, beeswax, dried lavender, the faint sweetness of something recently baked.
+        </p>
+        <p class="body-text" style="text-align:center">
+          The recipes here are rituals. The food is regulation. Cooking is devotion. You don't need to be perfect. You don't need the right equipment. You just need to begin.
+        </p>
+        <p class="body-text" style="text-align:center; color:rgba(200,160,64,0.45); font-style:italic">
+          The Hearth moves with the moon.<br>
+          Each phase, a different recipe. A different practice.<br>
+          Come back when the light changes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ CURRENT PHASE ═══ -->
+    <section class="section--medium" id="current">
+      <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
+
+        <div class="moon-phase" id="moon-phase-indicator">
+          <span class="moon-phase-icon">🌕</span>
+          <div>
+            <div class="moon-phase-text">Full Moon · Pink Moon</div>
+            <div class="moon-phase-date">April 1, 2026</div>
+          </div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-phase-tag">Full Moon · Illuminate</div>
+
+          <p class="intention-line">The feast is the ritual. Set the table with intention. Light every candle you own.</p>
+
+          <h2 class="recipe-title">Autumn Feast</h2>
+          <p class="recipe-desc">
+            Slow-roasted lamb shoulder with rosemary, garlic, and red wine. Root vegetables caramelised until their edges go dark and sweet. Crusty bread torn by hand. The meal you make when the house is full and the candles are lit.
+          </p>
+
+          <div class="divider" style="width:40px; margin:1.5rem 0"></div>
+
+          <p class="body-text" style="max-width:100%">
+            This is the full moon recipe — bold, generous, unapologetic. It feeds more people than you might have at the table. Make it anyway. The leftovers become tomorrow's soup.
+          </p>
+
+          <div style="margin-top:1.5rem">
+            <div class="recipe-tier">Full recipe · Free for all</div>
+          </div>
+        </div>
+
+        <!-- HEARTHCRAFT PRACTICE -->
+        <div class="practice-card">
+          <p class="intention-line">Before you cook, clear the surfaces. Wipe down the bench. Light one candle. Stand still for ten seconds. Now begin.</p>
+
+          <div class="practice-step">Hearthcraft · Full Moon</div>
+          <p class="practice-text">
+            The full moon kitchen practice is <em>the abundance audit.</em> Open every cupboard. What do you have? What has been sitting there waiting to be used? The thing pushed to the back of the shelf — that's tonight's ingredient. Nothing is wasted here. The Hearth sees everything in the light.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ THE CYCLE ═══ -->
+    <section class="section--medium" id="cycle">
+      <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
+
+        <div class="room-label">The Lunar Cycle</div>
+        <p class="room-sub" style="margin-bottom:1rem">Eight phases. Eight recipes. The kitchen moves with the moon.</p>
+
+        <div class="cycle-grid">
+          <div class="cycle-item active">
+            <div class="cycle-moon">🌕</div>
+            <div class="cycle-name">Full Moon</div>
+            <div class="cycle-recipe">The Feast</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌖</div>
+            <div class="cycle-name">Waning Gibbous</div>
+            <div class="cycle-recipe">Batch & Share</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌗</div>
+            <div class="cycle-name">Last Quarter</div>
+            <div class="cycle-recipe">Cleanse & Clear</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌘</div>
+            <div class="cycle-name">Waning Crescent</div>
+            <div class="cycle-recipe">The Soup Ritual</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌑</div>
+            <div class="cycle-name">New Moon</div>
+            <div class="cycle-recipe">One-Pot Reset</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌒</div>
+            <div class="cycle-name">Waxing Crescent</div>
+            <div class="cycle-recipe">First Shoots</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌓</div>
+            <div class="cycle-name">First Quarter</div>
+            <div class="cycle-recipe">Bold Flavours</div>
+          </div>
+          <div class="cycle-item">
+            <div class="cycle-moon">🌔</div>
+            <div class="cycle-name">Waxing Gibbous</div>
+            <div class="cycle-recipe">Slow & Layered</div>
+          </div>
+        </div>
+
+        <p class="body-text" style="text-align:center; margin-top:1rem; font-style:italic; color:rgba(200,160,64,0.35)">
+          Members receive the full recipe, hearthcraft practice,<br>and kitchen ritual for every phase.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ SEASONAL NOTE ═══ -->
+    <section class="section--short">
+      <div class="reveal" style="max-width:420px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0 2rem">
+        <div class="room-label" style="color:var(--loam)">🍂 Autumn · Southern Hemisphere</div>
+        <p class="body-text" style="text-align:center; font-style:italic">
+          The house draws inward. Soup season. Heavier scents. Candles lit earlier. The Hearth becomes the centre of everything.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ SUB-ROOMS ═══ -->
+    <section class="section--medium">
+      <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
+
+        <div class="room-label">Other doors from the Hearth</div>
+
+        <div class="subroom-grid">
+          <div class="subroom-teaser">
+            <div class="subroom-icon">◈</div>
+            <div class="subroom-name">The Atelier</div>
+            <p style="font-family:var(--font-cg); font-style:italic; font-size:0.82rem; color:rgba(237,216,184,0.3); line-height:1.6; margin-top:0.3rem">Scent rituals.<br>Perfume as practice.</p>
+            <div class="subroom-status" style="margin-top:0.6rem">forming</div>
+          </div>
+          <div class="subroom-teaser">
+            <div class="subroom-icon">🍷</div>
+            <div class="subroom-name">The Sommelier</div>
+            <p style="font-family:var(--font-cg); font-style:italic; font-size:0.82rem; color:rgba(237,216,184,0.3); line-height:1.6; margin-top:0.3rem">What to drink<br>with what you feel.</p>
+            <div class="subroom-status" style="margin-top:0.6rem">forming</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <section class="section--short" style="padding-bottom:6rem">
+      <div class="reveal" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem">
+        <svg width="50" height="10" viewBox="0 0 50 10" fill="none">
+          <line x1="0" y1="5" x2="15" y2="5" stroke="rgba(200,160,64,0.2)" stroke-width="0.5"/>
+          <ellipse cx="25" cy="5" rx="3" ry="4" stroke="rgba(196,98,45,0.3)" stroke-width="0.6" fill="rgba(196,98,45,0.08)" style="animation:flicker 3s ease-in-out infinite"/>
+          <line x1="35" y1="5" x2="50" y2="5" stroke="rgba(200,160,64,0.2)" stroke-width="0.5"/>
+        </svg>
+        <p style="font-family:var(--font-cg); font-style:italic; font-size:0.9rem; color:rgba(237,216,184,0.25); letter-spacing:0.04em">
+          The Hearth never goes cold.<br>Come back when the moon moves.
+        </p>
+        <p style="font-family:var(--font-fellsc); font-size:0.55rem; letter-spacing:0.25em; color:rgba(200,160,64,0.2); text-transform:uppercase; margin-top:0.5rem">
+          Maison Caché
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // ── EMBERS ──
+    (function() {
+      const container = document.getElementById('embers');
+      const colors = ['rgba(196,98,45,0.5)', 'rgba(212,136,42,0.45)', 'rgba(200,160,64,0.4)'];
+      for (let i = 0; i < 22; i++) {
+        const e = document.createElement('div');
+        const size = 1.5 + Math.random() * 2.5;
+        const drift = (Math.random() - 0.5) * 80;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        e.style.cssText = `position:absolute;bottom:-3%;left:${Math.random()*100}%;width:${size}px;height:${size}px;border-radius:50%;background:radial-gradient(circle,${color},transparent);animation:emberRise ${8+Math.random()*12}s ${Math.random()*12}s infinite ease-out;--drift:${drift}px;`;
+        container.appendChild(e);
+      }
+    })();
+
+    // ── REVEAL ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── HOUSE STATUS ──
+    const statusEl = document.getElementById('house-status');
+    function setStatus(text) { if (statusEl) statusEl.textContent = `[ hearth : ${text} ]`; }
+
+    document.querySelectorAll('.cycle-item').forEach(el => {
+      el.addEventListener('mouseenter', () => setStatus('the fire shifts'));
+      el.addEventListener('mouseleave', () => setStatus('lit'));
+    });
+    document.querySelectorAll('.subroom-teaser').forEach(el => {
+      el.addEventListener('mouseenter', () => setStatus('another door'));
+      el.addEventListener('mouseleave', () => setStatus('lit'));
+    });
+    document.querySelector('.recipe-card').addEventListener('mouseenter', () => setStatus('something is cooking'));
+    document.querySelector('.recipe-card').addEventListener('mouseleave', () => setStatus('lit'));
+
+    // ── SANCTUM TRIGGER ──
+    let sanctumClicks = 0, sanctumTimer = null;
+    function sanctumClick() {
+      sanctumClicks++;
+      const trigger = document.getElementById('sanctum-dot');
+      trigger.style.color = `rgba(200,160,64,${0.06 + sanctumClicks * 0.14})`;
+      if (sanctumTimer) clearTimeout(sanctumTimer);
+      sanctumTimer = setTimeout(() => { sanctumClicks = 0; trigger.style.color = 'rgba(200,160,64,0.05)'; }, 1600);
+      if (sanctumClicks >= 3) {
+        sanctumClicks = 0;
+        trigger.style.color = 'rgba(200,160,64,0.05)';
+        window.location.href = 'sanctum.html';
+      }
+    }
+  </script>
+</body>
+</html>

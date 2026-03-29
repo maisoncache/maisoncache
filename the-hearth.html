@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hearth</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ember: #C4622D;
+    --ash: #2A1F1A;
+    --smoke: #3D2E27;
+    --warm-white: #F5EDE0;
+    --cream: #EDD9BE;
+    --gold: #C49A3C;
+    --soft-gold: #E8C97A;
+    --stone: #8C7B6B;
+    --charcoal: #1A1208;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--charcoal);
+    color: var(--warm-white);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* FIRE BACKGROUND */
+  .fire-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 50% 100%, #8B2500 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, #C4622D 0%, transparent 50%),
+      radial-gradient(ellipse 80% 60% at 50% 110%, #3D1500 0%, transparent 80%),
+      linear-gradient(to top, #1A0A00 0%, #0D0500 40%, #050200 100%);
+    animation: fireBreath 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes fireBreath {
+    0% { opacity: 0.85; }
+    100% { opacity: 1; }
+  }
+
+  .ember-particles {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .ember {
+    position: absolute;
+    bottom: -10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--soft-gold);
+    animation: riseEmber linear infinite;
+    opacity: 0;
+  }
+
+  .ember:nth-child(1)  { left: 45%; animation-duration: 7s; animation-delay: 0s;   width: 2px; height: 2px; }
+  .ember:nth-child(2)  { left: 52%; animation-duration: 9s; animation-delay: 1.5s; background: var(--ember); }
+  .ember:nth-child(3)  { left: 48%; animation-duration: 6s; animation-delay: 3s;   width: 4px; height: 4px; background: #FF8C42; }
+  .ember:nth-child(4)  { left: 50%; animation-duration: 8s; animation-delay: 0.8s; }
+  .ember:nth-child(5)  { left: 43%; animation-duration: 11s; animation-delay: 2s;  width: 2px; height: 2px; }
+  .ember:nth-child(6)  { left: 55%; animation-duration: 7.5s; animation-delay: 4s; background: #FFD166; }
+  .ember:nth-child(7)  { left: 47%; animation-duration: 10s; animation-delay: 1s;  width: 2px; height: 2px; }
+  .ember:nth-child(8)  { left: 51%; animation-duration: 8.5s; animation-delay: 3.5s; }
+  .ember:nth-child(9)  { left: 44%; animation-duration: 6.5s; animation-delay: 5s; background: var(--ember); }
+  .ember:nth-child(10) { left: 56%; animation-duration: 9.5s; animation-delay: 2.5s; width: 2px; height: 2px; }
+  .ember:nth-child(11) { left: 49%; animation-duration: 7s; animation-delay: 6s; background: #FF8C42; }
+  .ember:nth-child(12) { left: 53%; animation-duration: 12s; animation-delay: 0.3s; width: 2px; height: 2px; }
+
+  @keyframes riseEmber {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    10%  { opacity: 0.9; }
+    50%  { transform: translateY(-40vh) translateX(20px); opacity: 0.5; }
+    100% { transform: translateY(-90vh) translateX(-15px); opacity: 0; }
+  }
+
+  /* GRAIN OVERLAY */
+  .grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 2;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    animation: grainShift 0.5s steps(2) infinite;
+  }
+
+  @keyframes grainShift {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-2%, -3%); }
+    50%  { transform: translate(1%, 2%); }
+    75%  { transform: translate(-1%, 1%); }
+    100% { transform: translate(2%, -1%); }
+  }
+
+  /* LAYOUT */
+  .wrapper {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HEADER */
+  header {
+    padding: 4rem 3rem 2rem;
+    text-align: center;
+    animation: fadeDown 1.4s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    opacity: 0.8;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(4rem, 10vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--warm-white);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--soft-gold);
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--stone);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 3rem;
+    animation: fadeIn 2s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  .divider-glyph {
+    color: var(--ember);
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* RITUAL CARDS */
+  .rituals {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5px;
+    padding: 2rem 2rem 0;
+    animation: fadeUp 1.6s ease 0.8s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: rgba(26, 15, 8, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(196, 154, 60, 0.12);
+    padding: 2.5rem 2rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--ember), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover::before { transform: scaleX(1); }
+
+  .card:hover {
+    background: rgba(40, 22, 10, 0.8);
+    border-color: rgba(196, 154, 60, 0.3);
+    transform: translateY(-3px);
+  }
+
+  .card-glyph {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(196, 98, 45, 0.5));
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+    color: var(--stone);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* NOURISHMENT SECTION */
+  .nourishment {
+    padding: 4rem 2rem 2rem;
+    animation: fadeUp 1.6s ease 1.2s forwards;
+    opacity: 0;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .nourish-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .nourish-item {
+    border-left: 1px solid rgba(196, 154, 60, 0.2);
+    padding-left: 1.5rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .nourish-item:hover { border-color: rgba(196, 154, 60, 0.6); }
+
+  .nourish-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .nourish-body {
+    font-size: 0.88rem;
+    color: var(--stone);
+    line-height: 1.9;
+  }
+
+  /* QUOTE BLOCK */
+  .hearth-quote {
+    padding: 5rem 2rem;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+    animation: fadeUp 1.6s ease 1.6s forwards;
+    opacity: 0;
+  }
+
+  blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    position: relative;
+  }
+
+  blockquote::before {
+    content: '\201C';
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
+    font-size: 6rem;
+    color: var(--ember);
+    opacity: 0.2;
+    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  cite {
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    font-style: normal;
+  }
+
+  /* SEASON TRACKER */
+  .season-bar {
+    display: flex;
+    gap: 0;
+    padding: 0 2rem 2rem;
+    animation: fadeUp 1.6s ease 2s forwards;
+    opacity: 0;
+  }
+
+  .season {
+    flex: 1;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(196, 154, 60, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .season.active {
+    border-top-color: var(--ember);
+    background: rgba(196, 98, 45, 0.06);
+  }
+
+  .season.active .season-name { color: var(--soft-gold); }
+
+  .season-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--stone);
+    display: block;
+    margin-bottom: 0.3rem;
+    transition: color 0.3s ease;
+  }
+
+  .season-note {
+    font-size: 0.7rem;
+    color: var(--smoke);
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .season:hover .season-name { color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(196, 154, 60, 0.08);
+    animation: fadeIn 2s ease 2.4s forwards;
+    opacity: 0;
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    opacity: 0.4;
+  }
+
+  /* FLAME FLICKER on hover for glyphs */
+  .card:hover .card-glyph {
+    animation: flicker 0.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%   { filter: drop-shadow(0 0 4px rgba(196, 98, 45, 0.4)); }
+    100% { filter: drop-shadow(0 0 16px rgba(255, 140, 66, 0.9)); }
+  }
+
+  @media (max-width: 600px) {
+    .nourish-grid { grid-template-columns: 1fr; }
+    .season-bar { flex-wrap: wrap; }
+    .season { flex: 1 1 45%; }
+    header { padding: 3rem 1.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="fire-bg"></div>
+
+<div class="ember-particles">
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+  <div class="ember"></div>
+</div>
+
+<div class="grain"></div>
+
+<div class="wrapper">
+
+  <header>
+    <p class="eyebrow">Maison Caché · The Rooms</p>
+    <h1>The<br><em>Hearth</em></h1>
+    <p class="tagline">Where the kettle always hums and the door is always open. This room feeds people.</p>
+  </header>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <section class="rituals">
+    <div class="card">
+      <span class="card-glyph">🕯</span>
+      <h3 class="card-title">The Morning Table</h3>
+      <p class="card-body">Before the noise begins. Coffee, quiet, and the particular light that belongs only to early hours. This is the ritual before the ritual.</p>
+      <span class="card-tag">Daily practice</span>
+    </div>
+    <div class="card">
+      <span class="card-glyph">🫙</span>
+      <h3 class="card-title">Sunday Slow Cook</h3>
+      <p class="card-body">Something in a pot. Something that takes longer than you think it should. The whole house smells like intention. This is love made edible.</p>
+      <span class="card-tag">Nourishment ritual</span>
+    </div>
+    <div class="card">
+      <span class="card-glyph">🌿</span>
+      <h3 class="card-title">Gathering Hours</h3>
+      <p class="card-body">The ones who matter, around something warm. No agenda. No performance. Just the sound of people who feel safe enough to be quiet together.</p>
+      <span class="card-tag">Connection</span>
+    </div>
+    <div class="card">
+      <span class="card-glyph">🍞</span>
+      <h3 class="card-title">Bread & Witness</h3>
+      <p class="card-body">To feed someone is to say: I thought about you before you arrived. Something made by hand. Something that took patience. The oldest language.</p>
+      <span class="card-tag">Sacred making</span>
+    </div>
+  </section>
+
+  <section class="nourishment">
+    <p class="section-label">What lives here</p>
+    <div class="nourish-grid">
+      <div class="nourish-item">
+        <h4 class="nourish-title">Recipes as ritual</h4>
+        <p class="nourish-body">Not just instructions. The story behind a dish. Why it matters. Who taught it. What it means to make it again.</p>
+      </div>
+      <div class="nourish-item">
+        <h4 class="nourish-title">Seasonal rhythms</h4>
+        <p class="nourish-body">Eating with the calendar. What winter asks for. What summer allows. The quiet intelligence of timing.</p>
+      </div>
+      <div class="nourish-item">
+        <h4 class="nourish-title">Family language</h4>
+        <p class="nourish-body">The shorthand of people who eat together. Inside jokes over the washing up. The texture of ordinary love.</p>
+      </div>
+      <div class="nourish-item">
+        <h4 class="nourish-title">Repair through feeding</h4>
+        <p class="nourish-body">Hard days end here. Something warm. Someone who knew before you said it. This room doesn't ask questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="animation-delay: 1.4s;">
+    <div class="divider-line"></div>
+    <span class="divider-glyph">✦</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="hearth-quote">
+    <blockquote>
+      You knew you were loved when someone made something for you without being asked.
+      <cite>— The Hearth · On nourishment as mother tongue</cite>
+    </blockquote>
+  </div>
+
+  <section class="season-bar">
+    <div class="season">
+      <span class="season-name">Autumn</span>
+      <span class="season-note">root vegetables, slow heat, apple everything</span>
+    </div>
+    <div class="season active">
+      <span class="season-name">Winter</span>
+      <span class="season-note">broth, candlelight, hands wrapped around cups</span>
+    </div>
+    <div class="season">
+      <span class="season-name">Spring</span>
+      <span class="season-note">first herbs, lighter pots, windows open</span>
+    </div>
+    <div class="season">
+      <span class="season-name">Summer</span>
+      <span class="season-note">cold plates, bare feet, eating outside</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Maison Caché · The Hidden House · Every room is a permission</p>
+  </footer>
+
+</div>
+
+<script>
+  // Season click toggle
+  document.querySelectorAll('.season').forEach(s => {
+    s.addEventListener('click', () => {
+      document.querySelectorAll('.season').forEach(x => x.classList.remove('active'));
+      s.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
