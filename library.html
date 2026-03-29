@@ -214,7 +214,7 @@
       border: 1px solid var(--gold-mute); color: var(--gold-dim);
       font-family: var(--font-display); font-size: clamp(0.68rem,1.1vw,0.78rem);
       letter-spacing: 0.38em; text-transform: uppercase;
-      padding: 1rem 2.5rem; transition: all 0.7s ease; overflow: hidden;
+      padding: 0.75rem 2rem; transition: all 0.7s ease; overflow: hidden;
     }
     .btn:hover { border-color: var(--teal-dim); color: var(--teal-bright); transform: translateY(-2px); }
     .btn--crimson { border-color: rgba(90,21,32,0.35); color: rgba(90,21,32,0.7); }
@@ -432,7 +432,7 @@
       color: var(--cream-mute);
       font-family: var(--font-display); font-size: 0.6rem;
       letter-spacing: 0.25em; text-transform: uppercase;
-      padding: 0.5rem 1.1rem; transition: all 0.4s ease;
+      padding: 0.65rem 1.2rem;min-height:44px; transition: all 0.4s ease;
     }
     .cat-tab:hover, .cat-tab.active {
       border-color: rgba(176,112,16,0.45); color: var(--amber-dim);
@@ -480,7 +480,7 @@
 
       <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:2rem;animation:fadeUp 2.5s ease forwards">
 
-        <div style="display:flex;gap:4rem;align-items:flex-end;margin-bottom:0.5rem">
+        <div style="display:flex;gap:4rem;align-items:flex-end;margin-bottom:0.5rem" aria-hidden="true">
           <div class="sconce">
             <div class="flame" style="animation-delay:0.3s"></div>
             <div class="candle-wax"></div>
@@ -530,6 +530,7 @@
         </div>
 
         <div class="search-bar">
+          <label for="search-input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Search the library</label>
           <input type="text" class="search-input" id="search-input"
                  placeholder="Search the library..."
                  oninput="searchBooks(this.value)" />
@@ -696,6 +697,7 @@
               return `
                 <div class="book" style="width:${w}px;height:${h}px"
                      role="button" tabindex="0"
+                     aria-label="Open ${book.title}"
                      onclick="openBook(${book.id})"
                      onkeydown="if(event.key==='Enter')openBook(${book.id})"
                      onmouseenter="setStatus('${book.title.toLowerCase().substring(0,30)}')"

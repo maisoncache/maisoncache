@@ -689,7 +689,7 @@
       <div class="constellation-map" id="constellation-map">
 
         <!-- SVG thread lines between stars -->
-        <svg class="constellation-svg" id="thread-svg" viewBox="0 0 700 500" preserveAspectRatio="xMidYMid meet">
+        <svg class="constellation-svg" id="thread-svg" viewBox="0 0 700 500" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
           <!-- The Lemon Grove constellation threads -->
           <line x1="350" y1="200" x2="290" y2="280" stroke="rgba(196,136,42,0.2)" stroke-width="0.8" stroke-dasharray="4 6"/>
           <line x1="350" y1="200" x2="420" y2="260" stroke="rgba(196,136,42,0.2)" stroke-width="0.8" stroke-dasharray="4 6"/>
@@ -707,6 +707,7 @@
         <!-- THE LEMON GROVE — featured, clickable -->
         <div class="star-node featured" style="left:50%;top:40%"
              role="button" tabindex="0"
+             aria-label="Open The Lemon Grove"
              onclick="openLemonGrove()"
              onkeydown="if(event.key==='Enter')openLemonGrove()"
              onmouseenter="setStatus('the lemon grove — mira & vale')"
@@ -720,6 +721,7 @@
         <!-- Supporting stars of the main constellation -->
         <div class="star-node" style="left:41.4%;top:56%"
              role="button" tabindex="0"
+             aria-label="Archive Rose — locked"
              onclick="openLocked('Archive Rose')"
              onkeydown="if(event.key==='Enter')openLocked('Archive Rose')"
              onmouseenter="setStatus('archive rose — a relic')"
@@ -732,6 +734,7 @@
 
         <div class="star-node" style="left:60%;top:52%"
              role="button" tabindex="0"
+             aria-label="The Vow-Grove — locked"
              onclick="openLocked('The Vow-Grove')"
              onkeydown="if(event.key==='Enter')openLocked('The Vow-Grove')"
              onmouseenter="setStatus('the vow-grove — members only')"
@@ -744,6 +747,7 @@
 
         <div class="star-node" style="left:51.4%;top:66%"
              role="button" tabindex="0"
+             aria-label="The Golden Thread — locked"
              onclick="openLocked('The Golden Thread')"
              onkeydown="if(event.key==='Enter')openLocked('The Golden Thread')"
              onmouseenter="setStatus('the golden thread')"
