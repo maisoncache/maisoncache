@@ -72,6 +72,11 @@
       color: var(--linen-dim); text-decoration: none; transition: color 0.4s ease;
     }
     .nav-back:hover { color: var(--beeswax); }
+    .moon-strip {
+      position: fixed; top: 0.85rem; right: 1rem; z-index: 100;
+      font-family: var(--font-fellsc); font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(200,160,64,0.35); pointer-events: none;
+    }
 
     .section {
       min-height: 100vh; display: flex; flex-direction: column;
@@ -244,6 +249,7 @@
   <div class="embers-layer" id="embers"></div>
 
   <a class="nav-back" href="index.html">← The House</a>
+  <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
   <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
   <div class="house-status" id="house-status">[ atelier : listening ]</div>
 

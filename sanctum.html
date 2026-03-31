@@ -137,6 +137,11 @@
       transition: all 0.4s ease;
     }
     .back-link:hover { color: var(--teal-bright); border-color: var(--teal-dim); }
+    .moon-strip {
+      position: fixed; top: 0.85rem; right: 1rem; z-index: 100;
+      font-family: var(--font-display); font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(176,120,32,0.38); pointer-events: none;
+    }
     .header-name {
       font-family: var(--font-fraktur); font-size: 1.1rem;
       color: rgba(240,224,200,0.22); letter-spacing: 0.05em;
@@ -518,6 +523,7 @@
 
     <header class="sanctum-header">
       <a href="index.html" class="back-link">← The House</a>
+      <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
       <div class="header-name">The Sanctum</div>
       <div class="header-note">18+ only</div>
     </header>

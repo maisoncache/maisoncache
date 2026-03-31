@@ -146,6 +146,11 @@
       cursor: crosshair;
     }
     .back-link:hover { color: var(--teal-bright); border-color: var(--teal-dim); }
+    .moon-strip {
+      position: fixed; top: 0.85rem; right: 1rem; z-index: 100;
+      font-family: var(--font-display); font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(61,139,122,0.4); pointer-events: none;
+    }
 
     .header-title {
       font-family: var(--font-display);
@@ -672,6 +677,7 @@
 
   <header class="archive-header">
     <a href="index.html" class="back-link">← The House</a>
+    <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
     <div class="header-title">Celestial Archive</div>
     <div class="member-status">members only</div>
   </header>
