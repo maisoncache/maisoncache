@@ -393,6 +393,11 @@
       letter-spacing: 0.16em; text-transform: lowercase;
       color: rgba(176,112,16,0.28); pointer-events: none;
     }
+    .sanctum-dot {
+      position: fixed; bottom: 0.4rem; left: 0.7rem; z-index: 60;
+      font-size: 0.85rem; color: rgba(200,160,64,0.05);
+      cursor: default; transition: color 0.4s ease; user-select: none;
+    }
 
     /* ── CANDLE SCONCE ── */
     .sconce {
@@ -595,6 +600,7 @@
     </div>
   </div>
 
+  <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
   <div id="library-status">[ library : open ]</div>
 
   <script>
@@ -837,6 +843,21 @@
     console.log('%c📚  The Library — Maison Caché', 'color: #c4901a; font-size: 14px; font-family: Georgia, serif; letter-spacing: 0.2em;');
     console.log('%cThe book is always open.', 'color: rgba(196,144,26,0.5); font-size: 11px; font-style: italic; font-family: Georgia, serif;');
     console.log('%c ', 'font-size:1px');
+
+    // ── SANCTUM TRIGGER ──
+    var sanctumClicks = 0, sanctumTimer = null;
+    function sanctumClick() {
+      sanctumClicks++;
+      var trigger = document.getElementById('sanctum-dot');
+      trigger.style.color = 'rgba(200,160,64,' + (0.06 + sanctumClicks * 0.14) + ')';
+      if (sanctumTimer) clearTimeout(sanctumTimer);
+      sanctumTimer = setTimeout(function() { sanctumClicks = 0; trigger.style.color = 'rgba(200,160,64,0.05)'; }, 1600);
+      if (sanctumClicks >= 3) {
+        sanctumClicks = 0;
+        trigger.style.color = 'rgba(200,160,64,0.05)';
+        window.location.href = 'sanctum.html';
+      }
+    }
   </script>
 </body>
 </html>
