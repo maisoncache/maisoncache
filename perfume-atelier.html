@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Perfume Atelier — Maison Caché</title>
+  <meta name="description" content="You don't wear perfume. You become it.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:title" content="The Perfume Atelier — Maison Caché">
+  <meta property="og:description" content="You don't wear perfume. You become it.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Almendra:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --ground: #180E06;
+      --mid: #241408;
+      --deep: #382010;
+      --bark: #4A2E18;
+      --loam: #8B6850;
+      --ember: #C4622D;
+      --flame: #D4882A;
+      --beeswax: #C8A040;
+      --amber: #B08020;
+      --linen: #EDD8B8;
+      --linen-dim: rgba(237,216,184,0.55);
+      --linen-ghost: rgba(237,216,184,0.2);
+      --ember-glow: rgba(196,98,45,0.12);
+      --font-cinzel: 'Cinzel', serif;
+      --font-fell: 'IM Fell English', serif;
+      --font-fellsc: 'IM Fell English SC', serif;
+      --font-cg: 'Cormorant Garamond', serif;
+      --font-alm: 'Almendra', serif;
+    }
+    body {
+      background: var(--ground);
+      color: var(--linen);
+      font-family: var(--font-fell);
+      line-height: 1.75;
+      overflow-x: hidden;
+      min-height: 100vh;
+      cursor: crosshair;
+    }
+    ::selection { background: rgba(196,98,45,0.4); color: var(--linen); }
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-thumb { background: rgba(200,160,64,0.15); }
+    button { font-family: var(--font-fell); cursor: crosshair; }
+
+    .layer-grain {
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.036;
+    }
+    .layer-vignette {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(24,14,6,0.7) 100%);
+    }
+    .layer-ember-glow {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 60vh; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 100%, rgba(196,98,45,0.1) 0%, rgba(212,136,42,0.05) 30%, transparent 70%);
+    }
+    .embers-layer { position: fixed; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+    .content { position: relative; z-index: 10; }
+
+    .nav-back {
+      position: fixed; top: 1.2rem; left: 1.5rem; z-index: 100;
+      font-family: var(--font-fellsc); font-size: 0.7rem; letter-spacing: 0.12em;
+      color: var(--linen-dim); text-decoration: none; transition: color 0.4s ease;
+    }
+    .nav-back:hover { color: var(--beeswax); }
+
+    .section {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 6rem 2rem; text-align: center;
+    }
+    .section--short { min-height: auto; padding: 4rem 2rem; }
+    .section--medium { min-height: auto; padding: 5rem 2rem; }
+
+    .room-label {
+      font-family: var(--font-fellsc); font-size: 0.6rem; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--ember); margin-bottom: 1.5rem;
+    }
+    .room-heading {
+      font-family: var(--font-cinzel); font-weight: 400; font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--linen); letter-spacing: 0.08em; margin-bottom: 0.6rem;
+    }
+    .room-sub {
+      font-family: var(--font-cg); font-weight: 300; font-style: italic;
+      font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--linen-dim);
+      letter-spacing: 0.04em; line-height: 1.8;
+    }
+    .body-text {
+      font-family: var(--font-fell); font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+      color: var(--linen-dim); line-height: 1.9; max-width: 480px;
+    }
+    .intention-line {
+      font-family: var(--font-alm); font-style: italic; font-size: 1rem;
+      color: var(--beeswax); opacity: 0.7; line-height: 1.8; margin-bottom: 1.5rem;
+    }
+    .divider {
+      height: 1px; background: linear-gradient(90deg, transparent, rgba(200,160,64,0.25), transparent);
+      margin: 2rem auto; width: 55px;
+    }
+
+    .btn {
+      display: inline-block; background: none;
+      border: 1px solid rgba(200,160,64,0.22); color: rgba(200,160,64,0.6);
+      font-family: var(--font-cinzel); font-size: clamp(0.65rem,1vw,0.75rem);
+      letter-spacing: 0.3em; text-transform: uppercase;
+      padding: 0.8rem 2.2rem; transition: all 0.5s ease;
+      text-decoration: none; cursor: crosshair;
+    }
+    .btn:hover { border-color: var(--ember); color: var(--ember); }
+
+    .house-status {
+      position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
+      font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
+      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
+    }
+    .sanctum-dot {
+      position: fixed; bottom: 0.6rem; left: 0.7rem; z-index: 60;
+      font-size: 0.7rem; color: rgba(200,160,64,0.05); cursor: default;
+      user-select: none; transition: color 0.6s ease;
+    }
+
+    .scent-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      background: var(--ground); overflow-y: auto; display: none;
+    }
+    .scent-close {
+      position: fixed; top: 1.5rem; right: 1.75rem; z-index: 110;
+      background: none; border: none;
+      color: var(--beeswax); opacity: 0.6;
+      font-family: var(--font-fellsc); font-size: 0.68rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.5rem; transition: color 0.4s ease;
+    }
+    .scent-close:hover { color: var(--ember); opacity: 1; }
+    .scent-option {
+      background: rgba(46,28,14,0.3);
+      border: 1px solid rgba(200,160,64,0.1);
+      color: var(--linen-dim);
+      font-family: var(--font-fell); font-size: clamp(0.95rem,1.8vw,1.08rem);
+      font-style: italic;
+      padding: 1.1rem 1.5rem; cursor: crosshair;
+      transition: all 0.5s ease;
+      text-align: left; width: 100%;
+    }
+    .scent-option:hover:not(:disabled) {
+      background: rgba(196,98,45,0.08);
+      border-color: rgba(196,98,45,0.45);
+      color: var(--ember);
+    }
+    .scent-option.selected {
+      background: rgba(200,160,64,0.07);
+      border-color: rgba(200,160,64,0.5);
+      color: var(--beeswax);
+    }
+    .scent-option:disabled:not(.selected) { opacity: 0.22; }
+
+    .scent-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      justify-content: center; margin-bottom: 1.5rem;
+    }
+    .scent-tag {
+      font-family: var(--font-fellsc); font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.5rem 1rem;
+      border: 1px solid rgba(200,160,64,0.08); color: var(--linen-ghost);
+      transition: all 0.4s ease;
+    }
+    .scent-tag:hover { border-color: rgba(196,98,45,0.3); color: var(--linen-dim); }
+
+    .scent-profile {
+      max-width: 520px; width: 100%; text-align: left;
+      border: 1px solid rgba(200,160,64,0.08);
+      background: rgba(36,20,8,0.4); padding: 2.5rem 2.2rem;
+      position: relative; margin-top: 2rem;
+    }
+    .scent-profile::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--ember), transparent);
+      opacity: 0.3;
+    }
+
+    .connection-card {
+      max-width: 480px; width: 100%; text-align: left;
+      padding: 1.5rem 1.8rem; border-left: 1px solid rgba(196,98,45,0.2);
+      margin-bottom: 1rem; transition: all 0.4s ease;
+    }
+    .connection-card:hover { border-left-color: var(--ember); background: rgba(46,28,14,0.2); }
+    .connection-card a { color: var(--linen); text-decoration: none; }
+    .connection-card .conn-name {
+      font-family: var(--font-fell); font-style: italic; font-size: 1rem;
+      color: var(--linen-dim); margin-bottom: 0.2rem;
+    }
+    .connection-card .conn-desc {
+      font-family: var(--font-cg); font-style: italic; font-size: 0.85rem;
+      color: rgba(200,160,64,0.4);
+    }
+    .connection-card .conn-forming {
+      font-family: var(--font-fellsc); font-size: 0.45rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(200,160,64,0.2); margin-top: 0.3rem;
+    }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1.2s ease, transform 1.2s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes emberRise {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0; }
+      100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      25% { opacity: 0.85; transform: scaleY(0.96); }
+      50% { opacity: 0.95; transform: scaleY(1.02); }
+      75% { opacity: 0.88; transform: scaleY(0.98); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 0.85; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--beeswax); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+
+  <div class="layer-ember-glow"></div>
+  <div class="layer-vignette"></div>
+  <div class="layer-grain"></div>
+  <div class="embers-layer" id="embers"></div>
+
+  <a class="nav-back" href="index.html">← The House</a>
+  <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
+  <div class="house-status" id="house-status">[ atelier : listening ]</div>
+
+  <div class="content">
+
+    <!-- ══ HERO ══ -->
+    <section class="section">
+      <div class="reveal" style="max-width:480px">
+        <div class="room-label">open now</div>
+        <svg width="60" height="80" viewBox="0 0 60 80" fill="none" aria-hidden="true" style="margin-bottom:1.5rem;opacity:0.6">
+          <rect x="20" y="30" width="20" height="40" rx="2" stroke="rgba(200,160,64,0.3)" stroke-width="0.8" fill="rgba(196,98,45,0.06)"/>
+          <rect x="24" y="22" width="12" height="10" rx="1" stroke="rgba(200,160,64,0.25)" stroke-width="0.6" fill="none"/>
+          <line x1="30" y1="22" x2="30" y2="14" stroke="rgba(196,98,45,0.3)" stroke-width="0.5"/>
+          <path d="M28 14 Q30 4 32 14" stroke="rgba(196,98,45,0.25)" stroke-width="0.5" fill="none" style="animation:flicker 3s ease-in-out infinite"/>
+          <path d="M26 10 Q30 0 34 10" stroke="rgba(200,160,64,0.15)" stroke-width="0.4" fill="none" style="animation:flicker 4s ease-in-out infinite 0.5s"/>
+        </svg>
+        <h1 class="room-heading">The Perfume Atelier</h1>
+        <p class="room-sub" style="margin-bottom:1.2rem">You don't wear perfume. You become it.</p>
+        <div class="divider"></div>
+        <p class="body-text" style="margin-bottom:2.5rem;text-align:center">
+          Three questions. One reading.<br>
+          The house will tell you what scent lives on your skin — and how to wear it like a spell.
+        </p>
+        <button class="btn" onclick="openScentQuiz()">Receive your scent reading</button>
+      </div>
+    </section>
+
+    <!-- ══ HOW IT WORKS ══ -->
+    <section class="section--short" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="max-width:560px;width:100%">
+        <div class="room-label" style="margin-bottom:2rem">How the reading works</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:center">
+          <div style="padding:1.2rem 0.8rem">
+            <div style="font-family:var(--font-cg,serif);font-size:1.6rem;color:rgba(200,160,64,0.4);margin-bottom:0.8rem;font-style:italic">I</div>
+            <div style="font-family:var(--font-fellsc,serif);font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(200,160,64,0.5);margin-bottom:0.5rem">Three questions</div>
+            <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(240,224,200,0.45);line-height:1.7">Answer intuitively. The house is reading something under the surface.</p>
+          </div>
+          <div style="padding:1.2rem 0.8rem;border-left:1px solid rgba(200,160,64,0.06);border-right:1px solid rgba(200,160,64,0.06)">
+            <div style="font-family:var(--font-cg,serif);font-size:1.6rem;color:rgba(200,160,64,0.4);margin-bottom:0.8rem;font-style:italic">II</div>
+            <div style="font-family:var(--font-fellsc,serif);font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(200,160,64,0.5);margin-bottom:0.5rem">Your archetype</div>
+            <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(240,224,200,0.45);line-height:1.7">A scent family, a ritual, and a reading written specifically for how you carry yourself.</p>
+          </div>
+          <div style="padding:1.2rem 0.8rem">
+            <div style="font-family:var(--font-cg,serif);font-size:1.6rem;color:rgba(200,160,64,0.4);margin-bottom:0.8rem;font-style:italic">III</div>
+            <div style="font-family:var(--font-fellsc,serif);font-size:0.52rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(200,160,64,0.5);margin-bottom:0.5rem">Fragrance picks</div>
+            <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(240,224,200,0.45);line-height:1.7">Three real perfumes matched to your profile — across price points. No affiliate links. No agenda.</p>
+          </div>
+        </div>
+        <div style="margin-top:2rem">
+          <button class="btn" onclick="openScentQuiz()">Begin your reading</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SCENT LIBRARY ══ -->
+    <section class="section--medium" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="max-width:580px">
+        <div class="room-label" style="margin-bottom:1.2rem">The Scent Library</div>
+        <p class="room-sub" style="margin-bottom:1.5rem">Browse by mood. Browse by season. Browse by ritual.</p>
+        <div class="divider" style="margin-bottom:2rem"></div>
+
+        <div style="font-family:var(--font-fellsc);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--loam);margin-bottom:0.8rem">By Mood</div>
+        <div class="scent-tags">
+          <span class="scent-tag">Grounding</span>
+          <span class="scent-tag">Energising</span>
+          <span class="scent-tag">Sensual</span>
+          <span class="scent-tag">Comforting</span>
+          <span class="scent-tag">Fierce</span>
+        </div>
+
+        <div style="font-family:var(--font-fellsc);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--loam);margin-bottom:0.8rem;margin-top:1rem">By Season</div>
+        <div class="scent-tags">
+          <span class="scent-tag">Autumn</span>
+          <span class="scent-tag">Winter</span>
+          <span class="scent-tag">Spring</span>
+          <span class="scent-tag">Summer</span>
+        </div>
+
+        <div style="font-family:var(--font-fellsc);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--loam);margin-bottom:0.8rem;margin-top:1rem">By Ritual</div>
+        <div class="scent-tags">
+          <span class="scent-tag">Morning</span>
+          <span class="scent-tag">Night</span>
+          <span class="scent-tag">Before Surrender</span>
+          <span class="scent-tag">After the Storm</span>
+        </div>
+
+        <div class="scent-profile">
+          <div style="font-family:var(--font-fellsc);font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--ember);margin-bottom:1.2rem">🌕 Full Moon · Illuminate</div>
+          <p class="body-text" style="margin-bottom:1.2rem">
+            Rose absolute + sandalwood + warm amber.<br>
+            The full moon scent. Opulent. Unapologetic.<br>
+            What it means to wear abundance on your skin.
+          </p>
+          <div class="divider" style="margin:1.5rem 0;width:40px"></div>
+          <p style="font-family:var(--font-cg);font-style:italic;font-size:0.85rem;color:rgba(200,160,64,0.4);line-height:1.8;margin-bottom:1.5rem">
+            The full scent ritual — layering instructions, product
+            recommendations at every price point, and intimacy notes —
+            lives in The Inner House.
+          </p>
+          <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn" style="font-size:0.6rem;padding:0.6rem 1.6rem">Join the house</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ INTIMACY TEASER ══ -->
+    <section class="section--short" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="max-width:440px">
+        <div class="divider" style="margin-bottom:2rem"></div>
+        <p class="intention-line">The Atelier has a back room.</p>
+        <p class="body-text" style="text-align:center;margin-bottom:1rem">
+          Scent as foreplay. Fragrance as emotional trigger.<br>
+          The perfume you put on before you let go.
+        </p>
+        <p style="font-family:var(--font-fellsc);font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.2);margin-top:1rem">
+          This room opens for members.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ CONNECTIONS ══ -->
+    <section class="section--short" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="max-width:520px;width:100%">
+        <div class="room-label" style="margin-bottom:2rem">The nose knows which room you need.</div>
+        <div class="connection-card">
+          <a href="hearth.html">
+            <div class="conn-name">The Hearth</div>
+            <div class="conn-desc">Domestic scent. Candles, herbs, baking.</div>
+          </a>
+        </div>
+        <div class="connection-card" style="cursor:default">
+          <div class="conn-name">The Garden</div>
+          <div class="conn-desc">Grow your own scent ingredients.</div>
+          <div class="conn-forming">forming</div>
+        </div>
+        <div class="connection-card">
+          <a href="sanctum.html">
+            <div class="conn-name">The Sanctum</div>
+            <div class="conn-desc">Where scent meets surrender.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ GHOST CTA ══ -->
+    <section class="section--short" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="max-width:460px">
+        <p class="body-text" style="text-align:center;margin-bottom:2rem">
+          The full Atelier cycle — phase-matched scent profiles,
+          layering rituals, product recommendations, and intimacy notes —
+          lives in The Inner House.
+        </p>
+        <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn">Join the house</a>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <section class="section--short" style="padding-bottom:6rem;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:1rem">
+        <svg width="50" height="10" viewBox="0 0 50 10" fill="none" aria-hidden="true">
+          <line x1="0" y1="5" x2="15" y2="5" stroke="rgba(200,160,64,0.2)" stroke-width="0.5"/>
+          <ellipse cx="25" cy="5" rx="3" ry="4" stroke="rgba(196,98,45,0.3)" stroke-width="0.6" fill="rgba(196,98,45,0.08)" style="animation:flicker 3s ease-in-out infinite"/>
+          <line x1="35" y1="5" x2="50" y2="5" stroke="rgba(200,160,64,0.2)" stroke-width="0.5"/>
+        </svg>
+        <p style="font-family:var(--font-cg);font-style:italic;font-size:0.9rem;color:rgba(237,216,184,0.25)">
+          The Atelier remembers what you wore.<br>Come back when the moon moves.
+        </p>
+        <p style="font-family:var(--font-fellsc);font-size:0.55rem;letter-spacing:0.25em;color:rgba(200,160,64,0.2);text-transform:uppercase;margin-top:0.5rem">
+          Maison Caché
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══ SCENT QUIZ OVERLAY ══ -->
+  <div class="scent-overlay" id="scent-overlay">
+    <button class="scent-close" onclick="closeScentQuiz()">Return to the Atelier</button>
+    <div id="scent-content"></div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════
+    // SCENT QUIZ DATA
+    // ══════════════════════════════════════════
+    const SCENT_QUESTIONS = [
+      {
+        question: "What draws you first?",
+        options: [
+          { text: "Smoke and wood \u2014 the memory of fire", scores: { hearth: 2, library: 1 } },
+          { text: "Flowers and green \u2014 the garden after rain", scores: { garden: 2, storm: 1 } },
+          { text: "Warm spice \u2014 cinnamon, cardamom, skin", scores: { hearth: 1, sanctum: 1 } },
+          { text: "Petrichor and ozone \u2014 the sky before it breaks", scores: { storm: 2, garden: 1 } },
+          { text: "Vanilla and sweetness \u2014 something baking, something held", scores: { hearth: 1, sanctum: 1, library: 1 } }
+        ]
+      },
+      {
+        question: "Where do you feel most yourself?",
+        options: [
+          { text: "In the kitchen \u2014 hands in dough, something on the stove", scores: { hearth: 2 } },
+          { text: "In the garden \u2014 soil under nails, things blooming", scores: { garden: 2 } },
+          { text: "In a library \u2014 old pages open, ink on your fingers", scores: { library: 2 } },
+          { text: "In bed \u2014 curtains drawn, the world outside forgotten", scores: { sanctum: 2 } },
+          { text: "At the window \u2014 watching a storm roll in", scores: { storm: 2 } }
+        ]
+      },
+      {
+        question: "What do you reach for at midnight?",
+        options: [
+          { text: "A candle and a cup of tea", scores: { hearth: 2 } },
+          { text: "A walk outside, barefoot on wet grass", scores: { garden: 1, storm: 1 } },
+          { text: "A book with a cracked spine", scores: { library: 2 } },
+          { text: "Silk and skin \u2014 someone close", scores: { sanctum: 2 } },
+          { text: "Wine and dark chocolate \u2014 slow indulgence", scores: { sanctum: 1, hearth: 1 } }
+        ]
+      }
+    ];
+
+    const SCENT_ARCHETYPES = {
+      hearth: {
+        name: "The Hearth",
+        icon: "\ud83d\udd6f",
+        description: "Your scent is warm, domestic, grounding. You smell like the safest room in the house \u2014 beeswax and baking bread, wood smoke curling through cinnamon, the faintest trace of vanilla on warm skin.",
+        notes: "Beeswax \u00b7 Cinnamon Bark \u00b7 Vanilla \u00b7 Smoked Wood \u00b7 Warm Bread",
+        fragrances: [
+          { name: "By the Fireplace", house: "Maison Margiela Replica", tier: "Signature", note: "Smoky, sweet, chestnut. The one everyone asks about." },
+          { name: "Fireside Intense", house: "Bath & Body Works", tier: "Accessible", note: "Under $30. Smoked wood and amber. Surprisingly good." },
+          { name: "Tobacco Vanille", house: "Tom Ford", tier: "Investment", note: "Rich, warm, unapologetic. The forever bottle." }
+        ],
+        room: "hearth.html",
+        roomName: "The Hearth"
+      },
+      garden: {
+        name: "The Garden",
+        icon: "\ud83c\udf3f",
+        description: "Your scent is green, alive, rain-touched. You smell like the earth after water \u2014 crushed stems, wet soil, something flowering just out of sight. There is dirt under your nails and you are not sorry.",
+        notes: "Crushed Basil \u00b7 Wet Earth \u00b7 Fig Leaf \u00b7 Neroli \u00b7 Green Tomato",
+        fragrances: [
+          { name: "Philosykos", house: "Diptyque", tier: "Signature", note: "Fig tree in full sun. Green, milky, alive." },
+          { name: "Green Tea", house: "Elizabeth Arden", tier: "Accessible", note: "Under $25. Fresh, clean, dewy. A classic for a reason." },
+          { name: "Jardin sur le Nil", house: "Herm\u00e8s", tier: "Investment", note: "Green mango, lotus, bulrushes. The garden that grows beside water." }
+        ],
+        room: null,
+        roomName: "The Garden"
+      },
+      library: {
+        name: "The Library",
+        icon: "\ud83d\udcd6",
+        description: "Your scent is papery, leathered, inked. You smell like the oldest room in a house full of books \u2014 dust motes in amber light, aged leather, the trace of someone\u2019s fountain pen left uncapped.",
+        notes: "Old Paper \u00b7 Leather \u00b7 Tobacco \u00b7 Cedarwood \u00b7 Black Tea",
+        fragrances: [
+          { name: "Tam Dao", house: "Diptyque", tier: "Signature", note: "Sandalwood, cedar, ink. The scent of a writer\u2019s desk." },
+          { name: "Whispers in the Library", house: "Maison Margiela Replica", tier: "Accessible", note: "Under $35 travel size. Cedar, tonka, vanilla. Books and quiet." },
+          { name: "Ombr\u00e9 Leather", house: "Tom Ford", tier: "Investment", note: "Leather, jasmine, cardamom. The first edition you don\u2019t lend out." }
+        ],
+        room: "library.html",
+        roomName: "The Library"
+      },
+      sanctum: {
+        name: "The Sanctum",
+        icon: "\ud83c\udf19",
+        description: "Your scent is dark, sensual, close. You smell like the room with the door closed \u2014 warm skin, black musk, jasmine opening at night. This is the perfume you put on when you mean it.",
+        notes: "Black Musk \u00b7 Amber \u00b7 Jasmine Night \u00b7 Warm Skin \u00b7 Oud",
+        fragrances: [
+          { name: "Black Orchid", house: "Tom Ford", tier: "Signature", note: "Orchid, dark chocolate, patchouli. The one you wear when you mean it." },
+          { name: "Dark Kiss", house: "Bath & Body Works", tier: "Accessible", note: "Under $20. Black dahlia, bergamot, vanilla. Dark and wearable." },
+          { name: "Santal 33", house: "Le Labo", tier: "Investment", note: "Sandalwood, leather, musk. The scent that makes strangers lean in." }
+        ],
+        room: "sanctum.html",
+        roomName: "The Sanctum"
+      },
+      storm: {
+        name: "The Storm",
+        icon: "\u26a1",
+        description: "Your scent is electric, ozone-sharp, untamed. You smell like the sky right before everything changes \u2014 petrichor on hot pavement, charged air, sea salt carried on a wind that doesn\u2019t ask permission.",
+        notes: "Petrichor \u00b7 Ozone \u00b7 Sea Salt \u00b7 Vetiver \u00b7 Lightning",
+        fragrances: [
+          { name: "Another 13", house: "Le Labo", tier: "Signature", note: "Ambroxan, musk, moss. The scent that changes on every skin." },
+          { name: "Light Blue", house: "Dolce & Gabbana", tier: "Accessible", note: "Under $40. Citrus, ozone, cedar. The open window." },
+          { name: "Aventus", house: "Creed", tier: "Investment", note: "Pineapple, birch, musk. The storm that hasn\u2019t landed yet." }
+        ],
+        room: "celestial-archive.html",
+        roomName: "The Celestial Archive"
+      }
+    };
+
+    // ══════════════════════════════════════════
+    // QUIZ STATE
+    // ══════════════════════════════════════════
+    let scentScores = { hearth: 0, garden: 0, library: 0, sanctum: 0, storm: 0 };
+    let currentQuestion = 0;
+
+    function openScentQuiz() {
+      document.getElementById('scent-overlay').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      setStatus('the atelier is listening');
+      scentScores = { hearth: 0, garden: 0, library: 0, sanctum: 0, storm: 0 };
+      currentQuestion = 0;
+      renderScentThreshold();
+    }
+
+    function closeScentQuiz() {
+      document.getElementById('scent-overlay').style.display = 'none';
+      document.body.style.overflow = '';
+      setStatus('listening');
+    }
+
+    // ══════════════════════════════════════════
+    // QUIZ RENDERING
+    // ══════════════════════════════════════════
+    function renderScentThreshold() {
+      document.getElementById('scent-content').innerHTML =
+        '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem;animation:fadeIn 1.5s ease forwards">' +
+          '<div style="font-family:var(--font-fellsc);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ember);margin-bottom:2.2rem">Maison Cach\u00e9</div>' +
+          '<h1 style="font-family:var(--font-cg);font-size:clamp(2.4rem,7vw,4.5rem);font-weight:300;font-style:italic;color:var(--linen);margin:0 0 0.5rem 0">The Scent Reading</h1>' +
+          '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:65px;margin:1.8rem auto"></div>' +
+          '<p class="body-text" style="max-width:420px;margin:0 auto 3.5rem;text-align:center">Three questions. One reading.<br>The house will tell you what scent lives on your skin \u2014 and how to wear it like a spell.</p>' +
+          '<button class="btn" onclick="renderScentQuestion(0)">Begin your reading</button>' +
+        '</div>';
+    }
+
+    function renderScentQuestion(idx) {
+      currentQuestion = idx;
+      var q = SCENT_QUESTIONS[idx];
+      var optionsHtml = '';
+      for (var i = 0; i < q.options.length; i++) {
+        optionsHtml += '<button class="scent-option" data-idx="' + i + '" onclick="selectScentOption(this,' + idx + ',' + i + ')">' + q.options[i].text + '</button>';
+      }
+      document.getElementById('scent-content').innerHTML =
+        '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem;animation:fadeIn 0.8s ease forwards">' +
+          '<div style="font-family:var(--font-fellsc);font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--loam);margin-bottom:2rem">Question ' + (idx + 1) + ' of 3</div>' +
+          '<h2 style="font-family:var(--font-cg);font-size:clamp(1.6rem,4.5vw,2.5rem);font-weight:300;font-style:italic;color:var(--linen);margin:0 0 2rem 0;max-width:500px">' + q.question + '</h2>' +
+          '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.15),transparent);width:44px;margin:0 auto 2.5rem"></div>' +
+          '<div style="display:flex;flex-direction:column;gap:0.8rem;max-width:480px;width:100%">' + optionsHtml + '</div>' +
+        '</div>';
+      document.getElementById('scent-overlay').scrollTop = 0;
+    }
+
+    function selectScentOption(el, qIdx, optIdx) {
+      var options = el.parentElement.querySelectorAll('.scent-option');
+      for (var i = 0; i < options.length; i++) {
+        options[i].disabled = true;
+      }
+      el.classList.add('selected');
+
+      var scores = SCENT_QUESTIONS[qIdx].options[optIdx].scores;
+      for (var key in scores) {
+        if (scores.hasOwnProperty(key)) {
+          scentScores[key] += scores[key];
+        }
+      }
+
+      setTimeout(function() {
+        if (qIdx < 2) {
+          renderScentQuestion(qIdx + 1);
+        } else {
+          renderScentChanneling();
+        }
+      }, 800);
+    }
+
+    function renderScentChanneling() {
+      var lines = ["The house is reading your skin\u2026", "Something is forming\u2026", "The notes are settling\u2026", "Your scent is revealing itself\u2026"];
+      var lineIdx = 0;
+      document.getElementById('scent-content').innerHTML =
+        '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem">' +
+          '<div style="font-size:2.2rem;color:var(--ember);margin-bottom:2rem;animation:pulse 2.5s infinite ease-in-out">\u25c9</div>' +
+          '<p id="channeling-text" class="body-text" style="min-height:2em;transition:opacity 0.5s ease;text-align:center">' + lines[0] + '</p>' +
+          '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:44px;margin:2rem auto 0;animation:pulse 2.5s infinite ease-in-out"></div>' +
+        '</div>';
+      window._channelingInterval = setInterval(function() {
+        lineIdx = (lineIdx + 1) % lines.length;
+        var t = document.getElementById('channeling-text');
+        if (t) t.textContent = lines[lineIdx]; else clearInterval(window._channelingInterval);
+      }, 1200);
+      setTimeout(function() {
+        if (window._channelingInterval) clearInterval(window._channelingInterval);
+        renderScentResult();
+      }, 4200);
+    }
+
+    function renderScentResult() {
+      var priority = ['sanctum', 'storm', 'library', 'garden', 'hearth'];
+      var maxScore = -1;
+      var winner = 'hearth';
+      for (var i = 0; i < priority.length; i++) {
+        var key = priority[i];
+        if (scentScores[key] > maxScore) {
+          maxScore = scentScores[key];
+          winner = key;
+        }
+      }
+      var a = SCENT_ARCHETYPES[winner];
+
+      var fragranceHtml = '';
+      for (var i = 0; i < a.fragrances.length; i++) {
+        var f = a.fragrances[i];
+        fragranceHtml +=
+          '<div style="border:1px solid rgba(200,160,64,0.08);background:rgba(36,20,8,0.4);padding:1.5rem 1.5rem;margin-bottom:0.8rem;text-align:left">' +
+            '<div style="font-family:var(--font-fellsc);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--loam);margin-bottom:0.6rem">' + f.tier + '</div>' +
+            '<div style="font-family:var(--font-fell);font-style:italic;font-size:1rem;color:var(--linen);margin-bottom:0.2rem">' + f.name + '</div>' +
+            '<div style="font-family:var(--font-cg);font-style:italic;font-size:0.85rem;color:rgba(200,160,64,0.45);margin-bottom:0.6rem">' + f.house + '</div>' +
+            '<div style="font-family:var(--font-fell);font-size:0.88rem;color:var(--linen-dim);line-height:1.7">' + f.note + '</div>' +
+          '</div>';
+      }
+
+      var roomHtml = '';
+      if (a.room) {
+        roomHtml =
+          '<p class="body-text" style="text-align:center;margin-bottom:1.5rem;color:var(--ember)">Your archetype is ' + a.name + '. That room is open.</p>' +
+          '<a href="' + a.room + '" class="btn" style="margin-bottom:1rem;text-decoration:none">Visit ' + a.roomName + '</a><br>';
+      } else {
+        roomHtml =
+          '<p class="body-text" style="text-align:center;margin-bottom:1.5rem;color:var(--ember)">Your archetype is ' + a.name + '. That room is forming.</p>';
+      }
+
+      document.getElementById('scent-content').innerHTML =
+        '<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:3.5rem 1.5rem;animation:fadeIn 1.5s ease forwards">' +
+          '<div style="max-width:520px;width:100%;text-align:center">' +
+            '<div style="font-family:var(--font-fellsc);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ember);margin-bottom:1.5rem">Your scent archetype</div>' +
+            '<div style="font-size:2.5rem;margin-bottom:1rem">' + a.icon + '</div>' +
+            '<h2 style="font-family:var(--font-cg);font-size:clamp(2rem,5vw,3rem);font-weight:300;font-style:italic;color:var(--linen);margin:0 0 1.5rem 0">' + a.name + '</h2>' +
+            '<p class="body-text" style="text-align:center;margin:0 auto 2rem">' + a.description + '</p>' +
+            '<div style="font-family:var(--font-fellsc);font-size:0.52rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--loam);margin-bottom:0.8rem">Your notes</div>' +
+            '<p style="font-family:var(--font-cg);font-style:italic;font-size:1rem;color:var(--beeswax);opacity:0.7;margin-bottom:2rem">' + a.notes + '</p>' +
+            '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:55px;margin:0 auto 2.5rem"></div>' +
+            '<div style="font-family:var(--font-fellsc);font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--ember);margin-bottom:1.5rem">The Atelier recommends</div>' +
+            fragranceHtml +
+            '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:44px;margin:2rem auto 2.5rem"></div>' +
+            roomHtml +
+            '<a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn" style="margin:1rem 0;text-decoration:none">Join the house</a><br>' +
+            '<button onclick="closeScentQuiz()" class="btn" style="margin-top:1rem">Return to the Atelier</button>' +
+          '</div>' +
+        '</div>';
+      document.getElementById('scent-overlay').scrollTop = 0;
+      setStatus('your scent is ready');
+    }
+
+    // ══════════════════════════════════════════
+    // EMBERS
+    // ══════════════════════════════════════════
+    (function() {
+      var container = document.getElementById('embers');
+      var colors = ['rgba(196,98,45,0.5)', 'rgba(212,136,42,0.5)', 'rgba(200,160,64,0.45)', 'rgba(180,120,30,0.4)'];
+      for (var i = 0; i < 22; i++) {
+        var e = document.createElement('div');
+        var size = 1.5 + Math.random() * 2.5;
+        var drift = (Math.random() - 0.5) * 80;
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        e.style.cssText = 'position:absolute;bottom:-3%;left:' + (Math.random()*100) + '%;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:radial-gradient(circle,' + color + ',transparent);animation:emberRise ' + (8+Math.random()*12) + 's ' + (Math.random()*12) + 's infinite ease-out;--drift:' + drift + 'px;';
+        container.appendChild(e);
+      }
+    })();
+
+    // ══════════════════════════════════════════
+    // SCROLL REVEAL
+    // ══════════════════════════════════════════
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+    // ══════════════════════════════════════════
+    // HOUSE STATUS
+    // ══════════════════════════════════════════
+    var statusEl = document.getElementById('house-status');
+    function setStatus(text) { if (statusEl) statusEl.textContent = '[ atelier : ' + text + ' ]'; }
+
+    document.querySelectorAll('.connection-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { setStatus('another door'); });
+      el.addEventListener('mouseleave', function() { setStatus('listening'); });
+    });
+    document.querySelectorAll('.scent-tag').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { setStatus('browsing'); });
+      el.addEventListener('mouseleave', function() { setStatus('listening'); });
+    });
+
+    // ══════════════════════════════════════════
+    // SANCTUM TRIGGER
+    // ══════════════════════════════════════════
+    var sanctumClicks = 0, sanctumTimer = null;
+    function sanctumClick() {
+      sanctumClicks++;
+      var trigger = document.getElementById('sanctum-dot');
+      trigger.style.color = 'rgba(200,160,64,' + (0.06 + sanctumClicks * 0.14) + ')';
+      if (sanctumTimer) clearTimeout(sanctumTimer);
+      sanctumTimer = setTimeout(function() { sanctumClicks = 0; trigger.style.color = 'rgba(200,160,64,0.05)'; }, 1600);
+      if (sanctumClicks >= 3) {
+        sanctumClicks = 0;
+        trigger.style.color = 'rgba(200,160,64,0.05)';
+        window.location.href = 'sanctum.html';
+      }
+    }
+  </script>
+</body>
+</html>

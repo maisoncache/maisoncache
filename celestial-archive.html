@@ -364,6 +364,14 @@
       opacity: 1;
     }
 
+    /* Mobile: always show labels — hover doesn't exist on touch */
+    @media (hover: none), (max-width: 640px) {
+      .star-label { opacity: 1; }
+      .star-node .star-point { width: 12px; height: 12px; }
+      .star-node.featured .star-point { width: 18px; height: 18px; }
+      .star-node.dim .star-point { width: 8px; height: 8px; }
+    }
+
     /* ── LEMON GROVE CARD ── */
     .lemon-grove-card {
       position: fixed;
@@ -622,6 +630,9 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (hover: none), (max-width: 600px) {
+      .desktop-only { display: none; }
+    }
     @media (max-width: 600px) {
       .constellation-map {
         height: min(400px, 55vh);
@@ -684,7 +695,7 @@
 
     <!-- ══ CONSTELLATION MAP ══ -->
     <section class="sky-section">
-      <div class="sky-label">The Archive Sky — hover to discover. click to enter.</div>
+      <div class="sky-label">The Archive Sky — <span class="desktop-only">hover to discover. </span>tap or click to enter.</div>
 
       <div class="constellation-map" id="constellation-map">
 

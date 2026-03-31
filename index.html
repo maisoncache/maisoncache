@@ -196,7 +196,7 @@
       letter-spacing: 0.38em; text-transform: uppercase;
       padding: 1rem 2.8rem; transition: all 0.7s ease; position: relative;
     }
-    .btn:hover { border-color: var(--teal-dim); color: var(--teal-bright); transform: translateY(-2px); }
+    .btn:hover { border-color: var(--teal-dim); color: var(--teal-bright); transform: translateY(-2px); background: rgba(255,255,255,0.03); letter-spacing: 0.42em; }
     .btn--rose { border-color: var(--rose-dim); color: var(--rose-dim); }
     .btn--rose:hover { border-color: rgba(155,52,104,0.8); color: var(--rose); }
 
@@ -321,12 +321,13 @@
 
     .ghost-motif {
       font-size: 1.6rem;
-      color: rgba(176,120,32,0.12);
+      color: rgba(176,120,32,0.35);
       margin-bottom: 1rem;
-      opacity: 0.12;
+      opacity: 0.45;
       transition: all 0.7s ease;
       display: block;
       animation: motifPulse 6s ease-in-out infinite;
+      filter: blur(0.5px);
     }
     .door-ghost:nth-child(2n) .ghost-motif { animation-delay: 1.5s; }
     .door-ghost:nth-child(3n) .ghost-motif { animation-delay: 3s; }
@@ -335,18 +336,19 @@
       font-family: var(--font-italic);
       font-size: 1.1rem;
       font-style: italic;
-      color: rgba(240,224,200,0.18);
-      opacity: 0.18;
+      color: rgba(240,224,200,0.35);
+      opacity: 0.45;
       transition: opacity 0.6s ease;
       margin-bottom: 0.4rem;
       display: block;
+      filter: blur(0.5px);
     }
     .ghost-tag {
       font-family: var(--font-display);
       font-size: 0.52rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(176,120,32,0.15);
+      color: rgba(176,120,32,0.3);
       display: block;
     }
 
@@ -372,11 +374,11 @@
     }
     .oracle-close {
       position: fixed; top: 1.5rem; right: 1.75rem; z-index: 110;
-      background: none; border: none;
+      background: none; border: 1px solid rgba(176,120,32,0.15); border-radius: 2px;
       color: var(--amber-dim);
-      font-family: var(--font-display); font-size: 0.68rem;
+      font-family: var(--font-display); font-size: 0.72rem;
       letter-spacing: 0.22em; text-transform: uppercase;
-      padding: 0.5rem; transition: color 0.4s ease;
+      padding: 0.5rem 1rem; transition: all 0.4s ease;
     }
     .oracle-close:hover { color: var(--teal-bright); }
     .oracle-option {
@@ -472,6 +474,54 @@
       max-width: 380px; width: 90%;
     }
 
+    /* ── VALUE STATEMENT ── */
+    .value-statement {
+      font-family: var(--font-display);
+      font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-mute);
+      max-width: 480px;
+      text-align: center;
+      line-height: 1.9;
+    }
+
+    /* ── HERO NAV ── */
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-nav-link {
+      font-family: var(--font-display);
+      font-size: clamp(0.62rem, 1vw, 0.7rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: all 0.4s ease;
+    }
+    .hero-nav-link:hover { color: var(--teal-bright); border-color: rgba(45,107,94,0.4); }
+    .hero-nav-dot { color: var(--amber-mute); font-size: 0.7rem; }
+
+    /* ── DOOR IMPROVEMENTS ── */
+    .door-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+      color: var(--cream-mute);
+      line-height: 1.6;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .door, .door-ghost { min-height: 120px; padding: 1.8rem 1.2rem; }
+      .hero-nav { gap: 0.8rem; }
+    }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -532,7 +582,17 @@
           looking for the door.
         </p>
 
-        <button class="btn" onclick="document.getElementById('oracle-section').scrollIntoView({behavior:'smooth'})">
+        <p class="value-statement">A moon-led digital house for rituals, recipes, scent, writing, and members-only rooms.</p>
+
+        <div class="hero-nav">
+          <a href="#rooms" class="hero-nav-link">Explore rooms</a>
+          <span class="hero-nav-dot">·</span>
+          <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="hero-nav-link">Join free</a>
+          <span class="hero-nav-dot">·</span>
+          <a href="#oracle-section" class="hero-nav-link">Oracle</a>
+        </div>
+
+        <button class="btn" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">
           Step inside
         </button>
 
@@ -546,6 +606,7 @@
     <!-- ══ ABOUT ══ -->
     <section class="section section--medium">
       <div class="reveal" style="max-width:540px">
+        <p style="font-family:var(--font-display);font-size:clamp(0.65rem,1vw,0.72rem);letter-spacing:0.35em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:1.8rem">What lives here</p>
         <p class="body-text" style="margin-bottom:2.2rem">
           Maison Caché is not a shop.<br>
           It's a house you find when you stop looking.<br>
@@ -582,6 +643,7 @@
             <span class="door-motif">🌺</span>
             <span class="door-name">The Perfume Atelier</span>
             <span class="door-sub">Scent reading</span>
+            <span class="door-desc">Find your fragrance archetype in three questions</span>
           </a>
 
           <!-- OPEN: The Hearth -->
@@ -592,6 +654,7 @@
             <span class="door-motif">🔥</span>
             <span class="door-name">The Hearth</span>
             <span class="door-sub">Kitchen rituals</span>
+            <span class="door-desc">Recipes, hearthcraft & domestic magic by moon cycle</span>
           </a>
 
           <!-- OPEN: The Library -->
@@ -602,6 +665,7 @@
             <span class="door-motif">📚</span>
             <span class="door-name">The Library</span>
             <span class="door-sub">Always open</span>
+            <span class="door-desc">Essays, shelves & seasonal reading — free to browse</span>
           </a>
 
           <!-- OPEN: The Archive (members only) -->
@@ -612,6 +676,7 @@
             <span class="door-motif">✧</span>
             <span class="door-name">The Archive</span>
             <span class="door-sub">Members only</span>
+            <span class="door-desc">Sacred fiction, myth & serialised writing for members</span>
           </a>
 
           <!-- GHOST: The Garden -->
@@ -633,8 +698,16 @@
       </div>
     </section>
 
+    <!-- ══ ORACLE WHISPER ══ -->
+    <div class="reveal" style="text-align:center;padding:3rem 2rem 1rem">
+      <p style="font-family:var(--font-italic);font-style:italic;font-size:0.95rem;color:rgba(240,224,200,0.18);letter-spacing:0.04em;line-height:1.8">
+        The house has one more room. It doesn't announce itself.
+      </p>
+      <div style="margin-top:1.2rem;color:rgba(176,120,32,0.15);font-size:0.9rem;animation:breathe 3.5s infinite ease-in-out">↓</div>
+    </div>
+
     <!-- ══ ORACLE ══ -->
-    <section class="section section--medium" id="oracle-section" style="position:relative">
+    <section class="section section--medium" id="oracle-section" style="position:relative;padding-top:5rem;min-height:auto">
       <div class="inset-border"></div>
       <div class="reveal" style="max-width:480px;position:relative;z-index:1">
         <div class="label" style="margin-bottom:1.8rem">Now open</div>
