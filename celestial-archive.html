@@ -146,6 +146,11 @@
       cursor: crosshair;
     }
     .back-link:hover { color: var(--teal-bright); border-color: var(--teal-dim); }
+    .moon-strip {
+      position: fixed; top: 0.85rem; right: 1rem; z-index: 100;
+      font-family: var(--font-display); font-size: 0.5rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(61,139,122,0.4); pointer-events: none;
+    }
 
     .header-title {
       font-family: var(--font-display);
@@ -362,6 +367,14 @@
 
     .star-node:hover .star-label {
       opacity: 1;
+    }
+
+    /* Mobile: always show labels — hover doesn't exist on touch */
+    @media (hover: none), (max-width: 640px) {
+      .star-label { opacity: 1; }
+      .star-node .star-point { width: 12px; height: 12px; }
+      .star-node.featured .star-point { width: 18px; height: 18px; }
+      .star-node.dim .star-point { width: 8px; height: 8px; }
     }
 
     /* ── LEMON GROVE CARD ── */
@@ -620,8 +633,16 @@
       color: rgba(196,136,42,0.3);
       pointer-events: none;
     }
+    .sanctum-dot {
+      position: fixed; bottom: 0.4rem; left: 0.7rem; z-index: 60;
+      font-size: 0.85rem; color: rgba(200,160,64,0.05);
+      cursor: default; transition: color 0.4s ease; user-select: none;
+    }
 
     /* ── RESPONSIVE ── */
+    @media (hover: none), (max-width: 600px) {
+      .desktop-only { display: none; }
+    }
     @media (max-width: 600px) {
       .constellation-map {
         height: min(400px, 55vh);
@@ -656,6 +677,7 @@
 
   <header class="archive-header">
     <a href="index.html" class="back-link">← The House</a>
+    <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
     <div class="header-title">Celestial Archive</div>
     <div class="member-status">members only</div>
   </header>
@@ -684,7 +706,7 @@
 
     <!-- ══ CONSTELLATION MAP ══ -->
     <section class="sky-section">
-      <div class="sky-label">The Archive Sky — hover to discover. click to enter.</div>
+      <div class="sky-label">The Archive Sky — <span class="desktop-only">hover to discover. </span>tap or click to enter.</div>
 
       <div class="constellation-map" id="constellation-map">
 
@@ -858,6 +880,7 @@
 
   </div>
 
+  <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
   <div id="archive-status">[ archive : breathing ]</div>
 
   <!-- ══ THE LEMON GROVE CARD ══ -->
@@ -1077,6 +1100,21 @@
     console.log('%cYou found the walls.', 'color: rgba(196,136,42,0.7); font-size: 12px; font-style: italic; font-family: Georgia, serif;');
     console.log('%cThe Lemon Grove is the brightest star. It always was.', 'color: rgba(61,139,122,0.5); font-size: 11px; font-style: italic; font-family: Georgia, serif;');
     console.log('%c ', 'font-size:1px');
+
+    // ── SANCTUM TRIGGER ──
+    var sanctumClicks = 0, sanctumTimer = null;
+    function sanctumClick() {
+      sanctumClicks++;
+      var trigger = document.getElementById('sanctum-dot');
+      trigger.style.color = 'rgba(200,160,64,' + (0.06 + sanctumClicks * 0.14) + ')';
+      if (sanctumTimer) clearTimeout(sanctumTimer);
+      sanctumTimer = setTimeout(function() { sanctumClicks = 0; trigger.style.color = 'rgba(200,160,64,0.05)'; }, 1600);
+      if (sanctumClicks >= 3) {
+        sanctumClicks = 0;
+        trigger.style.color = 'rgba(200,160,64,0.05)';
+        window.location.href = 'sanctum.html';
+      }
+    }
 
   </script>
 </body>

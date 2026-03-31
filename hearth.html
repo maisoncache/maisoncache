@@ -44,6 +44,7 @@
       line-height: 1.75;
       overflow-x: hidden;
       min-height: 100vh;
+      cursor: crosshair;
     }
 
     /* ── LAYERS ── */
@@ -82,6 +83,10 @@
     }
     .section--short { min-height: auto; padding: 4rem 2rem; }
     .section--medium { min-height: auto; padding: 5rem 2rem; }
+    @media (min-width: 1024px) {
+      .section { min-height: auto; padding: 5rem 2rem; }
+      .section--medium { padding: 4rem 2rem; }
+    }
 
     /* ── TYPOGRAPHY ── */
     .room-label {
@@ -127,6 +132,23 @@
       font-family: var(--font-cg); font-style: italic; font-size: 0.85rem;
       color: rgba(200,160,64,0.45);
     }
+
+    /* ── HEMISPHERE TOGGLE ── */
+    .hemi-toggle {
+      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+    }
+    .hemi-btn {
+      font-family: var(--font-fellsc); font-size: 0.55rem; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.5rem 1.2rem; min-height: 44px;
+      background: transparent; border: 1px solid rgba(200,160,64,0.12);
+      color: rgba(237,216,184,0.35); cursor: crosshair; transition: all 0.4s;
+      border-radius: 1px;
+    }
+    .hemi-btn.active {
+      border-color: rgba(200,160,64,0.3); color: var(--beeswax);
+      background: rgba(200,160,64,0.05);
+    }
+    .hemi-hidden { display: none; }
 
     /* ── RECIPE CARD ── */
     .recipe-card {
@@ -363,13 +385,7 @@
 
     <!-- ═══ ABOUT ═══ -->
     <section class="section--medium">
-      <div class="reveal" style="max-width:500px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding:0 2rem">
-        <p class="body-text" style="text-align:center">
-          This is the warmest room in the house. The one that smells like something — wood smoke, beeswax, dried lavender, the faint sweetness of something recently baked.
-        </p>
-        <p class="body-text" style="text-align:center">
-          The recipes here are rituals. The food is regulation. Cooking is devotion. You don't need to be perfect. You don't need the right equipment. You just need to begin.
-        </p>
+      <div class="reveal" style="max-width:500px; margin: 0 auto; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding:0 2rem">
         <p class="body-text" style="text-align:center; color:rgba(200,160,64,0.45); font-style:italic">
           The Hearth moves with the moon.<br>
           Each phase, a different recipe. A different practice.<br>
@@ -380,6 +396,13 @@
 
     <!-- ═══ CURRENT PHASE ═══ -->
     <section class="section--medium" id="current">
+
+      <!-- ── HEMISPHERE TOGGLE ── -->
+      <div class="hemi-toggle" id="hemi-toggle">
+        <button class="hemi-btn" id="btn-south" onclick="setHemisphere('south')">🌏 Southern · Autumn</button>
+        <button class="hemi-btn" id="btn-north" onclick="setHemisphere('north')">🌍 Northern · Spring</button>
+      </div>
+
       <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem">
 
         <div class="moon-phase" id="moon-phase-indicator">
@@ -393,23 +416,142 @@
         <div class="recipe-card">
           <div class="recipe-phase-tag">Full Moon · Illuminate</div>
 
-          <p class="intention-line">The feast is the ritual. Set the table with intention. Light every candle you own.</p>
+          <!-- ── SOUTHERN / AUTUMN ── -->
+          <div class="hemi-south">
+            <p class="intention-line">The feast is the ritual. Set the table with intention. Light every candle you own.</p>
 
-          <h2 class="recipe-title">Autumn Feast</h2>
-          <p class="recipe-desc">
-            Slow-roasted lamb shoulder with rosemary, garlic, and red wine. Root vegetables caramelised until their edges go dark and sweet. Crusty bread torn by hand. The meal you make when the house is full and the candles are lit.
-          </p>
+            <h2 class="recipe-title">Autumn Feast</h2>
+            <p class="recipe-desc">
+              Slow-roasted lamb shoulder with rosemary, garlic, and red wine. Root vegetables caramelised until their edges go dark and sweet. Crusty bread torn by hand. The meal you make when the house is full and the candles are lit.
+            </p>
 
-          <div class="divider" style="width:40px; margin:1.5rem 0"></div>
+            <!-- RECIPE META BAR -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin:1.2rem 0 1.5rem;padding:1rem 0.8rem;border:1px solid rgba(200,160,64,0.08);background:rgba(20,12,4,0.4)">
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Serves</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">4–6</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Prep</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">20 min</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Cook</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">3–4 hrs</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Effort</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">Patient</div>
+              </div>
+            </div>
 
-          <p class="body-text" style="max-width:100%">
-            This is the full moon recipe — bold, generous, unapologetic. It feeds more people than you might have at the table. Make it anyway. The leftovers become tomorrow's soup.
-          </p>
+            <div class="divider" style="width:40px; margin:1.5rem 0"></div>
 
-          <p style="font-family:var(--font-cg,Cormorant Garamond,serif); font-style:italic; font-size:0.95rem; color:rgba(200,160,64,0.7); margin-top:1rem; line-height:1.7">
-            Drink pairing: A full-bodied red — Shiraz or Grenache.<br>
-            Or: Spiced chai with honey if the night calls for warmth without wine.
-          </p>
+            <p class="body-text" style="max-width:100%; text-align:left">
+              This is the full moon recipe — bold, generous, unapologetic. It feeds more people than you might have at the table. Make it anyway. The leftovers become tomorrow's soup.
+            </p>
+
+            <div style="margin-top:1.5rem; text-align:left">
+              <p style="font-family:var(--font-fellsc,serif);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.8rem">Ingredients</p>
+              <ul style="font-family:var(--font-cg,serif);font-size:0.95rem;color:rgba(237,216,184,0.7);line-height:1.9;list-style:none;padding:0;margin:0">
+                <li>1.8–2kg bone-in lamb shoulder</li>
+                <li>6 cloves garlic, halved</li>
+                <li>4 sprigs fresh rosemary, plus extra</li>
+                <li>500ml red wine (something you'd also drink)</li>
+                <li>400ml chicken or vegetable stock</li>
+                <li>3 tbsp olive oil</li>
+                <li>Salt, black pepper</li>
+                <li>500g root vegetables — parsnip, carrot, turnip, cut into large pieces</li>
+                <li>1 tbsp honey</li>
+                <li>Good bread, for tearing</li>
+              </ul>
+            </div>
+
+            <div style="margin-top:1.5rem; text-align:left">
+              <p style="font-family:var(--font-fellsc,serif);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.8rem">Method</p>
+              <ol style="font-family:var(--font-cg,serif);font-size:0.95rem;color:rgba(237,216,184,0.7);line-height:1.9;padding-left:1.2rem;margin:0">
+                <li>Score the lamb all over and press a half-clove of garlic and a small sprig of rosemary into each cut. Don't rush this. It matters.</li>
+                <li>Rub the shoulder with olive oil, salt, and pepper until it looks like something worth cooking. Place it in a heavy roasting dish. Pour the wine and stock around it — not over it. Scatter the rosemary.</li>
+                <li>Cover tightly with two layers of foil. Place in a cold oven, then set to 160°C. Let it go for four hours without lifting the foil. The house will smell like something your body remembers.</li>
+                <li>After four hours, remove the foil. Toss the root vegetables with olive oil, honey, salt, and pepper and arrange them around the lamb. Return uncovered for 45 minutes to an hour until the vegetables are dark at the edges and the lamb pulls apart at a touch.</li>
+                <li>Tear the bread. Don't slice it.</li>
+                <li>Rest the lamb for 20 minutes before you serve it. Use this time to light the rest of the candles.</li>
+              </ol>
+              <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(200,160,64,0.4);margin-top:1rem">Serves 4–6. The leftovers become tomorrow's soup.</p>
+            </div>
+
+            <p style="font-family:var(--font-cg,Cormorant Garamond,serif); font-style:italic; font-size:0.95rem; color:rgba(200,160,64,0.7); margin-top:1.5rem; line-height:1.7; text-align:left">
+              Drink pairing: A full-bodied red — Shiraz or Grenache.<br>
+              Or: Spiced chai with honey if the night calls for warmth without wine.
+            </p>
+          </div>
+
+          <!-- ── NORTHERN / SPRING ── -->
+          <div class="hemi-north hemi-hidden">
+            <p class="intention-line">This is a meal that opens like a window. Set the table near it.</p>
+
+            <h2 class="recipe-title">Spring Table</h2>
+            <p class="recipe-desc">
+              Herb-roasted spring lamb with new potatoes, asparagus, and peas. Bright with lemon and fresh herbs. The meal you make when the door is cracked open and the light lasts longer than expected.
+            </p>
+
+            <!-- RECIPE META BAR -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin:1.2rem 0 1.5rem;padding:1rem 0.8rem;border:1px solid rgba(200,160,64,0.08);background:rgba(20,12,4,0.4)">
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Serves</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">4</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Prep</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">30 min</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Cook</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">1–1.5 hrs</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:var(--font-fellsc,serif);font-size:0.48rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.3rem">Effort</div>
+                <div style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.92rem;color:rgba(240,224,200,0.7)">Easy</div>
+              </div>
+            </div>
+
+            <div class="divider" style="width:40px; margin:1.5rem 0"></div>
+
+            <p class="body-text" style="max-width:100%; text-align:left">
+              This is the full moon recipe — light, generous, alive. Make it for the people arriving back into your life after the long dark. Or just for yourself. The full moon in bloom.
+            </p>
+
+            <div style="margin-top:1.5rem; text-align:left">
+              <p style="font-family:var(--font-fellsc,serif);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.8rem">Ingredients</p>
+              <ul style="font-family:var(--font-cg,serif);font-size:0.95rem;color:rgba(237,216,184,0.7);line-height:1.9;list-style:none;padding:0;margin:0">
+                <li>1.5kg bone-in leg or shoulder of lamb</li>
+                <li>1 lemon, zested and juiced</li>
+                <li>4 cloves garlic, crushed</li>
+                <li>Large handful fresh herbs — mint, parsley, oregano, whatever the season is showing you</li>
+                <li>4 tbsp olive oil</li>
+                <li>500g new potatoes, halved</li>
+                <li>1 bunch asparagus, woody ends removed</li>
+                <li>Salt, black pepper</li>
+                <li>Optional: a handful of peas, fresh or frozen</li>
+              </ul>
+            </div>
+
+            <div style="margin-top:1.5rem; text-align:left">
+              <p style="font-family:var(--font-fellsc,serif);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(200,160,64,0.35);margin-bottom:0.8rem">Method</p>
+              <ol style="font-family:var(--font-cg,serif);font-size:0.95rem;color:rgba(237,216,184,0.7);line-height:1.9;padding-left:1.2rem;margin:0">
+                <li>Make a paste with the garlic, lemon zest, herbs, olive oil, salt, and pepper. Score the lamb and work the paste into every cut and across the surface. Let it sit for at least 30 minutes. An hour if you have it. This is not wasted time — it's the beginning of the ritual.</li>
+                <li>Place the new potatoes in a roasting dish, toss with olive oil and salt, and set the lamb on top. Roast at 200°C for 20 minutes to build colour, then reduce to 180°C for 45 minutes to an hour depending on size. You're looking for pink at the centre, not grey.</li>
+                <li>In the last 10 minutes, scatter the asparagus and peas around the lamb. Squeeze the lemon over everything.</li>
+                <li>Rest for 15 minutes before serving. Eat outside if you can. If not, open a window.</li>
+              </ol>
+              <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(200,160,64,0.4);margin-top:1rem">Serves 4. Light and generous. The full moon in bloom.</p>
+            </div>
+
+            <p style="font-family:var(--font-cg,Cormorant Garamond,serif); font-style:italic; font-size:0.95rem; color:rgba(200,160,64,0.7); margin-top:1.5rem; line-height:1.7; text-align:left">
+              Drink pairing: A crisp rosé or a grassy Sauvignon Blanc.<br>
+              Or: Sparkling water with fresh mint and lemon if the evening is still light.
+            </p>
+          </div>
 
           <div style="margin-top:1.5rem">
             <div class="recipe-tier">Full recipe · Free for all</div>
@@ -417,12 +559,21 @@
         </div>
 
         <!-- HEARTHCRAFT PRACTICE -->
-        <div class="practice-card">
+        <div class="practice-card hemi-south">
           <p class="intention-line">Before you cook, clear the surfaces. Wipe down the bench. Light one candle. Stand still for ten seconds. Now begin.</p>
 
           <div class="practice-step">Hearthcraft · Full Moon</div>
           <p class="practice-text">
             The full moon kitchen practice is <em>the abundance audit.</em> Open every cupboard. What do you have? What has been sitting there waiting to be used? The thing pushed to the back of the shelf — that's tonight's ingredient. Nothing is wasted here. The Hearth sees everything in the light.
+          </p>
+        </div>
+
+        <div class="practice-card hemi-north hemi-hidden">
+          <p class="intention-line">Before you cook, open a window. Even briefly. Let the air change. Clear the bench. Light one candle.</p>
+
+          <div class="practice-step">Hearthcraft · Full Moon</div>
+          <p class="practice-text">
+            The full moon kitchen practice is <em>the first window.</em> Look at what's fresh — what's come back. Spring asks you to begin with what's new, not what's left over. Notice what you're reaching for without thinking. That instinct is the practice.
           </p>
         </div>
 
@@ -499,11 +650,19 @@
 
     <!-- ═══ SEASONAL NOTE ═══ -->
     <section class="section--short">
-      <div class="reveal" style="max-width:420px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0 2rem">
-        <div class="room-label" style="color:var(--loam)">🍂 Autumn · Southern Hemisphere</div>
-        <p class="body-text" style="text-align:center; font-style:italic">
-          The house draws inward. Soup season. Heavier scents. Candles lit earlier. The Hearth becomes the centre of everything.
-        </p>
+      <div class="reveal" style="max-width:420px; margin: 0 auto; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1rem; padding:0 2rem">
+        <div class="hemi-south">
+          <div class="room-label" style="color:var(--loam)">🍂 Autumn · Southern Hemisphere</div>
+          <p class="body-text" style="text-align:center; font-style:italic">
+            The house draws inward. Soup season. Heavier scents. Candles lit earlier. The Hearth becomes the centre of everything.
+          </p>
+        </div>
+        <div class="hemi-north hemi-hidden">
+          <div class="room-label" style="color:var(--loam)">🌸 Spring · Northern Hemisphere</div>
+          <p class="body-text" style="text-align:center; font-style:italic">
+            The house opens its windows. Lighter days. Fresh starts. The Hearth moves outward — cook with the door cracked, eat while the light lasts.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -522,10 +681,12 @@
           <div class="archive-item">
             <div class="archive-moon">🌕</div>
             <div class="archive-info">
-              <div class="archive-recipe-name">Autumn Feast — Slow-Roasted Lamb Shoulder</div>
+              <div class="archive-recipe-name hemi-south">Autumn Feast — Slow-Roasted Lamb Shoulder</div>
+              <div class="archive-recipe-name hemi-north hemi-hidden">Spring Table — Herb-Roasted Spring Lamb</div>
               <div class="archive-phase-name">Full Moon · April 2026</div>
             </div>
-            <div class="archive-season">🍂</div>
+            <div class="archive-season hemi-south">🍂</div>
+            <div class="archive-season hemi-north hemi-hidden">🌸</div>
           </div>
           <div class="archive-item">
             <div class="archive-moon">🌖</div>
@@ -549,7 +710,8 @@
               <div class="archive-recipe-name">Pumpkin Soup with Sage Brown Butter</div>
               <div class="archive-phase-name">Waning Crescent · April 2026</div>
             </div>
-            <div class="archive-season">🍂</div>
+            <div class="archive-season hemi-south">🍂</div>
+            <div class="archive-season hemi-north hemi-hidden">🌸</div>
           </div>
           <div class="archive-item">
             <div class="archive-moon">🌑</div>
@@ -557,7 +719,8 @@
               <div class="archive-recipe-name">Simple Dhal with Rice — One-Pot Reset</div>
               <div class="archive-phase-name">New Moon · April 2026</div>
             </div>
-            <div class="archive-season">🍂</div>
+            <div class="archive-season hemi-south">🍂</div>
+            <div class="archive-season hemi-north hemi-hidden">🌸</div>
           </div>
           <div class="archive-item">
             <div class="archive-moon">🌒</div>
@@ -617,7 +780,7 @@
 
     <!-- ═══ JOIN THE HOUSE ═══ -->
     <section class="section--short">
-      <div class="reveal" style="max-width:440px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.2rem">
+      <div class="reveal" style="max-width:440px; margin: 0 auto; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.2rem">
         <p class="intention-line" style="max-width:360px">The full Hearth cycle — all eight recipes with ingredients and method, hearthcraft practices, and expanded rituals — lives in The Inner House.</p>
         <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" style="font-family:var(--font-cinzel); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--beeswax); text-decoration:none; border:1px solid rgba(200,160,64,0.25); padding:0.7rem 2rem; transition:all 0.4s">Join the house</a>
         <p style="font-family:var(--font-fellsc); font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(200,160,64,0.2)">$5/month · The Inner House</p>
@@ -697,6 +860,26 @@
         window.location.href = 'sanctum.html';
       }
     }
+
+    // ── HEMISPHERE TOGGLE ──
+    function setHemisphere(hemi) {
+      document.querySelectorAll('.hemi-south, .hemi-north').forEach(el => {
+        el.classList.add('hemi-hidden');
+      });
+      document.querySelectorAll('.hemi-' + hemi).forEach(el => {
+        el.classList.remove('hemi-hidden');
+      });
+      document.getElementById('btn-south').classList.toggle('active', hemi === 'south');
+      document.getElementById('btn-north').classList.toggle('active', hemi === 'north');
+      localStorage.setItem('mc-hemisphere', hemi);
+    }
+
+    (function() {
+      const saved = localStorage.getItem('mc-hemisphere');
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const detected = /Australia|Auckland|Antarctica/i.test(tz) ? 'south' : 'north';
+      setHemisphere(saved || detected);
+    })();
   </script>
 </body>
 </html>

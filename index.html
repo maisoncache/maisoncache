@@ -132,6 +132,10 @@
     }
     .section--short  { min-height: 55vh; }
     .section--medium { min-height: 75vh; }
+    @media (min-width: 1024px) {
+      .section { min-height: auto; padding: 5rem 2rem; }
+      .section--medium { min-height: auto; padding: 4rem 2rem; }
+    }
 
     .reveal { transition: opacity 1.5s ease, transform 1.5s ease; }
     .reveal.will-animate { opacity: 0; transform: translateY(28px); }
@@ -296,6 +300,13 @@
       font-family: var(--font-display); font-size: 0.52rem;
       letter-spacing: 0.28em; text-transform: uppercase;
       color: rgba(45,107,94,0.55);
+    }
+    .door-tag-members {
+      position: absolute; top: -0.6rem; left: 50%; transform: translateX(-50%);
+      background: var(--bg); padding: 0 0.7rem;
+      font-family: var(--font-display); font-size: 0.52rem;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(155,52,104,0.55);
     }
 
     /* GHOST DOOR — outline only, coming soon */
@@ -474,6 +485,54 @@
       max-width: 380px; width: 90%;
     }
 
+    /* ── VALUE STATEMENT ── */
+    .value-statement {
+      font-family: var(--font-display);
+      font-size: clamp(0.68rem, 1.1vw, 0.78rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-mute);
+      max-width: 480px;
+      text-align: center;
+      line-height: 1.9;
+    }
+
+    /* ── HERO NAV ── */
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hero-nav-link {
+      font-family: var(--font-display);
+      font-size: clamp(0.62rem, 1vw, 0.7rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber-dim);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: all 0.4s ease;
+    }
+    .hero-nav-link:hover { color: var(--teal-bright); border-color: rgba(45,107,94,0.4); }
+    .hero-nav-dot { color: var(--amber-mute); font-size: 0.7rem; }
+
+    /* ── DOOR IMPROVEMENTS ── */
+    .door-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+      color: var(--cream-mute);
+      line-height: 1.6;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .door, .door-ghost { min-height: 120px; padding: 1.8rem 1.2rem; }
+      .hero-nav { gap: 0.8rem; }
+    }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -528,11 +587,16 @@
           <div class="divider" style="width:50px"></div>
         </div>
 
-        <p class="tagline">
-          A sanctuary for dreamers.<br>
-          For the ones who never stopped<br>
-          looking for the door.
-        </p>
+
+        <p class="value-statement">A moon-led digital house for rituals, recipes, scent, writing, and members-only rooms.</p>
+
+        <div class="hero-nav">
+          <a href="#rooms" class="hero-nav-link">Explore rooms</a>
+          <span class="hero-nav-dot">·</span>
+          <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="hero-nav-link">Join free</a>
+          <span class="hero-nav-dot">·</span>
+          <a href="#oracle-section" class="hero-nav-link">Oracle</a>
+        </div>
 
         <button class="btn" onclick="document.getElementById('rooms').scrollIntoView({behavior:'smooth'})">
           Step inside
@@ -547,13 +611,13 @@
 
     <!-- ══ ABOUT ══ -->
     <section class="section section--medium">
-      <div class="reveal" style="max-width:540px">
+      <div class="reveal" style="max-width:540px; margin: 0 auto;">
+        <p style="font-family:var(--font-display);font-size:clamp(0.65rem,1vw,0.72rem);letter-spacing:0.35em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:1.8rem">What lives here</p>
         <p class="body-text" style="margin-bottom:2.2rem">
           Maison Caché is not a shop.<br>
           It's a house you find when you stop looking.<br>
           Every room holds something different —<br>
-          a scent reading, a wolf note, a library that never closes.<br>
-          You don't browse here. You <em style="color:var(--rose-dim)">feel</em> here.
+          a scent reading, a wolf note, a library that never closes.
         </p>
         <div class="divider" style="width:50px;margin-bottom:2.2rem"></div>
         <p style="font-family:var(--font-italic);font-size:clamp(1rem,1.9vw,1.2rem);color:var(--amber-dim);font-style:italic;line-height:1.9">
@@ -564,7 +628,7 @@
 
     <!-- ══ THE DOORS ══ -->
     <section class="section section--medium" id="rooms">
-      <div class="reveal" style="max-width:820px;width:100%">
+      <div class="reveal" style="max-width:820px; margin: 0 auto;width:100%">
 
         <div class="label" style="margin-bottom:1.5rem">The rooms of the house</div>
 
@@ -584,6 +648,7 @@
             <span class="door-motif">🌺</span>
             <span class="door-name">The Perfume Atelier</span>
             <span class="door-sub">Scent reading</span>
+            <span class="door-desc">Find your fragrance archetype in three questions</span>
           </a>
 
           <!-- OPEN: The Hearth -->
@@ -594,6 +659,7 @@
             <span class="door-motif">🔥</span>
             <span class="door-name">The Hearth</span>
             <span class="door-sub">Kitchen rituals</span>
+            <span class="door-desc">Recipes, hearthcraft & domestic magic by moon cycle</span>
           </a>
 
           <!-- OPEN: The Library -->
@@ -604,16 +670,18 @@
             <span class="door-motif">📚</span>
             <span class="door-name">The Library</span>
             <span class="door-sub">Always open</span>
+            <span class="door-desc">Essays, shelves & seasonal reading — free to browse</span>
           </a>
 
           <!-- OPEN: The Archive (members only) -->
           <a href="celestial-archive.html" class="door"
-             onmouseenter="setStatus('the celestial archive — open')"
+             onmouseenter="setStatus('the celestial archive — members')"
              onmouseleave="setStatus('listening')">
-            <div class="door-tag-open">open now</div>
+            <div class="door-tag-members">members</div>
             <span class="door-motif">✧</span>
             <span class="door-name">The Archive</span>
             <span class="door-sub">Members only</span>
+            <span class="door-desc">Sacred fiction, myth & serialised writing for members</span>
           </a>
 
           <!-- GHOST: The Garden -->
@@ -646,7 +714,7 @@
     <!-- ══ ORACLE ══ -->
     <section class="section section--medium" id="oracle-section" style="position:relative;padding-top:5rem;min-height:auto">
       <div class="inset-border"></div>
-      <div class="reveal" style="max-width:480px;position:relative;z-index:1">
+      <div class="reveal" style="max-width:480px; margin: 0 auto;position:relative;z-index:1">
         <div class="label" style="margin-bottom:1.8rem">Now open</div>
         <h2 style="font-family:var(--font-italic);font-size:clamp(2rem,5vw,3rem);font-style:italic;font-weight:300;color:var(--cream);margin-bottom:1.2rem">The Oracle</h2>
         <div class="divider" style="width:44px;margin-bottom:2rem"></div>
@@ -665,12 +733,12 @@
 
     <!-- ══ REMEMBER ME ══ -->
     <section class="section section--short">
-      <div class="reveal" style="max-width:440px" id="remember-section">
+      <div class="reveal" style="max-width:440px; margin: 0 auto;" id="remember-section">
         <div id="remember-form">
           <div class="label" style="margin-bottom:1.5rem">The house sends letters</div>
           <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(1.05rem,2vw,1.25rem)">
             Every time the moon shifts, a letter arrives.<br>
-            Recipes, rituals, playlists, and a prompt from the Sanctum.<br>
+            Recipes, rituals, playlists, and a seasonal prompt.<br>
             Free to join. The deeper rooms are $5/month for those who stay.
           </p>
           <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">
