@@ -132,6 +132,10 @@
     }
     .section--short  { min-height: 55vh; }
     .section--medium { min-height: 75vh; }
+    @media (min-width: 1024px) {
+      .section { min-height: auto; padding: 5rem 2rem; }
+      .section--medium { min-height: auto; padding: 4rem 2rem; }
+    }
 
     .reveal { transition: opacity 1.5s ease, transform 1.5s ease; }
     .reveal.will-animate { opacity: 0; transform: translateY(28px); }
@@ -296,6 +300,13 @@
       font-family: var(--font-display); font-size: 0.52rem;
       letter-spacing: 0.28em; text-transform: uppercase;
       color: rgba(45,107,94,0.55);
+    }
+    .door-tag-members {
+      position: absolute; top: -0.6rem; left: 50%; transform: translateX(-50%);
+      background: var(--bg); padding: 0 0.7rem;
+      font-family: var(--font-display); font-size: 0.52rem;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(155,52,104,0.55);
     }
 
     /* GHOST DOOR — outline only, coming soon */
@@ -576,11 +587,6 @@
           <div class="divider" style="width:50px"></div>
         </div>
 
-        <p class="tagline">
-          A sanctuary for dreamers.<br>
-          For the ones who never stopped<br>
-          looking for the door.
-        </p>
 
         <p class="value-statement">A moon-led digital house for rituals, recipes, scent, writing, and members-only rooms.</p>
 
@@ -611,8 +617,7 @@
           Maison Caché is not a shop.<br>
           It's a house you find when you stop looking.<br>
           Every room holds something different —<br>
-          a scent reading, a wolf note, a library that never closes.<br>
-          You don't browse here. You <em style="color:var(--rose-dim)">feel</em> here.
+          a scent reading, a wolf note, a library that never closes.
         </p>
         <div class="divider" style="width:50px;margin-bottom:2.2rem"></div>
         <p style="font-family:var(--font-italic);font-size:clamp(1rem,1.9vw,1.2rem);color:var(--amber-dim);font-style:italic;line-height:1.9">
@@ -670,9 +675,9 @@
 
           <!-- OPEN: The Archive (members only) -->
           <a href="celestial-archive.html" class="door"
-             onmouseenter="setStatus('the celestial archive — open')"
+             onmouseenter="setStatus('the celestial archive — members')"
              onmouseleave="setStatus('listening')">
-            <div class="door-tag-open">open now</div>
+            <div class="door-tag-members">members</div>
             <span class="door-motif">✧</span>
             <span class="door-name">The Archive</span>
             <span class="door-sub">Members only</span>
@@ -733,7 +738,7 @@
           <div class="label" style="margin-bottom:1.5rem">The house sends letters</div>
           <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(1.05rem,2vw,1.25rem)">
             Every time the moon shifts, a letter arrives.<br>
-            Recipes, rituals, playlists, and a prompt from the Sanctum.<br>
+            Recipes, rituals, playlists, and a seasonal prompt.<br>
             Free to join. The deeper rooms are $5/month for those who stay.
           </p>
           <div style="display:flex;flex-direction:column;gap:1rem;align-items:center">

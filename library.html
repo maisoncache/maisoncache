@@ -164,6 +164,10 @@
     }
     .section--short { min-height: 60vh; }
     .section--medium { min-height: 75vh; }
+    @media (min-width: 1024px) {
+      .section { min-height: auto; padding: 5rem 2rem; }
+      .section--medium { min-height: auto; padding: 4rem 2rem; }
+    }
 
     .reveal { transition: opacity 1.6s ease, transform 1.6s ease; }
     .reveal.will-animate { opacity: 0; transform: translateY(28px); }
