@@ -558,6 +558,23 @@
           radial-gradient(50% 40% at 50% 50%, rgba(55, 12, 75, 0.30) 0%, transparent 60%);
         animation: none;
       }
+      /* Static title — gradient clip unreliable on mobile, kill shimmer and glow */
+      .house-name {
+        animation: none;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+      }
+      .house-name .shimmer {
+        background: none;
+        -webkit-background-clip: unset;
+        -webkit-text-fill-color: var(--cream);
+        background-clip: unset;
+        animation: none;
+      }
+      /* Kill hero-orb pulse — one less animated layer behind the text */
+      .hero-orb {
+        animation: none;
+        opacity: 0.5;
+      }
     }
   </style>
 </head>
