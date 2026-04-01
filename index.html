@@ -545,6 +545,20 @@
       outline: 2px solid var(--teal-bright, #5ab89a);
       outline-offset: 2px;
     }
+
+    @media (max-width: 768px) {
+      body {
+        background-color: #130920;
+      }
+      .atmo-aurora {
+        background:
+          radial-gradient(90% 70% at 20% 35%, rgba(80, 20, 105, 0.85) 0%, transparent 55%),
+          radial-gradient(75% 60% at 80% 20%, rgba(75, 18, 98, 0.70) 0%, transparent 50%),
+          radial-gradient(80% 90% at 50% 100%, rgba(70, 15, 90, 0.60) 0%, transparent 55%),
+          radial-gradient(50% 40% at 50% 50%, rgba(55, 12, 75, 0.30) 0%, transparent 60%);
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
