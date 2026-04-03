@@ -640,20 +640,20 @@
     <section class="section" id="rooms-section">
       <div class="reveal" style="max-width:760px; margin: 0 auto;width:100%">
         <div class="label" style="margin-bottom:0.8rem">The eight rooms</div>
-        <p style="font-family:var(--font-italic);font-style:italic;font-size:0.88rem;color:rgba(45,107,94,0.6);letter-spacing:0.08em;margin-bottom:2rem">2 rooms open now · 6 rooms forming</p>
+        <p style="font-family:var(--font-italic);font-style:italic;font-size:0.88rem;color:rgba(45,107,94,0.6);letter-spacing:0.08em;margin-bottom:2rem">2 rooms live · 6 rooms forming</p>
 
         <div class="rooms-grid">
 
           <div class="room-cell open" role="button" tabindex="0"
-               aria-label="Open The Ritual Space"
-               onclick="openRoom('ritual')"
-               onkeydown="if(event.key==='Enter')openRoom('ritual')"
-               onmouseenter="setStatus('the ritual space — open')"
+               aria-label="Join to access The Ritual Space"
+               onclick="window.open('https://maison-cache.ghost.io/#/portal/signup', '_blank')"
+               onkeydown="if(event.key==='Enter')window.open('https://maison-cache.ghost.io/#/portal/signup','_blank')"
+               onmouseenter="setStatus('the ritual space — members only')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🕯</span>
             <span class="room-cell-name">The Ritual Space</span>
             <span class="room-cell-sub">Moon phase prompts. The entry room.</span>
-            <span class="room-cell-status">open</span>
+            <span class="room-cell-status">members</span>
           </div>
 
           <div class="room-cell shadow"
@@ -693,15 +693,15 @@
           </div>
 
           <div class="room-cell open" role="button" tabindex="0"
-               aria-label="Open The Codex"
-               onclick="window.location.href='codex.html'"
-               onkeydown="if(event.key==='Enter')window.location.href='codex.html'"
-               onmouseenter="setStatus('the codex — open')"
+               aria-label="Join to access The Codex"
+               onclick="window.open('https://maison-cache.ghost.io/#/portal/signup', '_blank')"
+               onkeydown="if(event.key==='Enter')window.open('https://maison-cache.ghost.io/#/portal/signup','_blank')"
+               onmouseenter="setStatus('the codex — members only')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">📜</span>
             <span class="room-cell-name">The Codex</span>
             <span class="room-cell-sub">Scene generator. Browse by mood.</span>
-            <span class="room-cell-status">open</span>
+            <span class="room-cell-status">members</span>
           </div>
 
           <div class="room-cell shadow"
