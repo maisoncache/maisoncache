@@ -509,6 +509,39 @@
       outline: 2px solid var(--amber, #b07010);
       outline-offset: 2px;
     }
+
+    /* ── BOOK HOVER TOOLTIP ── */
+    .book {
+      position: relative;
+    }
+    .book-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      background: rgba(8, 5, 8, 0.97);
+      border: 1px solid rgba(45, 107, 94, 0.2);
+      border-bottom: 2px solid rgba(45, 107, 94, 0.35);
+      padding: 0.8rem 1rem;
+      font-family: 'Cormorant Infant', serif;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: rgba(45, 107, 94, 0.75);
+      line-height: 1.7;
+      text-align: center;
+      writing-mode: horizontal-tb;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 50;
+      white-space: normal;
+    }
+    .book:hover .book-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body>
@@ -655,7 +688,7 @@
       <span id="house-status-msg">house: the library</span>
     </div>
     <div id="house-status-right">
-      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span id="house-status-phase">🌕 full moon</span>
       <span style="opacity:0.3">·</span>
       <span id="house-status-time">--:--</span>
     </div>
@@ -781,12 +814,12 @@
       if (books.length === 0) {
         container.innerHTML = '';
         const noResultMessages = [
-          "The library doesn't hold that title yet. Perhaps it will.",
-          "That book belongs in a different house.",
-          "It was here once. Then it wasn't.",
-          "Ask again at the new moon.",
-          "The shelves heard you. They're thinking.",
-          "Not yet. But the house remembers you looked."
+          `The library doesn't hold that title yet.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">Perhaps it will.</span>`,
+          `That book belongs in a different house.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">Or hasn't arrived yet.</span>`,
+          `It was here once. Then it wasn't.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">The shelves are quiet on that.</span>`,
+          `Ask again at the new moon.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">The house has its own timing.</span>`,
+          `The shelves heard you.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">They're thinking.</span>`,
+          `Not yet.<br><span style="font-size:0.85rem;color:rgba(176,112,16,0.3)">But the house remembers you looked.</span>`
         ];
         noResults.innerHTML = noResultMessages[Math.floor(Math.random() * noResultMessages.length)];
         noResults.style.display = 'block';
@@ -814,10 +847,11 @@
                      onclick="openBook(${book.id})"
                      onkeydown="if(event.key==='Enter')openBook(${book.id})"
                      onmouseenter="setStatus('${book.title.toLowerCase().substring(0,30)}')"
-                     onmouseleave="setStatus('open')">
+                     onmouseleave="setStatus('browsing')">
                   <div class="book-spine" style="background:linear-gradient(to right, ${book.color} 0%, ${book.spine} 60%, rgba(0,0,0,0.4) 100%)">
                     <span class="book-title-text">${book.title}</span>
                   </div>
+                  ${book.fragment ? `<div class="book-tooltip">${book.fragment}</div>` : ''}
                 </div>
               `;
             }).join('')}
