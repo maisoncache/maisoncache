@@ -55,7 +55,6 @@
       overflow-x: hidden;
       cursor: crosshair;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 2rem;
     }
 
     ::selection { background: rgba(107,31,58,0.45); color: var(--cream); }
@@ -138,11 +137,6 @@
       transition: all 0.4s ease;
     }
     .back-link:hover { color: var(--teal-bright); border-color: var(--teal-dim); }
-    .moon-strip {
-      position: fixed; top: 0.85rem; right: 1rem; z-index: 100;
-      font-family: var(--font-display); font-size: 0.5rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(176,120,32,0.38); pointer-events: none;
-    }
     .header-name {
       font-family: var(--font-fraktur); font-size: 1.1rem;
       color: rgba(240,224,200,0.22); letter-spacing: 0.05em;
@@ -214,10 +208,6 @@
       text-align: center; padding: 6rem 2rem 4rem; position: relative;
     }
     .section--short { min-height: 60vh; }
-    @media (min-width: 1024px) {
-      .section { min-height: auto; padding: 5rem 2rem; }
-      .section--short { min-height: auto; }
-    }
 
     .reveal { opacity: 1; transform: none; transition: opacity 1.6s ease, transform 1.6s ease; }
     .reveal.will-animate { opacity: 0; transform: translateY(28px); }
@@ -453,49 +443,12 @@
       animation: breathe 3.5s infinite ease-in-out;
     }
 
-    /* ── STATUS BAR ── */
-    #house-status {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 60;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.35rem 1.5rem;
-      background: rgba(7, 4, 12, 0.96);
-      border-top: 1px solid rgba(45, 107, 94, 0.2);
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: lowercase;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    #house-status-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: #3d8b7a;
-      opacity: 0.7;
-    }
-    #house-status-right {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      color: rgba(240, 224, 200, 0.2);
-      font-size: 0.55rem;
-    }
-    .status-dot {
-      display: inline-block;
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #3d8b7a;
-      animation: statusPulse 3s ease-in-out infinite;
-    }
-    @keyframes statusPulse {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50%       { opacity: 1;   transform: scale(1.4); }
+    /* ── STATUS ── */
+    #sanctum-status {
+      position: fixed; bottom: 0.5rem; right: 0.8rem; z-index: 60;
+      font-family: var(--font-display); font-size: 0.54rem;
+      letter-spacing: 0.16em; text-transform: lowercase;
+      color: rgba(155,52,104,0.28); pointer-events: none;
     }
 
     /* ── CANDLE ROW ── */
@@ -565,7 +518,6 @@
 
     <header class="sanctum-header">
       <a href="index.html" class="back-link">← The House</a>
-      <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
       <div class="header-name">The Sanctum</div>
       <div class="header-note">18+ only</div>
     </header>
@@ -629,7 +581,7 @@
 
     <!-- ══ WOLF NOTE ══ -->
     <section class="section section--short">
-      <div class="reveal" style="max-width:520px; margin: 0 auto;width:100%">
+      <div class="reveal" style="max-width:520px;width:100%">
         <div class="wolf-note-box">
           <p class="wolf-note-text" id="wolf-note-text"></p>
         </div>
@@ -638,7 +590,7 @@
 
     <!-- ══ EIGHT ROOMS ══ -->
     <section class="section" id="rooms-section">
-      <div class="reveal" style="max-width:760px; margin: 0 auto;width:100%">
+      <div class="reveal" style="max-width:760px;width:100%">
         <div class="label" style="margin-bottom:0.8rem">The eight rooms</div>
         <p style="font-family:var(--font-italic);font-style:italic;font-size:0.88rem;color:rgba(45,107,94,0.6);letter-spacing:0.08em;margin-bottom:2rem">2 rooms live · 6 rooms forming</p>
 
@@ -733,7 +685,7 @@
 
     <!-- ══ HOLD MY PLACE ══ -->
     <section class="section section--short">
-      <div class="reveal" style="max-width:440px; margin: 0 auto;">
+      <div class="reveal" style="max-width:440px">
         <div class="label" style="margin-bottom:1.5rem">Hold my place</div>
           <p class="body-text" style="margin-bottom:1.8rem;font-size:clamp(1.05rem,2vw,1.25rem)">
             The rooms open when they're ready.<br>
@@ -767,62 +719,14 @@
     <div class="room-overlay-inner" id="room-content"></div>
   </div>
 
-  <div id="sanctum-whisper" style="
-    position: fixed; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 500; pointer-events: none;
-    text-align: center; opacity: 0;
-    transition: opacity 2s ease;
-    max-width: 360px; width: 90%;
-  ">
-    <p style="
-      font-family: 'Cormorant Infant', serif;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      font-style: italic;
-      color: rgba(155, 52, 104, 0.8);
-      line-height: 2;
-      letter-spacing: 0.04em;
-    ">You went deeper.<br>
-    <span style="color: rgba(45,107,94,0.6)">The house noticed.</span></p>
-    <div style="
-      margin-top: 1.2rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      color: rgba(155,52,104,0.3);
-      text-transform: uppercase;
-    ">It always does</div>
-  </div>
-
-  <div id="house-status">
-    <div id="house-status-left">
-      <span class="status-dot"></span>
-      <span id="house-status-msg">house: the sanctum</span>
-    </div>
-    <div id="house-status-right">
-      <span id="house-status-phase">🌖 waning gibbous</span>
-      <span style="opacity:0.3">·</span>
-      <span id="house-status-time">--:--</span>
-    </div>
-  </div>
+  <div id="sanctum-status">[ sanctum : waiting ]</div>
 
   <script>
     // ── STATUS ──
     function setStatus(text) {
-      const msg = document.getElementById('house-status-msg');
-      if (msg) msg.textContent = 'house: ' + text;
+      const el = document.getElementById('sanctum-status');
+      if (el) el.textContent = `[ sanctum : ${text} ]`;
     }
-
-    function updateStatusClock() {
-      const el = document.getElementById('house-status-time');
-      if (!el) return;
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      el.textContent = h + ':' + m;
-    }
-    updateStatusClock();
-    setInterval(updateStatusClock, 30000);
 
     // ── AGE GATE ──
     function enterSanctum() {
@@ -1029,37 +933,6 @@
       document.body.style.overflow = '';
       setStatus('the basement breathes');
     }
-
-    // ── EASTER EGG: TYPE "descend" ──
-    (function() {
-      const secret = 'descend';
-      let typed = '';
-      let whisperTimeout = null;
-
-      document.addEventListener('keydown', function(e) {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        typed += e.key.toLowerCase();
-        if (typed.length > secret.length) typed = typed.slice(-secret.length);
-
-        if (typed === secret) {
-          typed = '';
-          const aurora = document.querySelector('.atmo-aurora');
-          if (aurora) {
-            aurora.style.transition = 'filter 2.5s ease';
-            aurora.style.filter = 'hue-rotate(-30deg) saturate(1.4) brightness(1.2)';
-            setTimeout(() => { aurora.style.filter = ''; }, 5000);
-          }
-          setStatus('you went deeper');
-          setTimeout(() => setStatus('the sanctum'), 5500);
-          const whisper = document.getElementById('sanctum-whisper');
-          if (whisper) {
-            whisper.style.opacity = '1';
-            if (whisperTimeout) clearTimeout(whisperTimeout);
-            whisperTimeout = setTimeout(() => { whisper.style.opacity = '0'; }, 5000);
-          }
-        }
-      });
-    })();
 
   </script>
 </body>
