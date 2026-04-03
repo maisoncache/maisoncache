@@ -45,6 +45,7 @@
       overflow-x: hidden;
       min-height: 100vh;
       cursor: crosshair;
+      padding-bottom: 2rem;
     }
 
     /* ── LAYERS ── */
@@ -283,11 +284,49 @@
       z-index: 5; pointer-events: none; opacity: 0.35;
     }
 
-    /* ── HOUSE STATUS ── */
-    .house-status {
-      position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
-      font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
-      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
+    /* ── STATUS BAR ── */
+    #house-status {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 60;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 1.5rem;
+      background: rgba(7, 4, 12, 0.96);
+      border-top: 1px solid rgba(45, 107, 94, 0.2);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #house-status-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #3d8b7a;
+      opacity: 0.7;
+    }
+    #house-status-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(240, 224, 200, 0.2);
+      font-size: 0.55rem;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #3d8b7a;
+      animation: statusPulse 3s ease-in-out infinite;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
     }
 
     /* ── SANCTUM TRIGGER ── */
@@ -323,6 +362,10 @@
       .reveal { opacity: 1; transform: none; }
     }
     a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--beeswax); outline-offset: 2px; }
+    @keyframes idleNoteIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
   </style>
 </head>
 <body>
@@ -334,7 +377,17 @@
 
   <a class="nav-back" href="index.html">← The House</a>
   <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
-  <div class="house-status" id="house-status">[ hearth : lit ]</div>
+  <div id="house-status">
+    <div id="house-status-left">
+      <span class="status-dot"></span>
+      <span id="house-status-msg">house: the hearth</span>
+    </div>
+    <div id="house-status-right">
+      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span style="opacity:0.3">·</span>
+      <span id="house-status-time">--:--</span>
+    </div>
+  </div>
 
   <!-- CANDLE CLUSTER -->
   <svg class="candle-cluster" width="120" height="80" viewBox="0 0 120 80" fill="none" aria-hidden="true">
@@ -477,6 +530,27 @@
                 <li>Tear the bread. Don't slice it.</li>
                 <li>Rest the lamb for 20 minutes before you serve it. Use this time to light the rest of the candles.</li>
               </ol>
+
+              <div id="idle-note" style="
+                display: none;
+                margin: 2rem auto;
+                max-width: 420px;
+                padding: 1.5rem 1.8rem;
+                border-left: 2px solid rgba(45,107,94,0.4);
+                background: rgba(45,107,94,0.03);
+                animation: idleNoteIn 1.5s ease forwards;
+              ">
+                <p style="
+                  font-family: 'Cormorant Infant', serif;
+                  font-size: 1rem;
+                  font-style: italic;
+                  color: rgba(45,107,94,0.75);
+                  line-height: 1.9;
+                  margin: 0;
+                ">You're still here. Good.<br>The lamb rewards patience.<br>
+                <span style="color: rgba(45,107,94,0.4); font-size: 0.85rem;">— the hearth</span></p>
+              </div>
+
               <p style="font-family:var(--font-cg,serif);font-style:italic;font-size:0.88rem;color:rgba(200,160,64,0.4);margin-top:1rem">Serves 4–6. The leftovers become tomorrow's soup.</p>
             </div>
 
@@ -828,8 +902,21 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // ── HOUSE STATUS ──
-    const statusEl = document.getElementById('house-status');
-    function setStatus(text) { if (statusEl) statusEl.textContent = `[ hearth : ${text} ]`; }
+    function setStatus(text) {
+      const msg = document.getElementById('house-status-msg');
+      if (msg) msg.textContent = 'house: ' + text;
+    }
+
+    function updateStatusClock() {
+      const el = document.getElementById('house-status-time');
+      if (!el) return;
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      el.textContent = h + ':' + m;
+    }
+    updateStatusClock();
+    setInterval(updateStatusClock, 30000);
 
     document.querySelectorAll('.cycle-item').forEach(el => {
       el.addEventListener('mouseenter', () => setStatus('the fire shifts'));
@@ -879,6 +966,35 @@
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const detected = /Australia|Auckland|Antarctica/i.test(tz) ? 'south' : 'north';
       setHemisphere(saved || detected);
+    })();
+
+    // ── IDLE REVEAL ──
+    (function() {
+      let idleTimer = null;
+      let hasShown = false;
+
+      function showIdleNote() {
+        if (hasShown) return;
+        hasShown = true;
+        const note = document.getElementById('idle-note');
+        if (!note) return;
+        note.style.display = 'block';
+        setTimeout(() => {
+          note.style.transition = 'opacity 3s ease';
+          note.style.opacity = '0';
+          setTimeout(() => { note.style.display = 'none'; }, 3000);
+        }, 20000);
+      }
+
+      function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        if (!hasShown) {
+          idleTimer = setTimeout(showIdleNote, 180000);
+        }
+      }
+
+      resetIdleTimer();
+      window.addEventListener('scroll', resetIdleTimer, { passive: true });
     })();
   </script>
 </body>

@@ -44,6 +44,7 @@
       overflow-x: hidden;
       min-height: 100vh;
       cursor: crosshair;
+      padding-bottom: 2rem;
     }
     ::selection { background: rgba(196,98,45,0.4); color: var(--linen); }
     ::-webkit-scrollbar { width: 2px; }
@@ -126,10 +127,49 @@
     }
     .btn:hover { border-color: var(--ember); color: var(--ember); }
 
-    .house-status {
-      position: fixed; bottom: 0.45rem; right: 0.7rem; z-index: 60;
-      font-family: var(--font-fellsc); font-size: 0.56rem; letter-spacing: 0.16em;
-      text-transform: lowercase; color: rgba(200,160,64,0.34); pointer-events: none;
+    /* ── STATUS BAR ── */
+    #house-status {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 60;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 1.5rem;
+      background: rgba(7, 4, 12, 0.96);
+      border-top: 1px solid rgba(45, 107, 94, 0.2);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #house-status-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #3d8b7a;
+      opacity: 0.7;
+    }
+    #house-status-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(240, 224, 200, 0.2);
+      font-size: 0.55rem;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #3d8b7a;
+      animation: statusPulse 3s ease-in-out infinite;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
     }
     .sanctum-dot {
       position: fixed; bottom: 0.6rem; left: 0.7rem; z-index: 60;
@@ -255,7 +295,17 @@
   <a class="nav-back" href="index.html">← The House</a>
   <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
   <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
-  <div class="house-status" id="house-status">[ atelier : listening ]</div>
+  <div id="house-status">
+    <div id="house-status-left">
+      <span class="status-dot"></span>
+      <span id="house-status-msg">house: the atelier</span>
+    </div>
+    <div id="house-status-right">
+      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span style="opacity:0.3">·</span>
+      <span id="house-status-time">--:--</span>
+    </div>
+  </div>
 
   <div class="content">
 
@@ -718,8 +768,21 @@
     // ══════════════════════════════════════════
     // HOUSE STATUS
     // ══════════════════════════════════════════
-    var statusEl = document.getElementById('house-status');
-    function setStatus(text) { if (statusEl) statusEl.textContent = '[ atelier : ' + text + ' ]'; }
+    function setStatus(text) {
+      const msg = document.getElementById('house-status-msg');
+      if (msg) msg.textContent = 'house: ' + text;
+    }
+
+    function updateStatusClock() {
+      const el = document.getElementById('house-status-time');
+      if (!el) return;
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      el.textContent = h + ':' + m;
+    }
+    updateStatusClock();
+    setInterval(updateStatusClock, 30000);
 
     document.querySelectorAll('.connection-card').forEach(function(el) {
       el.addEventListener('mouseenter', function() { setStatus('another door'); });

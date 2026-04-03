@@ -57,6 +57,7 @@
       overflow-x: hidden;
       cursor: crosshair;
       -webkit-font-smoothing: antialiased;
+      padding-bottom: 2rem;
     }
 
     ::selection { background: rgba(107,31,58,0.4); color: var(--cream); }
@@ -621,17 +622,48 @@
     }
 
     /* ── STATUS BAR ── */
-    #archive-status {
+    #house-status {
       position: fixed;
-      bottom: 0.5rem;
-      right: 0.8rem;
+      bottom: 0; left: 0; right: 0;
       z-index: 60;
-      font-family: var(--font-display);
-      font-size: 0.54rem;
-      letter-spacing: 0.16em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 1.5rem;
+      background: rgba(7, 4, 12, 0.96);
+      border-top: 1px solid rgba(45, 107, 94, 0.2);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
       text-transform: lowercase;
-      color: rgba(196,136,42,0.3);
       pointer-events: none;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #house-status-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #3d8b7a;
+      opacity: 0.7;
+    }
+    #house-status-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(240, 224, 200, 0.2);
+      font-size: 0.55rem;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #3d8b7a;
+      animation: statusPulse 3s ease-in-out infinite;
+    }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.4); }
     }
     .sanctum-dot {
       position: fixed; bottom: 0.4rem; left: 0.7rem; z-index: 60;
@@ -881,7 +913,17 @@
   </div>
 
   <span class="sanctum-dot" id="sanctum-dot" onclick="sanctumClick()">◉</span>
-  <div id="archive-status">[ archive : breathing ]</div>
+  <div id="house-status">
+    <div id="house-status-left">
+      <span class="status-dot"></span>
+      <span id="house-status-msg">house: the archive</span>
+    </div>
+    <div id="house-status-right">
+      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span style="opacity:0.3">·</span>
+      <span id="house-status-time">--:--</span>
+    </div>
+  </div>
 
   <!-- ══ THE LEMON GROVE CARD ══ -->
   <div class="lemon-grove-card" id="lemon-grove-card">
@@ -946,9 +988,20 @@
   <script>
     // ── STATUS BAR ──
     function setStatus(text) {
-      const el = document.getElementById('archive-status');
-      if (el) el.textContent = `[ archive : ${text} ]`;
+      const msg = document.getElementById('house-status-msg');
+      if (msg) msg.textContent = 'house: ' + text;
     }
+
+    function updateStatusClock() {
+      const el = document.getElementById('house-status-time');
+      if (!el) return;
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      el.textContent = h + ':' + m;
+    }
+    updateStatusClock();
+    setInterval(updateStatusClock, 30000);
 
     // ── CANVAS STAR FIELD ──
     (function() {
