@@ -1,0 +1,16 @@
+{
+  "name": "maisoncache-automation",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "notion-poll": "node notion-to-ghost.js",
+    "ghost-webhook": "node ghost-to-github.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
