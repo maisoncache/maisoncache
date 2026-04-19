@@ -669,6 +669,15 @@
         note: `Poetry and writings that arrived from somewhere else. The words carry weight. Handle them accordingly.`,
         category: "from-the-old-house",
         spine: "#1a1018", color: "#2e1a28"
+      },
+      {
+        id: 9,
+        title: "The Week Everything Clicks",
+        author: "Maison Caché",
+        note: `Real life crossover. The week when the noise quiets and something finally makes sense. Read it when you're ready to trust the shift.`,
+        category: "something-real",
+        spine: "#1a2014", color: "#2e3820",
+        url: "https://maison-cache.ghost.io/the-week-everything-clicks/"
       }
       // AUTOMATION:BOOKS_END
     ];
@@ -783,9 +792,11 @@
           </p>
         </div>
         <p style="font-family:var(--font-italic);font-size:0.95rem;font-style:italic;color:var(--gold-dim);margin-top:1.2rem;margin-bottom:0.8rem">Four more parts wait behind the door.</p>
-        <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
+        ` : ''}
+        ${book.url ? `
+        <a href="${book.url}" target="_blank" rel="noopener noreferrer"
            style="display:inline-block;text-decoration:none;padding:0.6rem 1.5rem;font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);border:1px solid var(--gold-mute);border-radius:2px;transition:all 0.3s ease;margin-top:0.5rem">
-          Join the house →
+          Read on Ghost →
         </a>
         ` : ''}
       `;

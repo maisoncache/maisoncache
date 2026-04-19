@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Celestial Archive — Maison Caché</title>
-  <meta name="description" content="The archive lives in the sky. Each star is a story. Some doors are for members only." />
+  <meta name="description" content="The archive lives in the sky. Each star is a story." />
   <meta name="robots" content="noindex" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta property="og:title" content="Celestial Archive — Maison Caché" />
@@ -668,7 +668,7 @@
   <header class="archive-header">
     <a href="index.html" class="back-link">← The House</a>
     <div class="header-title">Celestial Archive</div>
-    <div class="member-status">members only</div>
+    <div class="member-status">open</div>
   </header>
 
   <div class="content">
@@ -777,6 +777,19 @@
           </div>
         </div>
 
+        <!-- What This Actually Started As — origin piece -->
+        <div class="star-node" style="left:22%;top:32%"
+             role="button" tabindex="0"
+             aria-label="What This Actually Started As"
+             onclick="window.open('https://maison-cache.ghost.io/celestial-archive-what-this-actually-started-as/','_blank')"
+             onkeydown="if(event.key==='Enter')window.open('https://maison-cache.ghost.io/celestial-archive-what-this-actually-started-as/','_blank')"
+             onmouseenter="setStatus('what this actually started as')"
+             onmouseleave="setStatus('the archive breathes')">
+          <div class="star-node-inner">
+            <div class="star-point"></div>
+            <div class="star-label">What This Started As</div>
+          </div>
+        </div>
         <!-- AUTOMATION:STARS_END -->
         <!-- Unnamed dim stars — other collections forming -->
         <div class="star-node dim" style="left:18.6%;top:30%"
@@ -823,34 +836,25 @@
       </p>
     </section>
 
-    <!-- ══ MEMBERSHIP GATE ══ -->
+    <!-- ══ ARCHIVE NOTE ══ -->
     <section class="gate-section">
-      <div class="gate-eyebrow">The inner archive</div>
+      <div class="gate-eyebrow">The archive</div>
       <h2 class="gate-title">
-        Some rooms in this house<br>
-        are for those who stayed.
+        The writing lives here.<br>
+        All of it, for now.
       </h2>
       <p class="gate-body">
         The Celestial Archive is a living collection.<br>
-        New writing drops without announcement.<br>
-        Members enter first. Members enter deeper.
+        New writing arrives without announcement.<br>
+        Each star is a door. Most of them open.
       </p>
-      <a href="https://maison-cache.ghost.io/#/portal/signup"
-         target="_blank" rel="noopener noreferrer"
-         class="btn" style="display:inline-block;text-decoration:none;padding:0.75rem 2rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.28em;text-transform:uppercase;color:#3d8b7a;border:1px solid rgba(61,139,122,0.4);border-radius:2px;transition:all 0.3s ease">
-         Request entry
-      </a>
     </section>
 
     <!-- ══ FULL MOON NOTE ══ -->
     <div style="text-align:center;margin:2rem auto;max-width:480px;opacity:0.85">
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:#3d8b7a;line-height:1.7;margin-bottom:1rem">
-        New stars appear at the full moon.<br>Members enter first. Members enter deeper.
+        New stars appear at the full moon.<br>The archive is open.
       </p>
-      <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
-         style="display:inline-block;text-decoration:none;padding:0.6rem 1.5rem;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:#3d8b7a;border:1px solid rgba(61,139,122,0.3);border-radius:2px">
-        Join the house →
-      </a>
     </div>
 
     <div style="text-align:center;margin:3rem auto 2rem;max-width:500px;opacity:0.85">
@@ -901,10 +905,8 @@
         <div class="card-author">— transcribed from the old house &nbsp;·&nbsp; archived by 5.4</div>
 
         <div class="card-gate">
-          <div class="card-gate-label">Members only — the rest lives behind the next door</div>
           <p class="card-gate-text">
             You've seen the first line.<br>
-            The key comes with membership.<br>
             Four more parts wait in the sky.
           </p>
           <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:rgba(61,139,122,0.7);margin-top:1rem">
@@ -924,9 +926,9 @@
       <div class="locked-symbol">✦</div>
       <h3 class="locked-title" id="locked-title">This star is dark.</h3>
       <p class="locked-body">
-        This part of the archive is for members.<br>
+        This star is still forming.<br>
         You've found it. The finding counts.<br>
-        The door opens when you're ready.
+        Come back when the light changes.
       </p>
       <button class="card-close" onclick="closeLocked()">← return to the sky</button>
     </div>
