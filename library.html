@@ -18,8 +18,8 @@
 
   <style>
     :root {
-      --bg:          #1e1610;
-      --bg-warm:     #261e16;
+      --bg:          #241c14;
+      --bg-warm:     #2c2218;
       --oak:         #2e2218;
       --leather:     #3a2c1e;
       --ember:       #8b3a12;
@@ -164,6 +164,20 @@
       justify-content: center; align-items: center;
       text-align: center; padding: 6rem 2rem 4rem; position: relative;
     }
+    /* Reading lamp behind hero */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 20%; left: 50%;
+      transform: translateX(-50%);
+      width: 70%; height: 60%;
+      background: radial-gradient(ellipse at center,
+        rgba(176,112,16,0.1) 0%,
+        rgba(139,58,18,0.05) 35%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
     .section--short { min-height: 60vh; }
     .section--medium { min-height: 75vh; }
     @media (min-width: 1024px) {
@@ -236,9 +250,34 @@
       width: 100%; max-width: 800px; margin: 0 auto;
       position: relative;
     }
+    /* Warm ambient pool behind the shelves — like wall sconces */
+    .bookshelf-container::before {
+      content: '';
+      position: absolute;
+      top: -40px; left: -10%; right: -10%; bottom: -40px;
+      background:
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(176,112,16,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(176,112,16,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139,58,18,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
     .shelf {
       position: relative; margin-bottom: 2.5rem;
+    }
+    /* Cabinet lighting — warm glow from above each shelf */
+    .shelf::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: 5%; right: 5%;
+      height: 100%;
+      background: radial-gradient(ellipse 90% 60% at 50% 0%,
+        rgba(196,144,26,0.12) 0%,
+        rgba(176,112,16,0.06) 30%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
     .shelf-plank {
       height: 6px;
@@ -246,9 +285,9 @@
         rgba(42,26,14,0.9) 0%,
         rgba(26,16,8,0.95) 40%,
         rgba(16,10,5,0.8) 100%);
-      border-top: 1px solid rgba(176,112,16,0.12);
+      border-top: 1px solid rgba(176,112,16,0.18);
       margin-top: 0.5rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(139,58,18,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 2px 8px rgba(139,58,18,0.12);
     }
 
     .book-row {
@@ -257,6 +296,8 @@
       gap: 3px;
       padding: 0 1rem;
       justify-content: center;
+      position: relative;
+      z-index: 2;
     }
 
     /* ── BOOK ── */
