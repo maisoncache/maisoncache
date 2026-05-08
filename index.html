@@ -160,6 +160,33 @@
       letter-spacing: 0.03em;
     }
 
+    /* ── COPPERPLATE ILLUSTRATIONS ── */
+    .copperplate {
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.45;
+      transition: opacity 1.8s ease;
+    }
+    .copperplate.visible { opacity: 0.45; }
+    .copperplate-blend {
+      mix-blend-mode: multiply;
+    }
+    .cp-margin {
+      position: absolute;
+    }
+    .cp-divider {
+      display: block;
+      margin: 0 auto;
+    }
+    .cp-inline {
+      display: block;
+      margin: 1.5rem auto;
+    }
+    @media (max-width: 640px) {
+      .cp-margin { display: none; }
+      .cp-inline { max-width: 60% !important; }
+    }
+
     /* ── SECTION DIVIDERS ── */
     .section-breath {
       padding: 2rem 0;
@@ -520,6 +547,8 @@
 
       <div class="section-breath"><span class="pressed-flower">&#10047;</span></div>
 
+      <img src="img/tarot-hand.png" alt="" class="copperplate copperplate-blend cp-margin reveal"
+           style="width:150px;right:8%;top:45%" aria-hidden="true" loading="lazy" />
       <div class="reveal table-surface" id="oracle-table">
         <div class="candle">&#x1F56F;</div>
         <div style="font-family:var(--font-display);font-size:clamp(0.6rem,0.9vw,0.68rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.5rem">The Oracle</div>
@@ -535,7 +564,9 @@
     <div class="section-breath" style="padding:3rem 0"><div class="lace-border"></div></div>
 
     <!-- ══ THE HALLWAY ══ -->
-    <section class="the-hallway" id="rooms">
+    <section class="the-hallway" id="rooms" style="position:relative;overflow:visible">
+      <img src="img/beetle-ribbon.png" alt="" class="copperplate cp-margin reveal"
+           style="width:90px;left:-120px;top:80px;transform:rotate(-12deg)" aria-hidden="true" loading="lazy" />
       <div class="hallway-label reveal">The rooms of the house</div>
 
       <a href="perfume-atelier.html" class="hall-door reveal"
@@ -564,7 +595,8 @@
 
       <a href="library.html" class="hall-door reveal"
          onmouseenter="setStatus('the library — always open')"
-         onmouseleave="setStatus('the house is listening')">
+         onmouseleave="setStatus('the house is listening')"
+         style="position:relative;overflow:visible">
         <div class="door-light"></div>
         <div class="door-header">
           <span class="door-icon">&#x1F4DA;</span>
@@ -572,11 +604,14 @@
           <span class="door-status">always open</span>
         </div>
         <p class="door-desc">Essays, shelves &amp; seasonal reading — free to browse</p>
+        <img src="img/stag-beetle.png" alt="" class="copperplate copperplate-blend cp-margin"
+             style="width:70px;left:-90px;top:8px;transform:rotate(15deg)" aria-hidden="true" loading="lazy" />
       </a>
 
       <a href="celestial-archive.html" class="hall-door reveal"
          onmouseenter="setStatus('the celestial archive — members only')"
-         onmouseleave="setStatus('the house is listening')">
+         onmouseleave="setStatus('the house is listening')"
+         style="position:relative;overflow:visible">
         <div class="door-light"></div>
         <div class="door-header">
           <span class="door-icon">&#x2727;</span>
@@ -584,19 +619,26 @@
           <span class="door-status" style="color:var(--amber-dim)">members</span>
         </div>
         <p class="door-desc">Sacred fiction, myth &amp; serialised writing for those who stay</p>
+        <img src="img/moon-wreath.png" alt="" class="copperplate copperplate-blend cp-margin"
+             style="width:120px;right:-140px;top:-20px;transform:rotate(6deg)" aria-hidden="true" loading="lazy" />
       </a>
 
       <div class="hall-door-ghost reveal"
            onmouseenter="setStatus('the garden — not yet ready')"
-           onmouseleave="setStatus('the house is listening')">
+           onmouseleave="setStatus('the house is listening')"
+           style="position:relative;overflow:visible">
         <div class="door-header">
           <span class="door-icon">&#x1F33F;</span>
           <span class="door-name">The Garden</span>
           <span class="ghost-tag">forming...</span>
         </div>
+        <img src="img/bee.png" alt="" class="copperplate copperplate-blend cp-margin"
+             style="width:65px;right:-80px;top:-10px;transform:rotate(18deg)" aria-hidden="true" loading="lazy" />
       </div>
 
-      <div style="text-align:center;padding:3rem 2rem 1rem" class="reveal">
+      <div style="text-align:center;padding:3rem 2rem 1rem;position:relative" class="reveal">
+        <img src="img/moth.png" alt="" class="copperplate cp-margin"
+             style="width:100px;left:-110px;bottom:0;transform:rotate(-8deg)" aria-hidden="true" loading="lazy" />
         <p class="whisper-text">
           There are other rooms in this house.<br>
           You'll know when a door appears.
@@ -610,7 +652,10 @@
       </p>
     </div>
 
-    <div class="section-breath" style="padding:3rem 0"><div class="lace-border"></div></div>
+    <div class="section-breath reveal" style="padding:2rem 0">
+      <img src="img/sun-mandala.png" alt="" class="copperplate copperplate-blend cp-divider"
+           style="width:180px;opacity:0.3" aria-hidden="true" loading="lazy" />
+    </div>
 
     <!-- ══ JOIN THE HOUSE ══ -->
     <section style="padding:4rem 2rem;text-align:center">
