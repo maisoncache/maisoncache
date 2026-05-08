@@ -311,14 +311,17 @@
       position: absolute;
       right: 12px; top: 50%;
       transform: translateY(-50%);
-      width: 65px; height: 65px;
+      width: 90px; height: 90px;
       object-fit: contain;
-      opacity: 0.12;
+      opacity: 0.25;
       mix-blend-mode: multiply;
       pointer-events: none;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease, filter 0.6s ease;
     }
-    .hall-door:hover .door-bookplate { opacity: 0.22; }
+    .hall-door:hover .door-bookplate {
+      opacity: 0.5;
+      filter: sepia(0.6) saturate(1.8) brightness(0.9) hue-rotate(-10deg);
+    }
     .hall-door::before {
       content: '';
       position: absolute; left: 0; top: 0; bottom: 0;
@@ -387,7 +390,7 @@
       font-style: italic;
       color: var(--cream-mute);
       line-height: 1.7;
-      padding-left: 2.2rem;
+      padding-left: 0;
     }
 
     /* Ghost door — forming */
@@ -785,7 +788,7 @@
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
         <div class="door-header">
-          <span class="door-icon">&#x1F33A;</span>
+
           <span class="door-name">The Perfume Atelier</span>
           <span class="door-status">open</span>
         </div>
@@ -798,7 +801,7 @@
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
         <div class="door-header">
-          <span class="door-icon">&#x1F525;</span>
+
           <span class="door-name">The Hearth</span>
           <span class="door-status">open</span>
         </div>
@@ -811,7 +814,7 @@
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
         <div class="door-header">
-          <span class="door-icon">&#x1F4DA;</span>
+
           <span class="door-name">The Library</span>
           <span class="door-status">always open</span>
         </div>
@@ -824,7 +827,7 @@
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
         <div class="door-header">
-          <span class="door-icon">&#x2727;</span>
+
           <span class="door-name">The Celestial Archive</span>
           <span class="door-status" style="color:var(--amber-dim)">members</span>
         </div>
@@ -836,11 +839,11 @@
            onmouseenter="setStatus('the garden — not yet ready')"
            onmouseleave="setStatus('the house is listening')">
         <div class="door-header">
-          <span class="door-icon">&#x1F33F;</span>
+
           <span class="door-name">The Garden</span>
           <span class="ghost-tag">forming...</span>
         </div>
-        <img src="img/garden-gate.png" alt="" class="door-bookplate" style="opacity:0.07" aria-hidden="true" loading="lazy" />
+        <img src="img/garden-gate.png" alt="" class="door-bookplate" style="opacity:0.1" aria-hidden="true" loading="lazy" />
       </div>
 
       <div style="text-align:center;padding:3rem 2rem 1rem" class="reveal">

@@ -18,28 +18,28 @@
 
   <style>
     :root {
-      --bg:          #080508;
-      --bg-warm:     #100c0a;
-      --oak:         #1a1008;
-      --leather:     #2a1a0e;
+      --bg:          #1e1610;
+      --bg-warm:     #261e16;
+      --oak:         #2e2218;
+      --leather:     #3a2c1e;
       --ember:       #8b3a12;
       --amber:       #b07010;
       --amber-bright:#c8841a;
-      --amber-dim:   rgba(176,112,16,0.75);
-      --amber-mute:  rgba(176,112,16,0.22);
+      --amber-dim:   rgba(176,112,16,0.85);
+      --amber-mute:  rgba(176,112,16,0.28);
       --teal:        #2a5c52;
       --teal-bright: #3a7a6e;
-      --teal-dim:    rgba(42,92,82,0.55);
+      --teal-dim:    rgba(42,92,82,0.65);
       --moss:        #2e4a2a;
       --crimson:     #5a1520;
       --crimson-dim: rgba(90,21,32,0.55);
       --gold:        #c4901a;
-      --gold-dim:    rgba(196,144,26,0.55);
-      --gold-mute:   rgba(196,144,26,0.2);
+      --gold-dim:    rgba(196,144,26,0.7);
+      --gold-mute:   rgba(196,144,26,0.25);
       --cream:       #f2e8d5;
-      --cream-dim:   rgba(242,232,213,0.82);
-      --cream-mute:  rgba(242,232,213,0.42);
-      --cream-ghost: rgba(242,232,213,0.12);
+      --cream-dim:   rgba(242,232,213,0.9);
+      --cream-mute:  rgba(242,232,213,0.55);
+      --cream-ghost: rgba(242,232,213,0.18);
       --parchment:   #e8d8b8;
 
       --font-display: 'Cinzel', serif;
@@ -72,15 +72,15 @@
     .atmo-hearth {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 90% 60% at 50% 110%, rgba(139,58,18,0.45) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 50% at 15% 60%, rgba(26,16,8,0.8) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 50% at 85% 60%, rgba(26,16,8,0.8) 0%, transparent 50%),
-        radial-gradient(ellipse 70% 40% at 50% 20%, rgba(16,12,10,0.6) 0%, transparent 60%);
+        radial-gradient(ellipse 90% 60% at 50% 110%, rgba(139,58,18,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 15% 60%, rgba(30,22,16,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 50% at 85% 60%, rgba(30,22,16,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 40% at 50% 20%, rgba(20,16,12,0.3) 0%, transparent 60%);
       animation: hearthBreath 20s ease-in-out infinite alternate;
     }
     .atmo-vignette {
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse 70% 70% at center, transparent 20%, rgba(5,3,4,0.94) 100%);
+      background: radial-gradient(ellipse 70% 70% at center, transparent 30%, rgba(15,10,8,0.6) 100%);
     }
     .atmo-grain {
       position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.04;
@@ -133,7 +133,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 50;
       padding: 1.4rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
-      background: linear-gradient(to bottom, rgba(5,3,4,0.92), transparent);
+      background: linear-gradient(to bottom, rgba(30,22,16,0.85), transparent);
     }
     .back-link {
       font-family: var(--font-display); font-size: 0.6rem;
@@ -313,7 +313,7 @@
     /* ── BOOK DETAIL OVERLAY ── */
     .book-overlay {
       position: fixed; inset: 0; z-index: 200;
-      background: rgba(5,3,4,0.97);
+      background: rgba(25,18,14,0.97);
       display: none; overflow-y: auto;
       animation: fadeIn 0.6s ease forwards;
     }
@@ -337,7 +337,7 @@
       max-width: 540px; width: 100%;
       border: 1px solid rgba(176,112,16,0.15);
       padding: 3rem 2.5rem;
-      background: rgba(16,12,8,0.6);
+      background: rgba(30,22,16,0.6);
       position: relative;
       animation: fadeUp 0.8s ease forwards;
     }
@@ -358,14 +358,14 @@
       border: 1px solid rgba(176,112,16,0.15);
     }
     .search-input {
-      flex: 1; background: rgba(16,12,8,0.8);
+      flex: 1; background: rgba(30,22,16,0.8);
       border: none; outline: none;
       color: var(--cream); font-family: var(--font-body);
       font-size: 1rem; font-style: italic;
       padding: 0.8rem 1.2rem;
       transition: background 0.4s ease;
     }
-    .search-input:focus { background: rgba(26,16,8,0.9); }
+    .search-input:focus { background: rgba(38,28,18,0.9); }
     .search-input::placeholder { color: rgba(176,112,16,0.3); }
     .search-btn {
       background: none; border: none;
@@ -406,7 +406,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.35rem 1.5rem;
-      background: rgba(7, 4, 12, 0.96);
+      background: rgba(22, 16, 12, 0.96);
       border-top: 1px solid rgba(45, 107, 94, 0.2);
       font-family: 'Courier New', Courier, monospace;
       font-size: 0.58rem;
@@ -514,7 +514,7 @@
     .hallway-strip:hover,
     .hallway-strip.open {
       width: 200px;
-      background: rgba(12,8,6,0.97);
+      background: rgba(25,18,14,0.97);
       border-right: 1px solid rgba(176,112,16,0.08);
       box-shadow: 4px 0 30px rgba(0,0,0,0.4);
     }
@@ -597,7 +597,7 @@
       .hallway-strip.open {
         width: 100%; height: 100%;
         top: auto; bottom: 0;
-        background: rgba(12,8,6,0.98);
+        background: rgba(25,18,14,0.98);
         border-top: 1px solid rgba(176,112,16,0.1);
         border-right: none;
         border-radius: 16px 16px 0 0;
@@ -1200,7 +1200,7 @@
           left:${Math.random()*100}%;
           width:${size}px;height:${size}px;
           border-radius:50%;
-          background:rgba(242,232,213,0.35);
+          background:rgba(242,232,213,0.25);
           animation:dustFloat ${14+Math.random()*18}s ${Math.random()*20}s infinite ease-out;
           --sway:${sway}px;
         `;
