@@ -717,6 +717,334 @@
       pointer-events: none;
     }
 
+    /* ── THE LIBRARY CAT ── */
+    .library-cat {
+      position: relative;
+      display: inline-block;
+      cursor: crosshair;
+      transition: transform 0.4s ease;
+      z-index: 10;
+    }
+    .library-cat:hover { transform: translateY(-2px); }
+    .cat-body {
+      position: relative;
+      width: 32px; height: 18px;
+      background: rgba(60,45,30,0.85);
+      border-radius: 50% 50% 45% 45%;
+      transition: all 0.4s ease;
+    }
+    .cat-body::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: 2px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 9px solid rgba(60,45,30,0.85);
+    }
+    .cat-body::after {
+      content: '';
+      position: absolute;
+      top: -8px; right: 2px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 9px solid rgba(60,45,30,0.85);
+    }
+    .cat-tail {
+      position: absolute;
+      right: -12px; bottom: 2px;
+      width: 16px; height: 6px;
+      border-bottom: 2px solid rgba(60,45,30,0.7);
+      border-right: 2px solid rgba(60,45,30,0.7);
+      border-radius: 0 0 8px 0;
+      animation: tailSwish 4s ease-in-out infinite;
+    }
+    @keyframes tailSwish {
+      0%,100% { transform: rotate(0deg); }
+      50% { transform: rotate(12deg); }
+    }
+    .cat-eyes {
+      position: absolute;
+      top: 2px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 6px;
+    }
+    .cat-eye {
+      width: 4px; height: 2px;
+      background: rgba(196,144,26,0.6);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .cat-eye.closed { height: 1px; background: rgba(196,144,26,0.3); }
+    .library-cat:hover .cat-eye {
+      height: 4px;
+      background: rgba(196,144,26,0.9);
+      box-shadow: 0 0 4px rgba(196,144,26,0.4);
+    }
+    .cat-tooltip {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%; transform: translateX(-50%);
+      width: 180px;
+      background: rgba(25,18,14,0.97);
+      border: 1px solid rgba(176,112,16,0.15);
+      padding: 0.6rem 0.8rem;
+      font-family: var(--font-italic);
+      font-size: 0.78rem;
+      font-style: italic;
+      color: rgba(196,144,26,0.6);
+      text-align: center;
+      line-height: 1.5;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      white-space: normal;
+    }
+    .library-cat:hover .cat-tooltip {
+      opacity: 1; visibility: visible;
+    }
+
+    /* ── CURIOSITY OBJECTS ── */
+    .curiosity-shelf {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 2.5rem;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    .curiosity {
+      position: relative;
+      cursor: crosshair;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      opacity: 0.55;
+    }
+    .curiosity:hover {
+      opacity: 0.85;
+      transform: translateY(-3px);
+      filter: brightness(1.3);
+    }
+    .curiosity-label {
+      position: absolute;
+      bottom: -1.2rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-hand);
+      font-size: 0.65rem;
+      color: rgba(176,112,16,0.25);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .curiosity:hover .curiosity-label { opacity: 1; }
+
+    /* Magnifying glass */
+    .magnifying-glass {
+      width: 20px; height: 20px;
+      border: 2px solid rgba(176,112,16,0.5);
+      border-radius: 50%;
+      position: relative;
+    }
+    .magnifying-glass::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; right: -3px;
+      width: 2px; height: 10px;
+      background: rgba(176,112,16,0.4);
+      transform: rotate(-45deg);
+      border-radius: 1px;
+    }
+
+    /* Globe */
+    .globe {
+      width: 22px; height: 22px;
+      border: 1.5px solid rgba(176,112,16,0.4);
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+    .globe::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1px; height: 100%;
+      background: rgba(176,112,16,0.3);
+    }
+    .globe::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0;
+      transform: translateY(-50%);
+      width: 100%; height: 1px;
+      background: rgba(176,112,16,0.3);
+    }
+    .curiosity:hover .globe {
+      animation: globeSpin 2s linear infinite;
+    }
+    @keyframes globeSpin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    /* Pocket watch */
+    .pocket-watch {
+      width: 18px; height: 18px;
+      border: 1.5px solid rgba(176,112,16,0.5);
+      border-radius: 50%;
+      position: relative;
+    }
+    .pocket-watch::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 1px; height: 6px;
+      background: rgba(196,144,26,0.6);
+      transform-origin: bottom center;
+      transform: translate(-50%, -100%) rotate(0deg);
+      animation: watchTick 2s steps(60) infinite;
+    }
+    .pocket-watch::after {
+      content: '';
+      position: absolute;
+      top: -4px; left: 50%;
+      transform: translateX(-50%);
+      width: 4px; height: 3px;
+      border: 1px solid rgba(176,112,16,0.35);
+      border-radius: 2px 2px 0 0;
+      border-bottom: none;
+    }
+    @keyframes watchTick {
+      from { transform: translate(-50%, -100%) rotate(0deg); }
+      to { transform: translate(-50%, -100%) rotate(360deg); }
+    }
+
+    /* Letter opener */
+    .letter-opener {
+      width: 3px; height: 28px;
+      background: linear-gradient(to bottom,
+        rgba(196,144,26,0.5) 0%,
+        rgba(176,112,16,0.3) 60%,
+        rgba(242,232,213,0.2) 100%);
+      border-radius: 1px 1px 0 0;
+      transform: rotate(-15deg);
+    }
+
+    /* ── FRAMED PORTRAIT ── */
+    .portrait-frame {
+      width: 120px; height: 150px;
+      border: 3px solid rgba(176,112,16,0.25);
+      padding: 4px;
+      position: relative;
+      cursor: crosshair;
+      transition: all 0.6s ease;
+      margin: 0 auto;
+    }
+    .portrait-frame:hover {
+      border-color: rgba(176,112,16,0.5);
+      box-shadow: 0 0 20px rgba(176,112,16,0.08);
+    }
+    .portrait-inner {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg,
+        rgba(42,26,14,0.8) 0%,
+        rgba(30,20,12,0.9) 50%,
+        rgba(42,26,14,0.8) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.8s ease;
+    }
+    .portrait-figure {
+      font-size: 2.5rem;
+      opacity: 0.3;
+      transition: all 0.8s ease;
+    }
+    .portrait-frame:hover .portrait-figure {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+    .portrait-plaque {
+      position: absolute;
+      bottom: -1.6rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-hand);
+      font-size: 0.7rem;
+      color: rgba(176,112,16,0.25);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .portrait-frame:hover .portrait-plaque { opacity: 1; }
+
+    /* ── STAIRCASE ── */
+    .staircase-section {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .staircase {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin: 2rem auto 1.5rem;
+      width: 120px;
+    }
+    .stair-step {
+      height: 8px;
+      background: linear-gradient(to bottom,
+        rgba(176,112,16,0.15),
+        rgba(42,26,14,0.4));
+      border-top: 1px solid rgba(176,112,16,0.12);
+      transition: all 0.3s ease;
+    }
+    .stair-step:nth-child(1) { width: 100%; }
+    .stair-step:nth-child(2) { width: 88%; }
+    .stair-step:nth-child(3) { width: 76%; }
+    .stair-step:nth-child(4) { width: 64%; }
+    .stair-step:nth-child(5) { width: 52%; }
+    .stair-step:nth-child(6) { width: 40%; opacity: 0.7; }
+    .stair-step:nth-child(7) { width: 28%; opacity: 0.4; }
+    .staircase:hover .stair-step {
+      background: linear-gradient(to bottom,
+        rgba(176,112,16,0.25),
+        rgba(42,26,14,0.5));
+      box-shadow: 0 0 8px rgba(176,112,16,0.06);
+    }
+    .staircase-railing {
+      position: absolute;
+      right: calc(50% - 68px);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to top,
+        rgba(176,112,16,0.2),
+        rgba(176,112,16,0.06),
+        transparent);
+    }
+
+    /* ── HIDDEN BOOK ── */
+    .book.secret-book .book-spine {
+      background: linear-gradient(to right,
+        #2a1a14 0%, #1e120e 60%, rgba(0,0,0,0.4) 100%) !important;
+    }
+    .book.secret-book::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(155,52,104,0.2);
+      transition: all 0.6s ease;
+    }
+    .book.secret-book:hover::after {
+      background: rgba(155,52,104,0.6);
+      box-shadow: 0 0 6px rgba(155,52,104,0.3);
+    }
+
     /* ── WEBRING BAR ── */
     .webring-bar {
       text-align: center;
@@ -910,9 +1238,55 @@
       </div>
     </section>
 
+    <!-- ══ CURIOSITIES SHELF ══ -->
+    <!-- not everything on a shelf is a book. some things just... are. -->
+    <div class="curiosity-shelf reveal">
+      <div class="curiosity" title="A magnifying glass, well-used">
+        <div class="magnifying-glass"></div>
+        <span class="curiosity-label">magnifying glass</span>
+      </div>
+
+      <!-- The library cat -->
+      <div class="library-cat" id="library-cat" onclick="catRecommend()" title="The librarian">
+        <div class="cat-body">
+          <div class="cat-eyes">
+            <div class="cat-eye closed"></div>
+            <div class="cat-eye closed"></div>
+          </div>
+        </div>
+        <div class="cat-tail"></div>
+        <div class="cat-tooltip">He's sleeping. Or pretending to.</div>
+      </div>
+
+      <div class="curiosity" title="Time moves differently in here">
+        <div class="pocket-watch"></div>
+        <span class="curiosity-label">pocket watch</span>
+      </div>
+
+      <div class="curiosity" onclick="spinGlobe(this)" title="Everywhere and nowhere">
+        <div class="globe"></div>
+        <span class="curiosity-label">the world</span>
+      </div>
+
+      <div class="curiosity" title="For letters you haven't opened yet">
+        <div class="letter-opener"></div>
+        <span class="curiosity-label">letter opener</span>
+      </div>
+    </div>
+
+    <!-- ══ PORTRAIT GALLERY ══ -->
+    <div style="padding:2rem 2rem 1rem;text-align:center" class="reveal">
+      <div class="portrait-frame" id="portrait" onmouseenter="shiftPortrait()" onclick="shiftPortrait()">
+        <div class="portrait-inner">
+          <div class="portrait-figure" id="portrait-figure">&#x1F312;</div>
+        </div>
+        <div class="portrait-plaque" id="portrait-plaque">a face you almost recognise</div>
+      </div>
+    </div>
+
     <!-- ══ GHOST CTA ══ -->
     <div style="text-align:center;margin:3rem auto 2rem;max-width:480px;opacity:0.85">
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:#b07010;line-height:1.7;margin-bottom:1rem">
+      <p style="font-family:var(--font-italic);font-size:1.15rem;font-style:italic;color:var(--gold-dim);line-height:1.7;margin-bottom:1rem">
         The Library's shelves change with the moon.<br>Members receive curated reading each phase.
       </p>
       <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
@@ -921,16 +1295,27 @@
       </a>
     </div>
 
-    <div style="text-align:center;margin:3rem auto 2rem;max-width:500px;opacity:0.85">
+    <!-- ══ THE STAIRCASE ══ -->
+    <div class="staircase-section reveal">
+      <div class="staircase-railing"></div>
       <p class="body-text" style="font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:0.5rem">
         The Library has a staircase.
       </p>
-      <p class="body-text" style="font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:1.5rem">
+      <div class="staircase" onclick="window.location.href='celestial-archive.html'" style="cursor:crosshair" title="Ascend to the Celestial Archive">
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+        <div class="stair-step"></div>
+      </div>
+      <p style="font-family:var(--font-italic);font-size:clamp(0.9rem,1.8vw,1.05rem);font-style:italic;color:var(--cream-mute);line-height:1.8;margin-bottom:1.5rem">
         It winds upward, past the top shelf, into the Observatory Tower.<br>
         The Celestial Archive lives above the books.
       </p>
-      <a href="celestial-archive.html" style="display:inline-block;text-decoration:none;padding:0.65rem 1.8rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:#b07010;border:1px solid rgba(176,112,16,0.3);border-radius:2px;transition:all 0.3s ease">
-        Ascend →
+      <a href="celestial-archive.html" class="btn" style="text-decoration:none">
+        Ascend
       </a>
     </div>
 
@@ -1314,6 +1699,112 @@
       var now = new Date();
       el.textContent = 'ink still wet as of ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
     })();
+
+    // ══ THE LIBRARY CAT ══
+    var catMessages = [
+      "He nudges a book off the shelf. It lands open.",
+      "He stares at you. Then at a book. Then back at you.",
+      "A slow blink. That means he trusts you. Read this one.",
+      "He stretches, yawns, and knocks something off the shelf. On purpose.",
+      "He walks across the books and sits on exactly one.",
+      "He's not helping. He's judging. There's a difference.",
+      "A purr. That's rare. He likes this one.",
+      "He headbutts the spine of a book. Subtle."
+    ];
+    function catRecommend() {
+      var cat = document.getElementById('library-cat');
+      var tooltip = cat.querySelector('.cat-tooltip');
+      var eyes = cat.querySelectorAll('.cat-eye');
+
+      // Wake up
+      eyes.forEach(function(e) { e.classList.remove('closed'); });
+      setStatus('the cat is awake');
+
+      // Pick a random book and open it
+      var book = BOOKS[Math.floor(Math.random() * BOOKS.length)];
+      var msg = catMessages[Math.floor(Math.random() * catMessages.length)];
+      tooltip.textContent = msg;
+      tooltip.style.opacity = '1';
+      tooltip.style.visibility = 'visible';
+
+      setTimeout(function() {
+        openBook(book.id);
+        setStatus('the cat recommended: ' + book.title.toLowerCase().substring(0,25));
+      }, 1800);
+
+      // Go back to sleep after a while
+      setTimeout(function() {
+        eyes.forEach(function(e) { e.classList.add('closed'); });
+        tooltip.textContent = "He's sleeping. Or pretending to.";
+        tooltip.style.opacity = '';
+        tooltip.style.visibility = '';
+      }, 8000);
+    }
+
+    // ══ PORTRAIT GALLERY ══
+    var portraits = [
+      { figure: '\uD83C\uDF12', plaque: 'a face you almost recognise' },
+      { figure: '\uD83C\uDF15', plaque: 'she was here before you' },
+      { figure: '\u2727', plaque: 'the one who lit the first candle' },
+      { figure: '\uD83E\uDD89', plaque: 'the librarian before the cat' },
+      { figure: '\uD83C\uDF3F', plaque: 'someone who left a pressed flower' },
+      { figure: '\u25C9', plaque: 'you, in another life' },
+      { figure: '\uD83D\uDD6F', plaque: 'the one who keeps the fire' }
+    ];
+    var portraitIdx = 0;
+    function shiftPortrait() {
+      portraitIdx = (portraitIdx + 1) % portraits.length;
+      var fig = document.getElementById('portrait-figure');
+      var plaque = document.getElementById('portrait-plaque');
+      fig.style.opacity = '0';
+      setTimeout(function() {
+        fig.textContent = portraits[portraitIdx].figure;
+        plaque.textContent = portraits[portraitIdx].plaque;
+        fig.style.opacity = '0.3';
+      }, 400);
+    }
+
+    // ══ GLOBE ══
+    function spinGlobe(el) {
+      var globe = el.querySelector('.globe');
+      globe.style.animation = 'globeSpin 2s linear';
+      setStatus('the world turns');
+      setTimeout(function() {
+        globe.style.animation = '';
+        setStatus('the pages are turning');
+      }, 2000);
+    }
+
+    // ══ HIDDEN BOOK (SANCTUM PASSAGE) ══
+    // The renderShelves function will mark one book as secret
+    // We inject it after shelves render
+    var _origRenderShelves = renderShelves;
+    renderShelves = function() {
+      _origRenderShelves();
+      // Mark a specific book as the secret passage
+      var books = document.querySelectorAll('.book');
+      if (books.length > 3) {
+        var secretBook = books[books.length - 2]; // second to last
+        secretBook.classList.add('secret-book');
+        secretBook.setAttribute('title', '');
+        // Override its click
+        var origClick = secretBook.getAttribute('onclick');
+        secretBook.onclick = function(e) {
+          e.stopPropagation();
+          setStatus('something shifts behind the shelf...');
+          document.body.style.transition = 'opacity 1.5s ease';
+          document.body.style.opacity = '0';
+          setTimeout(function() {
+            window.location.href = 'sanctum.html';
+          }, 1500);
+        };
+        // Add a tooltip
+        var tip = secretBook.querySelector('.book-tooltip');
+        if (tip) tip.textContent = 'This one feels different.';
+      }
+    };
+    // Re-render with the secret book
+    renderShelves();
   </script>
 </body>
 </html>
