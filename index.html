@@ -30,11 +30,11 @@
       --amber-mute:   rgba(120,80,30,0.2);
       --amber-glow:   rgba(120,80,30,0.06);
       --gold:         #7a5c38;
-      --gold-dim:     rgba(100,75,40,0.4);
+      --gold-dim:     rgba(100,75,40,0.55);
       --cream:        #2a1f14;
-      --cream-dim:    rgba(42,31,20,0.78);
-      --cream-mute:   rgba(42,31,20,0.4);
-      --cream-ghost:  rgba(42,31,20,0.12);
+      --cream-dim:    rgba(42,31,20,0.82);
+      --cream-mute:   rgba(42,31,20,0.6);
+      --cream-ghost:  rgba(42,31,20,0.3);
       --ink:          #5a4a3e;
       --velvet:       #2a0e1e;
       --rose:         #9b3468;
@@ -169,7 +169,7 @@
       display: inline-block;
       color: var(--gold-dim);
       font-size: 1.1rem;
-      opacity: 0.4;
+      opacity: 0.55;
       filter: blur(0.3px);
     }
 
@@ -215,7 +215,7 @@
     .found-you {
       font-family: var(--font-hand);
       font-size: clamp(1.4rem,3vw,1.8rem);
-      color: rgba(160,120,60,0.2);
+      color: rgba(160,120,60,0.5);
       margin-top: 1.5rem;
     }
 
@@ -374,7 +374,7 @@
     .ghost-tag {
       font-family: var(--font-hand);
       font-size: 0.9rem;
-      color: rgba(160,128,80,0.25);
+      color: rgba(160,128,80,0.5);
       margin-left: auto;
     }
 
@@ -434,7 +434,7 @@
     #house-status {
       position: fixed; bottom: 0.4rem; right: 0.7rem; z-index: 60;
       font-family: var(--font-hand); font-size: 0.8rem;
-      color: rgba(100,75,40,0.25); pointer-events: none;
+      color: rgba(100,75,40,0.45); pointer-events: none;
       transition: color 0.8s ease;
     }
 
@@ -527,7 +527,7 @@
           Three cards. One reading.<br>
           Drawn for you alone.
         </p>
-        <p class="hand-text" style="margin-bottom:2rem;color:rgba(120,80,30,0.4)">The cards are on the table. Turn them when you're ready.</p>
+        <p class="hand-text" style="margin-bottom:2rem;color:rgba(120,80,30,0.6)">The cards are on the table. Turn them when you're ready.</p>
         <button class="btn" onclick="openOracle()">Draw your cards</button>
       </div>
     </section>
@@ -605,7 +605,7 @@
     </section>
 
     <div class="reveal" style="text-align:center;padding:2rem 2rem 0">
-      <p class="hand-text" style="color:rgba(196,147,90,0.2);font-size:clamp(1.1rem,2vw,1.3rem)">
+      <p class="hand-text" style="color:rgba(196,147,90,0.45);font-size:clamp(1.1rem,2vw,1.3rem)">
         The house has one more room. It doesn't announce itself.
       </p>
     </div>
@@ -621,7 +621,7 @@
             Every time the moon shifts, a letter arrives.<br>
             Recipes, rituals, playlists, and a prompt from the Sanctum.
           </p>
-          <p class="hand-text" style="margin-bottom:2rem;color:rgba(120,80,30,0.4);font-size:clamp(1.1rem,2vw,1.3rem)">Free to join. The deeper rooms are $5/month for those who stay.</p>
+          <p class="hand-text" style="margin-bottom:2rem;color:rgba(120,80,30,0.6);font-size:clamp(1.1rem,2vw,1.3rem)">Free to join. The deeper rooms are $5/month for those who stay.</p>
           <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
              class="btn" style="text-decoration:none">
             Join the house
@@ -638,17 +638,17 @@
     </section>
 
     <footer>
-      <div style="font-family:var(--font-fraktur);font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(42,31,20,0.12);margin-bottom:0.6rem">Maison Caché</div>
+      <div style="font-family:var(--font-fraktur);font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(42,31,20,0.3);margin-bottom:0.6rem">Maison Caché</div>
       <p style="font-family:var(--font-italic);font-style:italic;font-size:0.92rem;color:var(--cream-mute);margin-bottom:1.5rem">A house for those who feel too much and think sideways.</p>
       <a href="https://www.tiktok.com/@maisoncache" target="_blank" rel="noopener noreferrer"
-         style="color:rgba(160,128,80,0.28);text-decoration:none;font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;border-bottom:1px solid rgba(100,75,40,0.1);padding-bottom:2px;transition:all 0.4s ease"
+         style="color:rgba(160,128,80,0.5);text-decoration:none;font-family:var(--font-display);font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;border-bottom:1px solid rgba(100,75,40,0.1);padding-bottom:2px;transition:all 0.4s ease"
          onmouseenter="setStatus('tiktok')" onmouseleave="setStatus('the house is listening')">
         @maisoncache
       </a>
-      <div style="margin-top:1rem;font-family:var(--font-hand);font-size:0.9rem;color:rgba(42,31,20,0.1)">last candle lit: <span id="visitor-count">000137</span></div>
+      <div style="margin-top:1rem;font-family:var(--font-hand);font-size:0.9rem;color:rgba(42,31,20,0.28)">last candle lit: <span id="visitor-count">000137</span></div>
       <div style="margin-top:0.8rem">
         <a href="#" onclick="event.preventDefault();document.getElementById('privacy-modal').style.display='block'"
-           style="font-size:0.55rem;letter-spacing:0.15em;color:rgba(42,31,20,0.06);text-decoration:none;font-family:var(--font-display);text-transform:uppercase">
+           style="font-size:0.55rem;letter-spacing:0.15em;color:rgba(42,31,20,0.18);text-decoration:none;font-family:var(--font-display);text-transform:uppercase">
           Privacy
         </a>
       </div>
@@ -874,7 +874,7 @@
       note.innerHTML = `
         <div style="font-family:var(--font-hand);font-size:1.1rem;color:rgba(160,128,80,0.4);margin-bottom:1rem">a note for the sleepless</div>
         <p style="font-family:var(--font-italic);font-size:1rem;font-style:italic;color:rgba(42,31,20,0.65);line-height:1.9">You're awake at this hour for a reason.<br>The house knows what it is.</p>
-        <div style="margin-top:1.2rem;font-family:var(--font-hand);font-size:0.9rem;color:rgba(160,128,80,0.22);cursor:default" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),3000)">close quietly</div>
+        <div style="margin-top:1.2rem;font-family:var(--font-hand);font-size:0.9rem;color:rgba(160,128,80,0.45);cursor:default" onclick="this.parentElement.style.opacity='0';setTimeout(()=>this.parentElement.remove(),3000)">close quietly</div>
       `;
       document.body.appendChild(note);
       setTimeout(() => { note.style.opacity = '1'; }, 8000);
@@ -941,7 +941,7 @@
           <h1 style="font-family:var(--font-italic);font-size:clamp(2.4rem,7vw,5rem);font-weight:300;font-style:italic;color:var(--cream);margin:0 0 0.5rem 0">The Oracle</h1>
           <div style="height:1px;background:linear-gradient(90deg,transparent,var(--amber-dim),transparent);width:65px;margin:1.8rem auto"></div>
           <p class="body-text" style="max-width:440px;margin:0 auto 2rem">Three cards. One reading.<br>Drawn for you alone and never repeated.</p>
-          <p class="hand-text" style="margin-bottom:3rem;color:rgba(120,80,30,0.4)">The house will tell you what this cycle holds.</p>
+          <p class="hand-text" style="margin-bottom:3rem;color:rgba(120,80,30,0.6)">The house will tell you what this cycle holds.</p>
           <button class="btn" onclick="beginTarotDraw()">Draw your cards</button>
         </div>`;
     }
