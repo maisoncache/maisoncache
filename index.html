@@ -497,6 +497,179 @@
       border-top: 1px solid rgba(100,75,40,0.08);
     }
 
+    /* ── HALLWAY NAV STRIP ── */
+    .hallway-strip {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 3px; z-index: 80;
+      background: linear-gradient(to bottom,
+        transparent 5%,
+        rgba(120,80,30,0.12) 20%,
+        rgba(120,80,30,0.18) 50%,
+        rgba(120,80,30,0.12) 80%,
+        transparent 95%);
+      transition: width 0.5s ease, background 0.5s ease;
+      overflow: hidden;
+      cursor: default;
+    }
+    .hallway-strip:hover,
+    .hallway-strip.open {
+      width: 200px;
+      background: var(--surface);
+      border-right: 1px solid rgba(120,80,30,0.1);
+      box-shadow: 4px 0 30px rgba(0,0,0,0.06);
+    }
+    .hallway-strip-inner {
+      opacity: 0;
+      transition: opacity 0.4s ease 0.15s;
+      padding: 2.5rem 1.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .hallway-strip:hover .hallway-strip-inner,
+    .hallway-strip.open .hallway-strip-inner {
+      opacity: 1;
+    }
+    .hallway-strip-title {
+      font-family: var(--font-fraktur);
+      font-size: 0.85rem;
+      color: var(--cream-ghost);
+      margin-bottom: 2rem;
+      white-space: nowrap;
+    }
+    .hallway-strip-rooms {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+    }
+    .hallway-strip-room {
+      display: block;
+      text-decoration: none;
+      font-family: var(--font-italic);
+      font-size: 0.95rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream-mute);
+      padding: 0.5rem 0.6rem;
+      border-left: 2px solid transparent;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .hallway-strip-room:hover {
+      color: var(--cream-dim);
+      border-left-color: var(--amber-dim);
+      background: rgba(120,80,30,0.04);
+    }
+    .hallway-strip-room.current {
+      color: var(--amber);
+      border-left-color: var(--amber);
+    }
+    .hallway-strip-room .room-icon {
+      display: inline-block;
+      width: 1.4rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+    .hallway-strip-room.ghost-room {
+      color: var(--cream-ghost);
+      filter: blur(0.3px);
+    }
+    .hallway-strip-sound {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(120,80,30,0.08);
+    }
+    .hallway-strip-sound button {
+      background: none; border: none;
+      font-family: var(--font-italic);
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--cream-ghost);
+      padding: 0.4rem 0.6rem;
+      transition: color 0.3s ease;
+    }
+    .hallway-strip-sound button:hover {
+      color: var(--amber-dim);
+    }
+
+    /* Mobile: keyhole icon instead of strip */
+    @media (max-width: 640px) {
+      .hallway-strip {
+        width: 0; background: none;
+      }
+      .hallway-strip:hover { width: 0; }
+      .hallway-strip.open {
+        width: 100%; height: 100%;
+        top: auto; bottom: 0;
+        background: var(--surface);
+        border-top: 1px solid rgba(120,80,30,0.12);
+        border-right: none;
+        border-radius: 16px 16px 0 0;
+        max-height: 70vh;
+        box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
+      }
+      .hallway-strip.open .hallway-strip-inner {
+        opacity: 1;
+        padding: 1.5rem 1.5rem 2rem;
+      }
+    }
+    .keyhole-btn {
+      display: none;
+      position: fixed;
+      bottom: 1rem; left: 1rem;
+      z-index: 81;
+      background: var(--surface);
+      border: 1px solid rgba(120,80,30,0.12);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      color: var(--amber-dim);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .keyhole-btn:hover { background: var(--surface-lift); }
+    @media (max-width: 640px) {
+      .keyhole-btn { display: flex; align-items: center; justify-content: center; }
+    }
+
+    /* ── CARRIED CANDLE ── */
+    .carried-candle {
+      position: fixed;
+      top: 1rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 70;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      opacity: 0.5;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    .carried-candle:hover { opacity: 0.75; }
+    .carried-flame {
+      width: 5px; height: 8px;
+      background: radial-gradient(ellipse at bottom,
+        rgba(220,170,80,0.9) 0%,
+        rgba(180,120,40,0.5) 50%,
+        transparent 100%);
+      border-radius: 50% 50% 30% 30%;
+      animation: candleFlicker 2.8s ease-in-out infinite;
+    }
+    .carried-wick {
+      width: 1px; height: 3px;
+      background: rgba(80,60,30,0.4);
+    }
+    .carried-wax {
+      width: 3px; height: 10px;
+      background: linear-gradient(to bottom,
+        rgba(200,180,140,0.3),
+        rgba(200,180,140,0.15));
+      border-radius: 0 0 1px 1px;
+    }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -517,6 +690,32 @@
   <div class="atmo-vignette"></div>
   <div class="atmo-grain"></div>
   <div class="embers" id="embers"></div>
+
+  <!-- ══ HALLWAY NAV STRIP ══ -->
+  <nav class="hallway-strip" id="hallway-strip" aria-label="House navigation">
+    <div class="hallway-strip-inner">
+      <div class="hallway-strip-title">Maison Caché</div>
+      <ul class="hallway-strip-rooms">
+        <li><a href="index.html" class="hallway-strip-room current"><span class="room-icon">&#x1F6AA;</span> The Foyer</a></li>
+        <li><a href="perfume-atelier.html" class="hallway-strip-room"><span class="room-icon">&#x1F33A;</span> The Perfume Atelier</a></li>
+        <li><a href="hearth.html" class="hallway-strip-room"><span class="room-icon">&#x1F525;</span> The Hearth</a></li>
+        <li><a href="library.html" class="hallway-strip-room"><span class="room-icon">&#x1F4DA;</span> The Library</a></li>
+        <li><a href="celestial-archive.html" class="hallway-strip-room"><span class="room-icon">&#x2727;</span> The Celestial Archive</a></li>
+        <li><span class="hallway-strip-room ghost-room"><span class="room-icon">&#x1F33F;</span> The Garden</span></li>
+      </ul>
+      <div class="hallway-strip-sound">
+        <button onclick="toggleSound()" id="sound-toggle">&#x1F9BF; sound: off</button>
+      </div>
+    </div>
+  </nav>
+  <button class="keyhole-btn" id="keyhole-btn" onclick="toggleHallway()" aria-label="Open house navigation">&#x1F573;</button>
+
+  <!-- ══ CARRIED CANDLE ══ -->
+  <div class="carried-candle" aria-hidden="true">
+    <div class="carried-flame"></div>
+    <div class="carried-wick"></div>
+    <div class="carried-wax"></div>
+  </div>
 
   <div id="house-whisper">
     <div style="font-family:var(--font-italic);font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;color:rgba(120,80,30,0.75);line-height:2;letter-spacing:0.04em">
@@ -697,6 +896,7 @@
         @maisoncache
       </a>
       <div style="margin-top:1rem;font-family:var(--font-hand);font-size:0.9rem;color:rgba(42,31,20,0.28)">last candle lit: <span id="visitor-count">000137</span></div>
+      <div style="margin-top:0.5rem;font-family:var(--font-hand);font-size:0.8rem;color:rgba(42,31,20,0.2)" id="last-tended"></div>
       <div style="margin-top:0.8rem">
         <a href="#" onclick="event.preventDefault();document.getElementById('privacy-modal').style.display='block'"
            style="font-size:0.55rem;letter-spacing:0.15em;color:rgba(42,31,20,0.18);text-decoration:none;font-family:var(--font-display);text-transform:uppercase">
@@ -1077,6 +1277,64 @@
       el.scrollTop = 0;
       setStatus('your reading is ready');
     }
+    // ══ HALLWAY NAV STRIP ══
+    function toggleHallway() {
+      const strip = document.getElementById('hallway-strip');
+      strip.classList.toggle('open');
+      const btn = document.getElementById('keyhole-btn');
+      btn.textContent = strip.classList.contains('open') ? '\u2715' : '\uD83D\uDD73';
+    }
+    // Close hallway on outside click (mobile)
+    document.addEventListener('click', function(e) {
+      const strip = document.getElementById('hallway-strip');
+      const btn = document.getElementById('keyhole-btn');
+      if (strip.classList.contains('open') && !strip.contains(e.target) && e.target !== btn) {
+        strip.classList.remove('open');
+        btn.textContent = '\uD83D\uDD73';
+      }
+    });
+
+    // ══ SOUND TOGGLE (placeholder) ══
+    let soundOn = false;
+    function toggleSound() {
+      soundOn = !soundOn;
+      const btn = document.getElementById('sound-toggle');
+      btn.textContent = soundOn ? '\uD83E\uDDBF sound: on' : '\uD83E\uDDBF sound: off';
+      setStatus(soundOn ? 'the house exhales' : 'the house is listening');
+    }
+
+    // ══ TIME OF DAY ══
+    (function() {
+      const now = new Date();
+      // Use AEST approximation
+      const utcH = now.getUTCHours();
+      const aestH = (utcH + 10) % 24;
+      const root = document.documentElement;
+      const warmth = document.querySelector('.atmo-warmth');
+      const vignette = document.querySelector('.atmo-vignette');
+
+      if (aestH >= 6 && aestH < 12) {
+        // Morning — cooler, brighter
+        if (warmth) warmth.style.filter = 'brightness(1.1) saturate(0.85)';
+      } else if (aestH >= 18 && aestH < 22) {
+        // Evening — warmer
+        if (warmth) warmth.style.filter = 'brightness(1.15) saturate(1.15)';
+      } else if (aestH >= 22 || aestH < 2) {
+        // Night — darker, tighter vignette
+        if (warmth) warmth.style.filter = 'brightness(0.7) saturate(1.2)';
+        if (vignette) vignette.style.background = 'radial-gradient(ellipse at center, transparent 30%, rgba(180,160,130,0.35) 100%)';
+      }
+      // 2am-4am handled by existing 3AM door easter egg
+    })();
+
+    // ══ LAST TENDED FOOTER ══
+    (function() {
+      const el = document.getElementById('last-tended');
+      if (!el) return;
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const now = new Date();
+      el.textContent = 'ink still wet as of ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    })();
   </script>
 </body>
 </html>

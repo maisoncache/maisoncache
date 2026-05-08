@@ -14,7 +14,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Infant:ital,wght@0,300;0,400;1,300;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Infant:ital,wght@0,300;0,400;1,300;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -46,6 +46,7 @@
       --font-body:    'EB Garamond', serif;
       --font-italic:  'Cormorant Infant', serif;
       --font-fraktur: 'UnifrakturMaguntia', cursive;
+      --font-hand:    'Caveat', cursive;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -496,6 +497,213 @@
       .book-card { padding: 2rem 1.5rem; }
     }
 
+    /* ── HALLWAY NAV STRIP ── */
+    .hallway-strip {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 3px; z-index: 80;
+      background: linear-gradient(to bottom,
+        transparent 5%,
+        rgba(176,112,16,0.1) 20%,
+        rgba(176,112,16,0.15) 50%,
+        rgba(176,112,16,0.1) 80%,
+        transparent 95%);
+      transition: width 0.5s ease, background 0.5s ease;
+      overflow: hidden;
+      cursor: default;
+    }
+    .hallway-strip:hover,
+    .hallway-strip.open {
+      width: 200px;
+      background: rgba(12,8,6,0.97);
+      border-right: 1px solid rgba(176,112,16,0.08);
+      box-shadow: 4px 0 30px rgba(0,0,0,0.4);
+    }
+    .hallway-strip-inner {
+      opacity: 0;
+      transition: opacity 0.4s ease 0.15s;
+      padding: 2.5rem 1.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .hallway-strip:hover .hallway-strip-inner,
+    .hallway-strip.open .hallway-strip-inner { opacity: 1; }
+    .hallway-strip-title {
+      font-family: var(--font-fraktur);
+      font-size: 0.85rem;
+      color: var(--cream-ghost);
+      margin-bottom: 2rem;
+      white-space: nowrap;
+    }
+    .hallway-strip-rooms {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      flex: 1;
+    }
+    .hallway-strip-room {
+      display: block;
+      text-decoration: none;
+      font-family: var(--font-italic);
+      font-size: 0.95rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream-mute);
+      padding: 0.5rem 0.6rem;
+      border-left: 2px solid transparent;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .hallway-strip-room:hover {
+      color: var(--cream-dim);
+      border-left-color: var(--amber-dim);
+      background: rgba(176,112,16,0.04);
+    }
+    .hallway-strip-room.current {
+      color: var(--amber);
+      border-left-color: var(--amber);
+    }
+    .hallway-strip-room .room-icon {
+      display: inline-block;
+      width: 1.4rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+    .hallway-strip-room.ghost-room {
+      color: var(--cream-ghost);
+      filter: blur(0.3px);
+    }
+    .hallway-strip-sound {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(176,112,16,0.06);
+    }
+    .hallway-strip-sound button {
+      background: none; border: none;
+      font-family: var(--font-italic);
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--cream-ghost);
+      padding: 0.4rem 0.6rem;
+      cursor: crosshair;
+      transition: color 0.3s ease;
+    }
+    .hallway-strip-sound button:hover { color: var(--amber-dim); }
+
+    @media (max-width: 640px) {
+      .hallway-strip { width: 0; background: none; }
+      .hallway-strip:hover { width: 0; }
+      .hallway-strip.open {
+        width: 100%; height: 100%;
+        top: auto; bottom: 0;
+        background: rgba(12,8,6,0.98);
+        border-top: 1px solid rgba(176,112,16,0.1);
+        border-right: none;
+        border-radius: 16px 16px 0 0;
+        max-height: 70vh;
+        box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+      }
+      .hallway-strip.open .hallway-strip-inner {
+        opacity: 1;
+        padding: 1.5rem 1.5rem 2rem;
+      }
+    }
+    .keyhole-btn {
+      display: none;
+      position: fixed;
+      bottom: 3rem; left: 1rem;
+      z-index: 81;
+      background: rgba(16,12,8,0.9);
+      border: 1px solid rgba(176,112,16,0.12);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      color: var(--amber-dim);
+      cursor: crosshair;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .keyhole-btn:hover { background: rgba(26,16,8,0.95); }
+    @media (max-width: 640px) {
+      .keyhole-btn { display: flex; align-items: center; justify-content: center; }
+    }
+
+    /* ── CARRIED CANDLE ── */
+    .carried-candle {
+      position: fixed;
+      top: 1rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 70;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      opacity: 0.5;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+    .carried-flame {
+      width: 5px; height: 8px;
+      background: radial-gradient(ellipse at bottom,
+        rgba(255,200,80,0.9) 0%,
+        rgba(196,144,26,0.5) 50%,
+        transparent 100%);
+      border-radius: 50% 50% 30% 30%;
+      animation: candleFlicker 2.8s ease-in-out infinite;
+    }
+    .carried-wick {
+      width: 1px; height: 3px;
+      background: rgba(176,112,16,0.3);
+    }
+    .carried-wax {
+      width: 3px; height: 10px;
+      background: linear-gradient(to bottom,
+        rgba(242,232,213,0.2),
+        rgba(242,232,213,0.08));
+      border-radius: 0 0 1px 1px;
+    }
+
+    /* ── READING LAMP GLOW ── */
+    .book-overlay.open .book-overlay-inner::before {
+      content: '';
+      position: fixed;
+      top: -20%; right: -10%;
+      width: 60%; height: 70%;
+      background: radial-gradient(ellipse at center,
+        rgba(196,144,26,0.06) 0%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── WEBRING BAR ── */
+    .webring-bar {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(176,112,16,0.06);
+      border-bottom: 1px solid rgba(176,112,16,0.06);
+      margin: 2rem auto;
+      max-width: 400px;
+    }
+    .webring-bar-label {
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      color: rgba(176,112,16,0.3);
+      margin-bottom: 0.5rem;
+    }
+    .webring-bar-nav {
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(176,112,16,0.25);
+    }
+    .webring-bar-nav a {
+      color: rgba(176,112,16,0.35);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .webring-bar-nav a:hover { color: var(--teal-bright); }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -551,9 +759,35 @@
   <div class="atmo-grain"></div>
   <div class="dust-layer" id="dust"></div>
 
+  <!-- ══ HALLWAY NAV STRIP ══ -->
+  <!-- she wrote this page at 3am. the shelves remember. -->
+  <nav class="hallway-strip" id="hallway-strip" aria-label="House navigation">
+    <div class="hallway-strip-inner">
+      <div class="hallway-strip-title">Maison Caché</div>
+      <ul class="hallway-strip-rooms">
+        <li><a href="index.html" class="hallway-strip-room"><span class="room-icon">&#x1F6AA;</span> The Foyer</a></li>
+        <li><a href="perfume-atelier.html" class="hallway-strip-room"><span class="room-icon">&#x1F33A;</span> The Perfume Atelier</a></li>
+        <li><a href="hearth.html" class="hallway-strip-room"><span class="room-icon">&#x1F525;</span> The Hearth</a></li>
+        <li><a href="library.html" class="hallway-strip-room current"><span class="room-icon">&#x1F4DA;</span> The Library</a></li>
+        <li><a href="celestial-archive.html" class="hallway-strip-room"><span class="room-icon">&#x2727;</span> The Celestial Archive</a></li>
+        <li><span class="hallway-strip-room ghost-room"><span class="room-icon">&#x1F33F;</span> The Garden</span></li>
+      </ul>
+      <div class="hallway-strip-sound">
+        <button onclick="toggleSound()" id="sound-toggle">&#x1F9BF; sound: off</button>
+      </div>
+    </div>
+  </nav>
+  <button class="keyhole-btn" id="keyhole-btn" onclick="toggleHallway()" aria-label="Open house navigation">&#x1F573;</button>
+
+  <!-- ══ CARRIED CANDLE ══ -->
+  <div class="carried-candle" aria-hidden="true">
+    <div class="carried-flame"></div>
+    <div class="carried-wick"></div>
+    <div class="carried-wax"></div>
+  </div>
+
   <header class="library-header">
     <a href="index.html" class="back-link">← The House</a>
-    <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
     <div class="header-name">The Library</div>
     <div class="header-hours">always open</div>
   </header>
@@ -659,11 +893,20 @@
       </a>
     </div>
 
+    <!-- ══ WEBRING ══ -->
+    <div class="webring-bar">
+      <div class="webring-bar-label">Part of the Midnight Reading Circle</div>
+      <div class="webring-bar-nav">
+        <a href="#">&lt;&lt; prev</a> &middot; <a href="#">list</a> &middot; <a href="#">next &gt;&gt;</a>
+      </div>
+    </div>
+
     <footer style="padding:3rem 2rem;text-align:center;border-top:1px solid rgba(176,112,16,0.06)">
       <div style="font-family:var(--font-fraktur);font-size:1.3rem;color:rgba(242,232,213,0.15);margin-bottom:0.5rem">The Library</div>
-      <p style="font-family:var(--font-italic);font-style:italic;font-size:0.85rem;color:rgba(242,232,213,0.12)">
+      <p style="font-family:var(--font-italic);font-style:italic;font-size:0.85rem;color:rgba(242,232,213,0.12);margin-bottom:0.5rem">
         The book is always open. The house is always reading.
       </p>
+      <div style="font-family:var(--font-hand);font-size:0.8rem;color:rgba(242,232,213,0.12)" id="last-tended"></div>
     </footer>
 
   </div>
@@ -685,10 +928,10 @@
   <div id="house-status">
     <div id="house-status-left">
       <span class="status-dot"></span>
-      <span id="house-status-msg">house: the library</span>
+      <span id="house-status-msg">the pages are turning</span>
     </div>
     <div id="house-status-right">
-      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span id="house-status-phase"></span>
       <span style="opacity:0.3">·</span>
       <span id="house-status-time">--:--</span>
     </div>
@@ -996,6 +1239,40 @@
         window.location.href = 'sanctum.html';
       }
     }
+
+    // ══ HALLWAY NAV STRIP ══
+    function toggleHallway() {
+      var strip = document.getElementById('hallway-strip');
+      strip.classList.toggle('open');
+      var btn = document.getElementById('keyhole-btn');
+      btn.textContent = strip.classList.contains('open') ? '\u2715' : '\uD83D\uDD73';
+    }
+    document.addEventListener('click', function(e) {
+      var strip = document.getElementById('hallway-strip');
+      var btn = document.getElementById('keyhole-btn');
+      if (strip.classList.contains('open') && !strip.contains(e.target) && e.target !== btn) {
+        strip.classList.remove('open');
+        btn.textContent = '\uD83D\uDD73';
+      }
+    });
+
+    // ══ SOUND TOGGLE (placeholder) ══
+    var soundOn = false;
+    function toggleSound() {
+      soundOn = !soundOn;
+      var btn = document.getElementById('sound-toggle');
+      btn.textContent = soundOn ? '\uD83E\uDDBF sound: on' : '\uD83E\uDDBF sound: off';
+      setStatus(soundOn ? 'rain on the windows' : 'the pages are turning');
+    }
+
+    // ══ LAST TENDED ══
+    (function() {
+      var el = document.getElementById('last-tended');
+      if (!el) return;
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var now = new Date();
+      el.textContent = 'ink still wet as of ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    })();
   </script>
 </body>
 </html>
