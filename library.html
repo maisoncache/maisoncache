@@ -18,15 +18,15 @@
 
   <style>
     :root {
-      --bg:          #241c14;
-      --bg-warm:     #2c2218;
-      --oak:         #2e2218;
-      --leather:     #3a2c1e;
+      --bg:          #342a1e;
+      --bg-warm:     #3c3024;
+      --oak:         #3e3226;
+      --leather:     #4a3c2e;
       --ember:       #8b3a12;
       --amber:       #b07010;
       --amber-bright:#c8841a;
-      --amber-dim:   rgba(176,112,16,0.85);
-      --amber-mute:  rgba(176,112,16,0.28);
+      --amber-dim:   rgba(196,132,26,0.9);
+      --amber-mute:  rgba(176,112,16,0.35);
       --teal:        #2a5c52;
       --teal-bright: #3a7a6e;
       --teal-dim:    rgba(42,92,82,0.65);
@@ -34,12 +34,12 @@
       --crimson:     #5a1520;
       --crimson-dim: rgba(90,21,32,0.55);
       --gold:        #c4901a;
-      --gold-dim:    rgba(196,144,26,0.7);
-      --gold-mute:   rgba(196,144,26,0.25);
+      --gold-dim:    rgba(196,144,26,0.85);
+      --gold-mute:   rgba(196,144,26,0.35);
       --cream:       #f2e8d5;
-      --cream-dim:   rgba(242,232,213,0.9);
-      --cream-mute:  rgba(242,232,213,0.55);
-      --cream-ghost: rgba(242,232,213,0.18);
+      --cream-dim:   rgba(242,232,213,0.95);
+      --cream-mute:  rgba(242,232,213,0.7);
+      --cream-ghost: rgba(242,232,213,0.25);
       --parchment:   #e8d8b8;
 
       --font-display: 'Cinzel', serif;
@@ -80,7 +80,7 @@
     }
     .atmo-vignette {
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse 70% 70% at center, transparent 30%, rgba(15,10,8,0.6) 100%);
+      background: radial-gradient(ellipse 85% 85% at center, transparent 45%, rgba(15,10,8,0.35) 100%);
     }
     .atmo-grain {
       position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.04;
@@ -133,7 +133,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 50;
       padding: 1.4rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
-      background: linear-gradient(to bottom, rgba(30,22,16,0.85), transparent);
+      background: linear-gradient(to bottom, rgba(48,38,28,0.85), transparent);
     }
     .back-link {
       font-family: var(--font-display); font-size: 0.6rem;
@@ -172,8 +172,8 @@
       transform: translateX(-50%);
       width: 70%; height: 60%;
       background: radial-gradient(ellipse at center,
-        rgba(176,112,16,0.1) 0%,
-        rgba(139,58,18,0.05) 35%,
+        rgba(196,144,26,0.15) 0%,
+        rgba(176,112,16,0.08) 35%,
         transparent 70%);
       pointer-events: none;
       z-index: 1;
@@ -205,13 +205,13 @@
     }
     .room-heading {
       font-family: var(--font-italic);
-      font-size: clamp(1.8rem,4.5vw,3rem);
+      font-size: clamp(2rem,5vw,3.5rem);
       font-style: italic; font-weight: 300;
       color: var(--cream); line-height: 1.3;
     }
     .body-text {
       font-family: var(--font-body);
-      font-size: clamp(1.15rem,2.2vw,1.38rem);
+      font-size: clamp(1.25rem,2.5vw,1.5rem);
       font-style: italic; color: var(--cream-dim);
       line-height: 2.2;
     }
@@ -247,7 +247,7 @@
 
     /* ── BOOKSHELF ── */
     .bookshelf-container {
-      width: 100%; max-width: 800px; margin: 0 auto;
+      width: 100%; max-width: 920px; margin: 0 auto;
       position: relative;
     }
     /* Warm ambient pool behind the shelves — like wall sconces */
@@ -256,9 +256,9 @@
       position: absolute;
       top: -40px; left: -10%; right: -10%; bottom: -40px;
       background:
-        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(176,112,16,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(176,112,16,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139,58,18,0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(196,144,26,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 60%, rgba(196,144,26,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 50% 50%, rgba(176,112,16,0.08) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -273,8 +273,8 @@
       top: -8px; left: 5%; right: 5%;
       height: 100%;
       background: radial-gradient(ellipse 90% 60% at 50% 0%,
-        rgba(196,144,26,0.12) 0%,
-        rgba(176,112,16,0.06) 30%,
+        rgba(196,144,26,0.2) 0%,
+        rgba(176,112,16,0.1) 30%,
         transparent 70%);
       pointer-events: none;
       z-index: 1;
@@ -339,9 +339,9 @@
       text-orientation: mixed;
       transform: rotate(180deg);
       font-family: var(--font-italic);
-      font-size: 0.65rem;
+      font-size: 0.8rem;
       font-style: italic;
-      color: rgba(242,232,213,0.5);
+      color: rgba(242,232,213,0.6);
       letter-spacing: 0.08em;
       padding: 0 2px;
       max-height: 90%;
@@ -394,7 +394,7 @@
     /* ── SEARCH ── */
     .search-bar {
       display: flex; gap: 0;
-      max-width: 420px; width: 100%;
+      max-width: 500px; width: 100%;
       margin: 0 auto 3rem;
       border: 1px solid rgba(176,112,16,0.15);
     }
@@ -402,8 +402,8 @@
       flex: 1; background: rgba(30,22,16,0.8);
       border: none; outline: none;
       color: var(--cream); font-family: var(--font-body);
-      font-size: 1rem; font-style: italic;
-      padding: 0.8rem 1.2rem;
+      font-size: 1.1rem; font-style: italic;
+      padding: 0.9rem 1.4rem;
       transition: background 0.4s ease;
     }
     .search-input:focus { background: rgba(38,28,18,0.9); }
@@ -522,11 +522,11 @@
     }
     .cat-tab {
       background: none;
-      border: 1px solid rgba(176,112,16,0.12);
+      border: 1px solid rgba(176,112,16,0.18);
       color: var(--cream-mute);
-      font-family: var(--font-display); font-size: 0.6rem;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      padding: 0.65rem 1.2rem;min-height:44px; transition: all 0.4s ease;
+      font-family: var(--font-display); font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.75rem 1.4rem;min-height:44px; transition: all 0.4s ease;
     }
     .cat-tab:hover, .cat-tab.active {
       border-color: rgba(176,112,16,0.45); color: var(--amber-dim);
@@ -724,8 +724,9 @@
       cursor: crosshair;
       transition: transform 0.4s ease;
       z-index: 10;
+      transform: scale(1.6);
     }
-    .library-cat:hover { transform: translateY(-2px); }
+    .library-cat:hover { transform: scale(1.6) translateY(-2px); }
     .cat-body {
       position: relative;
       width: 32px; height: 18px;
@@ -782,16 +783,16 @@
     }
     .cat-tooltip {
       position: absolute;
-      bottom: calc(100% + 12px);
+      bottom: calc(100% + 16px);
       left: 50%; transform: translateX(-50%);
-      width: 180px;
+      width: 220px;
       background: rgba(25,18,14,0.97);
       border: 1px solid rgba(176,112,16,0.15);
       padding: 0.6rem 0.8rem;
       font-family: var(--font-italic);
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       font-style: italic;
-      color: rgba(196,144,26,0.6);
+      color: rgba(196,144,26,0.7);
       text-align: center;
       line-height: 1.5;
       opacity: 0; visibility: hidden;
@@ -808,28 +809,29 @@
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      gap: 2.5rem;
-      padding: 2rem 1rem;
+      gap: 3.5rem;
+      padding: 3rem 1rem;
       position: relative;
     }
     .curiosity {
       position: relative;
       cursor: crosshair;
       transition: transform 0.4s ease, filter 0.4s ease;
-      opacity: 0.55;
+      opacity: 0.65;
+      transform: scale(1.6);
     }
     .curiosity:hover {
-      opacity: 0.85;
-      transform: translateY(-3px);
+      opacity: 0.95;
+      transform: scale(1.6) translateY(-3px);
       filter: brightness(1.3);
     }
     .curiosity-label {
       position: absolute;
-      bottom: -1.2rem; left: 50%;
+      bottom: -1.4rem; left: 50%;
       transform: translateX(-50%);
       font-family: var(--font-hand);
-      font-size: 0.65rem;
-      color: rgba(176,112,16,0.25);
+      font-size: 0.55rem;
+      color: rgba(176,112,16,0.35);
       white-space: nowrap;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -930,8 +932,8 @@
 
     /* ── FRAMED PORTRAIT ── */
     .portrait-frame {
-      width: 120px; height: 150px;
-      border: 3px solid rgba(176,112,16,0.25);
+      width: 160px; height: 200px;
+      border: 3px solid rgba(176,112,16,0.3);
       padding: 4px;
       position: relative;
       cursor: crosshair;
@@ -956,8 +958,8 @@
       transition: background 0.8s ease;
     }
     .portrait-figure {
-      font-size: 2.5rem;
-      opacity: 0.3;
+      font-size: 3.5rem;
+      opacity: 0.4;
       transition: all 0.8s ease;
     }
     .portrait-frame:hover .portrait-figure {
@@ -991,10 +993,10 @@
       align-items: center;
       gap: 0;
       margin: 2rem auto 1.5rem;
-      width: 120px;
+      width: 180px;
     }
     .stair-step {
-      height: 8px;
+      height: 10px;
       background: linear-gradient(to bottom,
         rgba(176,112,16,0.15),
         rgba(42,26,14,0.4));
@@ -1286,7 +1288,7 @@
 
     <!-- ══ GHOST CTA ══ -->
     <div style="text-align:center;margin:3rem auto 2rem;max-width:480px;opacity:0.85">
-      <p style="font-family:var(--font-italic);font-size:1.15rem;font-style:italic;color:var(--gold-dim);line-height:1.7;margin-bottom:1rem">
+      <p style="font-family:var(--font-italic);font-size:1.3rem;font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:1.2rem">
         The Library's shelves change with the moon.<br>Members receive curated reading each phase.
       </p>
       <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
@@ -1468,8 +1470,8 @@
     ];
 
     // Spine colour palette — rich, aged, warm
-    const SPINE_HEIGHTS = [110, 130, 95, 120, 105, 140, 100, 125, 115, 135, 90, 118];
-    const SPINE_WIDTHS  = [22, 28, 18, 24, 20, 26, 22, 30, 18, 25, 20, 28];
+    const SPINE_HEIGHTS = [135, 158, 118, 148, 130, 168, 124, 152, 140, 162, 112, 145];
+    const SPINE_WIDTHS  = [28, 35, 24, 30, 26, 33, 28, 38, 24, 32, 26, 35];
 
     let currentFilter = 'all';
     let currentSearch = '';
