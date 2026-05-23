@@ -17,7 +17,7 @@
       background: #f5f0eb;
       color: #2d2d2d;
       min-height: 100vh;
-      padding-bottom: 100px;
+      padding-bottom: 120px;
     }
 
     header {
@@ -48,7 +48,6 @@
       right: 0;
       background: #4a3728;
       color: #fff;
-      padding: 0;
       z-index: 100;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
     }
@@ -57,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 20px;
+      padding: 14px 20px;
     }
 
     .total-bar .count {
@@ -73,7 +72,7 @@
     .send-btn {
       display: block;
       width: 100%;
-      padding: 16px;
+      padding: 18px;
       background: #6b8f5e;
       color: #fff;
       border: none;
@@ -119,7 +118,7 @@
       cursor: pointer;
       transition: background 0.15s;
       user-select: none;
-      min-height: 56px;
+      min-height: 60px;
     }
 
     .product-item:active {
@@ -131,8 +130,8 @@
     }
 
     .product-item .check {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border: 2px solid #c8bdb0;
       border-radius: 50%;
       margin-right: 14px;
@@ -151,7 +150,7 @@
     .product-item.selected .check::after {
       content: '✓';
       color: #fff;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
     }
 
@@ -160,14 +159,14 @@
     }
 
     .product-name {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 500;
       color: #2d2d2d;
       line-height: 1.3;
     }
 
     .product-size {
-      font-size: 13px;
+      font-size: 14px;
       color: #a09080;
       margin-top: 2px;
     }
@@ -183,7 +182,7 @@
     .quantity-controls {
       display: none;
       align-items: center;
-      margin-left: 12px;
+      margin-left: 10px;
       flex-shrink: 0;
     }
 
@@ -192,18 +191,19 @@
     }
 
     .qty-btn {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 2px solid #c8bdb0;
       background: #fff;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: #4a3728;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
     }
 
     .qty-btn:active {
@@ -213,73 +213,40 @@
     .qty-value {
       font-size: 18px;
       font-weight: 700;
-      min-width: 28px;
+      min-width: 30px;
       text-align: center;
       color: #4a3728;
     }
 
+    .notes-section {
+      background: #fff;
+      border-bottom: 2px solid #e8e0d8;
+      margin-top: 12px;
+    }
+
+    .notes-label {
+      padding: 10px 16px 0;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #8a7b6b;
+    }
+
     .notes-input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 10px 16px 14px;
       border: none;
-      border-bottom: 2px solid #e8e0d8;
-      font-size: 16px;
+      font-size: 17px;
       font-family: inherit;
       background: #fff;
       color: #2d2d2d;
       outline: none;
+      resize: none;
     }
 
     .notes-input::placeholder {
       color: #c0b0a0;
-    }
-
-    .notes-input:focus {
-      border-bottom-color: #6b8f5e;
-    }
-
-    .sent-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(74, 55, 40, 0.95);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 200;
-    }
-
-    .sent-overlay.visible {
-      display: flex;
-    }
-
-    .sent-overlay .tick {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #6b8f5e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .sent-overlay .tick::after {
-      content: '✓';
-      font-size: 40px;
-      color: #fff;
-    }
-
-    .sent-overlay p {
-      color: #fff;
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .sent-overlay .sub {
-      color: #d0c4b8;
-      font-size: 15px;
-      margin-top: 8px;
     }
 
     @media (min-width: 600px) {
@@ -294,92 +261,59 @@
     <p class="subtitle">Tap items to add them</p>
   </header>
 
-  <div>
-    <input type="text" class="notes-input" id="notes" placeholder="Any extra notes...">
-  </div>
-
   <main id="app"></main>
+
+  <div class="notes-section">
+    <p class="notes-label">Extra notes</p>
+    <textarea class="notes-input" id="notes" rows="2" placeholder="Anything else you need..."></textarea>
+  </div>
 
   <div class="running-total">
     <div class="total-bar">
       <span class="count" id="item-count">0 items</span>
       <span class="price" id="total-price">$0.00</span>
     </div>
-    <button class="send-btn" id="send-btn" disabled>SEND LIST TO KES</button>
-  </div>
-
-  <div class="sent-overlay" id="sent-overlay">
-    <div class="tick"></div>
-    <p>List sent!</p>
-    <p class="sub">Kes will get it now</p>
+    <button class="send-btn" id="send-btn" disabled>SEND LIST TO KES ✉</button>
   </div>
 
 <script>
   // ============================================
-  // SUPABASE CONFIG — Replace these values
+  // PRODUCT CATALOGUE
   // ============================================
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const products = [
+    { id: 1,  name: "Baby Spinach",                        size: "120g",    price: 2.70,  category: "Fruit & Veg" },
+    { id: 2,  name: "Baby Cos Lettuce",                    size: null,      price: 3.50,  category: "Fruit & Veg" },
+    { id: 3,  name: "Cocktail Tomatoes Truss",             size: null,      price: 3.90,  category: "Fruit & Veg" },
+    { id: 4,  name: "Pears",                               size: "each",    price: null,  category: "Fruit & Veg" },
+    { id: 5,  name: "Red Grapes",                          size: null,      price: null,  category: "Fruit & Veg" },
+    { id: 6,  name: "Vaalia Probiotic Yoghurt Vanilla",    size: "4 pack",  price: 5.00,  category: "Dairy" },
+    { id: 7,  name: "Powdered Milk Full Cream",            size: null,      price: 10.50, category: "Dairy" },
+    { id: 8,  name: "Half Loaf of Bread",                  size: null,      price: null,  category: "Bread & Bakery" },
+    { id: 9,  name: "Hi Fibre Bread Rolls",                size: "4 pack",  price: 2.70,  category: "Bread & Bakery" },
+    { id: 10, name: "Arnott's Saladas",                    size: "250g",    price: 3.40,  category: "Pantry" },
+    { id: 11, name: "Milo",                                size: "1kg",     price: 17.50, category: "Pantry" },
+    { id: 12, name: "Twinings Chamomile Tea",              size: null,      price: 8.00,  category: "Pantry" },
+    { id: 13, name: "Sustagen",                            size: "3 pack",  price: 7.00,  category: "Pantry" },
+    { id: 14, name: "Ouma Buttermilk Rusks",               size: null,      price: 7.00,  category: "Pantry" },
+    { id: 15, name: "Raw Sugar",                           size: "2kg",     price: 3.20,  category: "Pantry" },
+    { id: 16, name: "Arborio Rice",                        size: "1kg",     price: 4.00,  category: "Pantry" },
+    { id: 17, name: "Weet-Bix",                            size: "small box", price: null, category: "Pantry" },
+    { id: 18, name: "Bottled Peaches",                     size: null,      price: null,  category: "Pantry" },
+    { id: 19, name: "Herbert Adams King Island Beef Pie",  size: "2 pack",  price: 6.90,  category: "Frozen" }
+  ];
 
-  // Simple Supabase client (no SDK needed)
-  const supabase = {
-    async query(table, params = '') {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params}`, {
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
-        }
-      });
-      return res.json();
-    },
-    async insert(table, data) {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
-        },
-        body: JSON.stringify(data)
-      });
-      return res.json();
-    }
-  };
+  const RECIPIENT = 'Keziarogers@live.com.au';
 
   // ============================================
-  // APP STATE
+  // STATE
   // ============================================
-  let products = [];
-  let selected = {}; // { productId: quantity }
-
-  // ============================================
-  // LOAD PRODUCTS
-  // ============================================
-  async function loadProducts() {
-    try {
-      products = await supabase.query('products', 'order=sort_order.asc');
-      renderProducts();
-    } catch (err) {
-      console.error('Failed to load products:', err);
-      document.getElementById('app').innerHTML = `
-        <div style="padding:40px 20px;text-align:center;color:#8a7b6b;">
-          <p style="font-size:18px;margin-bottom:8px;">Couldn't load the list</p>
-          <p style="font-size:14px;">Check your connection and try again</p>
-          <button onclick="loadProducts()" style="margin-top:20px;padding:12px 24px;background:#6b8f5e;color:#fff;border:none;border-radius:6px;font-size:16px;cursor:pointer;">Try again</button>
-        </div>`;
-    }
-  }
+  const selected = {}; // { productId: quantity }
 
   // ============================================
   // RENDER
   // ============================================
-  function renderProducts() {
+  function render() {
     const app = document.getElementById('app');
-
-    // Group by category in the order they first appear
     const categoryOrder = [];
     const grouped = {};
     for (const p of products) {
@@ -392,15 +326,13 @@
 
     let html = '';
     for (const cat of categoryOrder) {
-      html += `<div class="category">`;
-      html += `<div class="category-header">${cat}</div>`;
-      html += `<ul class="product-list">`;
+      html += `<div class="category"><div class="category-header">${cat}</div><ul class="product-list">`;
       for (const p of grouped[cat]) {
         const qty = selected[p.id] || 1;
-        const isSelected = !!selected[p.id];
-        const priceText = p.price ? `$${Number(p.price).toFixed(2)}` : '';
+        const isSel = !!selected[p.id];
+        const priceText = p.price ? `$${p.price.toFixed(2)}` : '';
         html += `
-          <li class="product-item${isSelected ? ' selected' : ''}" data-id="${p.id}" onclick="toggleProduct(${p.id})">
+          <li class="product-item${isSel ? ' selected' : ''}" data-id="${p.id}" onclick="toggleProduct(${p.id})">
             <div class="check"></div>
             <div class="product-info">
               <div class="product-name">${p.name}</div>
@@ -408,15 +340,14 @@
             </div>
             ${priceText ? `<div class="product-price">${priceText}</div>` : ''}
             <div class="quantity-controls" onclick="event.stopPropagation()">
-              <button class="qty-btn" onclick="updateQuantity(${p.id}, -1)">−</button>
+              <button class="qty-btn" onclick="updateQty(${p.id}, -1)">−</button>
               <span class="qty-value">${qty}</span>
-              <button class="qty-btn" onclick="updateQuantity(${p.id}, 1)">+</button>
+              <button class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
             </div>
           </li>`;
       }
       html += `</ul></div>`;
     }
-
     app.innerHTML = html;
   }
 
@@ -429,17 +360,16 @@
     } else {
       selected[id] = 1;
     }
-    updateTotal();
-    // Re-render just the affected item instead of whole list
     const item = document.querySelector(`.product-item[data-id="${id}"]`);
-    if (!item) return;
-    const isSelected = !!selected[id];
-    item.classList.toggle('selected', isSelected);
-    const qtySpan = item.querySelector('.qty-value');
-    if (qtySpan) qtySpan.textContent = selected[id] || 1;
+    if (item) {
+      item.classList.toggle('selected', !!selected[id]);
+      const qtySpan = item.querySelector('.qty-value');
+      if (qtySpan) qtySpan.textContent = selected[id] || 1;
+    }
+    updateTotal();
   }
 
-  function updateQuantity(id, delta) {
+  function updateQty(id, delta) {
     if (!selected[id]) return;
     const newQty = selected[id] + delta;
     if (newQty <= 0) {
@@ -455,86 +385,61 @@
   }
 
   function updateTotal() {
-    const ids = Object.keys(selected).map(Number);
     let totalItems = 0;
     let totalPrice = 0;
-    let priceKnown = false;
+    let hasPrices = false;
 
-    for (const id of ids) {
-      const qty = selected[id];
+    for (const [id, qty] of Object.entries(selected)) {
       totalItems += qty;
-      const p = products.find(x => x.id === id);
+      const p = products.find(x => x.id === Number(id));
       if (p && p.price) {
-        totalPrice += Number(p.price) * qty;
-        priceKnown = true;
+        totalPrice += p.price * qty;
+        hasPrices = true;
       }
     }
 
     document.getElementById('item-count').textContent =
       totalItems === 1 ? '1 item' : `${totalItems} items`;
-
     document.getElementById('total-price').textContent =
-      priceKnown ? `~$${totalPrice.toFixed(2)}` : '$0.00';
-
+      hasPrices ? `~$${totalPrice.toFixed(2)}` : '$0.00';
     document.getElementById('send-btn').disabled = totalItems === 0;
   }
 
   // ============================================
-  // SUBMIT
+  // SEND VIA EMAIL
   // ============================================
-  async function submitList() {
-    const btn = document.getElementById('send-btn');
-    btn.disabled = true;
-    btn.textContent = 'SENDING…';
+  function sendList() {
+    const lines = [];
+    const categoryOrder = [...new Set(products.map(p => p.category))];
 
-    try {
-      const notes = document.getElementById('notes').value.trim();
-
-      // Create the list
-      const listResult = await supabase.insert('shopping_lists', {
-        status: 'submitted',
-        notes: notes || null,
-        submitted_at: new Date().toISOString()
-      });
-
-      const list = Array.isArray(listResult) ? listResult[0] : listResult;
-      if (!list || !list.id) throw new Error('No list ID returned');
-
-      // Insert all items
-      const items = Object.entries(selected).map(([productId, quantity]) => ({
-        list_id: list.id,
-        product_id: Number(productId),
-        quantity
-      }));
-
-      await supabase.insert('list_items', items);
-
-      // Show success
-      document.getElementById('sent-overlay').classList.add('visible');
-
-      // Reset after 3 seconds
-      setTimeout(() => {
-        selected = {};
-        document.getElementById('notes').value = '';
-        document.getElementById('sent-overlay').classList.remove('visible');
-        renderProducts();
-        updateTotal();
-        btn.textContent = 'SEND LIST TO KES';
-      }, 3000);
-
-    } catch (err) {
-      console.error('Failed to send list:', err);
-      btn.disabled = false;
-      btn.textContent = 'SEND LIST TO KES';
-      alert('Something went wrong. Please try again.');
+    for (const cat of categoryOrder) {
+      const items = products.filter(p => selected[p.id] && p.category === cat);
+      if (items.length === 0) continue;
+      lines.push(cat.toUpperCase());
+      for (const p of items) {
+        const qty = selected[p.id];
+        const detail = [p.size, p.price ? `$${p.price.toFixed(2)}` : null].filter(Boolean).join(' · ');
+        lines.push(`  ${qty > 1 ? `${qty}x ` : ''}${p.name}${detail ? `  (${detail})` : ''}`);
+      }
+      lines.push('');
     }
+
+    const notes = document.getElementById('notes').value.trim();
+    if (notes) {
+      lines.push('NOTES');
+      lines.push(`  ${notes}`);
+    }
+
+    const body = lines.join('\n').trim();
+    const subject = 'Shopping List';
+    window.location.href = `mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
   // ============================================
   // INIT
   // ============================================
-  document.getElementById('send-btn').addEventListener('click', submitList);
-  loadProducts();
+  document.getElementById('send-btn').addEventListener('click', sendList);
+  render();
 </script>
 
 </body>
