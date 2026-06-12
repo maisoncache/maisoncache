@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Library — Maison Caché</title>
   <meta name="description" content="The library never closes its book. Every shelf holds something." />
-  <meta name="robots" content="noindex" />
+  <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta property="og:title" content="The Library — Maison Caché" />
   <meta property="og:description" content="The library never closes its book. Every shelf holds something." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://maisoncache.github.io/maisoncache/img/og-card.jpg" />
   <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -615,22 +616,6 @@
       color: var(--cream-ghost);
       filter: blur(0.3px);
     }
-    .hallway-strip-sound {
-      margin-top: auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(176,112,16,0.06);
-    }
-    .hallway-strip-sound button {
-      background: none; border: none;
-      font-family: var(--font-italic);
-      font-size: 0.8rem;
-      font-style: italic;
-      color: var(--cream-ghost);
-      padding: 0.4rem 0.6rem;
-      cursor: crosshair;
-      transition: color 0.3s ease;
-    }
-    .hallway-strip-sound button:hover { color: var(--amber-dim); }
 
     @media (max-width: 640px) {
       .hallway-strip { width: 0; background: none; }
@@ -1048,32 +1033,6 @@
     }
 
     /* ── WEBRING BAR ── */
-    .webring-bar {
-      text-align: center;
-      padding: 1.5rem 2rem;
-      border-top: 1px solid rgba(176,112,16,0.06);
-      border-bottom: 1px solid rgba(176,112,16,0.06);
-      margin: 2rem auto;
-      max-width: 400px;
-    }
-    .webring-bar-label {
-      font-family: var(--font-hand);
-      font-size: 1.05rem;
-      color: rgba(176,112,16,0.4);
-      margin-bottom: 0.5rem;
-    }
-    .webring-bar-nav {
-      font-family: 'Courier New', monospace;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      color: rgba(176,112,16,0.35);
-    }
-    .webring-bar-nav a {
-      color: rgba(176,112,16,0.35);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .webring-bar-nav a:hover { color: var(--teal-bright); }
 
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
@@ -1143,9 +1102,6 @@
         <li><a href="celestial-archive.html" class="hallway-strip-room"><span class="room-icon">&#x2727;</span> The Celestial Archive</a></li>
         <li><span class="hallway-strip-room ghost-room"><span class="room-icon">&#x1F33F;</span> The Garden</span></li>
       </ul>
-      <div class="hallway-strip-sound">
-        <button onclick="toggleSound()" id="sound-toggle">&#x1F9BF; sound: off</button>
-      </div>
     </div>
   </nav>
   <button class="keyhole-btn" id="keyhole-btn" onclick="toggleHallway()" aria-label="Open house navigation">&#x1F573;</button>
@@ -1289,7 +1245,7 @@
     <!-- ══ GHOST CTA ══ -->
     <div style="text-align:center;margin:3rem auto 2rem;max-width:480px;opacity:0.85">
       <p style="font-family:var(--font-italic);font-size:1.3rem;font-style:italic;color:var(--gold-dim);line-height:1.8;margin-bottom:1.2rem">
-        The Library's shelves change with the moon.<br>Members receive curated reading each phase.
+        The Library's shelves change with the moon.<br>Members receive curated reading each phase — The Inner House, $5&nbsp;AUD/month.
       </p>
       <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
          style="display:inline-block;text-decoration:none;padding:0.75rem 2rem;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.28em;text-transform:uppercase;color:#b07010;border:1px solid rgba(176,112,16,0.4);border-radius:2px;transition:all 0.3s ease">
@@ -1322,12 +1278,6 @@
     </div>
 
     <!-- ══ WEBRING ══ -->
-    <div class="webring-bar">
-      <div class="webring-bar-label">Part of the Midnight Reading Circle</div>
-      <div class="webring-bar-nav">
-        <a href="#">&lt;&lt; prev</a> &middot; <a href="#">list</a> &middot; <a href="#">next &gt;&gt;</a>
-      </div>
-    </div>
 
     <footer style="padding:3rem 2rem;text-align:center;border-top:1px solid rgba(176,112,16,0.06)">
       <div style="font-family:var(--font-fraktur);font-size:1.3rem;color:rgba(242,232,213,0.15);margin-bottom:0.5rem">The Library</div>
@@ -1684,14 +1634,6 @@
       }
     });
 
-    // ══ SOUND TOGGLE (placeholder) ══
-    var soundOn = false;
-    function toggleSound() {
-      soundOn = !soundOn;
-      var btn = document.getElementById('sound-toggle');
-      btn.textContent = soundOn ? '\uD83E\uDDBF sound: on' : '\uD83E\uDDBF sound: off';
-      setStatus(soundOn ? 'rain on the windows' : 'the pages are turning');
-    }
 
     // ══ LAST TENDED ══
     (function() {
@@ -1808,5 +1750,6 @@
     // Re-render with the secret book
     renderShelves();
   </script>
+  <script src="js/moon.js"></script>
 </body>
 </html>

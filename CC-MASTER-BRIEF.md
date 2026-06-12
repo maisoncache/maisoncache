@@ -1,3 +1,5 @@
+> **HISTORICAL — April 2026 launch brief.** The live site has moved on (parchment Foyer/Library, un-gated Archive, Ghost at `maison-cache.ghost.io`, deployed from `main`). Do not implement from this file — **CLAUDE.md is the source of truth.**
+
 # MAISON CACHÉ — Claude Code Master Brief
 ## All HTML Updates for April 1 Launch
 
@@ -5,7 +7,7 @@
 
 ## THE HOUSE
 
-Maison Caché is a hidden house on the internet. Dark wellness. Whimsigoth aesthetic. For women who feel too much and rest too little. The site lives at `maisoncache.github.io/Maison-cache/` (note capital M).
+Maison Caché is a hidden house on the internet. Dark wellness. Whimsigoth aesthetic. For women who feel too much and rest too little. The site lives at `maisoncache.github.io/maisoncache/`.
 
 The site is the free storefront. Ghost (newsletter platform) is where paid membership lives. All email captures on the site redirect to Ghost signup. No paywall on the website. Ever.
 
@@ -31,8 +33,8 @@ The site is the free storefront. Ghost (newsletter platform) is where paid membe
 Every page that has an email input form and webhook submission must be updated:
 - Remove: `<input type="email">` fields, submit buttons that call webhook functions
 - Remove: `WEBHOOK_URL` constant and all `fetch(WEBHOOK_URL...)` calls
-- Replace with: `<a href="https://maisoncache.ghost.io/#/portal/signup">` styled as a button
-- Ghost URL: `https://maisoncache.ghost.io/#/portal/signup` (confirm actual subdomain)
+- Replace with: `<a href="https://maison-cache.ghost.io/#/portal/signup">` styled as a button
+- Ghost URL: `https://maison-cache.ghost.io/#/portal/signup` (confirm actual subdomain)
 
 ### 2. The Oracle → Tarot (Foyer) + Scent Reading (Perfume Atelier)
 - The Oracle scent quiz mechanics move from `index.html` to `perfume-atelier.html`
@@ -95,9 +97,9 @@ Each room should reference at least one other room with invitational language:
 
 All Ghost links should point to:
 ```
-https://maisoncache.ghost.io/#/portal/signup
+https://maison-cache.ghost.io/#/portal/signup
 ```
-**Confirm the actual subdomain after Ghost setup.**
+**Confirmed subdomain: `maison-cache.ghost.io` (with hyphen).**
 
 The CTA language is NEVER "subscribe" or "sign up." It's:
 - "Join the house"

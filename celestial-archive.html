@@ -10,6 +10,7 @@
   <meta property="og:title" content="Celestial Archive — Maison Caché" />
   <meta property="og:description" content="The archive lives in the sky. Each star is a story." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://maisoncache.github.io/maisoncache/img/og-card.jpg" />
   <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -709,7 +710,7 @@
 
   <header class="archive-header">
     <a href="index.html" class="back-link">← The House</a>
-    <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
+    <div class="moon-strip"></div>
     <div class="header-title">Celestial Archive</div>
     <div class="member-status">open</div>
   </header>
@@ -791,7 +792,7 @@
              aria-label="The Vow-Grove — locked"
              onclick="openLocked('The Vow-Grove')"
              onkeydown="if(event.key==='Enter')openLocked('The Vow-Grove')"
-             onmouseenter="setStatus('the vow-grove — members only')"
+             onmouseenter="setStatus('the vow-grove — still forming')"
              onmouseleave="setStatus('the archive breathes')">
           <div class="star-node-inner">
             <div class="star-point"></div>
@@ -925,7 +926,7 @@
       <span id="house-status-msg">house: the archive</span>
     </div>
     <div id="house-status-right">
-      <span id="house-status-phase">🌖 waning gibbous</span>
+      <span id="house-status-phase"></span>
       <span style="opacity:0.3">·</span>
       <span id="house-status-time">--:--</span>
     </div>
@@ -1137,7 +1138,7 @@
 
     // ── LOCKED STARS ──
     function openLocked(name) {
-      document.getElementById('locked-title').textContent = `${name} — members only.`;
+      document.getElementById('locked-title').textContent = `${name} — still forming.`;
       document.getElementById('locked-card').classList.add('open');
       document.body.style.overflow = 'hidden';
       setStatus('a locked door');
@@ -1174,5 +1175,6 @@
     }
 
   </script>
+  <script src="js/moon.js"></script>
 </body>
 </html>

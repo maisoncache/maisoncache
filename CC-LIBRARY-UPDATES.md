@@ -1,3 +1,5 @@
+> **HISTORICAL — April 2026 launch brief.** The live site has moved on (parchment Foyer/Library, un-gated Archive, Ghost at `maison-cache.ghost.io`, deployed from `main`). Do not implement from this file — **CLAUDE.md is the source of truth.**
+
 # LIBRARY (library.html) — Content & Structure Updates
 
 ## OVERVIEW

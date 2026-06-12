@@ -9,6 +9,7 @@
   <meta property="og:title" content="The Codex — Maison Caché">
   <meta property="og:description" content="The Codex doesn't judge what you want. It helps you ask for it.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://maisoncache.github.io/maisoncache/img/og-card.jpg" />
   <meta name="twitter:card" content="summary">
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +109,7 @@
 <body>
   <div class="layer-vignette"></div>
   <a class="nav-back" href="sanctum.html">← The Sanctum</a>
-  <div class="moon-strip">🌕 Full Moon · Pink Moon · April 2026</div>
+  <div class="moon-strip"></div>
   <div class="house-status" id="house-status">[ codex : waiting ]</div>
 
   <div class="content">
@@ -384,5 +385,6 @@ document.querySelectorAll('.for-btn').forEach(btn=>{
 document.querySelector('.shuffle-btn').addEventListener('mouseenter',()=>setStatus('the pages turn'));
 document.querySelector('.shuffle-btn').addEventListener('mouseleave',()=>setStatus('waiting'));
 </script>
+  <script src="js/moon.js"></script>
 </body>
 </html>
