@@ -86,6 +86,14 @@ Working and sacred:
 - Sanctum `◉` triple-click trigger (every page) · `descend` keyword
 - Library: book tooltips, cat recommendations, portrait cycle, hidden secret book passage
 - Hearth: hemisphere toggle (localStorage `mc-hemisphere`), 3-minute idle note
+- **Foyer oracle surface:** three face-down cards already on the table — click/hover to fan,
+  click to open the oracle overlay. No "Draw your cards" button. Do not add one back.
+- **Foyer 90-second idle whisper:** after 90s of inactivity, "You're still here." appears
+  once and fades. No CTA attached. Do not attach one.
+- **Foyer door personalities:** each `.hall-door` has a class modifier —
+  `--ajar` (Atelier, permanent light-leak), `--sound` (Hearth, pulsing dash),
+  `--noted` (Library, pinned note slip), `--distant` (Archive, slightly receded).
+  Do not remove these classes or flatten them back to the base style.
 
 ## Removed — do not reintroduce
 
@@ -123,3 +131,5 @@ This file is the source of truth.
   "Hold my place", "Request entry", "The Inner House".
 - Pricing language on the site: "The Inner House — $5 AUD/month". Keep it visible
   wherever The Inner House is mentioned.
+- `cursor: crosshair` on `body` and `button` across all pages (Foyer was previously
+  `cursor: default` — now corrected; do not revert).
