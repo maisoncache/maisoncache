@@ -60,7 +60,7 @@
       color: var(--cream);
       font-family: var(--font-body);
       overflow-x: hidden;
-      cursor: default;
+      cursor: crosshair;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -68,7 +68,7 @@
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: #d8cab2; }
     ::-webkit-scrollbar-thumb { background: rgba(100,75,40,0.25); border-radius: 2px; }
-    button { font-family: var(--font-body); cursor: default; }
+    button { font-family: var(--font-body); cursor: crosshair; }
 
     /* ── ATMOSPHERE ── */
     .atmo-warmth {
@@ -657,6 +657,84 @@
       border-radius: 0 0 1px 1px;
     }
 
+    /* ── ORACLE FACE-DOWN CARDS ── */
+    .oracle-cards-surface {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 140px;
+      cursor: crosshair;
+      position: relative;
+    }
+    .oracle-card-facedown {
+      width: 72px; height: 120px;
+      border: 1px solid rgba(100,75,40,0.3);
+      border-radius: 4px;
+      background: linear-gradient(160deg, #2a1f14 0%, #1a1208 100%);
+      position: relative;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      flex-shrink: 0;
+    }
+    .oracle-card-facedown::after {
+      content: '✦';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.75rem;
+      color: rgba(120,80,30,0.3);
+      pointer-events: none;
+    }
+    .oracle-card--left  { transform: rotate(-8deg) translateX(14px) translateY(6px); }
+    .oracle-card--center { z-index: 2; transform: translateY(-6px); }
+    .oracle-card--right { transform: rotate(8deg) translateX(-14px) translateY(6px); }
+    .oracle-cards-surface:hover .oracle-card--left  { transform: rotate(-12deg) translateX(18px) translateY(2px); box-shadow: -3px 6px 18px rgba(0,0,0,0.18); }
+    .oracle-cards-surface:hover .oracle-card--center { transform: translateY(-14px); box-shadow: 0 12px 28px rgba(0,0,0,0.2); }
+    .oracle-cards-surface:hover .oracle-card--right { transform: rotate(12deg) translateX(-18px) translateY(2px); box-shadow: 3px 6px 18px rgba(0,0,0,0.18); }
+
+    /* ── DOOR PERSONALITY STATES ── */
+    .hall-door--ajar .door-light { opacity: 0.65; }
+    .hall-door--ajar::after {
+      content: '';
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 2px; pointer-events: none;
+      background: linear-gradient(to bottom,
+        transparent 10%,
+        rgba(196,147,90,0.45) 35%,
+        rgba(196,147,90,0.6) 55%,
+        rgba(196,147,90,0.35) 72%,
+        transparent 90%);
+    }
+    @keyframes soundPulse {
+      0%,100% { opacity: 0.1; transform: translateY(-50%) scale(0.85); }
+      50% { opacity: 0.55; transform: translateY(-50%) scale(1); }
+    }
+    .hall-door--sound::after {
+      content: '—';
+      position: absolute; right: 2.2rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-hand); font-size: 1.1rem;
+      color: rgba(196,147,90,0.5);
+      animation: soundPulse 5.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hall-door--noted::after {
+      content: 'always open';
+      position: absolute; top: -11px; right: 2rem;
+      font-family: var(--font-hand); font-size: 0.82rem;
+      color: rgba(120,80,30,0.6);
+      transform: rotate(-2.5deg);
+      background: var(--bg);
+      padding: 1px 7px;
+      border: 1px solid rgba(120,80,30,0.15);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .hall-door--distant {
+      opacity: 0.72;
+      transform: scale(0.984);
+      transform-origin: center;
+    }
+    .hall-door--distant:hover { opacity: 0.9; }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -717,8 +795,8 @@
       <div style="position:relative;z-index:2;animation:fadeUp 3s ease forwards;display:flex;flex-direction:column;align-items:center;gap:1.5rem">
         <div class="eyebrow" style="animation:fadeIn 2s 0.5s ease both">The Hidden House</div>
         <h1 class="house-name"><span class="shimmer">Maison Caché</span></h1>
-        <div class="found-you" style="animation:fadeIn 2.5s 1.5s ease both">You found it.</div>
-        <div style="margin-top:2rem;animation:fadeIn 2s 2.5s ease both">
+        <div class="found-you" style="animation:fadeIn 3s 4s ease both">You found it.</div>
+        <div style="margin-top:2rem;animation:fadeIn 2s 6s ease both">
           <button class="btn" onclick="document.getElementById('entry-table').scrollIntoView({behavior:'smooth'})">
             Step inside
           </button>
@@ -732,30 +810,29 @@
     <!-- ══ THE ENTRY TABLE ══ -->
     <section class="entry-table" id="entry-table">
       <div class="reveal" style="max-width:520px;margin-bottom:3rem">
-        <p class="body-text" style="text-align:center;margin-bottom:1.5rem">
-          Maison Caché is not a shop.<br>
-          It's a house you find when you stop looking.
+        <p class="body-text" style="text-align:center;margin-bottom:1.2rem">
+          The kettle is on.<br>
+          The post came this morning.
         </p>
         <p class="body-text" style="text-align:center;font-size:clamp(1.05rem,1.9vw,1.2rem);color:var(--cream-mute)">
-          Every room holds something different —<br>
-          a scent reading, a wolf note, a library that never closes.<br>
-          You don't browse here. You <em style="color:var(--amber-dim)">feel</em> here.
+          The tarot is on the hall table if you want it.<br>
+          The library never locks.<br>
+          There's something on the hearth.
         </p>
-        <p class="hand-text" style="text-align:center;margin-top:1.5rem;color:rgba(120,80,30,0.6);font-size:clamp(1.05rem,1.9vw,1.25rem)">A free house of tarot, scent, recipes, fiction &amp; ritual — with deeper rooms for members.</p>
+        <p class="hand-text" style="text-align:center;margin-top:1.5rem;color:rgba(120,80,30,0.55);font-size:clamp(1rem,1.8vw,1.2rem)">Scent, recipes, fiction, ritual &amp; tarot — free, with deeper rooms for those who stay.</p>
       </div>
 
       <div class="section-breath"><span class="pressed-flower">&#10047;</span></div>
 
       <div class="reveal table-surface" id="oracle-table" style="position:relative;overflow:hidden">
-        <img src="img/tarot-card.webp" alt="" class="copperplate" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:120px;opacity:0.15;mix-blend-mode:multiply;pointer-events:none" aria-hidden="true" loading="lazy" />
         <div class="candle">&#x1F56F;</div>
-        <div style="font-family:var(--font-display);font-size:clamp(0.6rem,0.9vw,0.68rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.5rem;position:relative">The Oracle</div>
-        <p class="body-text" style="margin-bottom:1.2rem;font-size:clamp(1.05rem,2vw,1.2rem)">
-          Three cards. One reading.<br>
-          Drawn for you alone.
-        </p>
-        <p class="hand-text" style="margin-bottom:2rem;color:rgba(120,80,30,0.6)">The cards are on the table. Turn them when you're ready.</p>
-        <button class="btn" onclick="openOracle()">Draw your cards</button>
+        <div style="font-family:var(--font-display);font-size:clamp(0.6rem,0.9vw,0.68rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.8rem;position:relative">The Oracle</div>
+        <div class="oracle-cards-surface" onclick="openOracle()" role="button" tabindex="0" aria-label="Three face-down tarot cards — click to draw your reading" onkeydown="if(event.key==='Enter'||event.key===' ')openOracle()">
+          <div class="oracle-card-facedown oracle-card--left"></div>
+          <div class="oracle-card-facedown oracle-card--center"></div>
+          <div class="oracle-card-facedown oracle-card--right"></div>
+        </div>
+        <p class="hand-text" style="margin-top:1.6rem;color:rgba(120,80,30,0.42);font-size:clamp(0.9rem,1.5vw,1.05rem)">The cards are on the table.</p>
       </div>
     </section>
 
@@ -765,7 +842,7 @@
     <section class="the-hallway" id="rooms">
       <div class="hallway-label reveal">The rooms of the house</div>
 
-      <a href="perfume-atelier.html" class="hall-door reveal"
+      <a href="perfume-atelier.html" class="hall-door hall-door--ajar reveal"
          onmouseenter="setStatus('the perfume atelier — open')"
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
@@ -778,7 +855,7 @@
         <img src="img/perfume-bottle.webp" alt="" class="door-bookplate" aria-hidden="true" loading="lazy" />
       </a>
 
-      <a href="hearth.html" class="hall-door reveal"
+      <a href="hearth.html" class="hall-door hall-door--sound reveal"
          onmouseenter="setStatus('the hearth — open')"
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
@@ -791,7 +868,7 @@
         <img src="img/fireplace.webp" alt="" class="door-bookplate" aria-hidden="true" loading="lazy" />
       </a>
 
-      <a href="library.html" class="hall-door reveal"
+      <a href="library.html" class="hall-door hall-door--noted reveal"
          onmouseenter="setStatus('the library — always open')"
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
@@ -804,7 +881,7 @@
         <img src="img/book-moon.webp" alt="" class="door-bookplate" aria-hidden="true" loading="lazy" />
       </a>
 
-      <a href="celestial-archive.html" class="hall-door reveal"
+      <a href="celestial-archive.html" class="hall-door hall-door--distant reveal"
          onmouseenter="setStatus('the celestial archive — open')"
          onmouseleave="setStatus('the house is listening')">
         <div class="door-light"></div>
@@ -852,12 +929,17 @@
       <div class="reveal" style="max-width:480px;margin:0 auto;background:var(--surface);border:1px solid rgba(160,128,80,0.1);padding:3rem 2.5rem;position:relative" id="remember-section">
         <div id="remember-form">
           <div style="font-family:var(--font-display);font-size:clamp(0.6rem,0.9vw,0.68rem);letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1.5rem">The house sends letters</div>
-          <p class="body-text" style="margin-bottom:1.5rem;font-size:clamp(1.05rem,2vw,1.2rem)">
-            Every time the moon shifts, a letter arrives.<br>
-            Recipes, rituals, playlists, and a prompt from the Sanctum.
+          <p class="body-text" style="margin-bottom:0.7rem;font-size:clamp(1.05rem,2vw,1.2rem);color:var(--cream-mute)">
+            People ask what's behind the other doors.
           </p>
-          <p class="hand-text" style="margin-bottom:1rem;color:rgba(120,80,30,0.6);font-size:clamp(1.1rem,2vw,1.3rem)">Free to join. The letters cost nothing.</p>
-          <p class="body-text" style="margin-bottom:2rem;font-size:clamp(0.95rem,1.8vw,1.1rem);color:var(--cream-mute)">The deeper rooms are <strong style="color:var(--amber-dim)">The Inner House</strong> — $5&nbsp;AUD/month for the full recipe cycles, rituals, serialised fiction, and first entry when a new door opens.</p>
+          <p class="body-text" style="margin-bottom:1.8rem;font-size:clamp(1.05rem,2vw,1.2rem)">
+            The answer is: more house.
+          </p>
+          <p class="body-text" style="margin-bottom:1.8rem;font-size:clamp(1rem,1.9vw,1.15rem);color:var(--cream-mute)">
+            Full recipe cycles by moon phase. Rituals.<br>Serialised fiction. First entry when a new room opens.
+          </p>
+          <p class="hand-text" style="margin-bottom:0.4rem;color:rgba(120,80,30,0.5);font-size:clamp(0.88rem,1.5vw,1rem)">The Inner House — $5 AUD/month.</p>
+          <p class="body-text" style="margin-bottom:2rem;font-size:clamp(0.88rem,1.5vw,1rem);color:var(--cream-ghost);font-style:italic">(The letters are free. Always.)</p>
           <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer"
              class="btn" style="text-decoration:none">
             Join the house
@@ -1311,6 +1393,34 @@
       const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const now = new Date();
       el.textContent = 'ink still wet as of ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+    })();
+
+    // ══ 90-SECOND PRESENCE ══
+    (function() {
+      let idleTimer = null;
+      let shown = false;
+      const note = document.createElement('div');
+      note.style.cssText = [
+        'position:fixed','bottom:3.5rem','left:50%','transform:translateX(-50%)',
+        'z-index:60','opacity:0','transition:opacity 2.5s ease',
+        'pointer-events:none','text-align:center','white-space:nowrap'
+      ].join(';');
+      note.innerHTML = '<span style="font-family:var(--font-hand);font-size:1rem;color:rgba(120,80,30,0.38)">You\'re still here.</span>';
+      document.body.appendChild(note);
+      function resetIdle() {
+        if (shown) return;
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(function() {
+          if (shown) return;
+          shown = true;
+          note.style.opacity = '1';
+          setTimeout(function() { note.style.opacity = '0'; }, 5000);
+        }, 90000);
+      }
+      ['mousemove','keydown','scroll','touchstart','click'].forEach(function(ev) {
+        document.addEventListener(ev, resetIdle, { passive: true });
+      });
+      resetIdle();
     })();
   </script>
 </body>
