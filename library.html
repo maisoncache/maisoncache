@@ -1396,16 +1396,20 @@
         note: `Mira. Vale. A house that responds to truth. Sacred fiction. The first part lives here. The rest is waiting.`,
         fragment: `You already know this one.`,
         category: "from-the-old-house",
-        spine: "#2a1a0e", color: "#4a2e18"
+        spine: "#2a1a0e", color: "#4a2e18",
+        url: "https://maison-cache.ghost.io/#/portal/signup",
+        cta: "Read the rest in the house →"
       },
       {
         id: 8,
         title: "Selected Poetry — Xander",
         author: "From the old house",
         note: `Poetry and writings that arrived from somewhere else. The words carry weight. Handle them accordingly.`,
-        fragment: `Written in the house. Left here so it doesn't get lost.`,
+        fragment: `Some of it is too much to keep on an open shelf. A few pieces live here — the rest he left deeper in the house.`,
         category: "from-the-old-house",
-        spine: "#1a1018", color: "#2e1a28"
+        spine: "#1a1018", color: "#2e1a28",
+        url: "https://maison-cache.ghost.io/#/portal/signup",
+        cta: "Read the rest in the house →"
       },
       {
         id: 9,
@@ -1549,7 +1553,7 @@
         ${book.url ? `
         <a href="${book.url}" target="_blank" rel="noopener noreferrer"
            style="display:inline-block;text-decoration:none;padding:0.6rem 1.5rem;font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);border:1px solid var(--gold-mute);border-radius:2px;transition:all 0.3s ease;margin-top:0.5rem">
-          Read on Ghost →
+          ${book.cta || 'Read on Ghost →'}
         </a>
         ` : ''}
       `;
