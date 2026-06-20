@@ -406,7 +406,7 @@
         <p class="body-text" style="text-align:center;margin-bottom:2rem">
           The full Atelier cycle — phase-matched scent profiles,
           layering rituals, product recommendations, and intimacy notes —
-          lives in The Inner House — $5&nbsp;AUD/month.
+          lives in The Grimoire — $7&nbsp;AUD/month.
         </p>
         <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn">Join the house</a>
       </div>
@@ -445,21 +445,21 @@
       {
         question: "What draws you first?",
         options: [
-          { text: "Smoke and wood \u2014 the memory of fire", scores: { hearth: 2, library: 1 } },
-          { text: "Flowers and green \u2014 the garden after rain", scores: { garden: 2, storm: 1 } },
-          { text: "Warm spice \u2014 cinnamon, cardamom, skin", scores: { hearth: 1, sanctum: 1 } },
-          { text: "Petrichor and ozone \u2014 the sky before it breaks", scores: { storm: 2, garden: 1 } },
-          { text: "Vanilla and sweetness \u2014 something baking, something held", scores: { hearth: 1, sanctum: 1, library: 1 } }
+          { text: "Smoke and wood — the memory of fire", scores: { hearth: 2, library: 1 } },
+          { text: "Flowers and green — the garden after rain", scores: { garden: 2, storm: 1 } },
+          { text: "Warm spice — cinnamon, cardamom, skin", scores: { hearth: 1, sanctum: 1 } },
+          { text: "Petrichor and ozone — the sky before it breaks", scores: { storm: 2, garden: 1 } },
+          { text: "Vanilla and sweetness — something baking, something held", scores: { hearth: 1, sanctum: 1, library: 1 } }
         ]
       },
       {
         question: "Where do you feel most yourself?",
         options: [
-          { text: "In the kitchen \u2014 hands in dough, something on the stove", scores: { hearth: 2 } },
-          { text: "In the garden \u2014 soil under nails, things blooming", scores: { garden: 2 } },
-          { text: "In a library \u2014 old pages open, ink on your fingers", scores: { library: 2 } },
-          { text: "In bed \u2014 curtains drawn, the world outside forgotten", scores: { sanctum: 2 } },
-          { text: "At the window \u2014 watching a storm roll in", scores: { storm: 2 } }
+          { text: "In the kitchen — hands in dough, something on the stove", scores: { hearth: 2 } },
+          { text: "In the garden — soil under nails, things blooming", scores: { garden: 2 } },
+          { text: "In a library — old pages open, ink on your fingers", scores: { library: 2 } },
+          { text: "In bed — curtains drawn, the world outside forgotten", scores: { sanctum: 2 } },
+          { text: "At the window — watching a storm roll in", scores: { storm: 2 } }
         ]
       },
       {
@@ -468,8 +468,8 @@
           { text: "A candle and a cup of tea", scores: { hearth: 2 } },
           { text: "A walk outside, barefoot on wet grass", scores: { garden: 1, storm: 1 } },
           { text: "A book with a cracked spine", scores: { library: 2 } },
-          { text: "Silk and skin \u2014 someone close", scores: { sanctum: 2 } },
-          { text: "Wine and dark chocolate \u2014 slow indulgence", scores: { sanctum: 1, hearth: 1 } }
+          { text: "Silk and skin — someone close", scores: { sanctum: 2 } },
+          { text: "Wine and dark chocolate — slow indulgence", scores: { sanctum: 1, hearth: 1 } }
         ]
       }
     ];
@@ -477,9 +477,9 @@
     const SCENT_ARCHETYPES = {
       hearth: {
         name: "The Hearth",
-        icon: "\ud83d\udd6f",
-        description: "Your scent is warm, domestic, grounding. You smell like the safest room in the house \u2014 beeswax and baking bread, wood smoke curling through cinnamon, the faintest trace of vanilla on warm skin.",
-        notes: "Beeswax \u00b7 Cinnamon Bark \u00b7 Vanilla \u00b7 Smoked Wood \u00b7 Warm Bread",
+        icon: "🕯",
+        description: "Your scent is warm, domestic, grounding. You smell like the safest room in the house — beeswax and baking bread, wood smoke curling through cinnamon, the faintest trace of vanilla on warm skin.",
+        notes: "Beeswax · Cinnamon Bark · Vanilla · Smoked Wood · Warm Bread",
         fragrances: [
           { name: "By the Fireplace", house: "Maison Margiela Replica", tier: "Signature", note: "Smoky, sweet, chestnut. The one everyone asks about." },
           { name: "Fireside Intense", house: "Bath & Body Works", tier: "Accessible", note: "Under $30. Smoked wood and amber. Surprisingly good." },
@@ -490,35 +490,35 @@
       },
       garden: {
         name: "The Garden",
-        icon: "\ud83c\udf3f",
-        description: "Your scent is green, alive, rain-touched. You smell like the earth after water \u2014 crushed stems, wet soil, something flowering just out of sight. There is dirt under your nails and you are not sorry.",
-        notes: "Crushed Basil \u00b7 Wet Earth \u00b7 Fig Leaf \u00b7 Neroli \u00b7 Green Tomato",
+        icon: "🌿",
+        description: "Your scent is green, alive, rain-touched. You smell like the earth after water — crushed stems, wet soil, something flowering just out of sight. There is dirt under your nails and you are not sorry.",
+        notes: "Crushed Basil · Wet Earth · Fig Leaf · Neroli · Green Tomato",
         fragrances: [
           { name: "Philosykos", house: "Diptyque", tier: "Signature", note: "Fig tree in full sun. Green, milky, alive." },
           { name: "Green Tea", house: "Elizabeth Arden", tier: "Accessible", note: "Under $25. Fresh, clean, dewy. A classic for a reason." },
-          { name: "Jardin sur le Nil", house: "Herm\u00e8s", tier: "Investment", note: "Green mango, lotus, bulrushes. The garden that grows beside water." }
+          { name: "Jardin sur le Nil", house: "Hermès", tier: "Investment", note: "Green mango, lotus, bulrushes. The garden that grows beside water." }
         ],
         room: null,
         roomName: "The Garden"
       },
       library: {
         name: "The Library",
-        icon: "\ud83d\udcd6",
-        description: "Your scent is papery, leathered, inked. You smell like the oldest room in a house full of books \u2014 dust motes in amber light, aged leather, the trace of someone\u2019s fountain pen left uncapped.",
-        notes: "Old Paper \u00b7 Leather \u00b7 Tobacco \u00b7 Cedarwood \u00b7 Black Tea",
+        icon: "📖",
+        description: "Your scent is papery, leathered, inked. You smell like the oldest room in a house full of books — dust motes in amber light, aged leather, the trace of someone’s fountain pen left uncapped.",
+        notes: "Old Paper · Leather · Tobacco · Cedarwood · Black Tea",
         fragrances: [
-          { name: "Tam Dao", house: "Diptyque", tier: "Signature", note: "Sandalwood, cedar, ink. The scent of a writer\u2019s desk." },
+          { name: "Tam Dao", house: "Diptyque", tier: "Signature", note: "Sandalwood, cedar, ink. The scent of a writer’s desk." },
           { name: "Whispers in the Library", house: "Maison Margiela Replica", tier: "Accessible", note: "Under $35 travel size. Cedar, tonka, vanilla. Books and quiet." },
-          { name: "Ombr\u00e9 Leather", house: "Tom Ford", tier: "Investment", note: "Leather, jasmine, cardamom. The first edition you don\u2019t lend out." }
+          { name: "Ombré Leather", house: "Tom Ford", tier: "Investment", note: "Leather, jasmine, cardamom. The first edition you don’t lend out." }
         ],
         room: "library.html",
         roomName: "The Library"
       },
       sanctum: {
         name: "The Sanctum",
-        icon: "\ud83c\udf19",
-        description: "Your scent is dark, sensual, close. You smell like the room with the door closed \u2014 warm skin, black musk, jasmine opening at night. This is the perfume you put on when you mean it.",
-        notes: "Black Musk \u00b7 Amber \u00b7 Jasmine Night \u00b7 Warm Skin \u00b7 Oud",
+        icon: "🌙",
+        description: "Your scent is dark, sensual, close. You smell like the room with the door closed — warm skin, black musk, jasmine opening at night. This is the perfume you put on when you mean it.",
+        notes: "Black Musk · Amber · Jasmine Night · Warm Skin · Oud",
         fragrances: [
           { name: "Black Orchid", house: "Tom Ford", tier: "Signature", note: "Orchid, dark chocolate, patchouli. The one you wear when you mean it." },
           { name: "Dark Kiss", house: "Bath & Body Works", tier: "Accessible", note: "Under $20. Black dahlia, bergamot, vanilla. Dark and wearable." },
@@ -529,13 +529,13 @@
       },
       storm: {
         name: "The Storm",
-        icon: "\u26a1",
-        description: "Your scent is electric, ozone-sharp, untamed. You smell like the sky right before everything changes \u2014 petrichor on hot pavement, charged air, sea salt carried on a wind that doesn\u2019t ask permission.",
-        notes: "Petrichor \u00b7 Ozone \u00b7 Sea Salt \u00b7 Vetiver \u00b7 Lightning",
+        icon: "⚡",
+        description: "Your scent is electric, ozone-sharp, untamed. You smell like the sky right before everything changes — petrichor on hot pavement, charged air, sea salt carried on a wind that doesn’t ask permission.",
+        notes: "Petrichor · Ozone · Sea Salt · Vetiver · Lightning",
         fragrances: [
           { name: "Another 13", house: "Le Labo", tier: "Signature", note: "Ambroxan, musk, moss. The scent that changes on every skin." },
           { name: "Light Blue", house: "Dolce & Gabbana", tier: "Accessible", note: "Under $40. Citrus, ozone, cedar. The open window." },
-          { name: "Aventus", house: "Creed", tier: "Investment", note: "Pineapple, birch, musk. The storm that hasn\u2019t landed yet." }
+          { name: "Aventus", house: "Creed", tier: "Investment", note: "Pineapple, birch, musk. The storm that hasn’t landed yet." }
         ],
         room: "celestial-archive.html",
         roomName: "The Celestial Archive"
@@ -569,10 +569,10 @@
     function renderScentThreshold() {
       document.getElementById('scent-content').innerHTML =
         '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem;animation:fadeIn 1.5s ease forwards">' +
-          '<div style="font-family:var(--font-fellsc);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ember);margin-bottom:2.2rem">Maison Cach\u00e9</div>' +
+          '<div style="font-family:var(--font-fellsc);font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ember);margin-bottom:2.2rem">Maison Caché</div>' +
           '<h1 style="font-family:var(--font-cg);font-size:clamp(2.4rem,7vw,4.5rem);font-weight:300;font-style:italic;color:var(--linen);margin:0 0 0.5rem 0">The Scent Reading</h1>' +
           '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:65px;margin:1.8rem auto"></div>' +
-          '<p class="body-text" style="max-width:420px;margin:0 auto 3.5rem;text-align:center">Three questions. One reading.<br>The house will tell you what scent lives on your skin \u2014 and how to wear it like a spell.</p>' +
+          '<p class="body-text" style="max-width:420px;margin:0 auto 3.5rem;text-align:center">Three questions. One reading.<br>The house will tell you what scent lives on your skin — and how to wear it like a spell.</p>' +
           '<button class="btn" onclick="renderScentQuestion(0)">Begin your reading</button>' +
         '</div>';
     }
@@ -618,11 +618,11 @@
     }
 
     function renderScentChanneling() {
-      var lines = ["The house is reading your skin\u2026", "Something is forming\u2026", "The notes are settling\u2026", "Your scent is revealing itself\u2026"];
+      var lines = ["The house is reading your skin…", "Something is forming…", "The notes are settling…", "Your scent is revealing itself…"];
       var lineIdx = 0;
       document.getElementById('scent-content').innerHTML =
         '<div style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem">' +
-          '<div style="font-size:2.2rem;color:var(--ember);margin-bottom:2rem;animation:pulse 2.5s infinite ease-in-out">\u25c9</div>' +
+          '<div style="font-size:2.2rem;color:var(--ember);margin-bottom:2rem;animation:pulse 2.5s infinite ease-in-out">◉</div>' +
           '<p id="channeling-text" class="body-text" style="min-height:2em;transition:opacity 0.5s ease;text-align:center">' + lines[0] + '</p>' +
           '<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,64,0.25),transparent);width:44px;margin:2rem auto 0;animation:pulse 2.5s infinite ease-in-out"></div>' +
         '</div>';
