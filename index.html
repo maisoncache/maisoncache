@@ -195,6 +195,23 @@
     /* Torch mechanic needs a mouse — remove entirely on touch devices */
     .candlelight{ display:none; }
   }
+  @media (max-width:640px){
+    /* Bump fixed-size labels to readable sizes on mobile */
+    .kicker      { font-size:.78rem; letter-spacing:.22em; }
+    .state       { font-size:.72rem; letter-spacing:.18em; }
+    .eyebrow     { font-size:.75rem; letter-spacing:.32em; }
+    .arrival .eye{ font-size:.75rem; letter-spacing:.32em; }
+    .scrollhint  { font-size:.72rem; letter-spacing:.22em; }
+    .btn         { font-size:.75rem; letter-spacing:.22em; }
+    .arrival .warm{ font-size:1rem; }
+    .tag         { font-size:1rem; }
+    /* Status bar: readable but still secondary */
+    #status      { font-size:.65rem; }
+    /* Give doors a touch of breathing room */
+    .door        { padding:2rem 1.6rem 1.8rem; }
+    /* Arrival section: tighter padding on small screens */
+    .arrival     { padding:1.5rem; }
+  }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.floor{opacity:1;transform:none}body{opacity:1}}
 </style>
 </head>
