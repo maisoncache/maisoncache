@@ -473,6 +473,18 @@
       border-radius: 1px;
     }
 
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      /* Vignette is 92% opaque at edges — on mobile the whole screen IS the edge */
+      .atmo-vignette {
+        background: radial-gradient(ellipse at center, transparent 40%, rgba(5,3,10,0.35) 100%);
+      }
+      /* Aurora fills too much of a small screen — pull back significantly */
+      .atmo-aurora { opacity: 0.4; }
+      /* Embers are a performance drain on mobile — hide */
+      .embers { display: none; }
+    }
+
     /* ── ACCESSIBILITY ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {

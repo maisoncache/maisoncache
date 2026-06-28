@@ -194,6 +194,13 @@
   @media (hover:none){
     /* Torch mechanic needs a mouse — remove entirely on touch devices */
     .candlelight{ display:none; }
+    /* Cat: near-glow is mouse-triggered, never fires on touch — apply permanently */
+    .cat.here .eyes{
+      color:#f0d27a;
+      filter:drop-shadow(0 0 10px rgba(240,210,120,.8));
+      letter-spacing:.34rem;
+    }
+    .cat.here .murmur{ opacity:.5; }
   }
   @media (max-width:640px){
     /* Bump fixed-size labels to readable sizes on mobile */

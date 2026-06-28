@@ -110,6 +110,8 @@
       .footer-brand{font-size:0.65rem}
       .content{padding:0 1.2rem}
       .codex-header{padding:5rem 0 3rem}
+      /* Vignette 80% opacity at edges — too dark on small screens */
+      .layer-vignette{background:radial-gradient(ellipse at center,transparent 45%,rgba(10,5,16,0.3) 100%)}
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
