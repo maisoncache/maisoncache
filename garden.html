@@ -465,6 +465,168 @@
   .btn:hover { border-color: var(--sage); color: var(--sage); box-shadow: 0 0 22px -8px rgba(107,124,90,.4); }
   .btn-note { font-family: var(--font-fellsc); font-size: .5rem; letter-spacing: .18em; color: var(--ink-mute); margin-top: .8rem; display: block; }
 
+  /* ══════════════════════════════════════
+     COMPOST HEAP
+  ══════════════════════════════════════ */
+  .compost-section {
+    max-width: 680px; margin: 0 auto;
+    padding: 3rem 1.8rem 2rem;
+    border-top: 1px solid rgba(139,101,48,.12);
+    text-align: center;
+  }
+  .compost-header { margin-bottom: 2rem; }
+  .compost-title {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem); letter-spacing: .1em;
+    color: var(--ink); margin: .8rem 0 .5rem;
+  }
+  .compost-sub {
+    font-family: var(--font-cg); font-style: italic;
+    font-size: clamp(.9rem, 2vw, 1.05rem); color: var(--ink-dim); line-height: 1.7;
+  }
+
+  /* The pile */
+  .heap-visual { margin: 1.5rem auto; position: relative; width: 280px; height: 110px; }
+
+  .heap {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 220px; height: 80px;
+    background: radial-gradient(ellipse at 50% 40%, #4a2e10 0%, #2e1a06 55%, #1a0e02 100%);
+    border-radius: 50% 50% 35% 35% / 65% 65% 35% 35%;
+    box-shadow:
+      0 6px 18px rgba(20,10,2,.4),
+      inset 0 -3px 8px rgba(0,0,0,.3),
+      inset 0 3px 8px rgba(120,80,30,.1);
+    transition: background .8s ease, transform .4s ease;
+  }
+  /* Texture */
+  .heap::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: inherit;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(80,50,20,.4) 0%, transparent 30%),
+      radial-gradient(circle at 70% 30%, rgba(60,35,10,.3) 0%, transparent 25%),
+      radial-gradient(circle at 55% 65%, rgba(40,25,8,.3) 0%, transparent 20%);
+    pointer-events: none;
+  }
+  /* Steam wisps */
+  .heap-steam { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); width: 60px; }
+  .heap-steam span {
+    display: inline-block; width: 2px; height: 14px;
+    background: linear-gradient(to top, rgba(200,180,140,.35), transparent);
+    border-radius: 2px; margin: 0 5px;
+    animation: steamRise 2.8s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .heap-steam span:nth-child(2) { animation-delay: .9s; height: 10px; }
+  .heap-steam span:nth-child(3) { animation-delay: 1.7s; height: 12px; }
+  @keyframes steamRise {
+    0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+    20%  { opacity: 1; }
+    80%  { opacity: .3; }
+    100% { opacity: 0; transform: translateY(-18px) scaleX(1.5); }
+  }
+
+  /* State: buried — heap looks fuller */
+  .heap.has-burial {
+    background: radial-gradient(ellipse at 50% 35%, #3a2008 0%, #20100 55%, #0e0800 100%);
+    transform: translateX(-50%) scaleX(1.04) scaleY(1.06);
+  }
+
+  /* The sprout */
+  .heap-sprout {
+    position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center;
+    cursor: crosshair; opacity: 0;
+    transition: opacity .8s ease;
+    z-index: 10;
+  }
+  .heap-sprout.visible { opacity: 1; }
+  .sprout-stem {
+    width: 2px; height: 18px;
+    background: linear-gradient(to top, #4a6e30, #7aaa50);
+    border-radius: 2px;
+    animation: sproutSway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .sprout-leaf {
+    font-size: 1rem; margin-top: -2px;
+    animation: sproutSway 4s ease-in-out infinite;
+    filter: drop-shadow(0 1px 3px rgba(80,120,40,.4));
+  }
+  @keyframes sproutSway {
+    0%,100% { transform: rotate(-4deg); }
+    50%      { transform: rotate(4deg); }
+  }
+  .sprout-hint {
+    font-family: var(--font-fellsc); font-size: .44rem; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--sage-dim);
+    margin-top: .5rem; animation: breathe 2.5s ease-in-out infinite;
+  }
+
+  /* Burial form */
+  .burial-form { max-width: 440px; margin: 0 auto; }
+  .heap-prompt {
+    font-family: var(--font-fell); font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); color: var(--ink);
+    margin-bottom: 1.2rem; line-height: 1.7;
+  }
+  .burial-textarea {
+    width: 100%; background: rgba(42,31,20,.04);
+    border: 1px solid rgba(139,101,48,.25); border-radius: 3px;
+    padding: .9rem 1rem; resize: none;
+    font-family: var(--font-body); font-size: 1rem; color: var(--ink);
+    line-height: 1.7; outline: none; cursor: text;
+    transition: border-color .3s;
+    min-height: 80px;
+  }
+  .burial-textarea:focus { border-color: rgba(107,124,90,.5); }
+  .burial-textarea::placeholder { color: var(--ink-mute); font-style: italic; }
+  .bury-btn {
+    display: inline-block; margin-top: .9rem;
+    background: none; border: 1px solid rgba(92,61,30,.4);
+    color: var(--clay); font-family: var(--font-fellsc); font-size: .56rem;
+    letter-spacing: .28em; text-transform: uppercase;
+    padding: .7rem 2rem; border-radius: 3px; cursor: crosshair;
+    transition: all .4s ease;
+  }
+  .bury-btn:hover { border-color: var(--earth); color: var(--earth); background: rgba(92,61,30,.05); }
+  .bury-btn:disabled { opacity: .35; cursor: default; }
+
+  /* Post-burial states */
+  .heap-state-msg {
+    font-family: var(--font-fell); font-style: italic;
+    font-size: clamp(.95rem, 2vw, 1.05rem); color: var(--ink-dim);
+    margin: 1rem auto; max-width: 34ch; line-height: 1.8;
+    min-height: 2.4em;
+  }
+
+  /* Harvest card */
+  .harvest-card {
+    max-width: 520px; margin: 1.5rem auto 0;
+    background: var(--parch2); border: 1px solid rgba(92,61,30,.25);
+    border-radius: 3px; padding: 1.8rem 1.6rem;
+    box-shadow: 2px 4px 14px rgba(42,20,8,.1);
+    text-align: left; position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .harvest-card.revealed { opacity: 1; transform: none; }
+  .harvest-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(92,61,30,.04) 22px, rgba(92,61,30,.04) 23px);
+    pointer-events: none;
+  }
+  .harvest-label {
+    font-family: var(--font-fellsc); font-size: .48rem; letter-spacing: .28em;
+    text-transform: uppercase; color: var(--clay-dim); display: block; margin-bottom: .8rem;
+  }
+  .harvest-text {
+    font-family: var(--font-body); font-size: clamp(.95rem, 2vw, 1.05rem);
+    color: var(--ink); line-height: 1.9; position: relative; z-index: 1;
+  }
+  .harvest-text em { font-style: italic; color: var(--rust-dim); }
+
   /* ── FOOTER ── */
   .garden-footer {
     text-align: center; margin-top: 3rem; max-width: 580px; width: 100%;
@@ -680,6 +842,40 @@
 
       <div class="oracle-cards" id="oracle-cards"></div>
       <p class="oracle-closing" id="oracle-closing">That's what the ground holds. What you do with it is your work.</p>
+    </div>
+
+    <!-- ══ COMPOST HEAP ══ -->
+    <div class="compost-section fade" id="compost-section">
+      <div class="compost-header">
+        <span class="kicker">The Compost Heap</span>
+        <h2 class="compost-title">What Are You Ready to Let Rot?</h2>
+        <p class="compost-sub">Type it. The Golem takes it. It doesn't come back.</p>
+      </div>
+
+      <div class="heap-visual">
+        <div class="heap" id="heap">
+          <div class="heap-steam"><span></span><span></span><span></span></div>
+        </div>
+        <div class="heap-sprout" id="heap-sprout">
+          <span class="sprout-leaf">🌱</span>
+          <div class="sprout-stem"></div>
+          <span class="sprout-hint">— something grew —</span>
+        </div>
+      </div>
+
+      <p class="heap-state-msg" id="heap-state-msg"></p>
+
+      <div class="burial-form" id="burial-form">
+        <p class="heap-prompt">What are you ready to let rot?</p>
+        <textarea class="burial-textarea" id="burial-text" rows="3" placeholder="One word. A sentence. A whole thing. It doesn't matter."></textarea>
+        <br>
+        <button class="bury-btn" id="bury-btn" onclick="bury()">bury it</button>
+      </div>
+
+      <div class="harvest-card" id="harvest-card">
+        <span class="harvest-label">from the heap</span>
+        <p class="harvest-text" id="harvest-text"></p>
+      </div>
     </div>
 
     <!-- Footer nav -->
@@ -1016,6 +1212,138 @@
       sTimer = setTimeout(function(){ sClicks = 0; document.getElementById('sanctum-dot').style.color = 'rgba(139,101,48,.08)'; }, 1600);
       if (sClicks >= 3) { sClicks = 0; window.location.href = 'sanctum.html'; }
     };
+
+    /* ══════════════════════════════════════
+       COMPOST HEAP
+    ══════════════════════════════════════ */
+
+    var HEAP_POOL = [
+      { text: 'Petrichor — the smell of rain on dry earth — is geosmin, produced by bacteria in the soil as they begin to break down organic matter. You\'ve been smelling decomposition your whole life and calling it <em>clean.</em>' },
+      { text: 'Pick something you own that you no longer need. Don\'t donate it yet. Hold it for one minute. Notice what it was asking of you to keep it.' },
+      { text: 'In some traditions, the compost heap is where you leave offerings for the ancestors. Not to feed them — they\'re past feeding. To acknowledge that the dead become the ground, and the ground becomes the living.' },
+      { text: 'Name something that ended well. Not perfectly — <em>well.</em> The difference matters.' },
+      { text: 'Borage grows on disturbed ground. Blue star-shaped flowers, leaves that taste faintly of cucumber. It self-seeds aggressively — plants wherever the soil has been recently moved. It was the plant of courage. Soldiers drank it in wine. Add the flowers to water and drink it cold.' },
+      { text: 'Vetiver. The roots go down, not out. Harvested after two years, washed, dried, distilled. The oil smells like soil and smoke and something very old that hasn\'t finished yet. It\'s a base note because it holds everything else in place. You may need it right now.' },
+      { text: 'Do one thing today with your hands that makes something. Bread. A drawing. A badly potted plant. The material world is very patient with beginners.' },
+      { text: 'Persephone didn\'t escape the underworld. She negotiated it. Six months below, six months returned. Not rescue — <em>return.</em> The pomegranate seeds she ate bound her and freed her in the same swallow.' },
+      { text: 'What are you growing that you haven\'t told anyone about yet?' },
+      { text: 'Comfrey — called <em>knitbone</em> for its use in binding fractures. The root, made into a poultice, was said to knit bone. It also makes an excellent compost activator. What it does outside the body it does in the heap too: holds things together while they break down.' },
+      { text: 'Labdanum was collected from the coats of goats who grazed on cistus shrubs — the resin clung to their wool and was combed out. It smells like warm skin and ancient things. Used in perfume for millennia. The oldest beauty technology is also the strangest.' },
+      { text: 'Go outside tonight, even briefly. Stand still for sixty seconds. Notice what the air is doing. Come back inside.' },
+      { text: 'The ash of burned things was used to make lye soap, which cleaned everything. The Greeks called this transformation <em>kakos into kalos —</em> the bad into the beautiful. They were talking about fire. They could just as well have been talking about this.' },
+      { text: 'What do you know now that you didn\'t know a year ago? Don\'t make it a lesson. Just name the knowing.' },
+      { text: 'Oak galls are growths that appear when a wasp lays eggs inside a bud. The tree responds by growing <em>around</em> the intrusion — creating a round, hard ball. Inside: a larva, becoming. Oak galls made the iron gall ink that wrote most of the Western canon. Something that was never meant to happen, made into something that lasts.' },
+    ];
+
+    var SPROUT_HOURS = 20; // hours before sprout appears
+
+    function compostState() {
+      var buried   = localStorage.getItem('mc-compost-buried');   // timestamp string or null
+      var sprouted = localStorage.getItem('mc-compost-sprouted'); // 'true' or null
+      var count    = parseInt(localStorage.getItem('mc-compost-count') || '0', 10);
+      return { buried: buried ? parseInt(buried, 10) : null, sprouted: sprouted === 'true', count: count };
+    }
+
+    function renderHeap() {
+      var s         = compostState();
+      var heap      = document.getElementById('heap');
+      var form      = document.getElementById('burial-form');
+      var sprout    = document.getElementById('heap-sprout');
+      var stateMsg  = document.getElementById('heap-state-msg');
+      var harvestEl = document.getElementById('harvest-card');
+      var now       = Date.now();
+      var hoursOld  = s.buried ? (now - s.buried) / 3600000 : 0;
+      var isReady   = s.buried && !s.sprouted && hoursOld >= SPROUT_HOURS;
+
+      // Reset all
+      heap.classList.remove('has-burial');
+      sprout.classList.remove('visible');
+      form.style.display = 'block';
+      harvestEl.classList.remove('revealed');
+      stateMsg.textContent = '';
+
+      if (!s.buried) {
+        // Nothing composting — form ready
+        return;
+      }
+
+      if (s.buried && !s.sprouted && !isReady) {
+        // Composting in progress
+        heap.classList.add('has-burial');
+        form.style.display = 'none';
+        stateMsg.textContent = 'The heap is working.';
+        return;
+      }
+
+      if (isReady) {
+        // Sprout ready
+        heap.classList.add('has-burial');
+        form.style.display = 'none';
+        sprout.classList.add('visible');
+        stateMsg.textContent = 'Something came up.';
+        sprout.onclick = harvest;
+        return;
+      }
+
+      if (s.sprouted) {
+        // Already harvested this cycle — show form again for next burial
+        stateMsg.textContent = '';
+      }
+    }
+
+    window.bury = function() {
+      var text = document.getElementById('burial-text').value.trim();
+      if (!text) return;
+      // Text is discarded. Never stored. Gone.
+      localStorage.setItem('mc-compost-buried', Date.now().toString());
+      localStorage.removeItem('mc-compost-sprouted');
+      // Golem reacts
+      var sp = document.getElementById('golem-speech');
+      sp.style.opacity = '0';
+      setTimeout(function() {
+        sp.textContent = 'The heap has it now.';
+        sp.style.opacity = '1';
+      }, 300);
+      document.getElementById('status-msg').textContent = 'garden : the heap is working';
+      renderHeap();
+    };
+
+    function harvest() {
+      var s = compostState();
+      // Mark sprouted
+      localStorage.setItem('mc-compost-sprouted', 'true');
+      var newCount = s.count + 1;
+      localStorage.setItem('mc-compost-count', newCount.toString());
+      // Pick content — deterministic by count, cycles through pool
+      var fragment = HEAP_POOL[s.count % HEAP_POOL.length];
+      // Render
+      var sprout = document.getElementById('heap-sprout');
+      sprout.classList.remove('visible');
+      var card = document.getElementById('harvest-card');
+      document.getElementById('harvest-text').innerHTML = fragment.text;
+      // Show card after brief pause
+      setTimeout(function() {
+        card.classList.add('revealed');
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+      // Golem note
+      var sp = document.getElementById('golem-speech');
+      sp.style.opacity = '0';
+      setTimeout(function() {
+        sp.textContent = "That's what it made.";
+        sp.style.opacity = '1';
+      }, 400);
+      document.getElementById('status-msg').textContent = 'garden : something grew';
+      // Reset form after another pause so they can read the card
+      setTimeout(function() {
+        localStorage.removeItem('mc-compost-buried');
+        document.getElementById('burial-text').value = '';
+        document.getElementById('heap').classList.remove('has-burial');
+        document.getElementById('burial-form').style.display = 'block';
+      }, 2000);
+    }
+
+    renderHeap();
 
     /* ── INIT ── */
     setHem(hem);
