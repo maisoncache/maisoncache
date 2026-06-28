@@ -191,7 +191,15 @@
   /* privacy modal */
   #privacy-modal{display:none;position:fixed;inset:0;z-index:220;background:rgba(5,3,10,.97);overflow-y:auto}
 
-  @media (hover:none){ .candlelight{--my:42%} }
+  @media (hover:none){
+    .candlelight{
+      --my:42%;
+      /* Softer, larger radius on touch screens — less claustrophobic */
+      background:radial-gradient(circle min(380px,88vw) at var(--mx) var(--my),
+        rgba(255,202,120,0.09) 0%, rgba(255,178,92,0.04) 18%, rgba(8,4,14,0) 34%,
+        rgba(6,3,10,0.62) 68%, rgba(4,2,8,0.86) 100%);
+    }
+  }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.floor{opacity:1;transform:none}body{opacity:1}}
 </style>
 </head>
@@ -352,11 +360,19 @@
   </div>
 
 <script>
-  // candle follows pointer
+  // candle follows pointer / touch; re-centres on scroll when no touch active
   const root=document.documentElement;
+  let _touching=false, _touchEnd=null;
   function move(x,y){ root.style.setProperty('--mx',x+'px'); root.style.setProperty('--my',y+'px'); }
   window.addEventListener('mousemove',e=>move(e.clientX,e.clientY),{passive:true});
+  window.addEventListener('touchstart',()=>{ _touching=true; clearTimeout(_touchEnd); },{passive:true});
   window.addEventListener('touchmove',e=>{const t=e.touches[0]; if(t) move(t.clientX,t.clientY);},{passive:true});
+  window.addEventListener('touchend',()=>{ _touchEnd=setTimeout(()=>{ _touching=false; },400); },{passive:true});
+  // On scroll: keep torch centred in the viewport when user isn't actively touching
+  window.addEventListener('scroll',()=>{
+    if(!_touching && window.matchMedia('(hover:none)').matches)
+      move(window.innerWidth*0.5, window.innerHeight*0.42);
+  },{passive:true});
 
   // status
   const msg=document.getElementById('msg');

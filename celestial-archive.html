@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Celestial Archive — Maison Caché</title>
   <meta name="description" content="The archive lives in the sky. Each star is a story." />
-  <meta name="robots" content="noindex" />
+  <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta property="og:title" content="Celestial Archive — Maison Caché" />
   <meta property="og:description" content="The archive lives in the sky. Each star is a story." />
@@ -677,11 +677,12 @@
       .desktop-only { display: none; }
     }
     @media (max-width: 600px) {
-      .constellation-map {
-        height: min(400px, 55vh);
-      }
+      .constellation-map { height: min(400px, 55vh); }
       .archive-title { font-size: clamp(2.4rem, 12vw, 4rem); }
       .card-border { padding: 2rem 1.5rem; }
+      .archive-eyebrow { font-size: 0.78rem; }
+      .back-link { font-size: 0.75rem; }
+      .star-node { padding: 8px; }
     }
 
     /* ── ACCESSIBILITY ── */

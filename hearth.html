@@ -98,6 +98,16 @@
   @keyframes emberRise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.6}90%{opacity:0}100%{transform:translateY(-100vh) translateX(var(--drift));opacity:0}}
   .fade{opacity:0;transform:translateY(14px);transition:opacity 1s ease,transform 1s ease}
   .fade.in{opacity:1;transform:none}
+  @media (max-width:500px){
+    .kicker{font-size:.75rem}
+    .season{font-size:.68rem}
+    .sky-toggle button{font-size:.68rem}
+    .row .lab{font-size:.68rem}
+    .small{font-size:.68rem}
+    .phase{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--beeswax);outline-offset:2px}
 </style>
 </head>
 <body>
