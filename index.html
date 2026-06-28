@@ -192,13 +192,8 @@
   #privacy-modal{display:none;position:fixed;inset:0;z-index:220;background:rgba(5,3,10,.97);overflow-y:auto}
 
   @media (hover:none){
-    /* On touch devices the torch mechanic has no mouse to follow —
-       replace with a gentle static vignette so content stays readable */
-    .candlelight{
-      background:radial-gradient(ellipse 90% 65% at 50% 38%,
-        rgba(255,202,120,0.03) 0%, transparent 60%, rgba(4,2,8,0.14) 100%);
-      transition:none;
-    }
+    /* Torch mechanic needs a mouse — remove entirely on touch devices */
+    .candlelight{ display:none; }
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.floor{opacity:1;transform:none}body{opacity:1}}
 </style>
