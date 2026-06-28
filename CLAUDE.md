@@ -70,7 +70,8 @@ not today's sky — those are content metadata and are fine.)
   If it is ever re-gated, update the Foyer badge and this file together.
 - Sanctum — hidden (triple-click `◉` dot), 18+ age gate. 2 of 8 rooms open.
 - Codex — Sanctum sub-page, currently open/free.
-- Garden, Grimoire — "forming", intentionally not linked.
+- Garden — **open**. Seed packet mechanic: one plant per new moon, tears open to reveal riddle + four accordion sections (Grow it / Use it / Know it / Pair it). Hemisphere toggle (localStorage `mc-hemisphere`, same key as Hearth). Free teaser; deeper content members-only. Automation markers update the packet monthly. Do not hardcode plant content outside the AUTOMATION markers.
+- Grimoire — "forming", intentionally not linked.
 
 ---
 
