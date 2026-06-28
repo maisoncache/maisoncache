@@ -610,9 +610,9 @@
         <div class="rooms-grid">
 
           <div class="room-cell open" role="button" tabindex="0"
-               aria-label="Join to access The Ritual Space"
-               onclick="window.open('https://maison-cache.ghost.io/#/portal/signup', '_blank')"
-               onkeydown="if(event.key==='Enter')window.open('https://maison-cache.ghost.io/#/portal/signup','_blank')"
+               aria-label="Enter The Ritual Space"
+               onclick="openRoom('ritual')"
+               onkeydown="if(event.key==='Enter')openRoom('ritual')"
                onmouseenter="setStatus('the ritual space — open')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">🕯</span>
@@ -658,9 +658,9 @@
           </div>
 
           <div class="room-cell open" role="button" tabindex="0"
-               aria-label="Join to access The Codex"
-               onclick="window.open('https://maison-cache.ghost.io/#/portal/signup', '_blank')"
-               onkeydown="if(event.key==='Enter')window.open('https://maison-cache.ghost.io/#/portal/signup','_blank')"
+               aria-label="Enter The Codex"
+               onclick="openRoom('codex')"
+               onkeydown="if(event.key==='Enter')openRoom('codex')"
                onmouseenter="setStatus('the codex — open')"
                onmouseleave="setStatus('the basement breathes')">
             <span class="room-cell-glyph">📜</span>
@@ -886,6 +886,9 @@
         body: `The archive within the archive.<br><br>
                Distilled ritual entries. Tone preservation.<br>
                Everything the house has learned, written down.`,
+        taster: `<div style="margin:2rem 0">
+                   <a href="codex.html" class="btn btn--rose" style="text-decoration:none">Enter The Codex →</a>
+                 </div>`,
         sub: 'Scene generator. Browse by mood.',
         color: 'rgba(155,52,104,0.4)',
       },
