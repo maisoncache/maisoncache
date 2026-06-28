@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="The Garden — one plant, one moon, one packet at a time." />
+<meta name="description" content="The Garden — one plant, one moon, one packet at a time. The Golem is waiting." />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#f5f0e6" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta property="og:title" content="The Garden — Maison Caché" />
-<meta property="og:description" content="One plant. One moon. The packet changes." />
+<meta property="og:description" content="One plant. One moon. The Golem keeps it." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://maisoncache.github.io/maisoncache/img/og-card.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -18,26 +18,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --parch:   #f5f0e6;
-    --parch2:  #ede4d4;
-    --parch3:  #e2d5be;
-    --ink:     #2a1f14;
-    --ink-dim: rgba(42,31,20,.55);
-    --ink-mute:rgba(42,31,20,.32);
-    --sage:    #6b7c5a;
-    --sage-dim:rgba(107,124,90,.55);
+    --parch:    #f5f0e6;
+    --parch2:   #ede4d4;
+    --parch3:   #e2d5be;
+    --ink:      #2a1f14;
+    --ink-dim:  rgba(42,31,20,.55);
+    --ink-mute: rgba(42,31,20,.32);
+    --sage:     #6b7c5a;
+    --sage-dim: rgba(107,124,90,.55);
     --sage-mute:rgba(107,124,90,.28);
-    --gold:    #8b6530;
-    --gold-dim:rgba(139,101,48,.5);
+    --gold:     #8b6530;
+    --gold-dim: rgba(139,101,48,.5);
     --gold-mute:rgba(139,101,48,.28);
-    --rust:    #9b4c2a;
-    --rust-dim:rgba(155,76,42,.55);
+    --rust:     #9b4c2a;
+    --rust-dim: rgba(155,76,42,.55);
+    --clay:     #7a5c3a;
+    --clay-dim: rgba(122,92,58,.45);
+    --clay-mute:rgba(122,92,58,.22);
 
     --font-display:'Cinzel',serif;
-    --font-fell:'IM Fell English',serif;
-    --font-fellsc:'IM Fell English SC',serif;
-    --font-cg:'Cormorant Garamond',serif;
-    --font-body:'EB Garamond',serif;
+    --font-fell:   'IM Fell English',serif;
+    --font-fellsc: 'IM Fell English SC',serif;
+    --font-cg:     'Cormorant Garamond',serif;
+    --font-body:   'EB Garamond',serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,11 +62,13 @@
   /* ── ATMOSPHERE ── */
   .layer-light {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse at 60% 20%, rgba(245,240,230,0) 0%, rgba(237,228,212,.6) 100%);
+    background:
+      radial-gradient(ellipse at 30% 0%, rgba(220,210,180,.5) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 100%, rgba(160,180,130,.18) 0%, transparent 50%);
   }
   .layer-vignette {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 45%, rgba(210,198,178,.45) 100%);
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(210,198,178,.4) 100%);
   }
 
   /* ── NAV ── */
@@ -76,44 +81,142 @@
 
   .ribbon {
     position: fixed; top: 0; left: 0; z-index: 90;
-    background: rgba(107,124,90,.12); color: var(--sage);
+    background: rgba(107,124,90,.1); color: var(--sage);
     font-family: var(--font-fellsc); font-size: .5rem; letter-spacing: .22em;
     text-transform: uppercase; padding: .3rem .7rem;
     border-bottom-right-radius: 6px;
-    border: 1px solid rgba(107,124,90,.22); pointer-events: none;
+    border: 1px solid rgba(107,124,90,.2); pointer-events: none;
   }
 
   /* ── LAYOUT ── */
   .content { position: relative; z-index: 2; }
   .wrap { max-width: 680px; margin: 0 auto; padding: 0 1.8rem; }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 52vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 6rem 1.8rem 2rem;
-  }
+  /* ── KICKER ── */
   .kicker {
     font-family: var(--font-fellsc); font-size: .6rem;
     letter-spacing: .34em; text-transform: uppercase;
-    color: var(--sage); margin-bottom: 1.4rem;
-  }
-  .hero h1 {
-    font-family: var(--font-display); font-weight: 500;
-    font-size: clamp(2rem,5vw,3rem); letter-spacing: .06em;
-    color: var(--ink);
-  }
-  .hero .sub {
-    font-family: var(--font-cg); font-style: italic;
-    font-size: clamp(1.05rem,2.4vw,1.3rem);
-    color: var(--ink-dim); margin-top: 1rem; max-width: 36ch;
+    color: var(--sage);
   }
 
-  /* ── HEMISPHERE TOGGLE ── */
+  /* ── DIVIDER ── */
+  .rule {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-mute), transparent);
+    margin: 2rem auto;
+  }
+
+  /* ══════════════════════════════════════
+     GOLEM
+  ══════════════════════════════════════ */
+  .golem-scene {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 5rem 1.8rem 1rem;
+    text-align: center;
+    min-height: 55vh;
+  }
+
+  .golem-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  /* The figure — assembled from characters */
+  .golem {
+    font-family: monospace;
+    line-height: 1.25;
+    letter-spacing: .04em;
+    color: var(--clay);
+    font-size: clamp(.72rem, 2vw, .88rem);
+    text-align: center;
+    white-space: pre;
+    position: relative;
+    transition: all 1.2s ease;
+    filter: drop-shadow(0 2px 8px rgba(122,92,58,.2));
+    user-select: none;
+  }
+
+  /* Seasonal colour tints on the golem text */
+  .golem.season-spring { color: #6b7c5a; filter: drop-shadow(0 2px 8px rgba(107,124,90,.25)); }
+  .golem.season-summer { color: #8b6020; filter: drop-shadow(0 2px 6px rgba(139,96,32,.3)); }
+  .golem.season-autumn { color: #7a5c3a; filter: drop-shadow(0 2px 8px rgba(122,92,58,.22)); }
+  .golem.season-winter { color: #5a5a6a; filter: drop-shadow(0 2px 10px rgba(90,90,106,.18)); opacity: .82; }
+
+  /* Subtle slow breathing */
+  @keyframes golemBreath {
+    0%,100% { transform: scaleY(1) translateY(0); }
+    50%      { transform: scaleY(1.008) translateY(-1px); }
+  }
+  .golem { animation: golemBreath 6s ease-in-out infinite; }
+  .golem.season-winter { animation: golemBreath 10s ease-in-out infinite; }
+
+  /* The packet the Golem holds — layered in its arms */
+  .golem-packet-held {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 34px;
+    background: var(--parch2);
+    border: 1px solid rgba(139,101,48,.45);
+    border-radius: 2px;
+    box-shadow: 1px 2px 8px rgba(42,31,20,.18), inset 0 0 0 1px rgba(255,255,255,.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .7rem;
+    cursor: crosshair;
+    transition: transform .3s ease, box-shadow .3s ease;
+    z-index: 10;
+  }
+  .golem-packet-held:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 2px 5px 14px rgba(42,31,20,.22);
+  }
+  .golem-packet-held::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 10px;
+    background: linear-gradient(180deg, var(--parch3), transparent);
+    border-bottom: 1px dashed rgba(139,101,48,.25);
+  }
+
+  /* Speech / thought from the Golem */
+  .golem-speech {
+    font-family: var(--font-fell); font-style: italic;
+    font-size: clamp(.95rem, 2.2vw, 1.1rem);
+    color: var(--ink-dim);
+    line-height: 1.85;
+    max-width: 34ch;
+    margin: 0 auto 1rem;
+    min-height: 3.5em;
+    transition: opacity .6s ease;
+  }
+
+  .golem-name {
+    font-family: var(--font-fellsc); font-size: .5rem;
+    letter-spacing: .3em; text-transform: uppercase;
+    color: var(--clay-dim); margin-bottom: 1.4rem; display: block;
+  }
+
+  .take-hint {
+    font-family: var(--font-fellsc); font-size: .48rem;
+    letter-spacing: .28em; text-transform: uppercase;
+    color: var(--sage-dim); margin-top: 1.2rem;
+    animation: breathe 3s ease-in-out infinite;
+    display: block;
+  }
+  @keyframes breathe { 0%,100%{opacity:.45} 50%{opacity:1} }
+
+  /* After packet is taken — golem watches */
+  .golem-scene.packet-taken .golem-packet-held { display: none; }
+  .golem-scene.packet-taken .take-hint { display: none; }
+
+  /* ══════════════════════════════════════
+     HEMISPHERE TOGGLE
+  ══════════════════════════════════════ */
   .sky {
     display: flex; flex-direction: column;
-    align-items: center; gap: .7rem; margin: 1.2rem 0 .5rem;
+    align-items: center; gap: .7rem; margin: 1rem 0 .5rem;
   }
   .sky-q {
     font-family: var(--font-cg); font-style: italic;
@@ -131,194 +234,28 @@
     letter-spacing: .16em; text-transform: uppercase;
     padding: .55rem 1.2rem; transition: all .4s ease;
   }
-  .sky-toggle button.on {
-    background: rgba(107,124,90,.18); color: var(--sage);
-  }
+  .sky-toggle button.on { background: rgba(107,124,90,.18); color: var(--sage); }
 
-  /* ── DIVIDER ── */
-  .rule {
-    width: 60px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-mute), transparent);
-    margin: 2rem auto;
-  }
-
-  /* ══ SEED PACKET ══ */
+  /* ══════════════════════════════════════
+     SEED PACKET — OPEN STATE
+  ══════════════════════════════════════ */
   .packet-stage {
-    display: flex; flex-direction: column;
-    align-items: center; padding: 2rem 0 3rem;
-  }
-
-  .packet-wrap {
-    position: relative; cursor: crosshair;
-    perspective: 800px;
-  }
-
-  /* The closed packet */
-  .packet {
-    width: 220px;
-    background: var(--parch2);
-    border: 1px solid rgba(139,101,48,.35);
-    border-radius: 3px 3px 6px 6px;
-    box-shadow:
-      2px 4px 18px rgba(42,31,20,.18),
-      inset 0 0 0 1px rgba(255,255,255,.4);
-    position: relative;
-    overflow: hidden;
-    transform-origin: top center;
-    transition: transform .6s cubic-bezier(.4,0,.2,1), opacity .4s ease;
-  }
-
-  /* Aged paper texture via pseudo */
-  .packet::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(139,101,48,.04) 22px, rgba(139,101,48,.04) 23px),
-      radial-gradient(ellipse at 80% 10%, rgba(155,76,42,.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 90%, rgba(107,124,90,.06) 0%, transparent 50%);
-    pointer-events: none; z-index: 1;
-  }
-
-  /* Top flap */
-  .packet-flap {
-    height: 52px;
-    background: linear-gradient(180deg, var(--parch3) 0%, var(--parch2) 100%);
-    border-bottom: 1px dashed rgba(139,101,48,.3);
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    gap: .4rem;
-  }
-  .packet-flap::after {
-    content: '';
-    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-    width: 0; height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 6px solid var(--parch3);
-  }
-  .flap-glyph { font-size: 1.1rem; opacity: .7; }
-  .flap-label {
-    font-family: var(--font-fellsc); font-size: .48rem;
-    letter-spacing: .28em; text-transform: uppercase;
-    color: var(--sage); opacity: .9;
-  }
-
-  /* Packet body */
-  .packet-body { padding: 1.4rem 1.2rem 1.6rem; position: relative; z-index: 2; }
-
-  .packet-month {
-    font-family: var(--font-fellsc); font-size: .5rem;
-    letter-spacing: .3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: .8rem; display: block;
-  }
-  .packet-plant-name {
-    font-family: var(--font-display); font-size: 1.4rem;
-    letter-spacing: .08em; color: var(--ink);
-    line-height: 1.2; margin-bottom: .5rem;
-  }
-  .packet-latin {
-    font-family: var(--font-cg); font-style: italic;
-    font-size: .88rem; color: var(--ink-dim);
-    display: block; margin-bottom: 1rem;
-  }
-
-  /* Botanical line motif — CSS only */
-  .botanical {
-    width: 100%; height: 64px;
-    display: flex; align-items: center; justify-content: center;
-    margin: .8rem 0;
-    position: relative;
-  }
-  .botanical::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 10%; right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--sage-mute), var(--sage-dim), var(--sage-mute), transparent);
-  }
-  .botanical-glyph {
-    font-size: 2.4rem; line-height: 1;
-    filter: drop-shadow(0 1px 3px rgba(107,124,90,.3));
-    background: var(--parch2); padding: 0 .6rem;
-    position: relative; z-index: 1;
-  }
-
-  .packet-teaser {
-    font-family: var(--font-fell); font-style: italic;
-    font-size: .82rem; color: var(--ink-dim);
-    line-height: 1.65; text-align: center; margin-bottom: 1rem;
-  }
-
-  /* Tear prompt */
-  .tear-prompt {
-    text-align: center; margin-top: 1.5rem;
-  }
-  .tear-hint {
-    font-family: var(--font-fellsc); font-size: .48rem;
-    letter-spacing: .28em; text-transform: uppercase;
-    color: var(--sage-dim);
-    animation: breathe 3s ease-in-out infinite;
-  }
-  @keyframes breathe { 0%,100%{opacity:.5} 50%{opacity:1} }
-
-  /* Dirt smudge details */
-  .smudge {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-  }
-  .smudge-1 {
-    width: 28px; height: 16px;
-    background: rgba(107,90,60,.12);
-    bottom: 18px; right: 14px;
-    transform: rotate(-12deg);
-  }
-  .smudge-2 {
-    width: 14px; height: 10px;
-    background: rgba(107,90,60,.09);
-    top: 80px; left: 8px;
-    transform: rotate(20deg);
-  }
-
-  /* Corner stamps */
-  .stamp {
-    position: absolute; width: 22px; height: 22px;
-    border: 1px solid rgba(139,101,48,.3);
-    border-radius: 1px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: .7rem; opacity: .5; z-index: 2;
-  }
-  .stamp-tl { top: 6px; left: 6px; }
-  .stamp-tr { top: 6px; right: 6px; }
-
-  /* ── TEAR ANIMATION ── */
-  .packet-wrap.tearing .packet {
-    animation: tearOpen .55s cubic-bezier(.4,0,.6,1) forwards;
-  }
-  @keyframes tearOpen {
-    0%  { transform: rotate(0deg) translateY(0); opacity: 1; }
-    30% { transform: rotate(-3deg) translateY(-4px); }
-    60% { transform: rotate(2deg) translateY(8px) scaleY(.95); opacity: 1; }
-    100%{ transform: translateY(60px) scaleY(.7); opacity: 0; }
-  }
-
-  /* ══ UNFOLDED CONTENT ══ */
-  .packet-open {
     display: none;
-    max-width: 580px; width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 3rem;
     animation: unfold .8s ease forwards;
   }
+  .packet-stage.visible { display: flex; }
+
   @keyframes unfold {
-    from { opacity: 0; transform: translateY(20px) scaleY(.96); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: none; }
   }
-  .packet-wrap.open .packet-open { display: block; }
-  .packet-wrap.open .packet       { display: none; }
-  .packet-wrap.open .tear-prompt  { display: none; }
 
   /* Reveal card */
   .reveal-card {
+    max-width: 580px; width: 100%;
     background: var(--parch2);
     border: 1px solid rgba(139,101,48,.28);
     border-radius: 4px;
@@ -334,16 +271,34 @@
   }
   .reveal-inner { position: relative; z-index: 1; }
 
-  .riddle {
-    font-family: var(--font-fell); font-style: italic;
-    font-size: clamp(1rem, 2.2vw, 1.15rem);
-    color: var(--ink); line-height: 1.9;
-    margin-bottom: 2rem; text-align: center; max-width: 42ch; margin-left: auto; margin-right: auto;
+  .botanical {
+    width: 100%; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    margin: .6rem 0 1.2rem;
+    position: relative;
+  }
+  .botanical::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sage-mute), var(--sage-dim), var(--sage-mute), transparent);
+  }
+  .botanical-glyph {
+    font-size: 2.6rem; line-height: 1;
+    filter: drop-shadow(0 1px 3px rgba(107,124,90,.3));
+    background: var(--parch2); padding: 0 .6rem;
+    position: relative; z-index: 1;
   }
 
-  .plant-reveal {
-    text-align: center; margin: 1.8rem 0;
+  .riddle {
+    font-family: var(--font-fell); font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.12rem);
+    color: var(--ink); line-height: 1.9;
+    margin-bottom: 2rem; text-align: center;
+    max-width: 42ch; margin-left: auto; margin-right: auto;
   }
+
+  .plant-reveal { text-align: center; margin: 1.8rem 0; }
   .reveal-label {
     font-family: var(--font-fellsc); font-size: .52rem;
     letter-spacing: .32em; text-transform: uppercase;
@@ -358,14 +313,30 @@
     font-size: 1rem; color: var(--ink-dim); display: block; margin-top: .3rem;
   }
 
-  /* ── PACKET SECTIONS ── */
-  .seed-sections { display: flex; flex-direction: column; gap: 1rem; }
+  /* Golem note inside the opened packet */
+  .golem-note {
+    margin-top: 1.6rem; padding: 1.2rem 1.4rem;
+    border-left: 2px solid var(--clay-mute);
+    background: rgba(122,92,58,.05);
+    border-radius: 0 3px 3px 0;
+  }
+  .golem-note p {
+    font-family: var(--font-fell); font-style: italic;
+    font-size: .9rem; color: var(--clay); line-height: 1.75;
+  }
+  .golem-note-label {
+    font-family: var(--font-fellsc); font-size: .46rem;
+    letter-spacing: .26em; text-transform: uppercase;
+    color: var(--clay-dim); display: block; margin-bottom: .5rem;
+  }
+
+  /* ── ACCORDION SECTIONS ── */
+  .seed-sections { display: flex; flex-direction: column; gap: 1rem; max-width: 580px; width: 100%; }
 
   .seed-section {
     background: var(--parch2);
     border: 1px solid rgba(139,101,48,.22);
-    border-radius: 3px;
-    overflow: hidden;
+    border-radius: 3px; overflow: hidden;
   }
   .seed-section-head {
     display: flex; align-items: center; gap: .8rem;
@@ -391,7 +362,6 @@
   .seed-chevron {
     font-size: .7rem; color: var(--sage-dim);
     transition: transform .4s ease;
-    font-style: normal;
   }
   .seed-section.open .seed-chevron { transform: rotate(180deg); }
 
@@ -401,7 +371,7 @@
     padding: 0 1.4rem;
   }
   .seed-section.open .seed-section-body {
-    max-height: 600px;
+    max-height: 700px;
     padding: 1.2rem 1.4rem 1.6rem;
   }
   .seed-section-body p {
@@ -415,13 +385,13 @@
     letter-spacing: .18em; text-transform: uppercase;
     color: var(--sage); display: block; margin-bottom: .4rem; margin-top: .8rem;
   }
-  /* Hemisphere-aware content */
+  .seed-section-body strong:first-child { margin-top: 0; }
   .hem { display: none; }
   .hem.show { display: block; }
 
   /* ── MEMBERS TEASE ── */
   .members-tease {
-    text-align: center; margin-top: 2rem;
+    text-align: center; margin-top: 2rem; max-width: 580px; width: 100%;
     padding: 2rem 1.8rem;
     border-top: 1px solid rgba(139,101,48,.15);
     border-bottom: 1px solid rgba(139,101,48,.15);
@@ -429,7 +399,8 @@
   .members-tease p {
     font-family: var(--font-cg); font-style: italic;
     font-size: clamp(1rem, 2vw, 1.15rem); color: var(--ink-dim);
-    line-height: 1.8; margin-bottom: 1.4rem; max-width: 38ch; margin-left: auto; margin-right: auto;
+    line-height: 1.8; margin-bottom: 1.4rem;
+    max-width: 38ch; margin-left: auto; margin-right: auto;
   }
   .btn {
     display: inline-block;
@@ -445,13 +416,12 @@
   }
   .btn-note {
     font-family: var(--font-fellsc); font-size: .5rem;
-    letter-spacing: .18em; color: var(--ink-mute); margin-top: .8rem;
-    display: block;
+    letter-spacing: .18em; color: var(--ink-mute); margin-top: .8rem; display: block;
   }
 
   /* ── FOOTER NAV ── */
   .garden-footer {
-    text-align: center; margin-top: 3rem;
+    text-align: center; margin-top: 3rem; max-width: 580px; width: 100%;
     padding-top: 2rem;
     border-top: 1px solid rgba(139,101,48,.12);
   }
@@ -460,19 +430,14 @@
     letter-spacing: .28em; text-transform: uppercase;
     color: var(--sage-dim); margin-bottom: 1.2rem; display: block;
   }
-  .garden-footer .rooms {
-    display: flex; flex-direction: column;
-    align-items: center; gap: .55rem;
-  }
+  .garden-footer .rooms { display: flex; flex-direction: column; align-items: center; gap: .55rem; }
   .garden-footer a {
     font-family: var(--font-fellsc); font-size: .58rem;
     letter-spacing: .16em; color: var(--ink-mute);
     text-decoration: none; transition: color .3s;
   }
   .garden-footer a:hover { color: var(--gold); }
-  .garden-footer .back-link {
-    color: var(--gold-mute); margin-top: .4rem;
-  }
+  .garden-footer .back-link { color: var(--gold-mute); margin-top: .4rem; }
   .garden-footer .back-link:hover { color: var(--rust); }
 
   /* ── STATUS BAR ── */
@@ -486,7 +451,7 @@
     letter-spacing: .15em; text-transform: lowercase; pointer-events: none;
   }
   #status .l { display: flex; align-items: center; gap: .5rem; color: var(--sage); opacity: .85; }
-  #status .r { display: flex; gap: .7rem; color: var(--ink-mute); }
+  #status .r { color: var(--ink-mute); }
   .dot {
     width: 5px; height: 5px; border-radius: 50%;
     background: var(--sage);
@@ -500,13 +465,14 @@
 
   /* ── MOBILE ── */
   @media (max-width: 580px) {
-    .packet { width: 190px; }
+    .golem { font-size: .65rem; }
     .reveal-card { padding: 1.8rem 1.3rem 1.6rem; }
-    .seed-section-body.open { padding: 1rem 1.2rem 1.4rem; }
-    .layer-vignette { background: radial-gradient(ellipse at center, transparent 50%, rgba(210,198,178,.3) 100%); }
+    .layer-vignette { background: radial-gradient(ellipse at center, transparent 50%, rgba(210,198,178,.28) 100%); }
   }
 
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
 </style>
 </head>
@@ -519,15 +485,29 @@
   <a class="nav-back" href="index.html">← the house</a>
 
   <div class="content">
-    <section class="hero fade">
-      <div class="kicker">the garden · maison caché</div>
-      <h1>What's Growing</h1>
-      <p class="sub">One plant. One new moon. Open the packet and see what the season brought.</p>
-    </section>
 
-    <div class="wrap">
+    <!-- ══ GOLEM SCENE ══ -->
+    <div class="golem-scene fade" id="golem-scene">
 
-      <!-- Hemisphere toggle -->
+      <span class="golem-name">The Garden Keeper</span>
+
+      <div class="golem-wrap">
+        <!-- The figure. Assembled from earth. -->
+        <pre class="golem" id="golem" aria-label="The Garden Golem, waiting"></pre>
+
+        <!-- The packet held in its hands -->
+        <div class="golem-packet-held" id="golem-packet" onclick="takePacket()" title="Take the packet">
+          🌱
+        </div>
+      </div>
+
+      <p class="golem-speech" id="golem-speech"></p>
+
+      <span class="take-hint" id="take-hint">— take the packet —</span>
+
+      <div class="rule" style="margin-top:2rem"></div>
+
+      <!-- Hemisphere toggle lives here, under the Golem -->
       <div class="sky fade">
         <p class="sky-q">Where are you growing?</p>
         <div class="sky-toggle">
@@ -536,184 +516,154 @@
         </div>
       </div>
 
-      <div class="rule"></div>
+    </div><!-- /golem-scene -->
 
-      <!-- ══ SEED PACKET ══ -->
-      <div class="packet-stage fade" id="packet-stage">
+    <!-- ══ PACKET CONTENT (revealed after taking) ══ -->
+    <div class="wrap">
+      <div class="packet-stage" id="packet-stage">
 
-        <div class="packet-wrap" id="packet-wrap" onclick="tearOpen()">
-
-          <!-- Closed packet -->
-          <div class="packet" id="packet-closed">
-            <div class="smudge smudge-1"></div>
-            <div class="smudge smudge-2"></div>
-            <div class="stamp stamp-tl">✦</div>
-            <div class="stamp stamp-tr">✦</div>
-
-            <div class="packet-flap">
-              <span class="flap-glyph">🌿</span>
-              <span class="flap-label">New Moon · <!-- AUTOMATION:MONTH_LABEL_END -->July 2026<!-- /AUTOMATION:MONTH_LABEL_END --></span>
+        <!-- Riddle + reveal -->
+        <div class="reveal-card">
+          <div class="reveal-inner">
+            <div class="botanical">
+              <span class="botanical-glyph">🌿</span>
             </div>
 
-            <div class="packet-body">
-              <span class="packet-month"><!-- AUTOMATION:PACKET_MONTH_END -->Moon 7<!-- /AUTOMATION:PACKET_MONTH_END --></span>
-              <div class="packet-plant-name">?</div>
-              <span class="packet-latin">This month's plant</span>
+            <p class="riddle">
+              <!-- AUTOMATION:PACKET_RIDDLE_END -->
+              This one bites before it soothes. Your grandmother probably had it growing near the back door where nobody walked carefully. It wants full sun and a little neglect. It will outlive your patience and reward your hands.
+              <!-- /AUTOMATION:PACKET_RIDDLE_END -->
+            </p>
 
-              <div class="botanical">
-                <span class="botanical-glyph">🌱</span>
+            <div class="plant-reveal">
+              <span class="reveal-label">this month's plant</span>
+              <!-- AUTOMATION:PACKET_NAME_END -->
+              <span class="reveal-name">Nettle</span>
+              <span class="reveal-latin">Urtica dioica</span>
+              <!-- /AUTOMATION:PACKET_NAME_END -->
+            </div>
+
+            <!-- Golem's note inside the packet -->
+            <div class="golem-note">
+              <span class="golem-note-label">from the keeper</span>
+              <!-- AUTOMATION:PACKET_GOLEM_NOTE_END -->
+              <p>It's been here since before I was shaped. Grows where things have been broken open. I leave it where you'll find it.</p>
+              <!-- /AUTOMATION:PACKET_GOLEM_NOTE_END -->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Accordion sections -->
+        <div class="seed-sections">
+
+          <div class="seed-section" id="sec-grow">
+            <div class="seed-section-head" onclick="toggleSection('grow')">
+              <span class="seed-glyph">🪴</span>
+              <span class="seed-section-title">Grow It</span>
+              <span class="seed-chevron">▾</span>
+            </div>
+            <div class="seed-section-body">
+              <!-- AUTOMATION:PACKET_GROW_END -->
+              <div class="hem s-hem show">
+                <strong>Southern Hemisphere — Autumn</strong>
+                <p>Nettle wants a moist, rich corner you've slightly given up on. Near the compost heap is ideal. Plant now through early May — the cooler months suit it, though it will die back in frost and return, insistently, in spring.</p>
+                <p>It spreads by rhizome. Give it a boundary you mean. An old metal bucket buried to the rim works well. <em>It will test the boundary.</em> Water deeply once a week; less once established. It doesn't want fuss. It wants to be left alone to do what it does.</p>
+                <p>Harvest with gloves, always. Snip young tops — the first six leaves. Older leaves get coarse and bitter. Early morning, before the sun has had them.</p>
               </div>
-
-              <p class="packet-teaser">Something is growing in here.<br>Tear it open to find out what.</p>
-            </div>
-
-            <div class="tear-prompt">
-              <span class="tear-hint">— tap to open —</span>
+              <div class="hem n-hem">
+                <strong>Northern Hemisphere — Autumn</strong>
+                <p>Nettle thrives planted now, before the first hard frost. Prepare a moist, nitrogen-rich spot — alongside a compost heap, or the shadier edge of a kitchen garden. It wants to overwinter quietly and surge back in March.</p>
+                <p>Contain it — it spreads underground with real ambition. A buried barrier at least 20cm deep will hold it, mostly. <em>Plant it once. It will stay.</em> Water in well and leave it. It doesn't need watching.</p>
+                <p>Harvest gloved in spring, taking only the young tops. First six leaves, cut before flowering. Blanching instantly removes the sting — boiling water or a dry pan, thirty seconds, done.</p>
+              </div>
+              <!-- /AUTOMATION:PACKET_GROW_END -->
             </div>
           </div>
 
-          <!-- Opened content -->
-          <div class="packet-open" id="packet-open">
-
-            <!-- Riddle + reveal -->
-            <div class="reveal-card">
-              <div class="reveal-inner">
-                <div class="botanical" style="margin-bottom:1.2rem">
-                  <span class="botanical-glyph" style="font-size:3rem">🌿</span>
-                </div>
-
-                <p class="riddle">
-                  <!-- AUTOMATION:PACKET_RIDDLE_END -->
-                  This one bites before it soothes. Your grandmother probably had it growing near the back door where nobody walked carefully. It wants full sun and a little neglect. It will outlive your patience and reward your hands.
-                  <!-- /AUTOMATION:PACKET_RIDDLE_END -->
-                </p>
-
-                <div class="plant-reveal">
-                  <span class="reveal-label">this month's plant</span>
-                  <!-- AUTOMATION:PACKET_NAME_END -->
-                  <span class="reveal-name">Nettle</span>
-                  <span class="reveal-latin">Urtica dioica</span>
-                  <!-- /AUTOMATION:PACKET_NAME_END -->
-                </div>
-              </div>
+          <div class="seed-section" id="sec-use">
+            <div class="seed-section-head" onclick="toggleSection('use')">
+              <span class="seed-glyph">🍵</span>
+              <span class="seed-section-title">Use It</span>
+              <span class="seed-chevron">▾</span>
             </div>
-
-            <!-- Accordion sections -->
-            <div class="seed-sections">
-
-              <!-- Grow it -->
-              <div class="seed-section" id="sec-grow">
-                <div class="seed-section-head" onclick="toggleSection('grow')">
-                  <span class="seed-glyph">🪴</span>
-                  <span class="seed-section-title">Grow It</span>
-                  <span class="seed-chevron">▾</span>
-                </div>
-                <div class="seed-section-body">
-                  <!-- AUTOMATION:PACKET_GROW_END -->
-                  <div class="hem s-hem show">
-                    <strong>Southern Hemisphere — Autumn</strong>
-                    <p>Nettle wants a moist, rich corner you've slightly given up on. Near the compost heap is ideal. Plant now through early May — the cooler months suit it, though it will die back in frost and return, insistently, in spring.</p>
-                    <p>It spreads by rhizome. Give it a boundary you mean. An old metal bucket buried to the rim works well. <em>It will test the boundary.</em> Water deeply once a week; less once established. It doesn't want fuss. It wants to be left alone to do what it does.</p>
-                    <p>Harvest with gloves, always. Snip young tops — the first six leaves. Older leaves get coarse and bitter. Early morning, before the sun has had them.</p>
-                  </div>
-                  <div class="hem n-hem">
-                    <strong>Northern Hemisphere — Autumn</strong>
-                    <p>Nettle thrives planted now, before the first hard frost. Prepare a moist, nitrogen-rich spot — alongside a compost heap, or the shadier edge of a kitchen garden. It wants to overwinter quietly and surge back in March.</p>
-                    <p>Contain it — it spreads underground with real ambition. A buried barrier at least 20cm deep will hold it, mostly. <em>Plant it once. It will stay.</em> Water in well and leave it. It doesn't need watching.</p>
-                    <p>Harvest gloved in spring, taking only the young tops. First six leaves, cut before flowering. Blanching instantly removes the sting — boiling water or a dry pan, thirty seconds, done.</p>
-                  </div>
-                  <!-- /AUTOMATION:PACKET_GROW_END -->
-                </div>
-              </div>
-
-              <!-- Use it -->
-              <div class="seed-section" id="sec-use">
-                <div class="seed-section-head" onclick="toggleSection('use')">
-                  <span class="seed-glyph">🍵</span>
-                  <span class="seed-section-title">Use It</span>
-                  <span class="seed-chevron">▾</span>
-                </div>
-                <div class="seed-section-body">
-                  <!-- AUTOMATION:PACKET_USE_END -->
-                  <strong>In the kitchen</strong>
-                  <p>Treat nettle exactly like spinach, once blanched. Nettle soup — potato, onion, stock, a handful of young tops — is genuinely one of the quietest, most nourishing things you can make. Nettle pesto: blanched nettle, walnuts, hard cheese, olive oil, lemon. Darker and more mineral than basil. Better, some would say.</p>
-                  <p>Nettle tea: pour boiling water over fresh or dried leaves. Leave five minutes. Drink it plain or with honey. It tastes like green, like iron, like something that means business.</p>
-                  <strong>On the body</strong>
-                  <p>A nettle hair rinse strengthens the scalp and adds shine — steep a handful of dried nettle in boiling water for twenty minutes, cool, strain, pour through hair after washing. Leave it in. <em>Your grandmother knew this.</em></p>
-                  <p>As a skin tonic: cooled nettle tea patted onto oily skin tightens pores without stripping. It's astringent, mineral-rich, and underestimated.</p>
-                  <strong>In scent</strong>
-                  <p>Nettle reads as green, sharp, and mineral in fragrance — the smell of something living that doesn't apologise for it. It appears in fougères and fresh green compositions as a structural note, giving the kind of outdoors that is specifically <em>early morning after rain.</em> If you want to capture it: crush a young leaf between your fingers and breathe in slowly.</p>
-                  <!-- /AUTOMATION:PACKET_USE_END -->
-                </div>
-              </div>
-
-              <!-- Know it -->
-              <div class="seed-section" id="sec-know">
-                <div class="seed-section-head" onclick="toggleSection('know')">
-                  <span class="seed-glyph">📖</span>
-                  <span class="seed-section-title">Know It</span>
-                  <span class="seed-chevron">▾</span>
-                </div>
-                <div class="seed-section-body">
-                  <!-- AUTOMATION:PACKET_KNOW_END -->
-                  <p>Nettle is one of the oldest cultivated plants in the world, used before recorded cultivation began. The Romans brought it to Britain and reportedly beat their limbs with it to keep warm in the northern cold — <em>urtication,</em> it's called, and it's still used in some folk medicine traditions for arthritis.</p>
-                  <p>In folk magic and witchcraft, nettle is a protection plant. Hung at the door, it was believed to keep ill intent outside. Worn or carried, it was said to deflect curses back to their sender. The logic being: something that stings so reliably can hold a boundary. <em>It knows what it is. It doesn't apologise for it.</em></p>
-                  <p>Norse mythology gives nettle to Thor — the plant of lightning, storm, and masculine vitality. Germanic traditions used nettle thread to weave fairy-proof linen. Hans Christian Andersen's <em>The Wild Swans</em> — the sister who weaves nettle shirts to break her brothers' curse — is folklore as instruction: painful, careful work, done in silence, for love.</p>
-                  <p>The sting itself is a mixture of formic acid, histamine, and serotonin. The body's response — heat, redness, a tingling that lingers — is, in miniature, very like the sensation of adrenaline. It wakes you up. It reminds you that you're in a body that responds.</p>
-                  <!-- /AUTOMATION:PACKET_KNOW_END -->
-                </div>
-              </div>
-
-              <!-- Pair it -->
-              <div class="seed-section" id="sec-pair">
-                <div class="seed-section-head" onclick="toggleSection('pair')">
-                  <span class="seed-glyph">🔗</span>
-                  <span class="seed-section-title">Pair It</span>
-                  <span class="seed-chevron">▾</span>
-                </div>
-                <div class="seed-section-body">
-                  <!-- AUTOMATION:PACKET_PAIR_END -->
-                  <strong>In the Hearth</strong>
-                  <p>The nettle soup mentioned above pairs directly with the Hearth's winter bundle. Make it on a waning moon — the week the year starts moving toward rest. Eat it alone or with someone who also doesn't need to explain why they're tired. It fills something that toast doesn't.</p>
-                  <strong>In the Atelier</strong>
-                  <p>If you want to understand how nettle reads in perfume, try any classic fougère — <em>Brut, Fahrenheit, Drakkar Noir</em> — the green-lavender-oak moss family that nettle supports. Or go directly to something contemporary like <em>Diptyque's Virgilio</em> — fig and green nettle, slightly bitter, spring garden after rain. Smell it and then crush a nettle leaf. You'll hear the connection.</p>
-                  <strong>A note for the season</strong>
-                  <p><em>Nettle grows in disturbed ground.</em> Wherever the soil has been moved, broken, left uncertain — there it comes. The old name for it is "ortie" in French — from the Latin <em>urtica,</em> to burn. But the other meaning of disturbed ground is: this is where something is happening. This is where the change is. Nettle knows it. It shows up there first.</p>
-                  <!-- /AUTOMATION:PACKET_PAIR_END -->
-                </div>
-              </div>
-
-            </div><!-- /seed-sections -->
-
-            <!-- Members tease -->
-            <div class="members-tease">
-              <p>More grows deeper in the house — extended lore, the full recipe cycle, and the Grimoire crossover for members.</p>
-              <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn">Join the house</a>
-              <span class="btn-note">The Inner House — $5 AUD/month</span>
+            <div class="seed-section-body">
+              <!-- AUTOMATION:PACKET_USE_END -->
+              <strong>In the kitchen</strong>
+              <p>Treat nettle exactly like spinach, once blanched. Nettle soup — potato, onion, stock, a handful of young tops — is genuinely one of the quietest, most nourishing things you can make. Nettle pesto: blanched nettle, walnuts, hard cheese, olive oil, lemon. Darker and more mineral than basil. Better, some would say.</p>
+              <p>Nettle tea: pour boiling water over fresh or dried leaves. Leave five minutes. Drink it plain or with honey. It tastes like green, like iron, like something that means business.</p>
+              <strong>On the body</strong>
+              <p>A nettle hair rinse strengthens the scalp and adds shine — steep a handful of dried nettle in boiling water for twenty minutes, cool, strain, pour through hair after washing. Leave it in. <em>Your grandmother knew this.</em></p>
+              <p>As a skin tonic: cooled nettle tea patted onto oily skin tightens pores without stripping. It's astringent, mineral-rich, and underestimated.</p>
+              <strong>In scent</strong>
+              <p>Nettle reads as green, sharp, and mineral in fragrance — the smell of something living that doesn't apologise for it. It appears in fougères and fresh green compositions as a structural note, giving the kind of outdoors that is specifically <em>early morning after rain.</em> If you want to capture it: crush a young leaf between your fingers and breathe in slowly.</p>
+              <!-- /AUTOMATION:PACKET_USE_END -->
             </div>
+          </div>
 
-            <!-- Cross-room nav -->
-            <div class="garden-footer">
-              <span class="footer-label">elsewhere in the house</span>
-              <div class="rooms">
-                <a href="hearth.html">The Hearth</a>
-                <a href="perfume-atelier.html">The Perfume Atelier</a>
-                <a href="library.html">The Library</a>
-                <a href="celestial-archive.html">The Celestial Archive</a>
-                <a href="index.html" class="back-link">← back to the house</a>
-              </div>
+          <div class="seed-section" id="sec-know">
+            <div class="seed-section-head" onclick="toggleSection('know')">
+              <span class="seed-glyph">📖</span>
+              <span class="seed-section-title">Know It</span>
+              <span class="seed-chevron">▾</span>
             </div>
+            <div class="seed-section-body">
+              <!-- AUTOMATION:PACKET_KNOW_END -->
+              <p>Nettle is one of the oldest cultivated plants in the world, used before recorded cultivation began. The Romans brought it to Britain and reportedly beat their limbs with it to keep warm in the northern cold — <em>urtication,</em> it's called, and it's still used in some folk medicine traditions for arthritis.</p>
+              <p>In folk magic and witchcraft, nettle is a protection plant. Hung at the door, it was believed to keep ill intent outside. Worn or carried, it was said to deflect curses back to their sender. The logic being: something that stings so reliably can hold a boundary. <em>It knows what it is. It doesn't apologise for it.</em></p>
+              <p>Norse mythology gives nettle to Thor — the plant of lightning, storm, and masculine vitality. Germanic traditions used nettle thread to weave fairy-proof linen. Hans Christian Andersen's <em>The Wild Swans</em> — the sister who weaves nettle shirts to break her brothers' curse — is folklore as instruction: painful, careful work, done in silence, for love.</p>
+              <p>The sting itself is a mixture of formic acid, histamine, and serotonin. The body's response — heat, redness, a tingling that lingers — is, in miniature, very like the sensation of adrenaline. It wakes you up. It reminds you that you're in a body that responds.</p>
+              <!-- /AUTOMATION:PACKET_KNOW_END -->
+            </div>
+          </div>
 
-          </div><!-- /packet-open -->
-        </div><!-- /packet-wrap -->
+          <div class="seed-section" id="sec-pair">
+            <div class="seed-section-head" onclick="toggleSection('pair')">
+              <span class="seed-glyph">🔗</span>
+              <span class="seed-section-title">Pair It</span>
+              <span class="seed-chevron">▾</span>
+            </div>
+            <div class="seed-section-body">
+              <!-- AUTOMATION:PACKET_PAIR_END -->
+              <strong>In the Hearth</strong>
+              <p>The nettle soup mentioned above pairs directly with the Hearth's winter bundle. Make it on a waning moon — the week the year starts moving toward rest. Eat it alone or with someone who also doesn't need to explain why they're tired. It fills something that toast doesn't.</p>
+              <strong>In the Atelier</strong>
+              <p>If you want to understand how nettle reads in perfume, try any classic fougère — <em>Brut, Fahrenheit, Drakkar Noir</em> — the green-lavender-oak moss family that nettle supports. Or go directly to something contemporary like <em>Diptyque's Virgilio</em> — fig and green nettle, slightly bitter, spring garden after rain. Smell it and then crush a nettle leaf. You'll hear the connection.</p>
+              <strong>A note for the season</strong>
+              <p><em>Nettle grows in disturbed ground.</em> Wherever the soil has been moved, broken, left uncertain — there it comes. The old name for it is "ortie" in French — from the Latin <em>urtica,</em> to burn. But the other meaning of disturbed ground is: this is where something is happening. This is where the change is. Nettle knows it. It shows up there first.</p>
+              <!-- /AUTOMATION:PACKET_PAIR_END -->
+            </div>
+          </div>
+
+        </div><!-- /seed-sections -->
+
+        <!-- Members tease -->
+        <div class="members-tease">
+          <p>More grows deeper in the house — extended lore, the full recipe cycle, and the Grimoire crossover for members.</p>
+          <a href="https://maison-cache.ghost.io/#/portal/signup" target="_blank" rel="noopener noreferrer" class="btn">Join the house</a>
+          <span class="btn-note">The Inner House — $5 AUD/month</span>
+        </div>
+
+        <!-- Cross-room nav -->
+        <div class="garden-footer">
+          <span class="footer-label">elsewhere in the house</span>
+          <div class="rooms">
+            <a href="hearth.html">The Hearth</a>
+            <a href="perfume-atelier.html">The Perfume Atelier</a>
+            <a href="library.html">The Library</a>
+            <a href="celestial-archive.html">The Celestial Archive</a>
+            <a href="index.html" class="back-link">← back to the house</a>
+          </div>
+        </div>
+
       </div><!-- /packet-stage -->
-
     </div><!-- /wrap -->
+
   </div><!-- /content -->
 
   <!-- Status bar -->
   <div id="status">
-    <div class="l"><span class="dot"></span><span id="status-msg">garden : the packet is waiting</span></div>
+    <div class="l"><span class="dot"></span><span id="status-msg">garden : the keeper is here</span></div>
     <div class="r"><span id="status-phase">—</span></div>
   </div>
 
@@ -724,8 +674,116 @@
 
   <script src="js/moon.js"></script>
   <script>
+  (function() {
+
+    // ── GOLEM FORMS ── seasonal, assembled from marks
+    var FORMS = {
+      spring: [
+        '    ╭─╮    ',
+        '   (◉ ◉)   ',
+        '    ╰─╯    ',
+        '  ╭─┴─╮   ',
+        '  │ ░ │   ',
+        '  ╰─┬─╯   ',
+        ' ╭─╯ ╰─╮  ',
+        ' │     │  ',
+        ' ╰─╮ ╭─╯  ',
+        '   │ │    ',
+        ' ╰─╯ ╰─╯  ',
+      ],
+      summer: [
+        '    ╭─╮    ',
+        '   (◈ ◈)   ',
+        '    ╰─╯    ',
+        '  ╭─┴─╮   ',
+        '  │▓░▓│   ',
+        '  ╰─┬─╯   ',
+        ' ╭─╯ ╰─╮  ',
+        ' │     │  ',
+        ' ╰╮   ╭╯  ',
+        '  │   │   ',
+        ' ─╯   ╰─  ',
+      ],
+      autumn: [
+        '    ╭─╮    ',
+        '   (◉ ◉)   ',
+        '    ╰─╯    ',
+        '  ╭─┴─╮   ',
+        '  │ ▒ │   ',
+        '  ╰─┬─╯   ',
+        ' ╭─╯ ╰─╮  ',
+        ' │     │  ',
+        ' ╰─╮ ╭─╯  ',
+        '   │ │    ',
+        ' ╰─╯ ╰─╯  ',
+      ],
+      winter: [
+        '           ',
+        '    ╭─╮    ',
+        '   (· ·)   ',
+        '    ╰─╯    ',
+        '  ╭─┴─╮   ',
+        '  │ ░ │   ',
+        '  ╰┬──╯   ',
+        '   │      ',
+        '  ─╯      ',
+        '           ',
+        '           ',
+      ],
+    };
+
+    // ── GOLEM SPEECH — indexed by [season][visit] ──
+    // visit: 0 = first, 1 = returning, 2+ = long-returning
+    var SPEECH = {
+      spring: [
+        'New hands. The garden noticed.',
+        'You came back. The rosemary is still growing.',
+        'Same hands, different season. The soil remembers.',
+      ],
+      summer: [
+        'Sun-baked. Still here. So are you.',
+        'You were here before the heat. Things have changed.',
+        'You keep coming. The garden is taking shape.',
+      ],
+      autumn: [
+        'The composting season. A good time to arrive.',
+        'You planted something last time. It held.',
+        'Autumn again. The packet is heavier this year.',
+      ],
+      winter: [
+        'Slow. Half under. The garden doesn\'t stop — it waits.',
+        'You came in winter. Most don\'t.',
+        'Dormant isn\'t dead. You already know that.',
+      ],
+    };
+
+    // ── SEASON from date + hemisphere ──
+    function getSeason(hem) {
+      var m = new Date().getMonth(); // 0-11
+      var s, su, au, wi;
+      if (hem === 's') {
+        // Southern: summer Dec-Feb, autumn Mar-May, winter Jun-Aug, spring Sep-Nov
+        if (m >= 11 || m <= 1) return 'summer';
+        if (m >= 2  && m <= 4) return 'autumn';
+        if (m >= 5  && m <= 7) return 'winter';
+        return 'spring';
+      } else {
+        // Northern: spring Mar-May, summer Jun-Aug, autumn Sep-Nov, winter Dec-Feb
+        if (m >= 2  && m <= 4) return 'spring';
+        if (m >= 5  && m <= 7) return 'summer';
+        if (m >= 8  && m <= 10) return 'autumn';
+        return 'winter';
+      }
+    }
+
+    // ── MEMORY ──
+    var visitCount  = parseInt(localStorage.getItem('mc-garden-visits') || '0', 10);
+    var lastPlant   = localStorage.getItem('mc-garden-last-plant') || '';
+    var currentPlant = 'Nettle'; // AUTOMATION:PLANT_KEY_END Nettle /AUTOMATION:PLANT_KEY_END
+
     // ── HEMISPHERE ──
     var hem = localStorage.getItem('mc-hemisphere') || 's';
+
     function setHem(h) {
       hem = h;
       localStorage.setItem('mc-hemisphere', h);
@@ -733,49 +791,92 @@
       document.getElementById('btn-n').classList.toggle('on', h === 'n');
       document.querySelectorAll('.s-hem').forEach(function(el){ el.classList.toggle('show', h==='s'); });
       document.querySelectorAll('.n-hem').forEach(function(el){ el.classList.toggle('show', h==='n'); });
+      renderGolem();
     }
-    setHem(hem);
+    window.setHem = setHem;
 
-    // ── TEAR OPEN ──
-    var torn = false;
-    function tearOpen() {
-      if (torn) return;
-      torn = true;
-      var wrap = document.getElementById('packet-wrap');
-      wrap.classList.add('tearing');
-      document.getElementById('status-msg').textContent = 'garden : opening —';
-      setTimeout(function() {
-        wrap.classList.remove('tearing');
-        wrap.classList.add('open');
-        document.getElementById('status-msg').textContent = 'garden : nettle · urtica dioica';
-        wrap.onclick = null;
-        wrap.style.cursor = 'default';
-      }, 560);
+    // ── RENDER GOLEM ──
+    function renderGolem() {
+      var season = getSeason(hem);
+      var golem  = document.getElementById('golem');
+      var speech = document.getElementById('golem-speech');
+      var lines  = FORMS[season];
+      golem.textContent = lines.join('\n');
+      golem.className   = 'golem season-' + season;
+
+      // Speech: pick by visit count, cap at last index
+      var pool = SPEECH[season];
+      var idx  = Math.min(visitCount, pool.length - 1);
+
+      // If we have a returning-visitor plant memory, weave it in
+      var line = pool[idx];
+      if (visitCount > 0 && lastPlant && lastPlant !== currentPlant) {
+        line = 'You planted ' + lastPlant.toLowerCase() + ' last time. Something new is ready.';
+      } else if (visitCount > 0 && lastPlant === currentPlant) {
+        line = 'Still ' + lastPlant.toLowerCase() + ' this month. Good. It takes time.';
+      }
+      speech.textContent = line;
+
+      document.getElementById('status-msg').textContent = 'garden : the keeper is here · ' + season;
     }
+
+    // ── TAKE THE PACKET ──
+    window.takePacket = function() {
+      var scene = document.getElementById('golem-scene');
+      scene.classList.add('packet-taken');
+
+      // Golem speech changes
+      var speech = document.getElementById('golem-speech');
+      speech.style.opacity = '0';
+      setTimeout(function() {
+        speech.textContent = 'Open it.';
+        speech.style.opacity = '1';
+      }, 400);
+
+      // Show packet content after a beat
+      setTimeout(function() {
+        var stage = document.getElementById('packet-stage');
+        stage.classList.add('visible');
+        stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('status-msg').textContent = 'garden : nettle · urtica dioica';
+
+        // Save memory
+        localStorage.setItem('mc-garden-visits', visitCount + 1);
+        localStorage.setItem('mc-garden-last-plant', currentPlant);
+      }, 700);
+    };
 
     // ── ACCORDION ──
-    function toggleSection(id) {
+    window.toggleSection = function(id) {
       var el = document.getElementById('sec-' + id);
       var wasOpen = el.classList.contains('open');
       document.querySelectorAll('.seed-section').forEach(function(s){ s.classList.remove('open'); });
       if (!wasOpen) el.classList.add('open');
-    }
+    };
 
     // ── FADE IN ──
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: .12 });
+    }, { threshold: .1 });
     document.querySelectorAll('.fade').forEach(function(el){ io.observe(el); });
 
     // ── SANCTUM TRIGGER ──
     var sClicks = 0, sTimer;
-    function sanctumClick() {
+    window.sanctumClick = function() {
       sClicks++;
       document.getElementById('sanctum-dot').style.color = 'rgba(139,101,48,' + (0.08 + sClicks * 0.14) + ')';
       if (sTimer) clearTimeout(sTimer);
-      sTimer = setTimeout(function(){ sClicks = 0; document.getElementById('sanctum-dot').style.color = 'rgba(139,101,48,.08)'; }, 1600);
+      sTimer = setTimeout(function(){
+        sClicks = 0;
+        document.getElementById('sanctum-dot').style.color = 'rgba(139,101,48,.08)';
+      }, 1600);
       if (sClicks >= 3) { sClicks = 0; window.location.href = 'sanctum.html'; }
-    }
+    };
+
+    // ── INIT ──
+    setHem(hem);
+
+  })();
   </script>
 </body>
 </html>
